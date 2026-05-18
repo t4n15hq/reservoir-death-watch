@@ -32,6 +32,8 @@ class ReservoirAOI(BaseModel):
     dead_storage_capacity_bcm: float | None = None
     priority: int
     aoi_file: str
+    aoi_area_km2: float | None = None
+    aoi_review_status: str | None = None
     polygon: dict[str, Any]
     notes: str = ""
 
@@ -52,7 +54,7 @@ class AreaObservation(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     date: date
-    area_km2: float = Field(gt=0)
+    area_km2: float = Field(ge=0)
     data_source: AreaSource
     cloud_coverage_percent: float | None = Field(default=None, ge=0, le=100)
 
@@ -108,7 +110,7 @@ class ReservoirCurrent(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     as_of: date
-    area_km2: float = Field(gt=0)
+    area_km2: float = Field(ge=0)
     estimated_storage_bcm: float = Field(ge=0)
     cwc_reported_bcm: float | None = Field(default=None, ge=0)
     percent_full: float = Field(ge=0)
@@ -165,7 +167,7 @@ class EnsoSummary(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     state: str
-    oni_latest: float
+    oni_latest: float | None
     imd_monsoon_forecast: str | None = None
 
 
@@ -178,4 +180,3 @@ class DashboardSnapshot(BaseModel):
     enso: EnsoSummary
     national_aggregate: NationalAggregate
     reservoirs: list[ReservoirResult]
-

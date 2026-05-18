@@ -25,6 +25,8 @@ class ReservoirAOI(BaseModel):
     lon: float
     full_pool_capacity_bcm: float | None
     dead_storage_capacity_bcm: float | None
+    aoi_area_km2: float | None       # optional GeoJSON-derived area metadata
+    aoi_review_status: str | None    # e.g. "first_pass_needs_manual_review"
     polygon: GeoJSONPolygon       # full-pool boundary
 ```
 
@@ -148,6 +150,9 @@ The primary artifact. Single file, ~200KB gzipped.
 }
 ```
 
+`enso.oni_latest` may be `null` when the NOAA endpoint is temporarily unavailable. Do not
+substitute a stale or guessed ONI value.
+
 ### `dashboard/public/data/reservoirs/{id}.csv`
 
 Per-reservoir long history. Columns:
@@ -157,7 +162,7 @@ Per-reservoir long history. Columns:
 | `date` | YYYY-MM-DD | Monthly for JRC, weekly for recent S2 |
 | `area_km2` | float | |
 | `data_source` | string | `jrc` / `sentinel_2` / `sentinel_1` |
-| `estimated_storage_bcm` | float | Derived via area-volume curve |
+| `estimated_storage_bcm` | float | Derived via area-volume curve; Phase 0 may use flagged area-ratio proxy |
 | `cwc_storage_bcm` | float \| empty | Where matching CWC date exists |
 | `percent_full` | float | |
 

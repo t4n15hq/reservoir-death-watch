@@ -13,6 +13,10 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 - Added AOI directory instructions that prohibit placeholder polygons; Phase 0 still needs real `krs`, `mettur`, and `indira_sagar` GeoJSON AOIs.
 - Added a root `.gitignore` for Python caches, local virtualenvs, and macOS metadata.
 - Wired Earth Engine service account credential resolution through `GOOGLE_APPLICATION_CREDENTIALS` or the local `~/.secrets/reservoir-death-watch/` key file; local tests now cover credential path validation.
+- Generated first-pass JRC-derived AOIs for KRS, Mettur, and Indira Sagar.
+- Implemented JRC monthly history extraction, Sentinel-2 recent/current extraction, Sentinel-1 fallback plumbing, and Phase 0 static data export.
+- Exported `dashboard/public/data/reservoirs.json` plus per-reservoir CSVs for the three Phase 0 reservoirs.
+- Added explicit Phase 0 flags where output is not yet CWC-calibrated: `first_pass_needs_manual_review`, `needs_cwc_calibration`, and `volume_area_ratio_proxy`.
 
 ## 2026-05-18 — Project initialized
 

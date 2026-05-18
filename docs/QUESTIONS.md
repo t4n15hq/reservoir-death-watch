@@ -54,6 +54,16 @@ When `status: resolved`, append the resolution and move the question to the bott
 **Provisional answer:** One Astro project with islands. Simpler.
 **Status:** open
 
+### 2026-05-18: Phase 0 volume before CWC calibration
+
+**Context:** The first Earth Engine run can produce real surface-area observations before the CWC scraper/history is wired into area-volume calibration. The dashboard schema expects storage and percent-full fields, but the CWC-calibrated hypsometric curve does not exist yet.
+**Options considered:**
+- Leave volume fields empty: honest, but requires a schema break and makes the dashboard contract harder to exercise.
+- Copy current CWC storage into estimated storage: misleading because it is not satellite-derived.
+- Use an area-ratio proxy from current area / first-pass AOI area × full-pool capacity, with explicit flags.
+**Provisional answer:** Use the area-ratio proxy only in Phase 0 output and flag every reservoir with `needs_cwc_calibration` and `volume_area_ratio_proxy`. The Phase 0 gate is not passed until CWC validation replaces this.
+**Status:** open
+
 ---
 
 ## Resolved

@@ -18,7 +18,18 @@ Updated weekly via a cron job. Validated against three historical water crises (
 
 ## Status
 
-Pre-Phase-0. Specs in `docs/`. No code yet.
+Phase 0 in progress.
+
+Implemented so far:
+- Python pipeline scaffold and local tests.
+- Earth Engine service account auth.
+- First-pass JRC-derived AOIs for KRS, Mettur, and Indira Sagar.
+- Phase 0 extraction output in `dashboard/public/data/`.
+
+Not yet Phase 0 complete:
+- AOIs need manual review.
+- CWC bulletin/history ingestion is not yet wired into calibration.
+- Current volume estimates are flagged as area-ratio proxies until CWC calibration passes.
 
 See `docs/PHASES.md` for the build plan.
 
