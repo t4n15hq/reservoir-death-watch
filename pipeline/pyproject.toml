@@ -1,0 +1,32 @@
+[project]
+name = "reservoir-death-watch-pipeline"
+version = "0.1.0"
+description = "Satellite-driven reservoir depletion pipeline for Reservoir Death Watch"
+requires-python = ">=3.12"
+dependencies = [
+  "earthengine-api>=1.5.0",
+  "numpy>=2.0.0",
+  "pandas>=2.2.0",
+  "pydantic>=2.10.0",
+  "pypdf>=5.0.0",
+  "requests>=2.32.0",
+  "scipy>=1.14.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9.0.0",
+  "ruff>=0.8.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
