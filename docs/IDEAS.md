@@ -25,7 +25,7 @@ Layering GRACE/GRACE-FO water storage anomalies over the reservoir map.
 
 ---
 
-## 2026-05-18: Sediment loss over 40 years per reservoir
+## 2026-05-18: Sediment loss over multiple decades per reservoir
 
 Using JRC's permanent vs seasonal water classification to show how reservoirs have lost effective full-pool area to silt accumulation.
 

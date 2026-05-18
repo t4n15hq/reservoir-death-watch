@@ -10,11 +10,14 @@ from pathlib import Path
 import pandas as pd
 
 from reservoirs.aois import load_aois
+from reservoirs.area_volume import fit_power_law_curve
 from reservoirs.config import DASHBOARD_DATA_DIR, MODEL_VERSION
+from reservoirs.cwc_scraper import load_cwc_storage_csv
 from reservoirs.export import write_json_atomic
+from reservoirs.healthcheck import ping_healthcheck
 from reservoirs.jrc import extract_jrc_history
 from reservoirs.model import compute_tier, fit_depletion, project_to_dead_storage
-from reservoirs.oni import fetch_oni
+from reservoirs.oni import compute_el_nino_delta, fetch_oni
 from reservoirs.schemas import (
     AreaObservation,
     DashboardSnapshot,
@@ -46,6 +49,7 @@ def run_pipeline(
 
     results: list[ReservoirResult] = []
     csv_frames: dict[str, pd.DataFrame] = {}
+    cwc_storage = _load_cwc_storage_or_empty()
 
     for aoi in aois:
         print(f"{aoi.id}: extracting JRC history")
@@ -61,6 +65,7 @@ def run_pipeline(
             s2_series=s2_series,
             current=current,
             as_of=run_as_of,
+            cwc_storage=cwc_storage,
         )
         results.append(result)
         csv_frames[aoi.id] = history_frame
@@ -71,7 +76,7 @@ def run_pipeline(
         data_sources_used=DataSourcesUsed(
             jrc_through=_latest_jrc_month(results),
             s2_latest=max(result.current.as_of for result in results),
-            cwc_bulletin=None,
+            cwc_bulletin=_latest_cwc_date(cwc_storage),
             oni_month=None,
         ),
         enso=_fetch_enso_summary(),
@@ -81,6 +86,7 @@ def run_pipeline(
 
     if export:
         export_dashboard_data(snapshot, csv_frames, output_dir)
+    ping_healthcheck()
 
     return snapshot
 
@@ -92,12 +98,28 @@ def build_reservoir_result(
     s2_series: pd.DataFrame,
     current: RecentArea,
     as_of: date,
+    cwc_storage: pd.DataFrame | None = None,
 ) -> tuple[ReservoirResult, pd.DataFrame]:
     full_pool_area_km2 = _full_pool_area_km2(aoi, jrc_history, current)
-    full_capacity = aoi.full_pool_capacity_bcm
-    estimated_storage = _area_ratio_storage(current.area_km2, full_pool_area_km2, full_capacity)
-    percent_full = _percent_full(current.area_km2, full_pool_area_km2)
-    flags = ["needs_cwc_calibration", "volume_area_ratio_proxy"]
+    cwc_row = _cwc_row_for_reservoir(cwc_storage, aoi.id)
+    full_capacity = _full_capacity_bcm(aoi, cwc_row)
+    cwc_reported = _optional_cwc_value(cwc_row, "live_storage_bcm")
+    cwc_as_of = _optional_cwc_date(cwc_row)
+    curve, curve_flags = _calibrate_curve(
+        aoi,
+        full_pool_area_km2=full_pool_area_km2,
+        full_capacity_bcm=full_capacity,
+        history=_merge_history(jrc_history, s2_series, current),
+        cwc_row=cwc_row,
+    )
+    estimated_storage = _storage_from_area(
+        current.area_km2,
+        full_pool_area_km2=full_pool_area_km2,
+        capacity_bcm=full_capacity,
+        curve=curve,
+    )
+    percent_full = _storage_percent_full(estimated_storage, full_capacity)
+    flags = curve_flags
     if aoi.aoi_review_status:
         flags.append(aoi.aoi_review_status)
 
@@ -116,6 +138,7 @@ def build_reservoir_result(
 
     if fit:
         dead_area = _dead_storage_area_proxy(aoi, full_pool_area_km2)
+        el_nino_delta = compute_el_nino_delta(jrc_history)
         neutral = project_to_dead_storage(
             fit,
             current_area_km2=current.area_km2,
@@ -124,13 +147,25 @@ def build_reservoir_result(
             scenario="neutral_monsoon",
             sentinel_1=current.data_source == "sentinel_1",
         )
-        el_nino = Projection(
-            scenario="el_nino_monsoon",
-            days_to_dead_storage=None,
-            dead_storage_date=None,
-            confidence_interval_days=None,
-        )
-        flags.append("el_nino_delta_not_computed")
+        if el_nino_delta is not None:
+            el_nino = project_to_dead_storage(
+                fit,
+                current_area_km2=current.area_km2,
+                dead_storage_area_km2=dead_area,
+                as_of=current.as_of,
+                scenario="el_nino_monsoon",
+                el_nino_area_delta_km2=min(0.0, el_nino_delta),
+                sentinel_1=current.data_source == "sentinel_1",
+            )
+            flags.append("el_nino_delta_static_years")
+        else:
+            el_nino = Projection(
+                scenario="el_nino_monsoon",
+                days_to_dead_storage=None,
+                dead_storage_date=None,
+                confidence_interval_days=None,
+            )
+            flags.append("el_nino_delta_not_computed")
         flags.append("dead_storage_area_proxy")
     else:
         neutral = Projection(
@@ -157,11 +192,29 @@ def build_reservoir_result(
 
     history_for_csv = history.copy()
     history_for_csv["estimated_storage_bcm"] = history_for_csv["area_km2"].map(
-        lambda area: _area_ratio_storage(area, full_pool_area_km2, full_capacity)
+        lambda area: _storage_from_area(
+            area,
+            full_pool_area_km2=full_pool_area_km2,
+            capacity_bcm=full_capacity,
+            curve=curve,
+        )
     )
     history_for_csv["cwc_storage_bcm"] = None
+    if cwc_row is not None:
+        cwc_date = _optional_cwc_date(cwc_row)
+        history_for_csv.loc[history_for_csv["date"] == cwc_date, "cwc_storage_bcm"] = (
+            _optional_cwc_value(cwc_row, "live_storage_bcm")
+        )
     history_for_csv["percent_full"] = history_for_csv["area_km2"].map(
-        lambda area: _percent_full(area, full_pool_area_km2)
+        lambda area: _storage_percent_full(
+            _storage_from_area(
+                area,
+                full_pool_area_km2=full_pool_area_km2,
+                capacity_bcm=full_capacity,
+                curve=curve,
+            ),
+            full_capacity,
+        )
     )
 
     result = ReservoirResult(
@@ -180,7 +233,8 @@ def build_reservoir_result(
             as_of=current.as_of,
             area_km2=round(current.area_km2, 3),
             estimated_storage_bcm=round(estimated_storage, 3),
-            cwc_reported_bcm=None,
+            cwc_reported_bcm=round(cwc_reported, 3) if cwc_reported is not None else None,
+            cwc_as_of=cwc_as_of,
             percent_full=round(percent_full, 1),
             data_source=current.data_source,
         ),
@@ -265,6 +319,89 @@ def _merge_history(
     return history.reset_index(drop=True)
 
 
+def _load_cwc_storage_or_empty() -> pd.DataFrame:
+    try:
+        return load_cwc_storage_csv()
+    except Exception as exc:
+        print(f"CWC storage unavailable: {exc}")
+        return pd.DataFrame()
+
+
+def _latest_cwc_date(cwc_storage: pd.DataFrame) -> date | None:
+    if cwc_storage.empty:
+        return None
+    return max(cwc_storage["date"])
+
+
+def _cwc_row_for_reservoir(cwc_storage: pd.DataFrame | None, reservoir_id: str):
+    if cwc_storage is None or cwc_storage.empty:
+        return None
+    matches = cwc_storage[cwc_storage["reservoir_id"] == reservoir_id].sort_values("date")
+    if matches.empty:
+        return None
+    return matches.iloc[-1]
+
+
+def _calibrate_curve(
+    aoi: ReservoirAOI,
+    *,
+    full_pool_area_km2: float,
+    full_capacity_bcm: float | None,
+    history: pd.DataFrame,
+    cwc_row,
+):
+    flags: list[str] = []
+    if not full_capacity_bcm:
+        return None, ["needs_cwc_calibration", "volume_area_ratio_proxy"]
+
+    points = [(full_pool_area_km2, full_capacity_bcm)]
+    if cwc_row is not None:
+        cwc_date = _optional_cwc_date(cwc_row)
+        cwc_storage = _optional_cwc_value(cwc_row, "live_storage_bcm")
+        nearest_area, days_apart = _nearest_area_for_date(history, cwc_date)
+        if nearest_area is not None and cwc_storage and days_apart <= 14:
+            points.append((nearest_area, cwc_storage))
+            flags.extend(["cwc_calibrated_single_point", "phase0_cwc_validation_incomplete"])
+        else:
+            flags.extend(["needs_cwc_calibration", "volume_area_ratio_proxy"])
+    else:
+        flags.extend(["needs_cwc_calibration", "volume_area_ratio_proxy"])
+
+    if aoi.dead_storage_capacity_bcm and aoi.full_pool_capacity_bcm:
+        dead_area = full_pool_area_km2 * (
+            aoi.dead_storage_capacity_bcm / aoi.full_pool_capacity_bcm
+        )
+        points.append((dead_area, aoi.dead_storage_capacity_bcm))
+
+    if len(points) < 2:
+        return None, sorted(set(flags))
+
+    try:
+        curve = fit_power_law_curve(aoi.id, points)
+    except Exception:
+        flags.extend(["needs_cwc_calibration", "volume_area_ratio_proxy"])
+        return None, sorted(set(flags))
+
+    if curve.r_squared < 0.85:
+        flags.append("low_volume_confidence")
+    return curve, sorted(set(flags))
+
+
+def _nearest_area_for_date(
+    history: pd.DataFrame,
+    target_date: date | None,
+) -> tuple[float | None, int]:
+    if target_date is None or history.empty:
+        return None, 9999
+    frame = history.copy()
+    frame["date_delta"] = frame["date"].map(lambda value: abs((value - target_date).days))
+    frame = frame[frame["area_km2"] > 0].sort_values("date_delta")
+    if frame.empty:
+        return None, 9999
+    row = frame.iloc[0]
+    return float(row["area_km2"]), int(row["date_delta"])
+
+
 def _fetch_enso_summary() -> EnsoSummary:
     try:
         oni_latest, state = fetch_oni(timeout=10)
@@ -295,10 +432,45 @@ def _area_ratio_storage(
     return max(0.0, (area_km2 / full_pool_area_km2) * capacity_bcm)
 
 
-def _percent_full(area_km2: float, full_pool_area_km2: float) -> float:
-    if full_pool_area_km2 <= 0:
+def _storage_from_area(
+    area_km2: float,
+    *,
+    full_pool_area_km2: float,
+    capacity_bcm: float | None,
+    curve,
+) -> float:
+    if curve is not None and area_km2 > 0:
+        return max(0.0, curve.area_to_volume(area_km2))
+    return _area_ratio_storage(area_km2, full_pool_area_km2, capacity_bcm)
+
+
+def _storage_percent_full(storage_bcm: float, capacity_bcm: float | None) -> float:
+    if not capacity_bcm:
         return 0.0
-    return max(0.0, (area_km2 / full_pool_area_km2) * 100)
+    return max(0.0, (storage_bcm / capacity_bcm) * 100)
+
+
+def _full_capacity_bcm(aoi: ReservoirAOI, cwc_row) -> float | None:
+    cwc_capacity = _optional_cwc_value(cwc_row, "live_capacity_at_frl_bcm")
+    return cwc_capacity or aoi.full_pool_capacity_bcm
+
+
+def _optional_cwc_value(cwc_row, field: str) -> float | None:
+    if cwc_row is None:
+        return None
+    value = cwc_row.get(field) if hasattr(cwc_row, "get") else getattr(cwc_row, field, None)
+    if pd.isna(value):
+        return None
+    return float(value)
+
+
+def _optional_cwc_date(cwc_row) -> date | None:
+    if cwc_row is None:
+        return None
+    value = cwc_row.get("date") if hasattr(cwc_row, "get") else getattr(cwc_row, "date", None)
+    if pd.isna(value):
+        return None
+    return value
 
 
 def _dead_storage_area_proxy(aoi: ReservoirAOI, full_pool_area_km2: float) -> float:

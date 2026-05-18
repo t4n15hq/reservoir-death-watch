@@ -8,7 +8,7 @@ Every dataset earns its place by answering a specific question the project must 
 
 | Dataset | GEE asset ID | Latency | Resolution | Role |
 |---|---|---|---|---|
-| JRC Global Surface Water | `JRC/GSW1_4/MonthlyHistory` | 12–18 months | 30m, monthly, 1984–2024 | Historical backbone |
+| JRC Global Surface Water | `JRC/GSW1_4/MonthlyHistory` | Static release | 30m, monthly, 1984–2021 | Historical backbone |
 | Sentinel-2 SR Harmonized | `COPERNICUS/S2_SR_HARMONIZED` | 2–5 days | 10m, 5-day revisit | Live area |
 | Sentinel-1 GRD (SAR) | `COPERNICUS/S1_GRD` | 3–6 days | 10m, 6–12 day revisit | Monsoon cloud fallback |
 | SRTM DEM | `USGS/SRTMGL1_003` | Static | 30m | Area-volume curves |
@@ -29,15 +29,15 @@ External (non-GEE):
 
 ## JRC Global Surface Water — the foundation
 
-**What it is:** Per-pixel monthly water/no-water classification for every Landsat-observable pixel on Earth, from March 1984 to December 2024. Peer-reviewed (Pekel et al. 2016 Nature). Already validated globally.
+**What it is:** Per-pixel monthly water/no-water classification for every Landsat-observable pixel on Earth, from March 1984 to December 2021 in the `JRC/GSW1_4/MonthlyHistory` Earth Engine dataset. Peer-reviewed (Pekel et al. 2016 Nature). Already validated globally.
 
-**What it gives us:** A pre-computed 40-year time series of water extent per pixel. We aggregate over each reservoir's AOI to get a monthly area-in-km² series. Zero preprocessing.
+**What it gives us:** A pre-computed multi-decade time series of water extent per pixel. We aggregate over each reservoir's AOI to get a monthly area-in-km² series. Zero preprocessing.
 
 **Why it matters here:** Without JRC we'd build this from scratch with raw Landsat, which is doable but eats weeks. JRC compresses that into a one-line `ee.ImageCollection` call.
 
-**Limitation:** Ends Dec 2024 (~18 month lag). We stitch Sentinel-2 onto it for 2025–present.
+**Limitation:** The GEE `JRC/GSW1_4/MonthlyHistory` asset ends Dec 2021. We stitch Sentinel-2 onto it for 2022–present, so recent regression and current status come from Sentinel rather than JRC.
 
-**The sediment story it enables (Phase 2+ chart):** JRC's `permanent` and `seasonal` water bands let us see how each reservoir's full-pool area has shrunk over 40 years due to sedimentation. Almost nobody has visualized this for Indian reservoirs at scale. Original-finding territory.
+**The sediment story it enables (Phase 2+ chart):** JRC's `permanent` and `seasonal` water bands let us see how each reservoir's full-pool area has shrunk over multiple decades due to sedimentation. Almost nobody has visualized this for Indian reservoirs at scale. Original-finding territory.
 
 ### Code pattern
 

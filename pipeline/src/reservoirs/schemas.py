@@ -113,6 +113,7 @@ class ReservoirCurrent(BaseModel):
     area_km2: float = Field(ge=0)
     estimated_storage_bcm: float = Field(ge=0)
     cwc_reported_bcm: float | None = Field(default=None, ge=0)
+    cwc_as_of: date | None = None
     percent_full: float = Field(ge=0)
     data_source: CurrentSource
 

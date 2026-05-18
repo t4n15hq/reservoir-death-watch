@@ -1,0 +1,4 @@
+reservoir_id,cwc_name,date,live_capacity_at_frl_bcm,live_storage_bcm,percent_frl,normal_storage_bcm,percent_normal,source_url,source_lines
+krs,KRISHNARAJA SAGARA,2026-04-09,1.163,0.480,41.30,0.355,30.54,https://rsms.cwc.gov.in/admin/storage/bulletins/bulletin-09-04-2026-91.pdf,"L1151-L1153"
+mettur,METTUR,2026-04-09,2.647,1.254,47.37,1.215,45.91,https://rsms.cwc.gov.in/admin/storage/bulletins/bulletin-09-04-2026-91.pdf,"L1185"
+indira_sagar,INDIRA SAGAR,2026-04-09,9.745,4.192,43.02,3.537,36.30,https://rsms.cwc.gov.in/admin/storage/bulletins/bulletin-09-04-2026-91.pdf,"L1052-L1054"

@@ -158,6 +158,7 @@ The single artifact the dashboard reads. Updated weekly.
         "area_km2": 78.2,
         "estimated_storage_bcm": 0.78,
         "cwc_reported_bcm": 0.81,
+        "cwc_as_of": "2026-05-14",
         "percent_full": 56.9,
         "data_source": "sentinel_2"
       },
@@ -320,7 +321,7 @@ def compute_el_nino_delta(reservoir_id: str, jrc_history: pd.DataFrame, oni_hist
     """Historical monsoon inflow during El Niño years vs neutral years."""
 ```
 
-- For each year 1984–2024, classify monsoon-season ENSO state.
+- For each year with available JRC monthly history, classify monsoon-season ENSO state.
 - Compute area gain (June area → September area) per year.
 - Average for El Niño years vs neutral years.
 - Return the delta in km²-gained terms.

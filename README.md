@@ -6,7 +6,7 @@ A satellite-driven early warning system for India's draining reservoirs.
 
 ## What this is
 
-A live public dashboard covering all 166 reservoirs monitored by the Central Water Commission (CWC). For each reservoir, the system projects days-to-dead-storage under two scenarios — neutral monsoon and El Niño-suppressed monsoon — using Sentinel-2 satellite imagery for live extent, JRC Global Surface Water for 40 years of historical context, CWC bulletins as ground truth, and NOAA ONI for El Niño conditioning.
+A live public dashboard covering all 166 reservoirs monitored by the Central Water Commission (CWC). For each reservoir, the system projects days-to-dead-storage under two scenarios — neutral monsoon and El Niño-suppressed monsoon — using Sentinel-2 satellite imagery for live extent, JRC Global Surface Water for multi-decade historical context, CWC bulletins as ground truth, and NOAA ONI for El Niño conditioning.
 
 Updated weekly via a cron job. Validated against three historical water crises (Bengaluru 2024, Chennai/Mettur 2019, Marathwada/Jayakwadi 2016 & 2019).
 
@@ -25,11 +25,12 @@ Implemented so far:
 - Earth Engine service account auth.
 - First-pass JRC-derived AOIs for KRS, Mettur, and Indira Sagar.
 - Phase 0 extraction output in `dashboard/public/data/`.
+- CWC 09.04.2026 Phase 0 rows checked in as ground-truth calibration input.
 
 Not yet Phase 0 complete:
 - AOIs need manual review.
-- CWC bulletin/history ingestion is not yet wired into calibration.
-- Current volume estimates are flagged as area-ratio proxies until CWC calibration passes.
+- Current volume estimates are CWC-calibrated from one bulletin only; six-month validation is still pending.
+- NOAA ONI fetch currently times out from this environment, so live ENSO state may be unavailable.
 
 See `docs/PHASES.md` for the build plan.
 

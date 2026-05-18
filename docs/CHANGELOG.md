@@ -16,7 +16,10 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 - Generated first-pass JRC-derived AOIs for KRS, Mettur, and Indira Sagar.
 - Implemented JRC monthly history extraction, Sentinel-2 recent/current extraction, Sentinel-1 fallback plumbing, and Phase 0 static data export.
 - Exported `dashboard/public/data/reservoirs.json` plus per-reservoir CSVs for the three Phase 0 reservoirs.
-- Added explicit Phase 0 flags where output is not yet CWC-calibrated: `first_pass_needs_manual_review`, `needs_cwc_calibration`, and `volume_area_ratio_proxy`.
+- Added explicit Phase 0 flags where output is not yet final-gate validated: `first_pass_needs_manual_review`, `phase0_cwc_validation_incomplete`, and related low-confidence flags.
+- Added checked-in official CWC 09.04.2026 storage rows for the three Phase 0 reservoirs, CWC alias support, weekly-report parsing, and single-bulletin calibration flags.
+- Added documented El Niño monsoon area-delta computation from JRC history and a no-op-safe healthcheck ping stage.
+- Corrected docs to reflect that `JRC/GSW1_4/MonthlyHistory` ends in 2021, not 2024.
 
 ## 2026-05-18 — Project initialized
 

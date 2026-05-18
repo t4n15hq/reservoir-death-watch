@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal
 
+import pandas as pd
 import requests
 
 ONI_URL = "https://origin.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php"
@@ -15,6 +16,17 @@ EnsoState = Literal[
     "la_nina",
     "neutral",
 ]
+
+EL_NINO_MONSOON_YEARS = {
+    1986,
+    1991,
+    1997,
+    2002,
+    2009,
+    2015,
+    2018,
+    2023,
+}
 
 
 @dataclass(frozen=True)
@@ -83,3 +95,41 @@ def fetch_oni(url: str = ONI_URL, timeout: int = 30) -> tuple[float, EnsoState]:
     records = parse_oni_table(response.text)
     return latest_oni(records)
 
+
+def compute_el_nino_delta(jrc_history: pd.DataFrame) -> float | None:
+    """Compute June-to-September area-gain delta for El Nino years.
+
+    Negative values mean El Nino years gained less monsoon water area than the
+    non-El-Nino baseline.
+    """
+
+    if jrc_history.empty:
+        return None
+
+    frame = jrc_history.copy()
+    frame["date"] = pd.to_datetime(frame["month"] + "-01")
+    frame["year"] = frame["date"].dt.year
+    frame["month_number"] = frame["date"].dt.month
+
+    gains = []
+    for year, year_frame in frame.groupby("year"):
+        june = year_frame[year_frame["month_number"] == 6]
+        september = year_frame[year_frame["month_number"] == 9]
+        if june.empty or september.empty:
+            continue
+        gains.append(
+            {
+                "year": int(year),
+                "gain_km2": float(september.iloc[-1]["area_km2"] - june.iloc[-1]["area_km2"]),
+            }
+        )
+
+    if not gains:
+        return None
+
+    gain_frame = pd.DataFrame(gains)
+    el_nino = gain_frame[gain_frame["year"].isin(EL_NINO_MONSOON_YEARS)]
+    neutral = gain_frame[~gain_frame["year"].isin(EL_NINO_MONSOON_YEARS)]
+    if el_nino.empty or neutral.empty:
+        return None
+    return float(el_nino["gain_km2"].mean() - neutral["gain_km2"].mean())

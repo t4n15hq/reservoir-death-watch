@@ -44,12 +44,12 @@ Lives in a reservoir-dependent city. Wants a single plain-English answer: how wo
 
 - **National map** of India with 166 reservoirs, color-coded by criticality tier.
 - **State rollups**: per-state aggregate capacity, current storage, count of critical reservoirs.
-- **Reservoir detail pages**: 40-year history, current surface area, two-scenario projection (neutral monsoon vs El Niño monsoon), CSV download, methodology link.
+- **Reservoir detail pages**: multi-decade history, current surface area, two-scenario projection (neutral monsoon vs El Niño monsoon), CSV download, methodology link.
 - **Backtest mode**: rewind the model to a historical date and reproduce findings.
 
 ### What it claims
 
-> "Satellite-derived early-warning signal that flags reservoir-level water stress 30–90 days before the equivalent CWC bulletin reads as critical. Updated weekly. Backed by 40 years of JRC Global Surface Water history."
+> "Satellite-derived early-warning signal that flags reservoir-level water stress 30–90 days before the equivalent CWC bulletin reads as critical. Updated weekly. Backed by multi-decade JRC Global Surface Water history."
 
 ### What it does NOT claim
 

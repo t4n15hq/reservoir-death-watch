@@ -125,7 +125,7 @@ The primary artifact. Single file, ~200KB gzipped.
   "generated_at": "2026-05-17T03:14:22Z",
   "model_version": "1.0.0",
   "data_sources_used": {
-    "jrc_through": "2024-12",
+    "jrc_through": "2021-12",
     "s2_latest": "2026-05-15",
     "cwc_bulletin": "2026-05-14",
     "oni_month": "2026-04"

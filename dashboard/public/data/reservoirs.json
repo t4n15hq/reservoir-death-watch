@@ -1,6 +1,6 @@
 {
   "data_sources_used": {
-    "cwc_bulletin": null,
+    "cwc_bulletin": "2026-04-09",
     "jrc_through": "2021-12",
     "oni_month": null,
     "s2_latest": "2026-05-18"
@@ -10,18 +10,18 @@
     "oni_latest": null,
     "state": "unavailable"
   },
-  "generated_at": "2026-05-18T23:22:22.047244Z",
+  "generated_at": "2026-05-18T23:41:36.217163Z",
   "model_version": "1.0.0",
   "national_aggregate": {
-    "current_storage_bcm": 8.225,
+    "current_storage_bcm": 6.476,
     "people_at_risk_el_nino": 0,
     "people_at_risk_neutral": 13500000,
-    "percent_full": 50.7,
+    "percent_full": 47.8,
     "reservoirs_critical": 1,
     "reservoirs_stable": 1,
     "reservoirs_warning": 1,
     "reservoirs_watch": 0,
-    "total_capacity_bcm": 16.23
+    "total_capacity_bcm": 13.555
   },
   "reservoirs": [
     {
@@ -29,31 +29,32 @@
       "current": {
         "area_km2": 12.974,
         "as_of": "2026-05-15",
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-04-09",
+        "cwc_reported_bcm": 0.48,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.155,
-        "percent_full": 11.3
+        "estimated_storage_bcm": 0.159,
+        "percent_full": 13.7
       },
       "dead_storage_capacity_bcm": 0.13,
       "fit": {
         "fit_quality": "good",
-        "intercept": 107.56433959982535,
+        "intercept": 107.56428610781252,
         "n_observations": 9,
-        "r_squared": 0.9033952176410331,
+        "r_squared": 0.9033948992580395,
         "reservoir_id": "krs",
-        "slope_km2_per_day": -1.2682533620135963,
-        "std_error": 12.142078800729214,
+        "slope_km2_per_day": -1.2682524180368993,
+        "std_error": 12.142091911301812,
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
-        "el_nino_delta_not_computed",
+        "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete"
       ],
       "full_pool_area_km2": 114.872,
-      "full_pool_capacity_bcm": 1.37,
+      "full_pool_capacity_bcm": 1.163,
       "history": [
         {
           "area_km2": 0.0,
@@ -614,13 +615,13 @@
           "date": "1991-11-01"
         },
         {
-          "area_km2": 30.97680263411625,
+          "area_km2": 30.977857685254374,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1991-12-01"
         },
         {
-          "area_km2": 98.63511459933943,
+          "area_km2": 98.63507692561448,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1992-01-01"
@@ -686,13 +687,13 @@
           "date": "1992-11-01"
         },
         {
-          "area_km2": 108.12027223916493,
+          "area_km2": 108.11836421242889,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1992-12-01"
         },
         {
-          "area_km2": 97.81672711213436,
+          "area_km2": 97.81625097661404,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-01-01"
@@ -740,19 +741,19 @@
           "date": "1993-08-01"
         },
         {
-          "area_km2": 107.98809013397167,
+          "area_km2": 107.98505856167492,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-09-01"
         },
         {
-          "area_km2": 5.044497654346364,
+          "area_km2": 5.040091524496345,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-10-01"
         },
         {
-          "area_km2": 99.71437592879488,
+          "area_km2": 99.7106351617505,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-11-01"
@@ -764,13 +765,13 @@
           "date": "1993-12-01"
         },
         {
-          "area_km2": 66.89205366851778,
+          "area_km2": 66.8915055918928,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-01-01"
         },
         {
-          "area_km2": 83.81592623813646,
+          "area_km2": 83.81592623813647,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-02-01"
@@ -782,7 +783,7 @@
           "date": "1994-03-01"
         },
         {
-          "area_km2": 58.09547497521613,
+          "area_km2": 58.095474975216135,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-04-01"
@@ -806,7 +807,7 @@
           "date": "1994-07-01"
         },
         {
-          "area_km2": 4.4244760246237504,
+          "area_km2": 4.4248426306992625,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-08-01"
@@ -818,19 +819,19 @@
           "date": "1994-09-01"
         },
         {
-          "area_km2": 9.863195964489034,
+          "area_km2": 9.857892162292966,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-10-01"
         },
         {
-          "area_km2": 64.74894199900062,
+          "area_km2": 64.74105902285962,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-11-01"
         },
         {
-          "area_km2": 109.70332717500955,
+          "area_km2": 109.69788379381747,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-12-01"
@@ -1052,7 +1053,7 @@
           "date": "1997-12-01"
         },
         {
-          "area_km2": 98.92503673443147,
+          "area_km2": 98.92441672044032,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1998-01-01"
@@ -1076,7 +1077,7 @@
           "date": "1998-04-01"
         },
         {
-          "area_km2": 43.21291105488314,
+          "area_km2": 43.21291105488315,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1998-05-01"
@@ -1088,7 +1089,7 @@
           "date": "1998-06-01"
         },
         {
-          "area_km2": 21.756031260913872,
+          "area_km2": 21.756538231062652,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1998-07-01"
@@ -1106,7 +1107,7 @@
           "date": "1998-09-01"
         },
         {
-          "area_km2": 79.60229919602352,
+          "area_km2": 79.59989387020543,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1998-10-01"
@@ -1220,7 +1221,7 @@
           "date": "2000-04-01"
         },
         {
-          "area_km2": 35.410442423394514,
+          "area_km2": 35.41044242339451,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2000-05-01"
@@ -1244,19 +1245,19 @@
           "date": "2000-08-01"
         },
         {
-          "area_km2": 112.17400913985988,
+          "area_km2": 112.16904483034628,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2000-09-01"
         },
         {
-          "area_km2": 112.38323183493378,
+          "area_km2": 112.37476972336557,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2000-10-01"
         },
         {
-          "area_km2": 104.99269780768435,
+          "area_km2": 104.9925881991514,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2000-11-01"
@@ -1268,7 +1269,7 @@
           "date": "2000-12-01"
         },
         {
-          "area_km2": 97.54061760353846,
+          "area_km2": 97.540288750705,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2001-01-01"
@@ -1280,7 +1281,7 @@
           "date": "2001-02-01"
         },
         {
-          "area_km2": 75.0145287338681,
+          "area_km2": 75.01452873386812,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2001-03-01"
@@ -1304,7 +1305,7 @@
           "date": "2001-06-01"
         },
         {
-          "area_km2": 12.943055221945478,
+          "area_km2": 12.94305522194548,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2001-07-01"
@@ -1322,7 +1323,7 @@
           "date": "2001-09-01"
         },
         {
-          "area_km2": 103.5094121783883,
+          "area_km2": 103.50963140303645,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2001-10-01"
@@ -1700,7 +1701,7 @@
           "date": "2006-12-01"
         },
         {
-          "area_km2": 88.43718982192941,
+          "area_km2": 88.43748098886056,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2007-01-01"
@@ -1724,7 +1725,7 @@
           "date": "2007-04-01"
         },
         {
-          "area_km2": 20.96366702775185,
+          "area_km2": 20.963667027751853,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2007-05-01"
@@ -1754,31 +1755,31 @@
           "date": "2007-09-01"
         },
         {
-          "area_km2": 73.19900360660245,
+          "area_km2": 73.19434793481003,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2007-10-01"
         },
         {
-          "area_km2": 74.67293625136192,
+          "area_km2": 74.67225107949483,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2007-11-01"
         },
         {
-          "area_km2": 73.21780440692554,
+          "area_km2": 73.21416240060852,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2007-12-01"
         },
         {
-          "area_km2": 105.73690637115888,
+          "area_km2": 105.74016436510277,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-01-01"
         },
         {
-          "area_km2": 103.74799117521036,
+          "area_km2": 103.74861116968559,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-02-01"
@@ -1820,31 +1821,31 @@
           "date": "2008-08-01"
         },
         {
-          "area_km2": 105.43861459790716,
+          "area_km2": 105.44562776670527,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-09-01"
         },
         {
-          "area_km2": 4.5147344270469585,
+          "area_km2": 4.515172984032251,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-10-01"
         },
         {
-          "area_km2": 107.13322746082537,
+          "area_km2": 107.13476207752507,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-11-01"
         },
         {
-          "area_km2": 64.84849119325011,
+          "area_km2": 64.84841925214543,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-12-01"
         },
         {
-          "area_km2": 91.907244208735,
+          "area_km2": 91.90709691301417,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-01-01"
@@ -1880,31 +1881,31 @@
           "date": "2009-06-01"
         },
         {
-          "area_km2": 38.259806611894234,
+          "area_km2": 38.26101949478572,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-07-01"
         },
         {
-          "area_km2": 64.11155908198477,
+          "area_km2": 64.11422753050341,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-08-01"
         },
         {
-          "area_km2": 59.51929978071924,
+          "area_km2": 59.52019745287787,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-09-01"
         },
         {
-          "area_km2": 101.52110347586714,
+          "area_km2": 101.5234983221902,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-10-01"
         },
         {
-          "area_km2": 105.90184492450338,
+          "area_km2": 105.90837150901194,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-11-01"
@@ -2060,7 +2061,7 @@
           "date": "2011-12-01"
         },
         {
-          "area_km2": 86.2629018894612,
+          "area_km2": 86.26582383178922,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2012-01-01"
@@ -2072,13 +2073,13 @@
           "date": "2012-02-01"
         },
         {
-          "area_km2": 60.89967276436719,
+          "area_km2": 60.899672764367196,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2012-03-01"
         },
         {
-          "area_km2": 57.321570613091254,
+          "area_km2": 57.32157061309126,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2012-04-01"
@@ -2108,7 +2109,7 @@
           "date": "2012-08-01"
         },
         {
-          "area_km2": 56.0083892374031,
+          "area_km2": 56.008389237403094,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2012-09-01"
@@ -2120,13 +2121,13 @@
           "date": "2012-10-01"
         },
         {
-          "area_km2": 9.41897504427703,
+          "area_km2": 9.418975044277031,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2012-11-01"
         },
         {
-          "area_km2": 36.67635496360173,
+          "area_km2": 36.67635496360174,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2012-12-01"
@@ -2432,7 +2433,7 @@
           "date": "2017-02-01"
         },
         {
-          "area_km2": 41.831345004067316,
+          "area_km2": 41.83134500406731,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2017-03-01"
@@ -2450,7 +2451,7 @@
           "date": "2017-05-01"
         },
         {
-          "area_km2": 15.392488787597555,
+          "area_km2": 15.392488787597554,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2017-06-01"
@@ -2480,7 +2481,7 @@
           "date": "2017-10-01"
         },
         {
-          "area_km2": 92.06157405936298,
+          "area_km2": 92.06183097109178,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2017-11-01"
@@ -2708,19 +2709,19 @@
           "date": "2020-12-01"
         },
         {
-          "area_km2": 100.77057661085071,
+          "area_km2": 100.76812396856556,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-01-01"
         },
         {
-          "area_km2": 99.64143918415279,
+          "area_km2": 99.64176803698624,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-02-01"
         },
         {
-          "area_km2": 88.61745973289901,
+          "area_km2": 88.61745973289902,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-03-01"
@@ -2732,7 +2733,7 @@
           "date": "2021-04-01"
         },
         {
-          "area_km2": 58.37290232378648,
+          "area_km2": 58.372902323786484,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-05-01"
@@ -2762,25 +2763,25 @@
           "date": "2021-09-01"
         },
         {
-          "area_km2": 103.01330990143697,
+          "area_km2": 103.00975371720679,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-10-01"
         },
         {
-          "area_km2": 71.55922293221988,
+          "area_km2": 71.55805481396152,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-11-01"
         },
         {
-          "area_km2": 101.10067612348982,
+          "area_km2": 101.09465328456113,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-12-01"
         },
         {
-          "area_km2": 103.0933603062106,
+          "area_km2": 103.09336030621058,
           "cloud_coverage_percent": 27.19452625,
           "data_source": "sentinel_2",
           "date": "2025-12-26"
@@ -2798,7 +2799,7 @@
           "date": "2026-01-15"
         },
         {
-          "area_km2": 105.46435802986484,
+          "area_km2": 105.4668097225646,
           "cloud_coverage_percent": 12.8605875,
           "data_source": "sentinel_2",
           "date": "2026-01-25"
@@ -2810,13 +2811,13 @@
           "date": "2026-02-04"
         },
         {
-          "area_km2": 105.56625623645128,
+          "area_km2": 105.56610666891893,
           "cloud_coverage_percent": 7.013949,
           "data_source": "sentinel_2",
           "date": "2026-02-14"
         },
         {
-          "area_km2": 99.69464248885282,
+          "area_km2": 99.69450089234829,
           "cloud_coverage_percent": 7.83347725,
           "data_source": "sentinel_2",
           "date": "2026-02-24"
@@ -2828,7 +2829,7 @@
           "date": "2026-03-06"
         },
         {
-          "area_km2": 91.07800548023079,
+          "area_km2": 91.07800548023081,
           "cloud_coverage_percent": 7.044295,
           "data_source": "sentinel_2",
           "date": "2026-03-16"
@@ -2840,7 +2841,7 @@
           "date": "2026-03-26"
         },
         {
-          "area_km2": 38.40743712848755,
+          "area_km2": 38.407437128487544,
           "cloud_coverage_percent": 31.130463833333327,
           "data_source": "sentinel_2",
           "date": "2026-04-05"
@@ -2858,13 +2859,13 @@
           "date": "2026-04-25"
         },
         {
-          "area_km2": 3.9349085549972664,
+          "area_km2": 3.9349085549972656,
           "cloud_coverage_percent": 26.401966,
           "data_source": "sentinel_2",
           "date": "2026-05-05"
         },
         {
-          "area_km2": 12.974074818073687,
+          "area_km2": 12.974074818073689,
           "cloud_coverage_percent": 32.82834686666667,
           "data_source": "sentinel_2",
           "date": "2026-05-15"
@@ -2878,9 +2879,12 @@
       "population_served": 13500000,
       "projection": {
         "el_nino_monsoon": {
-          "confidence_interval_days": null,
-          "days_to_dead_storage": null,
-          "dead_storage_date": null,
+          "confidence_interval_days": [
+            0,
+            21
+          ],
+          "days_to_dead_storage": 2,
+          "dead_storage_date": "2026-05-17",
           "method": "linear_extrapolation",
           "scenario": "el_nino_monsoon"
         },
@@ -2904,21 +2908,22 @@
       "current": {
         "area_km2": 84.807,
         "as_of": "2026-05-17",
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-04-09",
+        "cwc_reported_bcm": 1.254,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 1.685,
-        "percent_full": 63.6
+        "estimated_storage_bcm": 1.467,
+        "percent_full": 55.4
       },
       "dead_storage_capacity_bcm": 0.21,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete"
       ],
       "full_pool_area_km2": 133.367,
-      "full_pool_capacity_bcm": 2.65,
+      "full_pool_capacity_bcm": 2.647,
       "history": [
         {
           "area_km2": 0.0,
@@ -3197,7 +3202,7 @@
           "date": "1987-12-01"
         },
         {
-          "area_km2": 49.98045682628625,
+          "area_km2": 49.98045682628624,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1988-01-01"
@@ -3557,19 +3562,19 @@
           "date": "1992-12-01"
         },
         {
-          "area_km2": 3.0475222400412156,
+          "area_km2": 3.047522240041216,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-01-01"
         },
         {
-          "area_km2": 46.355166076966086,
+          "area_km2": 46.35516607696608,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-02-01"
         },
         {
-          "area_km2": 105.5458576968663,
+          "area_km2": 105.54497901151092,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-03-01"
@@ -3581,7 +3586,7 @@
           "date": "1993-04-01"
         },
         {
-          "area_km2": 99.67499070670986,
+          "area_km2": 99.67288323505745,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-05-01"
@@ -3623,25 +3628,25 @@
           "date": "1993-11-01"
         },
         {
-          "area_km2": 110.65504471964347,
+          "area_km2": 110.6546053767513,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1993-12-01"
         },
         {
-          "area_km2": 113.1526463896389,
+          "area_km2": 113.15145879101087,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-01-01"
         },
         {
-          "area_km2": 4.048207195820176,
+          "area_km2": 4.047767852928018,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-02-01"
         },
         {
-          "area_km2": 102.08459262755609,
+          "area_km2": 102.08283868963721,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-03-01"
@@ -3659,7 +3664,7 @@
           "date": "1994-05-01"
         },
         {
-          "area_km2": 72.40956349542081,
+          "area_km2": 72.40956349542083,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-06-01"
@@ -3671,7 +3676,7 @@
           "date": "1994-07-01"
         },
         {
-          "area_km2": 117.2022516138216,
+          "area_km2": 117.20106401519357,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-08-01"
@@ -3683,31 +3688,31 @@
           "date": "1994-09-01"
         },
         {
-          "area_km2": 30.376339708870347,
+          "area_km2": 30.376339708870344,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-10-01"
         },
         {
-          "area_km2": 121.05256345412855,
+          "area_km2": 121.05168476877313,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-11-01"
         },
         {
-          "area_km2": 127.06654860252283,
+          "area_km2": 127.06566991716741,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1994-12-01"
         },
         {
-          "area_km2": 75.14566092074702,
+          "area_km2": 75.14610026321026,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1995-01-01"
         },
         {
-          "area_km2": 72.94027396474553,
+          "area_km2": 72.94027396474551,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1995-02-01"
@@ -3773,13 +3778,13 @@
           "date": "1995-12-01"
         },
         {
-          "area_km2": 41.4370495038898,
+          "area_km2": 41.437049503889796,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1996-01-01"
         },
         {
-          "area_km2": 22.99290612471944,
+          "area_km2": 22.992906124719443,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1996-02-01"
@@ -3809,13 +3814,13 @@
           "date": "1996-06-01"
         },
         {
-          "area_km2": 29.275743556595874,
+          "area_km2": 29.275743556595877,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1996-07-01"
         },
         {
-          "area_km2": 58.255325273739324,
+          "area_km2": 58.25532527373932,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1996-08-01"
@@ -3833,13 +3838,13 @@
           "date": "1996-10-01"
         },
         {
-          "area_km2": 117.34791774939536,
+          "area_km2": 117.34791774939538,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1996-11-01"
         },
         {
-          "area_km2": 91.61051412181789,
+          "area_km2": 91.60963543646248,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1996-12-01"
@@ -3917,7 +3922,7 @@
           "date": "1997-12-01"
         },
         {
-          "area_km2": 121.26774086319253,
+          "area_km2": 121.26774086319251,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1998-01-01"
@@ -4007,7 +4012,7 @@
           "date": "1999-03-01"
         },
         {
-          "area_km2": 51.39012775114851,
+          "area_km2": 51.390127751148526,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1999-04-01"
@@ -4049,19 +4054,19 @@
           "date": "1999-10-01"
         },
         {
-          "area_km2": 131.04073355519017,
+          "area_km2": 131.03985486983478,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1999-11-01"
         },
         {
-          "area_km2": 120.04729078841116,
+          "area_km2": 120.04641210305576,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "1999-12-01"
         },
         {
-          "area_km2": 66.55508383368813,
+          "area_km2": 66.55508383368814,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2000-01-01"
@@ -4079,13 +4084,13 @@
           "date": "2000-03-01"
         },
         {
-          "area_km2": 116.14957180545377,
+          "area_km2": 116.14869312009839,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2000-04-01"
         },
         {
-          "area_km2": 46.76216453035999,
+          "area_km2": 46.76216453035998,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2000-05-01"
@@ -4109,7 +4114,7 @@
           "date": "2000-08-01"
         },
         {
-          "area_km2": 31.261990254870568,
+          "area_km2": 31.26199025487057,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2000-09-01"
@@ -4289,7 +4294,7 @@
           "date": "2003-02-01"
         },
         {
-          "area_km2": 24.080249930589876,
+          "area_km2": 24.08024993058988,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2003-03-01"
@@ -4331,7 +4336,7 @@
           "date": "2003-09-01"
         },
         {
-          "area_km2": 3.271191010663425,
+          "area_km2": 3.2711910106634248,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2003-10-01"
@@ -4349,19 +4354,19 @@
           "date": "2003-12-01"
         },
         {
-          "area_km2": 15.858072817545262,
+          "area_km2": 15.85807281754526,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-01-01"
         },
         {
-          "area_km2": 26.161422266071774,
+          "area_km2": 26.161422266071778,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-02-01"
         },
         {
-          "area_km2": 20.37893413777137,
+          "area_km2": 20.378934137771367,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-03-01"
@@ -4373,19 +4378,19 @@
           "date": "2004-04-01"
         },
         {
-          "area_km2": 24.681989913828044,
+          "area_km2": 24.681989913828048,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-05-01"
         },
         {
-          "area_km2": 36.17744643944894,
+          "area_km2": 36.17744643944895,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-06-01"
         },
         {
-          "area_km2": 70.79151306170834,
+          "area_km2": 70.79151306170833,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-07-01"
@@ -4397,13 +4402,13 @@
           "date": "2004-08-01"
         },
         {
-          "area_km2": 11.016728890866961,
+          "area_km2": 11.016728890866963,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-09-01"
         },
         {
-          "area_km2": 77.08849378095204,
+          "area_km2": 77.08849378095205,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-10-01"
@@ -4415,31 +4420,31 @@
           "date": "2004-11-01"
         },
         {
-          "area_km2": 111.04265338446405,
+          "area_km2": 111.04177469910866,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2004-12-01"
         },
         {
-          "area_km2": 81.84770900820642,
+          "area_km2": 81.84770900820641,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2005-01-01"
         },
         {
-          "area_km2": 52.24593980780737,
+          "area_km2": 52.245939807807375,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2005-02-01"
         },
         {
-          "area_km2": 54.30559039812792,
+          "area_km2": 54.30559039812791,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2005-03-01"
         },
         {
-          "area_km2": 48.23759269633861,
+          "area_km2": 48.237592696338616,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2005-04-01"
@@ -4457,13 +4462,13 @@
           "date": "2005-06-01"
         },
         {
-          "area_km2": 72.31044221522392,
+          "area_km2": 72.31044221522393,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2005-07-01"
         },
         {
-          "area_km2": 128.32228579912672,
+          "area_km2": 128.32372739311222,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2005-08-01"
@@ -4487,7 +4492,7 @@
           "date": "2005-11-01"
         },
         {
-          "area_km2": 59.869996191584924,
+          "area_km2": 59.86999619158493,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2005-12-01"
@@ -4637,55 +4642,55 @@
           "date": "2007-12-01"
         },
         {
-          "area_km2": 94.59530891447716,
+          "area_km2": 94.59574825736932,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-01-01"
         },
         {
-          "area_km2": 104.99635945710756,
+          "area_km2": 104.99723814246295,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-02-01"
         },
         {
-          "area_km2": 101.19310001100312,
+          "area_km2": 101.19397869635853,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-03-01"
         },
         {
-          "area_km2": 107.17127916944591,
+          "area_km2": 107.1721578548013,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-04-01"
         },
         {
-          "area_km2": 106.70507382438598,
+          "area_km2": 106.70595250974137,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-05-01"
         },
         {
-          "area_km2": 84.46062052705632,
+          "area_km2": 84.46105986951956,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-06-01"
         },
         {
-          "area_km2": 77.4895862122022,
+          "area_km2": 77.48958621220218,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-07-01"
         },
         {
-          "area_km2": 60.48472802348627,
+          "area_km2": 60.484728023486255,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-08-01"
         },
         {
-          "area_km2": 48.28892074634742,
+          "area_km2": 48.288920746347415,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-09-01"
@@ -4697,13 +4702,13 @@
           "date": "2008-10-01"
         },
         {
-          "area_km2": 97.11162402218814,
+          "area_km2": 97.11250270754353,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-11-01"
         },
         {
-          "area_km2": 93.31089044051794,
+          "area_km2": 93.31176912587333,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2008-12-01"
@@ -4721,13 +4726,13 @@
           "date": "2009-02-01"
         },
         {
-          "area_km2": 61.22303237668053,
+          "area_km2": 61.22303237668052,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-03-01"
         },
         {
-          "area_km2": 59.00260579923621,
+          "area_km2": 59.0026057992362,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-04-01"
@@ -4739,19 +4744,19 @@
           "date": "2009-05-01"
         },
         {
-          "area_km2": 59.156794534736854,
+          "area_km2": 59.15679453473686,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-06-01"
         },
         {
-          "area_km2": 75.97995395289468,
+          "area_km2": 75.97995395289466,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-07-01"
         },
         {
-          "area_km2": 92.51706246723293,
+          "area_km2": 92.5175018101251,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-08-01"
@@ -4763,7 +4768,7 @@
           "date": "2009-09-01"
         },
         {
-          "area_km2": 92.78841352551787,
+          "area_km2": 92.78841352551785,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2009-10-01"
@@ -4781,19 +4786,19 @@
           "date": "2009-12-01"
         },
         {
-          "area_km2": 86.15965278004902,
+          "area_km2": 86.15965278004903,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2010-01-01"
         },
         {
-          "area_km2": 83.20332275465148,
+          "area_km2": 83.20288341218824,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2010-02-01"
         },
         {
-          "area_km2": 78.70744939772082,
+          "area_km2": 78.70701005525758,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2010-03-01"
@@ -4823,19 +4828,19 @@
           "date": "2010-07-01"
         },
         {
-          "area_km2": 59.295184116289995,
+          "area_km2": 59.29518411629,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2010-08-01"
         },
         {
-          "area_km2": 2.4916789030651607,
+          "area_km2": 2.491678903065161,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2010-09-01"
         },
         {
-          "area_km2": 40.65125250585022,
+          "area_km2": 40.651252505850216,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2010-10-01"
@@ -5099,7 +5104,7 @@
           "date": "2014-05-01"
         },
         {
-          "area_km2": 34.56328090207489,
+          "area_km2": 34.563280902074894,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2014-06-01"
@@ -5111,31 +5116,31 @@
           "date": "2014-07-01"
         },
         {
-          "area_km2": 127.64227994144244,
+          "area_km2": 127.64341262215535,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2014-08-01"
         },
         {
-          "area_km2": 111.99433024716055,
+          "area_km2": 111.99520893251595,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2014-09-01"
         },
         {
-          "area_km2": 102.58998528968985,
+          "area_km2": 102.590424632582,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2014-10-01"
         },
         {
-          "area_km2": 102.30378786082693,
+          "area_km2": 102.30378786082692,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2014-11-01"
         },
         {
-          "area_km2": 110.48990881407245,
+          "area_km2": 110.49104149478534,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2014-12-01"
@@ -5291,7 +5296,7 @@
           "date": "2017-01-01"
         },
         {
-          "area_km2": 28.03747218924243,
+          "area_km2": 28.037472189242436,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2017-02-01"
@@ -5321,7 +5326,7 @@
           "date": "2017-06-01"
         },
         {
-          "area_km2": 24.505433258374314,
+          "area_km2": 24.505433258374318,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2017-07-01"
@@ -5333,19 +5338,19 @@
           "date": "2017-08-01"
         },
         {
-          "area_km2": 74.43307420040851,
+          "area_km2": 74.4330742004085,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2017-09-01"
         },
         {
-          "area_km2": 95.3086933018369,
+          "area_km2": 95.30869330183688,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2017-10-01"
         },
         {
-          "area_km2": 84.22069331620432,
+          "area_km2": 84.2206933162043,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2017-11-01"
@@ -5429,7 +5434,7 @@
           "date": "2018-12-01"
         },
         {
-          "area_km2": 92.08396024482224,
+          "area_km2": 92.08352090235901,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2019-01-01"
@@ -5459,19 +5464,19 @@
           "date": "2019-05-01"
         },
         {
-          "area_km2": 34.44068351388485,
+          "area_km2": 34.44068351388484,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2019-06-01"
         },
         {
-          "area_km2": 37.6399902844055,
+          "area_km2": 37.63999028440549,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2019-07-01"
         },
         {
-          "area_km2": 88.09723789665969,
+          "area_km2": 88.09723789665968,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2019-08-01"
@@ -5483,19 +5488,19 @@
           "date": "2019-09-01"
         },
         {
-          "area_km2": 127.43148981097491,
+          "area_km2": 127.43105046808276,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2019-10-01"
         },
         {
-          "area_km2": 122.54441940559853,
+          "area_km2": 122.54130968242387,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2019-11-01"
         },
         {
-          "area_km2": 129.5594525342512,
+          "area_km2": 129.5563428110765,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2019-12-01"
@@ -5573,43 +5578,43 @@
           "date": "2020-12-01"
         },
         {
-          "area_km2": 85.61045154869859,
+          "area_km2": 85.6104515486986,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-01-01"
         },
         {
-          "area_km2": 121.57336389271114,
+          "area_km2": 121.57568073926012,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-02-01"
         },
         {
-          "area_km2": 118.16245638895981,
+          "area_km2": 118.1647732355088,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-03-01"
         },
         {
-          "area_km2": 112.05938264893632,
+          "area_km2": 112.06026133429171,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-04-01"
         },
         {
-          "area_km2": 106.26333622542136,
+          "area_km2": 106.26421491077673,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-05-01"
         },
         {
-          "area_km2": 95.73818259488358,
+          "area_km2": 95.7381825948836,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-06-01"
         },
         {
-          "area_km2": 89.93547425836425,
+          "area_km2": 89.93547425836427,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-07-01"
@@ -5627,7 +5632,7 @@
           "date": "2021-09-01"
         },
         {
-          "area_km2": 89.15640117827277,
+          "area_km2": 89.15684052116494,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-10-01"
@@ -5639,13 +5644,13 @@
           "date": "2021-11-01"
         },
         {
-          "area_km2": 122.20793812135436,
+          "area_km2": 122.21104784452902,
           "cloud_coverage_percent": null,
           "data_source": "jrc",
           "date": "2021-12-01"
         },
         {
-          "area_km2": 124.99363948757771,
+          "area_km2": 124.99363948757768,
           "cloud_coverage_percent": 19.008004333333336,
           "data_source": "sentinel_2",
           "date": "2025-12-28"
@@ -5657,13 +5662,13 @@
           "date": "2026-01-07"
         },
         {
-          "area_km2": 96.13225375024157,
+          "area_km2": 96.13225375024159,
           "cloud_coverage_percent": 35.39638225,
           "data_source": "sentinel_2",
           "date": "2026-01-17"
         },
         {
-          "area_km2": 104.41411618253764,
+          "area_km2": 104.41354107048643,
           "cloud_coverage_percent": 5.7162435,
           "data_source": "sentinel_2",
           "date": "2026-01-27"
@@ -5675,13 +5680,13 @@
           "date": "2026-02-06"
         },
         {
-          "area_km2": 99.51211460684961,
+          "area_km2": 99.51211460684964,
           "cloud_coverage_percent": 31.74976575,
           "data_source": "sentinel_2",
           "date": "2026-02-16"
         },
         {
-          "area_km2": 59.90217994021911,
+          "area_km2": 59.90217994021909,
           "cloud_coverage_percent": 44.7847755,
           "data_source": "sentinel_2",
           "date": "2026-02-26"
@@ -5693,13 +5698,13 @@
           "date": "2026-03-08"
         },
         {
-          "area_km2": 91.49210883468841,
+          "area_km2": 91.49196276856671,
           "cloud_coverage_percent": 22.566519,
           "data_source": "sentinel_2",
           "date": "2026-03-18"
         },
         {
-          "area_km2": 89.35281767027237,
+          "area_km2": 89.35281767027236,
           "cloud_coverage_percent": 9.545821833333333,
           "data_source": "sentinel_2",
           "date": "2026-03-28"
@@ -5717,7 +5722,7 @@
           "date": "2026-04-17"
         },
         {
-          "area_km2": 85.40808158802488,
+          "area_km2": 85.4081788383148,
           "cloud_coverage_percent": 1.3156102500000002,
           "data_source": "sentinel_2",
           "date": "2026-04-27"
@@ -5729,7 +5734,7 @@
           "date": "2026-05-02"
         },
         {
-          "area_km2": 84.80693412558993,
+          "area_km2": 84.80683687530004,
           "cloud_coverage_percent": 32.22067025,
           "data_source": "sentinel_2",
           "date": "2026-05-17"
@@ -5766,10 +5771,11 @@
       "current": {
         "area_km2": 498.981,
         "as_of": "2026-05-18",
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-04-09",
+        "cwc_reported_bcm": 4.192,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 6.385,
-        "percent_full": 52.3
+        "estimated_storage_bcm": 4.85,
+        "percent_full": 49.8
       },
       "dead_storage_capacity_bcm": 3.39,
       "fit": {
@@ -5783,14 +5789,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
-        "el_nino_delta_not_computed",
+        "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "volume_area_ratio_proxy"
+        "low_volume_confidence",
+        "phase0_cwc_validation_incomplete"
       ],
       "full_pool_area_km2": 954.151,
-      "full_pool_capacity_bcm": 12.21,
+      "full_pool_capacity_bcm": 9.745,
       "history": [
         {
           "area_km2": 0.0,
@@ -8621,9 +8628,12 @@
       "population_served": null,
       "projection": {
         "el_nino_monsoon": {
-          "confidence_interval_days": null,
-          "days_to_dead_storage": null,
-          "dead_storage_date": null,
+          "confidence_interval_days": [
+            40,
+            92
+          ],
+          "days_to_dead_storage": 66,
+          "dead_storage_date": "2026-07-23",
           "method": "linear_extrapolation",
           "scenario": "el_nino_monsoon"
         },

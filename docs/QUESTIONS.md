@@ -28,6 +28,16 @@ When `status: resolved`, append the resolution and move the question to the bott
 - `reservoirwatch.in` — .in feels right for India focus
 
 **Provisional answer:** `reservoirs.tanishq.dev` for Phase 1–3 (no domain shopping needed). Decide on a vanity domain before Phase 4.
+**Status:** superseded by the 2026-05-18 CWC single-bulletin calibration below.
+
+### 2026-05-18: Phase 0 CWC source access
+
+**Context:** The official RSMS CWC PDF endpoint is visible in search/web previews, but direct `curl` from this environment receives 401 responses. A full automated latest-bulletin downloader may need cookies or a public mirror.
+**Options considered:**
+- Block Phase 0 until live PDF download is solved.
+- Check in the official Phase 0 rows from `bulletin-09-04-2026-91.pdf` with source URL/line references, then keep parser support for local PDFs.
+- Use CWC values from secondary sites. Rejected: CWC is the ground truth.
+**Provisional answer:** Check in the official 09.04.2026 rows for KRS, Mettur, and Indira Sagar as Phase 0 calibration input, while keeping `parse_bulletin_pdf` and alias support ready for local PDFs. Flag output with `phase0_cwc_validation_incomplete` until six-month CWC history is loaded.
 **Status:** open
 
 ---

@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+import pandas as pd
 import pytest
 
-from reservoirs.oni import classify_enso, latest_oni, parse_oni_table
+from reservoirs.oni import classify_enso, compute_el_nino_delta, latest_oni, parse_oni_table
 
 
 def test_classify_enso_boundaries() -> None:
@@ -43,3 +44,15 @@ def test_latest_oni_classifies_trend() -> None:
     assert latest == pytest.approx(0.8)
     assert state == "el_nino_developing"
 
+
+def test_compute_el_nino_delta_uses_june_to_september_gain() -> None:
+    frame = pd.DataFrame(
+        [
+            {"month": "2015-06", "area_km2": 100},
+            {"month": "2015-09", "area_km2": 110},
+            {"month": "2016-06", "area_km2": 100},
+            {"month": "2016-09", "area_km2": 140},
+        ]
+    )
+
+    assert compute_el_nino_delta(frame) == pytest.approx(-30)
