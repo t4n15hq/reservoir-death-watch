@@ -4,7 +4,11 @@ from datetime import UTC, datetime
 
 import pytest
 
-from reservoirs.area_volume import AreaVolumeCalibrationError, dead_storage_area_km2, fit_power_law_curve
+from reservoirs.area_volume import (
+    AreaVolumeCalibrationError,
+    dead_storage_area_km2,
+    fit_power_law_curve,
+)
 
 
 def test_fit_power_law_curve_recovers_synthetic_geometry() -> None:

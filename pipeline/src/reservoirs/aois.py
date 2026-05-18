@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import csv
 import json
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
-from reservoirs.config import RESERVOIRS_CSV, REPO_ROOT
+from reservoirs.config import REPO_ROOT, RESERVOIRS_CSV
 from reservoirs.schemas import ReservoirAOI
 
 

@@ -142,7 +142,10 @@ def compute_tier(
         el_nino_days is not None and el_nino_days < 60
     ):
         return "warning"
-    if five_year_average_for_month is not None and current_percent_full < five_year_average_for_month:
+    if (
+        five_year_average_for_month is not None
+        and current_percent_full < five_year_average_for_month
+    ):
         return "watch"
     return "stable"
 
@@ -179,4 +182,3 @@ def _standard_error(actual: np.ndarray, predicted: np.ndarray) -> float:
     if degrees <= 0:
         return 0.0
     return float(np.sqrt(np.sum((actual - predicted) ** 2) / degrees))
-

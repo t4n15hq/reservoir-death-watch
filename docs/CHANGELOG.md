@@ -12,7 +12,7 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 - Added 16 local tests covering `area_volume`, `model`, `oni`, and `cwc_scraper`; current status: passing locally with `python3 -m pytest`.
 - Added AOI directory instructions that prohibit placeholder polygons; Phase 0 still needs real `krs`, `mettur`, and `indira_sagar` GeoJSON AOIs.
 - Added a root `.gitignore` for Python caches, local virtualenvs, and macOS metadata.
-- Wired Earth Engine service account credential resolution through `GOOGLE_APPLICATION_CREDENTIALS` or `~/.secrets/reservoir-death-watch/gee_service_account.json`; local tests now cover credential path validation.
+- Wired Earth Engine service account credential resolution through `GOOGLE_APPLICATION_CREDENTIALS` or the local `~/.secrets/reservoir-death-watch/` key file; local tests now cover credential path validation.
 
 ## 2026-05-18 — Project initialized
 

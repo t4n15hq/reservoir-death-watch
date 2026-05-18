@@ -6,8 +6,14 @@ import json
 import os
 from pathlib import Path
 
-
 DEFAULT_CREDENTIALS_PATH = (
+    Path.home()
+    / ".secrets"
+    / "reservoir-death-watch"
+    / "reservoir-death-watch-0bc6b0a1aa14.json"
+)
+ALTERNATE_CREDENTIALS_PATHS = (
+    DEFAULT_CREDENTIALS_PATH,
     Path.home() / ".secrets" / "reservoir-death-watch" / "gee_service_account.json"
 )
 
@@ -22,20 +28,23 @@ def resolve_credentials_path(credentials_path: str | Path | None = None) -> Path
     Priority:
     1. Explicit function argument
     2. GOOGLE_APPLICATION_CREDENTIALS
-    3. Local development default under ~/.secrets
+    3. Local development defaults under ~/.secrets/reservoir-death-watch
     """
 
-    raw_path = (
-        credentials_path
-        or os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-        or DEFAULT_CREDENTIALS_PATH
-    )
+    raw_path = credentials_path or os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+    if not raw_path:
+        for candidate in ALTERNATE_CREDENTIALS_PATHS:
+            if candidate.exists():
+                return candidate
+        raw_path = DEFAULT_CREDENTIALS_PATH
+
     path = Path(raw_path).expanduser()
     if not path.exists():
+        expected_paths = ", ".join(str(path) for path in ALTERNATE_CREDENTIALS_PATHS)
         msg = (
             "Earth Engine service account JSON not found. Set "
             "GOOGLE_APPLICATION_CREDENTIALS or place it at "
-            f"{DEFAULT_CREDENTIALS_PATH}."
+            f"one of: {expected_paths}."
         )
         raise GEEAuthError(msg)
     return path

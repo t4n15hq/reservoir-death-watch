@@ -6,7 +6,6 @@ import pytest
 
 from reservoirs.cwc_scraper import CWCFormatError, parse_bulletin_text
 
-
 ALIASES = {
     "Krishna Raja Sagar": "krs",
     "Mettur": "mettur",
