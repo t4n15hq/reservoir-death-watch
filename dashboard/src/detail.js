@@ -1,4 +1,5 @@
 import { Chart, registerables } from 'chart.js';
+import 'chartjs-adapter-date-fns';
 import {
   awaitingFirstObservation,
   daysSince,
@@ -39,8 +40,7 @@ export async function renderDetail(container, reservoir) {
 
       ${pending ? '<div class="banner banner--pending">Awaiting first satellite observation. AOI not yet digitized for this reservoir. Run <code>scripts/seed_aois.py</code> and the pipeline to populate.</div>' : ''}
       ${stale ? '<div class="banner banner--stale">Stale data: most recent observation is older than 14 days.</div>' : ''}
-      ${!pending && flags.includes('current_only_no_history') ? '<div class="banner banner--info">Current observation only — no historical trace or depletion fit yet. Backfill via <code>scripts/backfill_history.py</code>.</div>' : ''}
-      ${!pending && flags.includes('volume_area_ratio_proxy') ? '<div class="banner banner--info">Storage computed via area-ratio proxy, not CWC-calibrated. Drop a CWC bulletin CSV in <code>pipeline/data/cwc/</code> for proper power-law calibration.</div>' : ''}
+      ${!pending && flags.includes('current_only_no_history') ? '<div class="banner banner--info">Current observation only — no historical trace or depletion fit yet.</div>' : ''}
 
       <dl class="kv">
         <dt>As of</dt>
@@ -50,7 +50,7 @@ export async function renderDetail(container, reservoir) {
         <dd>${pending ? '<span class="muted">no observation yet</span>' : `${formatArea(current.area_km2)} of ${formatArea(reservoir.full_pool_area_km2)} <span class="muted">(observed)</span>`}</dd>
 
         <dt>Estimated storage</dt>
-        <dd>${pending ? '<span class="muted">no observation yet</span>' : `${formatBcm(current.estimated_storage_bcm)} of ${formatBcm(reservoir.full_pool_capacity_bcm)} BCM <span class="muted">(derived)</span>`}</dd>
+        <dd>${pending ? '<span class="muted">no observation yet</span>' : `${formatBcm(current.estimated_storage_bcm)} of ${formatBcm(reservoir.full_pool_capacity_bcm)} BCM <span class="muted">(${storageDerivation(flags)})</span>`}</dd>
 
         <dt>CWC reported</dt>
         <dd>${
@@ -145,6 +145,12 @@ function drawHistoryChart(history) {
       },
     },
   });
+}
+
+function storageDerivation(flags) {
+  if (flags.includes('cwc_calibrated_single_point')) return 'derived from CWC-calibrated curve';
+  if (flags.includes('volume_area_ratio_proxy')) return 'derived via area-ratio proxy';
+  return 'derived';
 }
 
 function formatArea(value) {

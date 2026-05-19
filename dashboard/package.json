@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "chart.js": "^4.4.0",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "date-fns": "^4.2.1",
     "maplibre-gl": "^4.7.0"
   },
   "devDependencies": {
