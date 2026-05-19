@@ -4,6 +4,22 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 
 ---
 
+## 2026-05-19 — Phase 1 backtests: 1 of 4 pass; debugging starts here
+
+Live `RDW_RUN_BACKTESTS=1 pytest tests/test_backtest.py` against the three Phase 1 historical cases. Result: jayakwadi 2019-03-31 passes (tier=warning); krs 2023-12-31, mettur 2019-03-31, jayakwadi 2016-03-31 fail. Detailed assertion output captured in commit follow-ups.
+
+Root causes by case:
+
+- **KRS 2023-12-31** → tier=watch (expected critical). Depletion fit unavailable: only 5 S2 observations in the 90-day window (Nov–Dec 2023), below the min_observations=6 threshold; all five have 47–64% cloud cover. Without a fit there is no `days_to_dead_storage`, so the critical-tier path is unreachable. Separately, the area-ratio storage proxy reports 58.1% full while CWC actually had KRS at ~16% in late 2023 — V ∝ A is wrong at low fill, but this only affects the watch-tier 5-year-average check, not critical/warning which depend on `days_to_dead`.
+- **Mettur 2019-03-31** → tier=stable (expected warning/critical). Linear fit succeeds (slope=−0.27 km²/day, r²=0.80) but projects 199 days to dead storage — past the 120-day warning bar. The actual June 2019 Chennai crisis hit ~90 days later. Linear extrapolation does not capture the spring → peak-summer rate acceleration that drove the real crisis.
+- **Jayakwadi 2016-03-31** → tier=watch (expected warning/critical). Same shape: fit succeeds (slope=−0.27, r²=0.77), neutral projection 214d, El Niño projection 123d. 123d still exceeds the 60d critical threshold for the El Niño path, so the tier stays watch.
+
+Per AGENT.md non-negotiable #2: do NOT tune thresholds to make these pass. Investigation order is (1) area-volume curve, (2) regression window, (3) El Niño delta, (4) only then the linear model. Treating these failures as real diagnostic signals about the model.
+
+Backtest snapshots (`data/backtest_<case>.json`) not yet generated.
+
+---
+
 ## 2026-05-19 — PRD v2: scope tightened to 25 city-serving reservoirs
 
 **Product pivot.** Replaced the "all 166 CWC-monitored reservoirs" framing with "the 25 CWC reservoirs that supply India's major cities." The earlier scope inherited CWC's bookkeeping universe rather than making a product choice; the city-serving cut sharpens the journalist story (KRS → Bengaluru, Bisalpur → Jaipur, Bhavani Sagar → Coimbatore) and makes ground-truth verification tractable (25 × ~10 fields vs 166 × ~10). Per AGENT.md: *"Fewer moving parts wins. Honesty over polish. Reproducible over impressive."*
