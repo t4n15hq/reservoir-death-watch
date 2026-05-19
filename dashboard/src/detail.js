@@ -1,5 +1,6 @@
 import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-date-fns';
+import annotationPlugin from 'chartjs-plugin-annotation';
 import {
   awaitingFirstObservation,
   daysSince,
@@ -7,7 +8,7 @@ import {
   loadReservoirHistory,
 } from './data.js';
 
-Chart.register(...registerables);
+Chart.register(...registerables, annotationPlugin);
 
 let activeChart = null;
 
@@ -151,16 +152,67 @@ function drawHistoryChart(history, reservoir) {
     datasets.push({ label: 'Sentinel-1', data: s1, borderColor: '#8d5d9c', pointRadius: 1.8, borderWidth: 1.2, tension: 0.1 });
   }
 
-  // FRL reference (full pool)
-  const annotations = [];
+  // Reference lines: FRL (full pool area) + dead-storage area
+  // Plus a shaded last-90-days region indicating what the depletion fit was computed from.
+  const annotations = {};
   if (reservoir.full_pool_area_km2) {
-    annotations.push({
+    annotations.frl = {
       type: 'line',
-      borderColor: 'rgba(0,0,0,0.18)',
+      yMin: reservoir.full_pool_area_km2,
+      yMax: reservoir.full_pool_area_km2,
+      borderColor: 'rgba(58, 90, 120, 0.35)',
       borderWidth: 1,
       borderDash: [4, 3],
-      label: { display: false },
-    });
+      label: {
+        display: true,
+        content: 'FRL',
+        position: 'end',
+        backgroundColor: 'transparent',
+        color: '#3a5a78',
+        font: { family: "'Inter', sans-serif", size: 10, weight: '500' },
+        padding: { top: 0, bottom: 0, left: 4, right: 0 },
+        yAdjust: -6,
+      },
+    };
+  }
+  // Dead storage area: derived the same way the model does, so the chart
+  // reflects what the projection is using.
+  const deadCapacity = reservoir.dead_storage_capacity_bcm;
+  const fullCapacity = reservoir.full_pool_capacity_bcm;
+  const fullArea = reservoir.full_pool_area_km2;
+  if (deadCapacity && fullCapacity && fullArea) {
+    const deadArea = fullArea * Math.pow(deadCapacity / fullCapacity, 1 / 2.0);
+    annotations.dead = {
+      type: 'line',
+      yMin: deadArea,
+      yMax: deadArea,
+      borderColor: 'rgba(182, 50, 42, 0.4)',
+      borderWidth: 1,
+      borderDash: [4, 3],
+      label: {
+        display: true,
+        content: 'dead storage',
+        position: 'end',
+        backgroundColor: 'transparent',
+        color: '#b6322a',
+        font: { family: "'Inter', sans-serif", size: 10, weight: '500' },
+        padding: { top: 0, bottom: 0, left: 4, right: 0 },
+        yAdjust: 8,
+      },
+    };
+  }
+  // Shaded region: the 90-day depletion-fit window, ending at the latest observation.
+  const latest = points.length ? points[points.length - 1] : null;
+  if (reservoir.fit && latest) {
+    const winEnd = latest.x;
+    const winStart = winEnd - 90 * 24 * 60 * 60 * 1000;
+    annotations.fitWindow = {
+      type: 'box',
+      xMin: winStart,
+      xMax: winEnd,
+      backgroundColor: 'rgba(196, 122, 29, 0.06)',
+      borderWidth: 0,
+    };
   }
 
   activeChart = new Chart(ctx, {
@@ -172,6 +224,7 @@ function drawHistoryChart(history, reservoir) {
       parsing: false,
       animation: false,
       plugins: {
+        annotation: { annotations },
         legend: {
           labels: { color: '#4a4a48', font: { family: "'Inter', sans-serif", size: 11 }, usePointStyle: true, pointStyle: 'line' },
         },
