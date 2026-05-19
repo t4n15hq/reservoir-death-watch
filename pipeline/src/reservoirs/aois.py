@@ -61,6 +61,25 @@ def load_aois(
     return sorted(aois, key=lambda aoi: aoi.priority)
 
 
+def reservoirs_with_aois_on_disk(
+    *,
+    reservoirs_csv: Path = RESERVOIRS_CSV,
+) -> list[str]:
+    """Return reservoir IDs whose AOI GeoJSON files actually exist on disk.
+
+    Lets the pipeline scale up phase-by-phase without editing the
+    ``PHASE0_RESERVOIRS`` constant — drop a new AOI file in, and the
+    next run picks the reservoir up automatically.
+    """
+
+    out: list[str] = []
+    with reservoirs_csv.open(newline="", encoding="utf-8") as handle:
+        for row in csv.DictReader(handle):
+            if (REPO_ROOT / row["aoi_file"]).exists():
+                out.append(row["id"])
+    return out
+
+
 def _load_geojson_geometry(path: Path) -> tuple[dict, dict]:
     if not path.exists():
         raise AOILoadError(f"AOI file is missing: {path}")
