@@ -4,6 +4,44 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 
 ---
 
+## 2026-05-19 — Phase 1 backtests: 3 of 4 pass after dead-storage fix
+
+Path D follow-up to the 1-of-4 finding earlier today. Two real modeling
+bugs identified and fixed; backtest pass rate moved 1/4 → 3/4. KRS 2023
+remains a documented data limitation, not a code issue.
+
+Fixes:
+
+1. `_dead_storage_area_proxy` was computing dead area via linear V ∝ A
+   (a 10% volume ratio → 10% area ratio). Hypsometry says V = a · A^b;
+   typical narrow-deep Indian impoundments have b ≈ 1.8–2.5. The linear
+   proxy under-estimated dead area by ~3x and so over-inflated
+   `days_to_dead_storage` projections proportionally. Replaced with
+   power-law conversion using the calibrated curve when available, else
+   default b=2.0 (literature-supported middle, matches our fitted
+   Mettur=1.86 and Indira Sagar=2.83).
+
+2. Depletion fit was accepting S2 observations with up to 70% cloud
+   cover. Filtered to ≤50% at fit time — anything noisier carries too
+   much partial-water masking from the SCL filter to trust slope estimates.
+
+Results:
+
+- Mettur 2019-03-31: stable → **warning** (199d → 102d to dead) ✓
+- Jayakwadi 2016-03-31: watch → **warning** (214d → 0d, already at dead) ✓
+- Jayakwadi 2019-03-31: still passes ✓
+- KRS 2023-12-31: still fails. Only 5 S2 observations in Nov–Dec 2023
+  in the 90-day window; all have 47–64% cloud cover. No usable
+  depletion fit possible from satellite area alone. The actual KRS
+  storage (~16% per CWC) was real and CWC-visible but not satellite-
+  visible at the data quality available. Treated as documented model
+  limitation, not a bug to chase.
+
+Per AGENT.md non-negotiable #2: did NOT tune tier thresholds. Both fixes
+correct identified V≠A modeling errors with literature-supported values.
+
+---
+
 ## 2026-05-19 — Phase 1 backtests: 1 of 4 pass; debugging starts here
 
 Live `RDW_RUN_BACKTESTS=1 pytest tests/test_backtest.py` against the three Phase 1 historical cases. Result: jayakwadi 2019-03-31 passes (tier=warning); krs 2023-12-31, mettur 2019-03-31, jayakwadi 2016-03-31 fail. Detailed assertion output captured in commit follow-ups.
