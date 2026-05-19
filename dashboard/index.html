@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reservoir Death Watch</title>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.0/dist/maplibre-gl.css" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <h1>Reservoir Death Watch</h1>
+        <p class="tagline">
+          Satellite-derived early warning for India's reservoirs.
+          <span class="muted">Surface area is observed; volume is derived.</span>
+        </p>
+      </div>
+      <div class="generated" id="generated-meta">Loading…</div>
+    </header>
+
+    <main class="layout">
+      <section class="rollup" id="national-rollup" aria-live="polite"></section>
+
+      <section class="map-pane">
+        <div id="map" role="region" aria-label="India reservoir map"></div>
+        <div class="legend" aria-label="Tier legend">
+          <span class="dot critical"></span> critical
+          <span class="dot warning"></span> warning
+          <span class="dot watch"></span> watch
+          <span class="dot stable"></span> stable
+          <span class="dot stale"></span> stale data
+          <span class="dot pending"></span> awaiting first obs
+        </div>
+      </section>
+
+      <aside class="detail-pane" id="detail-pane">
+        <div class="empty">Select a reservoir to see its detail.</div>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Methodology and source data: <code>github.com/&lt;repo&gt;</code>. CWC bulletins remain the
+        authoritative ground truth for storage volumes; this dashboard shows satellite-derived
+        estimates alongside the latest CWC reading where available.
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
