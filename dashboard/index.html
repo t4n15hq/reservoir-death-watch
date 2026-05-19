@@ -4,47 +4,73 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Reservoir Death Watch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.0/dist/maplibre-gl.css" />
     <link rel="stylesheet" href="/src/styles/main.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="brand">
-        <h1>Reservoir Death Watch</h1>
-        <p class="tagline">
-          Satellite-derived early warning for India's reservoirs.
-          <span class="muted">Surface area is observed; volume is derived.</span>
-        </p>
+    <header class="hero">
+      <div class="hero__topline">
+        <span class="hero__kicker">India · 25 city-serving reservoirs</span>
+        <span class="hero__meta" id="generated-meta">Loading…</span>
       </div>
-      <div class="generated" id="generated-meta">Loading…</div>
+      <h1 class="hero__title">Reservoir Death Watch</h1>
+      <p class="hero__deck" id="hero-deck">
+        Satellite-derived early warning for the reservoirs supplying India's major cities.
+      </p>
+      <div class="hero__stats" id="hero-stats" aria-live="polite"></div>
     </header>
 
-    <main class="layout">
-      <section class="rollup" id="national-rollup" aria-live="polite"></section>
+    <main class="app">
+      <section class="app__list" aria-label="Reservoirs ranked by criticality">
+        <div class="list-head">
+          <h2>All reservoirs</h2>
+          <p>Ranked by days to dead storage.</p>
+        </div>
+        <ol class="reservoir-list" id="reservoir-list"></ol>
+      </section>
 
-      <section class="map-pane">
+      <section class="app__map">
         <div id="map" role="region" aria-label="India reservoir map"></div>
         <div class="legend" aria-label="Tier legend">
-          <span class="dot critical"></span> critical
-          <span class="dot warning"></span> warning
-          <span class="dot watch"></span> watch
-          <span class="dot stable"></span> stable
-          <span class="dot stale"></span> stale data
-          <span class="dot pending"></span> awaiting first obs
+          <span class="legend__dot legend__dot--critical"></span> critical
+          <span class="legend__dot legend__dot--warning"></span> warning
+          <span class="legend__dot legend__dot--watch"></span> watch
+          <span class="legend__dot legend__dot--stable"></span> stable
+          <span class="legend__dot legend__dot--stale"></span> stale
         </div>
       </section>
 
-      <aside class="detail-pane" id="detail-pane">
-        <div class="empty">Select a reservoir to see its detail.</div>
+      <aside class="app__detail" id="detail-pane">
+        <div class="empty">Select a reservoir from the list or map.</div>
       </aside>
     </main>
 
+    <section class="states-band" id="states-band" aria-label="State rollup"></section>
+
     <footer class="site-footer">
-      <p>
-        Methodology and source data: <code>github.com/&lt;repo&gt;</code>. CWC bulletins remain the
-        authoritative ground truth for storage volumes; this dashboard shows satellite-derived
-        estimates alongside the latest CWC reading where available.
-      </p>
+      <div class="footer-grid">
+        <div>
+          <strong>Reservoir Death Watch</strong>
+          <p>
+            Open methodology, weekly satellite refresh, CWC bulletins as ground truth where
+            available.
+          </p>
+        </div>
+        <div>
+          <strong>Surface area is the satellite-observable quantity.</strong>
+          <p>Volume is derived — via CWC-calibrated power-law curves where possible.</p>
+        </div>
+        <div>
+          <strong>Source</strong>
+          <p><a href="https://github.com/t4n15hq/reservoir-death-watch">github · reservoir-death-watch</a></p>
+        </div>
+      </div>
     </footer>
 
     <script type="module" src="/src/main.js"></script>

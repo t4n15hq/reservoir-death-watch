@@ -1,67 +1,49 @@
-export function renderRollup(container, snapshot, stateAggregates = null) {
-  const a = snapshot.national_aggregate ?? {};
-  const enso = snapshot.enso?.state ?? 'unavailable';
-  const reservoirs = snapshot.reservoirs ?? [];
-  const total = reservoirs.length;
-  const pending = reservoirs.filter((r) => (r.flags ?? []).includes('awaiting_first_observation')).length;
-  const observed = total - pending;
-
-  container.innerHTML = `
-    <div class="stat">
-      <div class="stat__label">Reservoirs in view</div>
-      <div class="stat__value">${observed} <span class="stat__divisor">/ ${total}</span></div>
-      <div class="stat__hint">${pending ? `${pending} awaiting first observation` : 'all observed'}</div>
-    </div>
-    <div class="stat">
-      <div class="stat__label">Storage (observed only)</div>
-      <div class="stat__value">${formatBcm(a.current_storage_bcm)} / ${formatBcm(a.total_capacity_bcm)} BCM</div>
-      <div class="stat__hint">${formatPercent(a.percent_full)} of full across ${observed} reservoirs</div>
-    </div>
-    <div class="stat">
-      <div class="stat__label">Critical / Warning</div>
-      <div class="stat__value">${a.reservoirs_critical ?? 0} / ${a.reservoirs_warning ?? 0}</div>
-      <div class="stat__hint">Watch ${a.reservoirs_watch ?? 0} · Stable ${a.reservoirs_stable ?? 0}</div>
-    </div>
-    <div class="stat">
-      <div class="stat__label">ENSO state</div>
-      <div class="stat__value">${enso.replaceAll('_', ' ')}</div>
-      <div class="stat__hint">El Niño suppresses monsoon refill</div>
-    </div>
-    ${renderStateStrip(stateAggregates)}
-  `;
-}
-
-function renderStateStrip(stateAggregates) {
+export function renderStateBand(container, snapshot, stateAggregates = null) {
   const states = stateAggregates?.states ?? [];
-  if (!states.length) return '';
-  const rows = states
-    .map((s) => {
-      const tiers = s.tier_counts ?? {};
-      return `
-        <li>
+  if (!states.length) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const sorted = [...states].sort((a, b) => {
+    const ac = (a.tier_counts?.critical ?? 0) + (a.tier_counts?.warning ?? 0);
+    const bc = (b.tier_counts?.critical ?? 0) + (b.tier_counts?.warning ?? 0);
+    if (ac !== bc) return bc - ac;
+    return (a.percent_full ?? 0) - (b.percent_full ?? 0);
+  });
+
+  const rows = sorted
+    .map(
+      (s) => `
+        <div class="state-row">
           <span class="state-row__name">${s.state}</span>
           <span class="state-row__pct">${formatPercent(s.percent_full)}</span>
           <span class="state-row__tiers">
-            <span title="critical" class="tier-dot tier-dot--critical">${tiers.critical ?? 0}</span>
-            <span title="warning" class="tier-dot tier-dot--warning">${tiers.warning ?? 0}</span>
-            <span title="watch" class="tier-dot tier-dot--watch">${tiers.watch ?? 0}</span>
-            <span title="stable" class="tier-dot tier-dot--stable">${tiers.stable ?? 0}</span>
+            ${tierBadge('critical', s.tier_counts?.critical)}
+            ${tierBadge('warning', s.tier_counts?.warning)}
+            ${tierBadge('watch', s.tier_counts?.watch)}
+            ${tierBadge('stable', s.tier_counts?.stable)}
           </span>
-        </li>
-      `;
-    })
+        </div>
+      `,
+    )
     .join('');
-  return `
-    <div class="state-strip">
-      <div class="state-strip__label">State rollup</div>
-      <ul>${rows}</ul>
+
+  container.innerHTML = `
+    <div class="states-card">
+      <div class="states-card__head">
+        <h2>By state</h2>
+        <p>${states.length} states · sorted by critical + warning counts.</p>
+      </div>
+      <div class="states-grid">${rows}</div>
     </div>
   `;
 }
 
-function formatBcm(value) {
-  if (value == null) return '—';
-  return value.toFixed(2);
+function tierBadge(tier, count) {
+  const n = count ?? 0;
+  if (!n) return `<span class="tier-dot tier-dot--zero">·</span>`;
+  return `<span class="tier-dot tier-dot--${tier}" title="${n} ${tier}">${n}</span>`;
 }
 
 function formatPercent(value) {

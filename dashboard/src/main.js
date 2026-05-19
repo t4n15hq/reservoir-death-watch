@@ -4,9 +4,11 @@ import {
   loadStateAggregates,
   readBacktestParam,
 } from './data.js';
-import { initMap, plotReservoirs, focusReservoir } from './map.js';
+import { initMap, plotReservoirs, focusReservoir, setActivePin } from './map.js';
 import { renderDetail, renderEmpty } from './detail.js';
-import { renderRollup } from './rollup.js';
+import { renderHero } from './hero.js';
+import { renderReservoirList } from './list.js';
+import { renderStateBand } from './rollup.js';
 
 async function boot() {
   const backtestCase = readBacktestParam();
@@ -19,50 +21,53 @@ async function boot() {
   }
 
   if (backtestCase) renderBacktestBanner(snapshot, backtestCase);
-  document.getElementById('generated-meta').innerHTML = formatGenerated(snapshot);
+  renderHero(snapshot, backtestCase);
 
-  // State aggregates are optional — if they're missing we just hide the strip.
   const stateAggregates = backtestCase ? null : await loadStateAggregates().catch(() => null);
-  renderRollup(document.getElementById('national-rollup'), snapshot, stateAggregates);
+  renderStateBand(document.getElementById('states-band'), snapshot, stateAggregates);
 
   const map = await initMap('map');
+
+  const selectByReservoir = (reservoir, { fly = true } = {}) => {
+    renderDetail(document.getElementById('detail-pane'), reservoir);
+    setActivePin(reservoir.id);
+    setActiveRow(reservoir.id);
+    if (fly) focusReservoir(map, reservoir);
+  };
+
   plotReservoirs(map, snapshot, {
-    onSelect: (reservoir) => {
-      renderDetail(document.getElementById('detail-pane'), reservoir);
-      focusReservoir(map, reservoir);
-    },
+    onSelect: (r) => selectByReservoir(r),
+  });
+
+  renderReservoirList(document.getElementById('reservoir-list'), snapshot, {
+    onSelect: (r) => selectByReservoir(r),
   });
 
   const initial = pickDefaultReservoir(snapshot);
   if (initial) {
-    // Render the default detail panel without flying the map — that would zoom in
-    // before the user has even seen the full India view.
-    renderDetail(document.getElementById('detail-pane'), initial);
+    // Render detail without flying — let the user see the full India view first.
+    selectByReservoir(initial, { fly: false });
   } else {
     renderEmpty(document.getElementById('detail-pane'));
   }
 }
 
-function formatGenerated(snapshot) {
-  const generated = snapshot.generated_at ? new Date(snapshot.generated_at) : null;
-  const generatedLabel = generated
-    ? generated.toISOString().slice(0, 10)
-    : 'unknown';
-  const enso = snapshot.enso?.state ?? 'unavailable';
-  return `
-    <span><strong>Generated</strong> ${generatedLabel}</span>
-    <span><strong>ENSO</strong> ${enso.replaceAll('_', ' ')}</span>
-    <span><strong>Model</strong> ${snapshot.model_version ?? 'unknown'}</span>
-  `;
+function setActiveRow(reservoirId) {
+  document.querySelectorAll('.reservoir-row').forEach((el) => {
+    el.classList.toggle('is-active', el.dataset.id === reservoirId);
+  });
 }
 
 function renderBacktestBanner(snapshot, caseId) {
   const banner = document.createElement('div');
   banner.className = 'backtest-banner';
-  const generated = snapshot.generated_at ? new Date(snapshot.generated_at).toISOString().slice(0, 10) : 'unknown';
+  const generated = snapshot.generated_at
+    ? new Date(snapshot.generated_at).toISOString().slice(0, 10)
+    : 'unknown';
   banner.innerHTML = `
-    <strong>Backtest mode:</strong> showing model as of <code>${generated}</code> for case
-    <code>${caseId}</code>. <a href="${window.location.pathname}">Exit backtest</a>
+    <strong>Backtest mode</strong> — showing model as of <code>${generated}</code>
+    for case <code>${caseId}</code>.
+    <a href="${window.location.pathname}">Exit backtest</a>
   `;
   document.body.insertBefore(banner, document.body.firstChild);
 }
@@ -70,12 +75,17 @@ function renderBacktestBanner(snapshot, caseId) {
 function pickDefaultReservoir(snapshot) {
   if (!snapshot.reservoirs?.length) return null;
   const tierOrder = { critical: 0, warning: 1, watch: 2, stable: 3 };
-  // Skip reservoirs we haven't observed yet — they have no real story to show.
   const observed = snapshot.reservoirs.filter(
     (r) => !(r.flags ?? []).includes('awaiting_first_observation'),
   );
   const pool = observed.length ? observed : snapshot.reservoirs;
-  return [...pool].sort((a, b) => (tierOrder[a.tier] ?? 9) - (tierOrder[b.tier] ?? 9))[0];
+  return [...pool].sort((a, b) => {
+    const dt = (tierOrder[a.tier] ?? 9) - (tierOrder[b.tier] ?? 9);
+    if (dt !== 0) return dt;
+    const da = a.projection?.neutral_monsoon?.days_to_dead_storage ?? 99999;
+    const db = b.projection?.neutral_monsoon?.days_to_dead_storage ?? 99999;
+    return da - db;
+  })[0];
 }
 
 boot();

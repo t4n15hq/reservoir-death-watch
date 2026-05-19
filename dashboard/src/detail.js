@@ -5,7 +5,6 @@ import {
   daysSince,
   isStale,
   loadReservoirHistory,
-  tierColor,
 } from './data.js';
 
 Chart.register(...registerables);
@@ -13,7 +12,7 @@ Chart.register(...registerables);
 let activeChart = null;
 
 export function renderEmpty(container) {
-  container.innerHTML = '<div class="empty">Select a reservoir to see its detail.</div>';
+  container.innerHTML = '<div class="empty">Select a reservoir from the list or map.</div>';
 }
 
 export async function renderDetail(container, reservoir) {
@@ -28,68 +27,55 @@ export async function renderDetail(container, reservoir) {
 
   container.innerHTML = `
     <div class="detail">
-      <div class="detail__header">
-        <div>
-          <h2>${reservoir.name}</h2>
-          <p class="meta">${reservoir.river} · ${reservoir.state}${
-    reservoir.city_served ? ` · serves ${reservoir.city_served}` : ''
-  }</p>
-        </div>
-        <span class="tier-pill" style="background:${tierColor(reservoir.tier)}">${reservoir.tier}</span>
-      </div>
+      <div class="detail__crumb">${reservoir.river} basin · ${reservoir.state}</div>
+      <h2 class="detail__title">
+        ${reservoir.name}
+        <span class="tier-pill tier-pill--${reservoir.tier}">${reservoir.tier}</span>
+      </h2>
+      <p class="detail__byline">
+        ${reservoir.city_served ? `Supplies <strong>${reservoir.city_served}</strong>` : 'Drinking water reservoir'}${
+          reservoir.population_served
+            ? ` · roughly <strong>${formatPop(reservoir.population_served)}</strong> people`
+            : ''
+        }${
+          current.as_of && !pending
+            ? ` · last observed <strong>${current.as_of}</strong>${ageDays != null ? ` (${ageDays}d ago)` : ''}`
+            : ''
+        }.
+      </p>
 
-      ${pending ? '<div class="banner banner--pending">Awaiting first satellite observation. AOI not yet digitized for this reservoir. Run <code>scripts/seed_aois.py</code> and the pipeline to populate.</div>' : ''}
-      ${stale ? '<div class="banner banner--stale">Stale data: most recent observation is older than 14 days.</div>' : ''}
+      ${pending ? '<div class="banner banner--pending">Awaiting first satellite observation. AOI not yet digitized for this reservoir.</div>' : ''}
+      ${stale ? '<div class="banner banner--stale">Stale data — most recent observation is older than 14 days.</div>' : ''}
       ${!pending && flags.includes('current_only_no_history') ? '<div class="banner banner--info">Current observation only — no historical trace or depletion fit yet.</div>' : ''}
 
-      <dl class="kv">
-        <dt>As of</dt>
-        <dd>${pending ? '<span class="muted">no observation yet</span>' : `${current.as_of ?? '—'} ${ageDays != null ? `<span class="muted">(${ageDays} d)</span>` : ''}`}</dd>
+      ${pending ? '' : renderHeadlineProjection(neutral, elNino)}
 
+      <h3>Snapshot</h3>
+      <dl class="kv">
         <dt>Satellite area</dt>
         <dd>${pending ? '<span class="muted">no observation yet</span>' : `${formatArea(current.area_km2)} of ${formatArea(reservoir.full_pool_area_km2)} <span class="muted">(observed)</span>`}</dd>
 
         <dt>Estimated storage</dt>
         <dd>${pending ? '<span class="muted">no observation yet</span>' : `${formatBcm(current.estimated_storage_bcm)} of ${formatBcm(reservoir.full_pool_capacity_bcm)} BCM <span class="muted">(${storageDerivation(flags)})</span>`}</dd>
 
-        <dt>CWC reported</dt>
+        <dt>Percent full</dt>
+        <dd>${pending ? '—' : formatPct(current.percent_full)}</dd>
+
+        <dt>CWC reference</dt>
         <dd>${
           current.cwc_reported_bcm != null
-            ? `${formatBcm(current.cwc_reported_bcm)} BCM as of ${current.cwc_as_of ?? '—'} <span class="muted">(authoritative)</span>`
-            : '<span class="muted">no recent CWC reading</span>'
+            ? `${formatBcm(current.cwc_reported_bcm)} BCM <span class="muted">as of ${current.cwc_as_of ?? '—'} (authoritative)</span>`
+            : '<span class="muted">no CWC reading for this reservoir yet</span>'
         }</dd>
 
-        <dt>Percent full</dt>
-        <dd>${formatPercent(current.percent_full)}</dd>
-
         <dt>Source</dt>
-        <dd>${current.data_source ?? '—'}</dd>
+        <dd>${pending ? '—' : `<code>${current.data_source ?? '—'}</code>`}</dd>
       </dl>
-
-      <h3>Days to dead storage</h3>
-      <div class="projection">
-        <div class="projection__scenario">
-          <div class="projection__label">Neutral monsoon</div>
-          <div class="projection__value">${formatDays(neutral.days_to_dead_storage)}</div>
-          <div class="projection__hint">${
-            neutral.dead_storage_date ? `est. ${neutral.dead_storage_date}` : ''
-          }</div>
-          <div class="projection__ci">${formatCi(neutral.confidence_interval_days)}</div>
-        </div>
-        <div class="projection__scenario">
-          <div class="projection__label">El Niño monsoon</div>
-          <div class="projection__value">${formatDays(elNino.days_to_dead_storage)}</div>
-          <div class="projection__hint">${
-            elNino.dead_storage_date ? `est. ${elNino.dead_storage_date}` : ''
-          }</div>
-          <div class="projection__ci">${formatCi(elNino.confidence_interval_days)}</div>
-        </div>
-      </div>
 
       <h3>Surface area history</h3>
       <div class="chart-wrap"><canvas id="history-chart"></canvas></div>
 
-      ${flags.length ? `<details class="flags"><summary>${flags.length} flag${flags.length === 1 ? '' : 's'}</summary><ul>${flags.map((f) => `<li><code>${f}</code></li>`).join('')}</ul></details>` : ''}
+      ${flags.length ? `<details class="flags"><summary>Data caveats (${flags.length})</summary><ul>${flags.map((f) => `<li><code>${f}</code></li>`).join('')}</ul></details>` : ''}
     </div>
   `;
 
@@ -99,7 +85,7 @@ export async function renderDetail(container, reservoir) {
   } else {
     try {
       const history = await loadReservoirHistory(reservoir.id);
-      drawHistoryChart(history);
+      drawHistoryChart(history, reservoir);
     } catch (err) {
       const wrap = container.querySelector('.chart-wrap');
       if (wrap) wrap.textContent = `History unavailable: ${err.message}`;
@@ -107,7 +93,38 @@ export async function renderDetail(container, reservoir) {
   }
 }
 
-function drawHistoryChart(history) {
+function renderHeadlineProjection(neutral, elNino) {
+  const neutralDays = neutral?.days_to_dead_storage;
+  const elNinoDays = elNino?.days_to_dead_storage;
+  const neutralCls = daysClass(neutralDays);
+  const elNinoCls = daysClass(elNinoDays);
+  return `
+    <div class="detail__headline">
+      <div class="detail__headline__label">Days to dead storage</div>
+      <div class="detail__headline__row">
+        <div>
+          <div class="detail__headline__scenario">Neutral monsoon</div>
+          <div class="detail__headline__days ${neutralCls}">${formatDays(neutralDays)}</div>
+          <div class="detail__headline__hint">${formatTarget(neutral)}</div>
+        </div>
+        <div>
+          <div class="detail__headline__scenario">El Niño monsoon</div>
+          <div class="detail__headline__days ${elNinoCls}">${formatDays(elNinoDays)}</div>
+          <div class="detail__headline__hint">${formatTarget(elNino)}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function daysClass(days) {
+  if (days == null) return '';
+  if (days < 60) return 'detail__headline__days--critical';
+  if (days < 120) return 'detail__headline__days--warning';
+  return '';
+}
+
+function drawHistoryChart(history, reservoir) {
   const canvas = document.getElementById('history-chart');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
@@ -117,40 +134,81 @@ function drawHistoryChart(history) {
   }
   const points = history
     .filter((row) => row.area_km2 != null && row.area_km2 > 0 && row.date)
-    .map((row) => ({ x: row.date, y: row.area_km2, source: row.data_source }));
+    .map((row) => ({ x: row.date.getTime(), y: row.area_km2, source: row.data_source }));
 
   const jrc = points.filter((p) => p.source === 'jrc');
   const s2 = points.filter((p) => p.source === 'sentinel_2');
   const s1 = points.filter((p) => p.source === 'sentinel_1');
 
+  const datasets = [];
+  if (jrc.length) {
+    datasets.push({ label: 'JRC monthly', data: jrc, borderColor: '#3a5a78', pointRadius: 0, borderWidth: 1.2, tension: 0.15 });
+  }
+  if (s2.length) {
+    datasets.push({ label: 'Sentinel-2', data: s2, borderColor: '#2f7a4f', pointRadius: 1.8, borderWidth: 1.2, tension: 0.1 });
+  }
+  if (s1.length) {
+    datasets.push({ label: 'Sentinel-1', data: s1, borderColor: '#8d5d9c', pointRadius: 1.8, borderWidth: 1.2, tension: 0.1 });
+  }
+
+  // FRL reference (full pool)
+  const annotations = [];
+  if (reservoir.full_pool_area_km2) {
+    annotations.push({
+      type: 'line',
+      borderColor: 'rgba(0,0,0,0.18)',
+      borderWidth: 1,
+      borderDash: [4, 3],
+      label: { display: false },
+    });
+  }
+
   activeChart = new Chart(ctx, {
     type: 'line',
-    data: {
-      datasets: [
-        { label: 'JRC monthly', data: jrc, borderColor: '#2980b9', pointRadius: 0, borderWidth: 1 },
-        { label: 'Sentinel-2', data: s2, borderColor: '#16a085', pointRadius: 2, borderWidth: 1 },
-        { label: 'Sentinel-1', data: s1, borderColor: '#8e44ad', pointRadius: 2, borderWidth: 1 },
-      ],
-    },
+    data: { datasets },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       parsing: false,
-      scales: {
-        x: { type: 'time', time: { unit: 'year' }, ticks: { color: '#555' } },
-        y: { title: { display: true, text: 'Area (km²)' }, ticks: { color: '#555' } },
-      },
+      animation: false,
       plugins: {
-        legend: { labels: { color: '#333' } },
+        legend: {
+          labels: { color: '#4a4a48', font: { family: "'Inter', sans-serif", size: 11 }, usePointStyle: true, pointStyle: 'line' },
+        },
+        tooltip: {
+          callbacks: {
+            title: (items) => new Date(items[0].parsed.x).toISOString().slice(0, 10),
+            label: (item) => `${item.dataset.label}: ${item.parsed.y.toFixed(1)} km²`,
+          },
+        },
+      },
+      scales: {
+        x: {
+          type: 'time',
+          time: { unit: 'year' },
+          ticks: { color: '#8a8579', font: { family: "'JetBrains Mono', monospace", size: 10 } },
+          grid: { color: 'rgba(0,0,0,0.04)' },
+        },
+        y: {
+          title: { display: true, text: 'km²', color: '#8a8579', font: { family: "'Inter', sans-serif", size: 11 } },
+          ticks: { color: '#8a8579', font: { family: "'JetBrains Mono', monospace", size: 10 } },
+          grid: { color: 'rgba(0,0,0,0.04)' },
+        },
       },
     },
   });
 }
 
 function storageDerivation(flags) {
-  if (flags.includes('cwc_calibrated_single_point')) return 'derived from CWC-calibrated curve';
-  if (flags.includes('volume_area_ratio_proxy')) return 'derived via area-ratio proxy';
+  if (flags.includes('cwc_calibrated_single_point')) return 'CWC-calibrated curve';
+  if (flags.includes('volume_area_ratio_proxy')) return 'area-ratio proxy';
   return 'derived';
+}
+
+function formatPop(n) {
+  if (n >= 1e7) return `${(n / 1e7).toFixed(1)} crore`;
+  if (n >= 1e5) return `${(n / 1e5).toFixed(1)} lakh`;
+  return n.toLocaleString();
 }
 
 function formatArea(value) {
@@ -163,17 +221,21 @@ function formatBcm(value) {
   return value.toFixed(3);
 }
 
-function formatPercent(value) {
+function formatPct(value) {
   if (value == null) return '—';
   return `${value.toFixed(1)}%`;
 }
 
 function formatDays(value) {
   if (value == null) return '—';
-  return `${value} d`;
+  return `${value}<span class="stat__suffix">d</span>`;
 }
 
-function formatCi(ci) {
-  if (!ci || ci.length !== 2) return '';
-  return `±[${ci[0]} – ${ci[1]}] d`;
+function formatTarget(projection) {
+  if (!projection?.dead_storage_date) return '—';
+  const ci = projection.confidence_interval_days;
+  if (Array.isArray(ci) && ci.length === 2) {
+    return `est. ${projection.dead_storage_date} · ±[${ci[0]}–${ci[1]}] d`;
+  }
+  return `est. ${projection.dead_storage_date}`;
 }
