@@ -1,0 +1,9 @@
+# /etc/cron.d/reservoirs
+# Weekly Reservoir Death Watch refresh, Sundays 03:00 UTC.
+# Per docs/TDD.md §7.2. Runs as the unprivileged `reservoirs` user.
+
+MAILTO=""
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+0 3 * * 0 reservoirs /opt/reservoirs/repo/infra/run.sh
