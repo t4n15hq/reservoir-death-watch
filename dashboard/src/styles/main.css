@@ -483,8 +483,21 @@ code { font-family: var(--mono); font-size: 0.9em; background: var(--line-soft);
   margin-top: 0.3rem;
 }
 
+.detail__download {
+  margin: 1.2rem 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line-soft);
+}
+.detail__download a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 .flags {
-  margin-top: 1.2rem;
+  margin-top: 1rem;
   font-size: 0.8rem;
   color: var(--ink-2);
 }

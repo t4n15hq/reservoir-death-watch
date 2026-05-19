@@ -76,6 +76,14 @@ export async function renderDetail(container, reservoir) {
       <h3>Surface area history</h3>
       <div class="chart-wrap"><canvas id="history-chart"></canvas></div>
 
+      ${pending ? '' : `
+        <p class="detail__download">
+          <a href="data/reservoirs/${reservoir.id}.csv" download>Download full history CSV</a>
+          · 15+ years of monthly JRC + recent Sentinel observations,
+          area in km², derived storage, source label per row.
+        </p>
+      `}
+
       ${flags.length ? `<details class="flags"><summary>Data caveats (${flags.length})</summary><ul>${flags.map((f) => `<li><code>${f}</code></li>`).join('')}</ul></details>` : ''}
     </div>
   `;
