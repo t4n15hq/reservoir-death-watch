@@ -1,0 +1,210 @@
+{
+  "generated_at": "2026-05-19T06:08:31.841546Z",
+  "states": [
+    {
+      "current_storage_bcm": 12.54,
+      "percent_full": 61.8,
+      "reservoir_count": 2,
+      "reservoir_ids": [
+        "nagarjuna_sagar",
+        "srisailam"
+      ],
+      "state": "Andhra Pradesh",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 0,
+        "warning": 1,
+        "watch": 1
+      },
+      "total_capacity_bcm": 20.28
+    },
+    {
+      "current_storage_bcm": 9.666,
+      "percent_full": 57.2,
+      "reservoir_count": 2,
+      "reservoir_ids": [
+        "sardar_sarovar",
+        "ukai"
+      ],
+      "state": "Gujarat",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 0,
+        "warning": 1,
+        "watch": 1
+      },
+      "total_capacity_bcm": 16.91
+    },
+    {
+      "current_storage_bcm": 5.763,
+      "percent_full": 61.7,
+      "reservoir_count": 1,
+      "reservoir_ids": [
+        "bhakra"
+      ],
+      "state": "Himachal Pradesh",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 0,
+        "warning": 0,
+        "watch": 1
+      },
+      "total_capacity_bcm": 9.34
+    },
+    {
+      "current_storage_bcm": 0.841,
+      "percent_full": 29.4,
+      "reservoir_count": 2,
+      "reservoir_ids": [
+        "maithon",
+        "panchet"
+      ],
+      "state": "Jharkhand",
+      "tier_counts": {
+        "critical": 2,
+        "stable": 0,
+        "warning": 0,
+        "watch": 0
+      },
+      "total_capacity_bcm": 2.86
+    },
+    {
+      "current_storage_bcm": 1.239,
+      "percent_full": 43.0,
+      "reservoir_count": 4,
+      "reservoir_ids": [
+        "harangi",
+        "hemavathy",
+        "kabini",
+        "krs"
+      ],
+      "state": "Karnataka",
+      "tier_counts": {
+        "critical": 1,
+        "stable": 2,
+        "warning": 1,
+        "watch": 0
+      },
+      "total_capacity_bcm": 2.883
+    },
+    {
+      "current_storage_bcm": 2.193,
+      "percent_full": 73.3,
+      "reservoir_count": 3,
+      "reservoir_ids": [
+        "idamalayar",
+        "idukki",
+        "mullaperiyar"
+      ],
+      "state": "Kerala",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 3,
+        "warning": 0,
+        "watch": 0
+      },
+      "total_capacity_bcm": 2.99
+    },
+    {
+      "current_storage_bcm": 3.903,
+      "percent_full": 30.2,
+      "reservoir_count": 2,
+      "reservoir_ids": [
+        "bargi",
+        "indira_sagar"
+      ],
+      "state": "Madhya Pradesh",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 0,
+        "warning": 1,
+        "watch": 1
+      },
+      "total_capacity_bcm": 12.925
+    },
+    {
+      "current_storage_bcm": 2.723,
+      "percent_full": 64.8,
+      "reservoir_count": 3,
+      "reservoir_ids": [
+        "jayakwadi",
+        "khadakwasla",
+        "totladoh"
+      ],
+      "state": "Maharashtra",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 1,
+        "warning": 1,
+        "watch": 1
+      },
+      "total_capacity_bcm": 4.2
+    },
+    {
+      "current_storage_bcm": 0.973,
+      "percent_full": 88.5,
+      "reservoir_count": 1,
+      "reservoir_ids": [
+        "bisalpur"
+      ],
+      "state": "Rajasthan",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 1,
+        "warning": 0,
+        "watch": 0
+      },
+      "total_capacity_bcm": 1.1
+    },
+    {
+      "current_storage_bcm": 1.724,
+      "percent_full": 46.0,
+      "reservoir_count": 3,
+      "reservoir_ids": [
+        "bhavanisagar",
+        "mettur",
+        "vaigai"
+      ],
+      "state": "Tamil Nadu",
+      "tier_counts": {
+        "critical": 1,
+        "stable": 1,
+        "warning": 1,
+        "watch": 0
+      },
+      "total_capacity_bcm": 3.747
+    },
+    {
+      "current_storage_bcm": 0.351,
+      "percent_full": 41.3,
+      "reservoir_count": 1,
+      "reservoir_ids": [
+        "singur"
+      ],
+      "state": "Telangana",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 0,
+        "warning": 0,
+        "watch": 1
+      },
+      "total_capacity_bcm": 0.85
+    },
+    {
+      "current_storage_bcm": 0.686,
+      "percent_full": 19.4,
+      "reservoir_count": 1,
+      "reservoir_ids": [
+        "tehri"
+      ],
+      "state": "Uttarakhand",
+      "tier_counts": {
+        "critical": 0,
+        "stable": 0,
+        "warning": 0,
+        "watch": 1
+      },
+      "total_capacity_bcm": 3.54
+    }
+  ]
+}

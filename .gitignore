@@ -14,3 +14,6 @@ gee_service_account.json
 reservoir-death-watch-*.json
 dist/
 build/
+node_modules/
+*.log
+.vite/
