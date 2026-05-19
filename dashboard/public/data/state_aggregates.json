@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-19T06:08:31.841546Z",
+  "generated_at": "2026-05-19T13:44:47.938537Z",
   "states": [
     {
-      "current_storage_bcm": 12.54,
-      "percent_full": 61.8,
+      "current_storage_bcm": 9.148,
+      "percent_full": 45.1,
       "reservoir_count": 2,
       "reservoir_ids": [
         "nagarjuna_sagar",
@@ -11,9 +11,9 @@
       ],
       "state": "Andhra Pradesh",
       "tier_counts": {
-        "critical": 0,
+        "critical": 1,
         "stable": 0,
-        "warning": 1,
+        "warning": 0,
         "watch": 1
       },
       "total_capacity_bcm": 20.28

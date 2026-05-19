@@ -67,15 +67,18 @@ AOI_CONFIG = {
         "simplify_m": 75,
     },
     "srisailam": {
-        # Dam at (16.08, 78.90) is the SE corner; reservoir extends 60 km NW.
-        # Seed from the reservoir centroid and use a tight radius so NS doesn't
-        # bleed in via the Krishna river that connects them.
-        "search_lat": 16.30,
-        "search_lon": 78.65,
-        "radius_m": 35_000,
+        # Srisailam reservoir extends ~50 km NW from its SE-corner dam, BUT it's
+        # connected to Nagarjuna Sagar via a continuous Krishna river that JRC
+        # marks as recurrent water — any radius-based seed merges the two
+        # connected components. Force a manual bbox that contains the Srisailam
+        # main body and stops well west of NS (which sits east of lon 79.08).
+        # Bounds confirmed by querying JRC max_extent for the largest connected
+        # component in the area: lon 78.20-78.90, lat 15.85-16.16. East bound
+        # stays well west of Nagarjuna Sagar (lon >= 79.08).
+        "manual_bbox": (78.18, 15.83, 78.92, 16.20),
         "min_area_km2": 50,
-        "nearby_buffer_m": 12_000,
-        "simplify_m": 90,
+        "nearby_buffer_m": 30_000,
+        "simplify_m": 120,
     },
 }
 
@@ -202,6 +205,15 @@ def build_aoi_feature(
     search_lat = config.get("search_lat", float(row["lat"]))
     search_lon = config.get("search_lon", float(row["lon"]))
     point = ee.Geometry.Point([search_lon, search_lat])
+    if config.get("manual_bbox"):
+        # bbox = (min_lon, min_lat, max_lon, max_lat). For reservoirs that
+        # fragment under recurrence>=50 (large reservoirs with seasonal bays;
+        # or that are connected to a neighbour via a continuous river that
+        # JRC marks as recurrent water), skip the connected-component step
+        # entirely — use the bbox as the AOI, and let the downstream
+        # Sentinel-2 water mask count actual water inside it.
+        min_lon, min_lat, max_lon, max_lat = config["manual_bbox"]
+        return _build_bbox_aoi(row, min_lon, min_lat, max_lon, max_lat, config, selection)
     search_area = point.buffer(config["radius_m"]).bounds()
     water = build_water_mask(search_area, selection)
     vectors = water.reduceToVectors(
@@ -229,10 +241,14 @@ def build_aoi_feature(
         .filter(ee.Filter.gte("area_km2", config["min_area_km2"]))
         .sort("area_km2", False)
     )
-    nearby = candidates.filterBounds(point.buffer(config["nearby_buffer_m"]))
-    selected = nearby.sort("area_km2", False).first()
-    if nearby.size().getInfo() == 0:
-        selected = candidates.sort("distance_m").first()
+    if config.get("manual_bbox"):
+        # bbox is the spatial constraint; just take the largest candidate inside it.
+        selected = candidates.sort("area_km2", False).first()
+    else:
+        nearby = candidates.filterBounds(point.buffer(config["nearby_buffer_m"]))
+        selected = nearby.sort("area_km2", False).first()
+        if nearby.size().getInfo() == 0:
+            selected = candidates.sort("distance_m").first()
 
     if selected.getInfo() is None:
         raise RuntimeError(f"no JRC water polygon found for {row['id']}")
@@ -260,6 +276,56 @@ def build_aoi_feature(
         },
         "geometry": geometry,
     }
+
+
+def _build_bbox_aoi(
+    row: dict[str, str],
+    min_lon: float,
+    min_lat: float,
+    max_lon: float,
+    max_lat: float,
+    config: dict[str, float],
+    selection: dict[str, object],
+) -> dict:
+    """Build an AOI whose polygon IS the bbox itself (no water-mask selection)."""
+
+    area_km2 = _bbox_area_km2(min_lon, min_lat, max_lon, max_lat)
+    return {
+        "type": "Feature",
+        "properties": {
+            "id": row["id"],
+            "name": row["name"],
+            "source": "manual_bbox",
+            "method": (
+                f"manual_bbox;lon={min_lon}-{max_lon};lat={min_lat}-{max_lat};"
+                f"strategy={selection['strategy']}"
+            ),
+            "area_km2": round(area_km2, 3),
+            "centroid_distance_m": 0.0,
+            "generated_at": datetime.now(UTC).isoformat(),
+            "review_status": "manual_bbox_needs_visual_check",
+            "ring_cleanup_applied": True,
+        },
+        "geometry": {
+            "type": "Polygon",
+            "coordinates": [[
+                [min_lon, min_lat],
+                [max_lon, min_lat],
+                [max_lon, max_lat],
+                [min_lon, max_lat],
+                [min_lon, min_lat],
+            ]],
+        },
+    }
+
+
+def _bbox_area_km2(min_lon: float, min_lat: float, max_lon: float, max_lat: float) -> float:
+    # Equirectangular approximation, accurate enough for "is this the right reservoir" sanity.
+    import math
+    mid_lat = (min_lat + max_lat) / 2
+    width_km = (max_lon - min_lon) * 111.32 * math.cos(math.radians(mid_lat))
+    height_km = (max_lat - min_lat) * 110.57
+    return width_km * height_km
 
 
 def collapse_to_largest_ring(geometry: dict) -> dict:
