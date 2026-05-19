@@ -1,26 +1,26 @@
 id,name,river,state,cwc_name,city_served,population_served,lat,lon,full_pool_capacity_bcm,dead_storage_capacity_bcm,priority,aoi_file,notes
-krs,Krishnaraja Sagar,Kaveri,Karnataka,Krishna Raja Sagar,"Bengaluru, Mysuru",13500000,12.4244,76.5719,1.37,0.13,1,pipeline/data/aois/krs.geojson,KRS 2024 backtest target
-mettur,Mettur,Kaveri,Tamil Nadu,Mettur,"Chennai (indirect), TN agri",,11.7860,77.7995,2.65,0.21,2,pipeline/data/aois/mettur.geojson,Mettur 2019 backtest target
-jayakwadi,Jayakwadi,Godavari,Maharashtra,Jayakwadi,Marathwada region,8000000,19.4818,75.3697,2.91,0.74,3,pipeline/data/aois/jayakwadi.geojson,Marathwada 2016/2019 backtest target
-indira_sagar,Indira Sagar,Narmada,Madhya Pradesh,Indira Sagar,MP/Maharashtra,,22.2944,76.4717,12.21,3.39,4,pipeline/data/aois/indira_sagar.geojson,Largest by capacity in India
-hirakud,Hirakud,Mahanadi,Odisha,Hirakud,Odisha agri/industry,,21.5667,83.8667,5.82,0.74,5,pipeline/data/aois/hirakud.geojson,Largest earthen dam
-bhakra,Bhakra,Sutlej,Himachal Pradesh,Bhakra,"Punjab, Haryana, Delhi NCR",,31.4106,76.4339,9.34,2.04,6,pipeline/data/aois/bhakra.geojson,Strategic - northern grain belt
-tehri,Tehri,Bhagirathi,Uttarakhand,Tehri,"Delhi, UP",,30.3779,78.4806,3.54,0.84,7,pipeline/data/aois/tehri.geojson,Tallest dam in India
-nagarjuna_sagar,Nagarjuna Sagar,Krishna,Andhra Pradesh,Nagarjuna Sagar,"AP, Telangana",,16.5728,79.3119,11.56,3.31,8,pipeline/data/aois/nagarjuna_sagar.geojson,Krishna basin (22% in May 2026)
-almatti,Almatti,Krishna,Karnataka,Almatti,North Karnataka,,16.3300,75.8856,3.11,0.50,9,pipeline/data/aois/almatti.geojson,Krishna basin
-tungabhadra,Tungabhadra,Tungabhadra,Karnataka,Tungabhadra,"Karnataka, AP",,15.2725,76.3367,3.28,0.40,10,pipeline/data/aois/tungabhadra.geojson,South interior drought belt
-sardar_sarovar,Sardar Sarovar,Narmada,Gujarat,Sardar Sarovar,"Gujarat, MP, MH, Rajasthan",,21.8333,73.7500,9.50,1.87,11,pipeline/data/aois/sardar_sarovar.geojson,Western India flagship
-srisailam,Srisailam,Krishna,Andhra Pradesh,Srisailam,"AP, Telangana",,16.0833,78.9000,8.72,2.12,12,pipeline/data/aois/srisailam.geojson,Krishna basin
-ukai,Ukai,Tapi,Gujarat,Ukai,Gujarat,,21.2500,73.5833,7.41,1.40,13,pipeline/data/aois/ukai.geojson,
-pong,Pong,Beas,Himachal Pradesh,Pong,HP/Punjab,,31.9833,76.0833,7.29,1.36,14,pipeline/data/aois/pong.geojson,
-gandhi_sagar,Gandhi Sagar,Chambal,Madhya Pradesh,Gandhi Sagar,MP/Rajasthan,,24.7000,75.5500,6.83,1.28,15,pipeline/data/aois/gandhi_sagar.geojson,
-rana_pratap_sagar,Rana Pratap Sagar,Chambal,Rajasthan,Rana Pratap Sagar,Rajasthan,,24.9333,75.5667,2.91,0.51,16,pipeline/data/aois/rana_pratap_sagar.geojson,
-harangi,Harangi,Kaveri,Karnataka,Harangi,Karnataka (Kodagu),,12.4583,75.9000,0.23,0.04,17,pipeline/data/aois/harangi.geojson,KRS sister reservoir
-bhadra,Bhadra,Tungabhadra,Karnataka,Bhadra,Karnataka,,13.6900,75.6453,2.03,0.30,18,pipeline/data/aois/bhadra.geojson,
-linganamakki,Linganamakki,Sharavati,Karnataka,Linganamakki,Karnataka,,14.1864,74.8497,4.30,0.95,19,pipeline/data/aois/linganamakki.geojson,
-idukki,Idukki,Periyar,Kerala,Idukki,Kerala,,9.8453,76.9633,1.46,0.45,20,pipeline/data/aois/idukki.geojson,
-mullaperiyar,Mullaperiyar,Periyar,Kerala,Mullaperiyar,"Kerala, TN",,9.5333,77.1333,0.44,0.10,21,pipeline/data/aois/mullaperiyar.geojson,Inter-state tension reservoir
-bargi,Bargi,Narmada,Madhya Pradesh,Bargi,MP,,22.9417,79.9333,3.18,0.45,22,pipeline/data/aois/bargi.geojson,
-tawa,Tawa,Tawa,Madhya Pradesh,Tawa,MP,,22.5550,77.9700,1.94,0.36,23,pipeline/data/aois/tawa.geojson,
-koyna,Koyna,Krishna,Maharashtra,Koyna,Maharashtra,,17.4017,73.7500,2.79,0.59,24,pipeline/data/aois/koyna.geojson,Hydropower critical
-ujjani,Ujjani,Bhima,Maharashtra,Ujjani,Maharashtra (Solapur),,18.0667,75.1167,3.32,0.95,25,pipeline/data/aois/ujjani.geojson,Bhima basin
+bhakra,Bhakra,Sutlej,Himachal Pradesh,Bhakra,"Delhi NCR, Punjab, Haryana",33000000,31.4106,76.4339,9.34,2.04,1,pipeline/data/aois/bhakra.geojson,Northern grain belt + Delhi drinking water
+tehri,Tehri,Bhagirathi,Uttarakhand,Tehri,"Delhi, UP cities",33000000,30.3779,78.4806,3.54,0.84,2,pipeline/data/aois/tehri.geojson,Tallest dam in India; Delhi drinking water
+krs,Krishnaraja Sagar,Kaveri,Karnataka,Krishna Raja Sagar,"Bengaluru, Mysuru",13500000,12.4244,76.5719,1.37,0.13,3,pipeline/data/aois/krs.geojson,KRS 2024 backtest target (Phase 0)
+mettur,Mettur,Kaveri,Tamil Nadu,Mettur,"Chennai (via Veeranam transfer), TN agri",10000000,11.7860,77.7995,2.65,0.21,4,pipeline/data/aois/mettur.geojson,Mettur 2019 backtest target (Phase 0)
+jayakwadi,Jayakwadi,Godavari,Maharashtra,Jayakwadi,"Aurangabad, Marathwada cities",9500000,19.4818,75.3697,2.91,0.74,5,pipeline/data/aois/jayakwadi.geojson,Marathwada 2016/2019 backtest target
+indira_sagar,Indira Sagar,Narmada,Madhya Pradesh,Indira Sagar,"Indore region, MP/Maharashtra",3500000,22.2944,76.4717,12.21,3.39,6,pipeline/data/aois/indira_sagar.geojson,Largest by capacity in India (Phase 0); national context anchor
+nagarjuna_sagar,Nagarjuna Sagar,Krishna,Andhra Pradesh,Nagarjuna Sagar,"Hyderabad, Vijayawada/Guntur",15000000,16.5728,79.3119,11.56,3.31,7,pipeline/data/aois/nagarjuna_sagar.geojson,Hyderabad drinking water + Krishna delta
+srisailam,Srisailam,Krishna,Andhra Pradesh,Srisailam,"Hyderabad, Telangana cities",10000000,16.0833,78.9000,8.72,2.12,8,pipeline/data/aois/srisailam.geojson,Hyderabad supplement
+sardar_sarovar,Sardar Sarovar,Narmada,Gujarat,Sardar Sarovar,"Ahmedabad, Vadodara, Rajkot",10000000,21.8333,73.7500,9.50,1.87,9,pipeline/data/aois/sardar_sarovar.geojson,Ahmedabad drinking water via Narmada main canal
+ukai,Ukai,Tapi,Gujarat,Ukai,Surat,7000000,21.2500,73.5833,7.41,1.40,10,pipeline/data/aois/ukai.geojson,Surat primary drinking water
+kabini,Kabini,Kaveri,Karnataka,Kabini,Bengaluru,13500000,11.9678,76.3439,0.55,0.03,11,pipeline/data/aois/kabini.geojson,Bengaluru ~20% supply
+hemavathy,Hemavathy,Kaveri,Karnataka,Hemavathy,Bengaluru,13500000,12.8408,76.1014,0.94,0.04,12,pipeline/data/aois/hemavathy.geojson,Bengaluru ~20% supply
+harangi,Harangi,Kaveri,Karnataka,Harangi,Bengaluru (regulator),13500000,12.4583,75.9000,0.23,0.04,13,pipeline/data/aois/harangi.geojson,KRS sister reservoir; Kaveri regulator
+bhavanisagar,Bhavanisagar,Bhavani,Tamil Nadu,Bhavanisagar,Coimbatore,2500000,11.4500,77.0667,0.93,0.10,14,pipeline/data/aois/bhavanisagar.geojson,Coimbatore drinking water + Kaveri tributary
+vaigai,Vaigai,Vaigai,Tamil Nadu,Vaigai,Madurai,1500000,10.0500,77.5900,0.17,0.02,15,pipeline/data/aois/vaigai.geojson,Madurai drinking water
+mullaperiyar,Mullaperiyar,Periyar,Kerala,Mullaperiyar,"Madurai, Theni",2500000,9.5333,77.1333,0.44,0.10,16,pipeline/data/aois/mullaperiyar.geojson,Inter-state water dispute reservoir
+idukki,Idukki,Periyar,Kerala,Idukki,"Kochi, Thiruvananthapuram (power-linked)",4000000,9.8453,76.9633,1.46,0.45,17,pipeline/data/aois/idukki.geojson,Kerala grid backbone
+idamalayar,Idamalayar,Periyar,Kerala,Idamalayar,Kochi,2500000,10.2000,76.6600,1.09,0.10,18,pipeline/data/aois/idamalayar.geojson,Kochi supplement
+bisalpur,Bisalpur,Banas,Rajasthan,Bisalpur,"Jaipur, Tonk",4000000,25.9333,75.4500,1.10,0.06,19,pipeline/data/aois/bisalpur.geojson,Jaipur primary drinking water
+khadakwasla,Khadakwasla,Mutha,Maharashtra,Khadakwasla,Pune,7000000,18.4400,73.7700,0.05,0.00,20,pipeline/data/aois/khadakwasla.geojson,Pune primary drinking water (with Panshet/Varasgaon)
+maithon,Maithon,Damodar,Jharkhand,Maithon,"Asansol, Dhanbad, Burdwan (DVC grid)",4500000,23.7833,86.8167,1.36,0.08,21,pipeline/data/aois/maithon.geojson,DVC system serves industrial belt
+panchet,Panchet,Damodar,Jharkhand,Panchet,"Asansol, DVC industrial belt",4500000,23.6667,86.7500,1.50,0.10,22,pipeline/data/aois/panchet.geojson,DVC system
+bargi,Bargi,Narmada,Madhya Pradesh,Bargi,Jabalpur,1200000,22.9417,79.9333,3.18,0.45,23,pipeline/data/aois/bargi.geojson,Jabalpur drinking water
+totladoh,Totladoh,Pench,Maharashtra,Totladoh,Nagpur,3000000,21.7333,79.2000,1.24,0.10,24,pipeline/data/aois/totladoh.geojson,Nagpur primary drinking water (Pench dam)
+singur,Singur,Manjira,Telangana,Singur,Hyderabad,10000000,17.7500,77.9333,0.85,0.04,25,pipeline/data/aois/singur.geojson,Hyderabad supplement via Manjira

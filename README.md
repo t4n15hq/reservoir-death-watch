@@ -6,7 +6,7 @@ A satellite-driven early warning system for India's draining reservoirs.
 
 ## What this is
 
-A live public dashboard covering all 166 reservoirs monitored by the Central Water Commission (CWC). For each reservoir, the system projects days-to-dead-storage under two scenarios — neutral monsoon and El Niño-suppressed monsoon — using Sentinel-2 satellite imagery for live extent, JRC Global Surface Water for multi-decade historical context, CWC bulletins as ground truth, and NOAA ONI for El Niño conditioning.
+A live public dashboard covering the 25 CWC-monitored reservoirs that supply India's major cities — Delhi, Bengaluru, Chennai, Hyderabad, Ahmedabad, Surat, Jaipur, Pune, Coimbatore, Madurai, Aurangabad, Jabalpur, Nagpur, Kochi, and the DVC industrial belt. For each reservoir, the system projects days-to-dead-storage under two scenarios — neutral monsoon and El Niño-suppressed monsoon — using Sentinel-2 satellite imagery for live extent, JRC Global Surface Water for multi-decade historical context, CWC bulletins as ground truth, and NOAA ONI for El Niño conditioning.
 
 Updated weekly via a cron job. Validated against three historical water crises (Bengaluru 2024, Chennai/Mettur 2019, Marathwada/Jayakwadi 2016 & 2019).
 
@@ -29,7 +29,8 @@ Implemented so far:
 
 Not yet Phase 0 complete:
 - AOIs need manual review.
-- Current volume estimates are CWC-calibrated from one bulletin only; six-month validation is still pending.
+- Current volume estimates are CWC-calibrated from one bulletin only; six-month validation is still pending. Drop additional `bulletin_*.csv` files into `pipeline/data/cwc/` and run `python scripts/run_phase0_gate.py` for the ±10% check.
+- First gate run against `2026-04-09`: KRS passes (−8.6%); Mettur (+21.2%) and Indira Sagar (+38.9%) miss high — area-to-volume calibration / AOI extent needs investigation, per `docs/PHASES.md` failure handling for Phase 0.
 - NOAA ONI fetch currently times out from this environment, so live ENSO state may be unavailable.
 
 See `docs/PHASES.md` for the build plan.

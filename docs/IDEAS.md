@@ -15,6 +15,18 @@ Estimated scope: small | medium | large project
 
 ---
 
+## 2026-05-19: Mumbai BMC + Chennai Metro Water reservoirs
+
+The largest gap in the city-serving scope after the v2 PRD pivot: Mumbai and most of Chennai's drinking water comes from reservoirs **not on CWC's monitored list**. Adding them would let us claim "every major Indian city's primary reservoirs" instead of "every major city except Mumbai."
+
+- Mumbai BMC system: Bhatsa, Upper Vaitarna, Middle Vaitarna, Modak Sagar (Lower Vaitarna), Tansa, Tulsi, Vihar. Daily levels published at `portal.mcgm.gov.in`.
+- Chennai Metro Water: Chembarambakkam, Poondi (Sathyamoorthy Sagar), Red Hills (Puzhal), Cholavaram. Daily levels at `chennaimetrowater.tn.gov.in`.
+- Why interesting: Mumbai's 22M and Chennai's 11M people are the headline omission today.
+- Why deferred: each source needs its own ground-truth scraper. AOI seeding works the same way (JRC). The pipeline calibration logic supports an arbitrary `cwc_row` so swapping in BMC/CMWSSB data is a refactor, not a redesign.
+- Estimated scope: small-to-medium per source. Phase 4 candidate after the core 25 ship and the cron is stable.
+
+---
+
 ## 2026-05-18: GRACE groundwater overlay
 
 Layering GRACE/GRACE-FO water storage anomalies over the reservoir map.

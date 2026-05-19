@@ -30,21 +30,22 @@ Since this project is built with agents on auto, "phase" here is a logical check
 
 ---
 
-## Phase 1 — Foundation, 25 reservoirs
+## Phase 1 — All 25 city-serving reservoirs + backtests pass
 
-**Goal:** Validate the pipeline on the CWC headline-bulletin reservoirs and pass all three backtests.
+**Goal:** Pipeline runs across the full 25-reservoir scope and all three historical backtests pass.
 
-**Reservoirs:** All 25 from `reservoirs.csv` rows 1–25 (priority order).
+**Reservoirs:** All 25 from `reservoirs.csv` (priorities 1–25).
 
 **Deliverables:**
-- Pipeline runs across 25 reservoirs.
-- All AOIs digitized and committed.
-- First version of GEE App / dashboard reading the JSON output (static, manual rebuild).
-- Backtest suite implemented and passing (KRS 2024, Mettur 2019, Jayakwadi 2016/2019).
+- AOIs digitized and committed for all 25.
+- Pipeline runs end-to-end across 25 reservoirs.
+- Dashboard renders all 25 pins, detail panel works for each, city-grouped view live.
+- Backtest suite passing (KRS 2024, Mettur 2019, Jayakwadi 2016 + 2019).
+- Sentinel-1 SAR fallback verified against a monsoon-month test case.
 
 **Gate:**
 - All three backtests pass with no threshold-tuning.
-- Pipeline output validated against CWC for all 25.
+- ±10% / six-month gate passes for at least 20 of the 25 reservoirs.
 - Dashboard loads, renders all 25 pins, detail panel works for each.
 
 **Failure handling:**
@@ -57,37 +58,16 @@ Since this project is built with agents on auto, "phase" here is a logical check
 
 ---
 
-## Phase 2 — Scale to 100
+## Phase 2 — Hetzner automation
 
-**Goal:** Trust the pipeline. Add the long tail of medium reservoirs.
-
-**Reservoirs:** First 100 from `reservoirs.csv`.
+**Goal:** Zero-manual weekly operation on the existing Hermes VPS.
 
 **Deliverables:**
-- 100 reservoirs in the dashboard.
-- State-level rollups added to UI.
-- Sentinel-1 SAR fallback fully working (test against a known monsoon-cloud month).
-- CHIRPS catchment rainfall integration as a secondary projection input.
-
-**Gate:**
-- Random sample of 10 reservoirs hand-checked, all within ±15% of CWC.
-- State rollups match sum-of-parts.
-- At least one monsoon-month test case verifies S1 fallback worked.
-
----
-
-## Phase 3 — All 166 + Hetzner automation
-
-**Goal:** Full CWC coverage. Zero-manual operations.
-
-**Reservoirs:** All 166.
-
-**Deliverables:**
-- All 166 in the dashboard.
-- Hetzner deployment per `TDD.md` §7.
+- Hetzner deployment per `TDD.md` §7 and `infra/README.md`.
 - Cron running every Sunday 3am UTC.
 - healthchecks.io configured with Discord webhook to existing Hermes setup.
-- `infra/README.md` complete and reproducible.
+- `infra/healthcheck.sh` wired up as the freshness budget check.
+- CHIRPS catchment rainfall integration as a secondary projection input (still optional).
 
 **Gate:**
 - Pipeline runs successfully on Hetzner for 4 consecutive Sundays with no manual intervention.
@@ -95,7 +75,7 @@ Since this project is built with agents on auto, "phase" here is a logical check
 
 ---
 
-## Phase 4 — Writeup and distribution
+## Phase 3 — Writeup and distribution
 
 **Goal:** Make the project findable. Personal projects without a writeup are invisible.
 
@@ -104,7 +84,7 @@ Since this project is built with agents on auto, "phase" here is a logical check
 - Methodology page at `/methodology`.
 - Per-reservoir CSV downloads page at `/data`.
 - Twitter / X thread drafted.
-- Three journalist cold-email drafts.
+- Three journalist cold-email drafts (urban-affairs / climate desk focus).
 - Hacker News submission ready.
 
 **Gate (the real "shipped" gate):**
@@ -115,9 +95,15 @@ Since this project is built with agents on auto, "phase" here is a logical check
 
 ---
 
+## Phase 4 (optional) — Mumbai BMC + Chennai Metro Water scrapers
+
+Add the non-CWC reservoirs that supply Mumbai (Bhatsa, Vaitarna system, Tansa) and Chennai's smaller city-managed reservoirs (Chembarambakkam, Poondi, Red Hills). Requires new ground-truth scrapers per source. Treat as a separate sub-project. See `IDEAS.md`.
+
+---
+
 ## Phase 5 (optional) — GRACE groundwater overlay
 
-Only if Tanishq isn't bored and wants to keep going. This is a separate technical project; treat it as such. New Phase 0–4 structure inside this phase.
+Only if Tanishq isn't bored and wants to keep going. This is a separate technical project; treat it as such. New Phase 0–3 structure inside this phase.
 
 ---
 
@@ -126,10 +112,9 @@ Only if Tanishq isn't bored and wants to keep going. This is a separate technica
 | Phase | Hard gate | Failure means |
 |---|---|---|
 | 0 | E2E pipeline on 3 reservoirs, within ±10% of CWC | Fix data extraction |
-| 1 | All 3 backtests pass, dashboard renders 25 | Debug model, do NOT proceed |
-| 2 | Random 10 within ±15%, state rollups correct | Find the systematic bug at scale |
-| 3 | 4 consecutive Sunday runs on Hetzner, ≥90% fresh | Fix infra before claiming live |
-| 4 | Writeup + 8 weeks stable + journalist email | Project is shipped |
+| 1 | All 3 backtests pass, dashboard renders 25, ≥20 of 25 within ±10% of CWC | Debug model, do NOT proceed |
+| 2 | 4 consecutive Sunday runs on Hetzner, ≥90% fresh | Fix infra before claiming live |
+| 3 | Writeup + 8 weeks stable + journalist email | Project is shipped |
 
 ---
 

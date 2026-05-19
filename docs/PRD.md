@@ -1,22 +1,24 @@
 # Product Requirements Document
 
 **Project:** Reservoir Death Watch
-**Version:** 1.0
-**Date:** May 18, 2026
+**Version:** 2.0
+**Date:** May 19, 2026
 
 This is the WHY and WHAT. The HOW lives in `TDD.md`. The phase plan lives in `PHASES.md`. The constitution lives in `../AGENT.md`.
+
+**v2 change:** Scope tightened from "all 166 CWC-monitored reservoirs" to "the 25 reservoirs supplying India's major cities." The earlier 166-universe framing inherited CWC's bookkeeping choice rather than making a product choice; the city-serving cut sharpens the story (KRS dead in 89 days → Bengaluru) and makes 25 × ~10 verifiable fields tractable instead of 166 × ~10. Mumbai's BMC-managed system is deferred to `IDEAS.md` since it requires a separate data scraper.
 
 ---
 
 ## 1. Thesis
 
-India has 166 large reservoirs monitored by the Central Water Commission. They hold most of the country's interannual freshwater buffer. When they empty before the monsoon refills them — as happened to Bengaluru in 2024 (KRS at 16%), Chennai in 2019 (four reservoirs dry), and is now visibly happening to the Krishna and Kaveri basins — millions of people lose access to drinking water and irrigation.
+When the reservoirs supplying India's major cities empty before the monsoon refills them — as happened to Bengaluru in 2024 (KRS at 16%), Chennai in 2019 (four reservoirs dry), and is now visibly happening to the Krishna and Kaveri basins — tens of millions of urban Indians lose reliable drinking water.
 
-As of the CWC's April 30, 2026 bulletin: 166 reservoirs at 38.72% of live capacity. Krishna at 22.55%. Kaveri at 35.74%. Eight states below normal. The WMO has just confirmed El Niño conditions forming May–July 2026, with a meaningful chance of suppressing the southwest monsoon by 10–20%.
+Twenty-five CWC-monitored reservoirs anchor the drinking-water supply for roughly two-thirds of India's metro population: Delhi (Bhakra, Tehri), Bengaluru (KRS, Kabini, Hemavathy, Harangi), Chennai (Mettur via the Veeranam transfer), Hyderabad (Nagarjuna Sagar, Srisailam, Singur), Ahmedabad (Sardar Sarovar), Surat (Ukai), Jaipur (Bisalpur), Pune (Khadakwasla), Coimbatore (Bhavani Sagar), Madurai (Vaigai), Aurangabad (Jayakwadi), Jabalpur (Bargi), Nagpur (Totladoh/Pench), Kochi (Idamalayar, Idukki), and the DVC industrial belt (Maithon, Panchet). The full list lives in `reservoirs.csv`.
 
-CWC publishes the data weekly as a 30-page PDF. ISRO Bhuvan hosts imagery. Nobody fuses the satellite history, the live observations, the ground-truth volumes, and the El Niño signal into a single, public-facing answer to the question every state water board is privately asking:
+CWC publishes weekly storage data as a 30-page PDF. ISRO Bhuvan hosts imagery. Nobody fuses the satellite history, the live observations, the ground-truth volumes, and the El Niño signal into a single, public-facing answer to the question every urban water utility is privately asking:
 
-**Which reservoirs run dry first, and when?**
+**Which of our cities' reservoirs runs dry first, and when?**
 
 This project is that answer.
 
@@ -24,17 +26,17 @@ This project is that answer.
 
 ## 2. Users
 
-### Primary: state water board analyst
+### Primary: investigative journalist or urban-affairs reporter
 
-Wants to know, before the press does, which reservoir under their jurisdiction is on track for emergency-level depletion. Needs to defend the projection to political leadership. **Lands first on the state rollup view.**
+Wants a chartable, citable data point for a story on the water crisis. Needs the methodology to be defensible. **Lands first on a specific city's reservoir page, downloads CSV.** "Bengaluru's water source dead in 89 days" is the headline; the dashboard provides the receipts.
 
-### Secondary: investigative journalist
+### Secondary: concerned urban resident
 
-Wants a chartable, citable data point for a story on the water crisis. Needs the methodology to be defensible. **Lands first on a specific reservoir's detail page, downloads CSV.**
+Lives in a reservoir-dependent city. Wants a single plain-English answer: how worried should I be about my city's water? **Lands on the city-search flow.**
 
-### Tertiary: concerned resident
+### Tertiary: urban water-utility planner (BMC, BWSSB, CMWSSB, etc.)
 
-Lives in a reservoir-dependent city. Wants a single plain-English answer: how worried should I be? **Lands on a search-by-city flow (Phase 2+).**
+Wants advance warning of which of their feeder reservoirs is on track for emergency depletion, before the press picks it up. **Lands on the per-reservoir detail page; treats it as a public second-opinion check on their internal model.**
 
 ---
 
@@ -42,14 +44,21 @@ Lives in a reservoir-dependent city. Wants a single plain-English answer: how wo
 
 ### What it shows
 
-- **National map** of India with 166 reservoirs, color-coded by criticality tier.
-- **State rollups**: per-state aggregate capacity, current storage, count of critical reservoirs.
+- **National map** of India with the 25 city-serving reservoirs, color-coded by criticality tier and labelled with the city they supply.
+- **City view**: each major city's primary feeders grouped, with an aggregate "days of water under each monsoon scenario."
 - **Reservoir detail pages**: multi-decade history, current surface area, two-scenario projection (neutral monsoon vs El Niño monsoon), CSV download, methodology link.
 - **Backtest mode**: rewind the model to a historical date and reproduce findings.
 
 ### What it claims
 
-> "Satellite-derived early-warning signal that flags reservoir-level water stress 30–90 days before the equivalent CWC bulletin reads as critical. Updated weekly. Backed by multi-decade JRC Global Surface Water history."
+> "Satellite-derived early-warning signal for the 25 reservoirs that supply India's major cities. Flags water stress 30–90 days before the equivalent CWC bulletin reads as critical. Updated weekly. Backed by multi-decade JRC Global Surface Water history."
+
+### What it does NOT cover
+
+- Mumbai (BMC-managed reservoirs sit outside CWC's monitoring set; deferred to `IDEAS.md`).
+- Smaller Chennai reservoirs (Poondi/Cholavaram/Red Hills/Chembarambakkam — Chennai Metro Water-managed; Mettur represents the Cauvery transfer upstream).
+- Hyderabad's HMWS&SB internal reservoirs (Osman Sagar, Himayat Sagar) — Singur covers the CWC-side Manjira contribution.
+- Smaller-city reservoirs (anything below ~1M population unless geopolitically significant like Mullaperiyar).
 
 ### What it does NOT claim
 
@@ -65,7 +74,7 @@ Lives in a reservoir-dependent city. Wants a single plain-English answer: how wo
 The project is "shipped" when all of these are true (also in `AGENT.md` §Definition of "shipped"):
 
 1. Dashboard live at a permanent public URL, no auth required.
-2. All 166 reservoirs render with `as_of` dates ≤ 14 days for ≥ 90% of them.
+2. All 25 city-serving reservoirs render with `as_of` dates ≤ 14 days for ≥ 90% of them.
 3. All three backtests (KRS 2024, Mettur 2019, Jayakwadi 2016/2019) pass on the live model.
 4. Weekly Hetzner cron has run successfully for 8 consecutive Sundays.
 5. Writeup published at `/methodology` and `/blog/launch-post`.

@@ -6,7 +6,9 @@ You are working on **Reservoir Death Watch**, a personal project by Tanishq. Thi
 
 ## What this project is
 
-A live public dashboard covering all 166 CWC-monitored reservoirs in India, projecting days-to-dead-storage under neutral-monsoon and El Niño-suppressed-monsoon scenarios. Updated weekly via a Hetzner cron. Backed by Sentinel-2/1 imagery, JRC Global Surface Water history, CWC bulletin ground truth, and NOAA ONI for El Niño conditioning.
+A live public dashboard covering the 25 CWC-monitored reservoirs that supply India's major cities, projecting days-to-dead-storage under neutral-monsoon and El Niño-suppressed-monsoon scenarios. Updated weekly via a Hetzner cron. Backed by Sentinel-2/1 imagery, JRC Global Surface Water history, CWC bulletin ground truth, and NOAA ONI for El Niño conditioning.
+
+(Scope was tightened from "all 166 CWC reservoirs" to "25 city-serving" in May 2026 — see `docs/PRD.md` v2 for the why. The 166-universe was CWC's bookkeeping choice; 25 city-serving is the product choice.)
 
 The full product requirements live in `docs/PRD.md`. The engineering spec lives in `docs/TDD.md`. The phase plan lives in `docs/PHASES.md`. The reservoir list lives in `docs/reservoirs.csv`. The validation cases live in `docs/BACKTESTS.md`. Read all of these before writing code.
 
@@ -87,7 +89,7 @@ When in doubt, ask before you build. Write the question into `docs/QUESTIONS.md`
 The project is shipped when ALL of these are true:
 
 1. Dashboard live at a permanent public URL, no auth required.
-2. All 166 reservoirs render with `as_of` dates ≤ 14 days for at least 90% of them.
+2. All 25 city-serving reservoirs render with `as_of` dates ≤ 14 days for at least 90% of them.
 3. All three backtests pass on the live model.
 4. Weekly Hetzner cron has run successfully for 8 consecutive Sundays.
 5. Writeup published at `/methodology` and `/blog/launch-post`.
