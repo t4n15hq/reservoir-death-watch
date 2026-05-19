@@ -18,27 +18,64 @@ from reservoirs.gee_auth import initialize_earth_engine
 
 PHASE0_IDS = ("krs", "mettur", "indira_sagar")
 
+# Strategies for selecting the AOI mask band on JRC/GSW1_4/GlobalSurfaceWater.
+# - "recurrence":  pixels wet in ≥ N% of years; best for full-pool boundary
+#                  because FRL pixels recur during annual peak fill.
+# - "occurrence":  pixels wet in ≥ N% of all monthly observations; stricter,
+#                  under-counts the FRL boundary on reservoirs that rarely fill.
+# - "max_extent":  pixels ever observed as water; most inclusive, can merge
+#                  with upstream river segments.
+SELECTION_STRATEGIES = ("recurrence", "occurrence", "max_extent")
+
+DEFAULT_STRATEGY = "recurrence"
+DEFAULT_RECURRENCE_THRESHOLD = 50
+DEFAULT_OCCURRENCE_THRESHOLD = 5
+
 AOI_CONFIG = {
     "krs": {
         "radius_m": 18_000,
         "min_area_km2": 20,
         "nearby_buffer_m": 4_000,
         "simplify_m": 60,
-        "occurrence_threshold": 5,
     },
     "mettur": {
         "radius_m": 38_000,
         "min_area_km2": 35,
         "nearby_buffer_m": 7_000,
         "simplify_m": 75,
-        "occurrence_threshold": 5,
     },
     "indira_sagar": {
         "radius_m": 95_000,
         "min_area_km2": 120,
         "nearby_buffer_m": 12_000,
         "simplify_m": 120,
-        "occurrence_threshold": 5,
+    },
+    "jayakwadi": {
+        "radius_m": 35_000,
+        "min_area_km2": 60,
+        "nearby_buffer_m": 8_000,
+        "simplify_m": 75,
+    },
+    # Nagarjuna Sagar and Srisailam are 67 km apart on the same river (Krishna),
+    # connected by a continuous JRC water mask. A generous radius pulls the
+    # connected component for one into the other's AOI. Tight radii pin each
+    # reservoir to its own dam.
+    "nagarjuna_sagar": {
+        "radius_m": 25_000,
+        "min_area_km2": 50,
+        "nearby_buffer_m": 5_000,
+        "simplify_m": 75,
+    },
+    "srisailam": {
+        # Dam at (16.08, 78.90) is the SE corner; reservoir extends 60 km NW.
+        # Seed from the reservoir centroid and use a tight radius so NS doesn't
+        # bleed in via the Krishna river that connects them.
+        "search_lat": 16.30,
+        "search_lon": 78.65,
+        "radius_m": 35_000,
+        "min_area_km2": 50,
+        "nearby_buffer_m": 12_000,
+        "simplify_m": 90,
     },
 }
 
@@ -51,22 +88,60 @@ def main() -> None:
     metadata = read_reservoir_metadata(ids)
     AOI_DIR.mkdir(parents=True, exist_ok=True)
 
+    selection = build_selection(args)
+
     for reservoir_id in ids:
         row = metadata[reservoir_id]
         config = AOI_CONFIG.get(reservoir_id, default_config(row))
-        feature = build_aoi_feature(row, config)
+        feature = build_aoi_feature(row, config, selection)
         output_path = AOI_DIR / f"{reservoir_id}.geojson"
         write_geojson(output_path, feature, overwrite=args.overwrite)
         print(
             f"{reservoir_id}: wrote {output_path} "
-            f"area={feature['properties']['area_km2']:.2f} km2"
+            f"area={feature['properties']['area_km2']:.2f} km2 "
+            f"(strategy={selection['strategy']}, threshold={selection['threshold']})"
         )
+
+
+def build_selection(args: argparse.Namespace) -> dict[str, object]:
+    """Resolve the band/threshold the JRC mask should use."""
+
+    if args.strategy not in SELECTION_STRATEGIES:
+        raise SystemExit(f"unknown strategy: {args.strategy}")
+    threshold = args.threshold
+    if threshold is None:
+        if args.strategy == "recurrence":
+            threshold = DEFAULT_RECURRENCE_THRESHOLD
+        elif args.strategy == "occurrence":
+            threshold = DEFAULT_OCCURRENCE_THRESHOLD
+        else:  # max_extent uses no threshold
+            threshold = 0
+    return {"strategy": args.strategy, "threshold": int(threshold)}
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("reservoir_ids", nargs="*", help="Reservoir IDs to seed")
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing AOI files")
+    parser.add_argument(
+        "--strategy",
+        choices=SELECTION_STRATEGIES,
+        default=DEFAULT_STRATEGY,
+        help=(
+            "JRC band used to define the water mask. 'recurrence' (default) captures the "
+            "FRL boundary because pixels recur during annual peak fill; 'occurrence' is "
+            "stricter and under-counts; 'max_extent' is most inclusive."
+        ),
+    )
+    parser.add_argument(
+        "--threshold",
+        type=int,
+        default=None,
+        help=(
+            "Threshold for the selected band. Default 50 for recurrence, 5 for occurrence; "
+            "ignored for max_extent."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -91,23 +166,44 @@ def default_config(row: dict[str, str]) -> dict[str, float]:
         "min_area_km2": max(5, full_capacity * 8),
         "nearby_buffer_m": 5_000,
         "simplify_m": 90,
-        "occurrence_threshold": 5,
     }
 
 
-def build_aoi_feature(row: dict[str, str], config: dict[str, float]) -> dict:
+def build_water_mask(search_area, selection: dict[str, object]):
+    """Build a JRC water mask Image per the chosen selection strategy."""
+
     import ee
 
-    point = ee.Geometry.Point([float(row["lon"]), float(row["lat"])])
+    asset = ee.Image("JRC/GSW1_4/GlobalSurfaceWater")
+    strategy = selection["strategy"]
+    threshold = int(selection["threshold"])
+
+    if strategy == "max_extent":
+        mask = asset.select("max_extent").eq(1)
+    elif strategy == "recurrence":
+        mask = asset.select("recurrence").gte(threshold)
+    else:  # occurrence
+        mask = asset.select("occurrence").gte(threshold)
+
+    return mask.selfMask().clip(search_area).rename("water")
+
+
+def build_aoi_feature(
+    row: dict[str, str],
+    config: dict[str, float],
+    selection: dict[str, object],
+) -> dict:
+    import ee
+
+    # The map pin lives at the dam. For reservoirs where the dam sits at the
+    # downstream edge of a long impoundment (Srisailam: dam at SE corner of a
+    # reservoir that extends 60 km NW), search from the reservoir centroid
+    # instead so the connected-component grab catches the right water body.
+    search_lat = config.get("search_lat", float(row["lat"]))
+    search_lon = config.get("search_lon", float(row["lon"]))
+    point = ee.Geometry.Point([search_lon, search_lat])
     search_area = point.buffer(config["radius_m"]).bounds()
-    water = (
-        ee.Image("JRC/GSW1_4/GlobalSurfaceWater")
-        .select("occurrence")
-        .gte(config["occurrence_threshold"])
-        .selfMask()
-        .clip(search_area)
-        .rename("water")
-    )
+    water = build_water_mask(search_area, selection)
     vectors = water.reduceToVectors(
         geometry=search_area,
         scale=30,
@@ -142,6 +238,7 @@ def build_aoi_feature(row: dict[str, str], config: dict[str, float]) -> dict:
         raise RuntimeError(f"no JRC water polygon found for {row['id']}")
 
     geometry = selected.geometry().simplify(config["simplify_m"]).getInfo()
+    geometry = collapse_to_largest_ring(geometry)
     area_km2 = selected.get("area_km2").getInfo()
     distance_m = selected.get("distance_m").getInfo()
 
@@ -152,8 +249,8 @@ def build_aoi_feature(row: dict[str, str], config: dict[str, float]) -> dict:
             "name": row["name"],
             "source": "JRC/GSW1_4/GlobalSurfaceWater",
             "method": (
-                "occurrence_threshold_connected_component;"
-                f"occurrence_gte={config['occurrence_threshold']};"
+                f"{selection['strategy']}_connected_component;"
+                f"threshold={selection['threshold']};"
                 f"radius_m={config['radius_m']}"
             ),
             "area_km2": round(float(area_km2), 3),
@@ -163,6 +260,38 @@ def build_aoi_feature(row: dict[str, str], config: dict[str, float]) -> dict:
         },
         "geometry": geometry,
     }
+
+
+def collapse_to_largest_ring(geometry: dict) -> dict:
+    """Reduce multi-ring polygons to their largest connected ring.
+
+    `reduceToVectors` can return hundreds of disconnected water polygons all
+    bundled into a single GeoJSON "Polygon" — those secondary rings get
+    treated as holes by Earth Engine's reduceRegion, which then 500s with an
+    opaque "internal error". Keep only the outer boundary of the actual
+    reservoir.
+    """
+
+    coords = geometry["coordinates"]
+    if geometry["type"] == "MultiPolygon":
+        # Pick the largest sub-polygon, then its largest ring.
+        coords = max(coords, key=lambda poly: _ring_shoelace(poly[0]))
+    if len(coords) <= 1:
+        return {"type": "Polygon", "coordinates": coords}
+    largest = max(coords, key=_ring_shoelace)
+    return {"type": "Polygon", "coordinates": [largest]}
+
+
+def _ring_shoelace(ring: list[list[float]]) -> float:
+    n = len(ring)
+    if n < 3:
+        return 0.0
+    total = 0.0
+    for i in range(n):
+        x1, y1 = ring[i]
+        x2, y2 = ring[(i + 1) % n]
+        total += (x2 - x1) * (y2 + y1)
+    return abs(total) / 2
 
 
 def write_geojson(path: Path, feature: dict, *, overwrite: bool) -> None:
