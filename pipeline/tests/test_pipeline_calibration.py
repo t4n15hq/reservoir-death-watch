@@ -166,6 +166,59 @@ def test_curve_passes_through_indira_sagar_anchor() -> None:
     assert curve.area_to_volume(641.5) == pytest.approx(4.192, rel=0.01)
 
 
+def test_dead_storage_area_uses_power_law_not_linear() -> None:
+    """Regression: the dead-storage area proxy must NOT assume V proportional to A.
+
+    Linear proxy made dead_area = 10% of FRL_area for typical reservoirs with
+    10% volume ratio, but proper hypsometry gives dead_area ≈ 26% of FRL_area
+    (with b=1.7). The 2.6x error inflated days-to-dead-storage projections
+    proportionally and was the main cause of the Mettur 2019 / Jayakwadi 2016
+    backtest failures (199d/214d when the model should have flagged crisis).
+    """
+
+    from reservoirs.pipeline import _dead_storage_area_proxy
+
+    aoi = _aoi(full_pool_capacity_bcm=10.0, dead_storage_capacity_bcm=1.0)  # 10% ratio
+    dead_area = _dead_storage_area_proxy(aoi, full_pool_area_km2=100.0, curve=None)
+    # Linear V∝A would give 10 km². Power-law b=2.0 gives ~31.6 km²
+    # (0.10^0.5 = 0.316). 1.7 gave 26 km².
+    assert dead_area > 25.0, f"power-law fix regressed: got {dead_area} km²"
+    assert dead_area < 40.0, f"unexpectedly large dead area: got {dead_area} km²"
+
+
+def test_dead_storage_area_prefers_calibrated_curve() -> None:
+    """When a curve was fit from CWC data, dead-storage area comes from it directly."""
+
+    from reservoirs.pipeline import _calibrate_curve, _dead_storage_area_proxy
+
+    aoi = _aoi(full_pool_capacity_bcm=2.647, dead_storage_capacity_bcm=0.21)
+    history = pd.DataFrame(
+        [
+            {"date": date(2020, 1, 1), "area_km2": 131.6, "data_source": "jrc"},
+            {"date": date(2026, 4, 7), "area_km2": 88.0, "data_source": "sentinel_2"},
+        ]
+    )
+    cwc_row = pd.Series(
+        {"reservoir_id": "mettur", "date": date(2026, 4, 9), "live_storage_bcm": 1.254}
+    )
+    curve, _ = _calibrate_curve(
+        aoi,
+        full_pool_area_km2=131.6,
+        full_capacity_bcm=2.647,
+        history=history,
+        cwc_row=cwc_row,
+    )
+    assert curve is not None
+    dead_area_with_curve = _dead_storage_area_proxy(aoi, 131.6, curve=curve)
+    dead_area_default = _dead_storage_area_proxy(aoi, 131.6, curve=None)
+    # The curve-derived dead-area should not match the default-exponent fallback;
+    # they're computed via different methods on different data.
+    assert dead_area_with_curve == pytest.approx(
+        curve.volume_to_area(aoi.dead_storage_capacity_bcm)
+    )
+    assert dead_area_with_curve != pytest.approx(dead_area_default, rel=0.01)
+
+
 def test_curve_returns_none_when_only_full_pool_anchor() -> None:
     aoi = _aoi()
     history = pd.DataFrame(columns=["date", "area_km2", "data_source"])

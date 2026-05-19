@@ -134,11 +134,22 @@ def build_reservoir_result(
         )
         for row in history.itertuples(index=False)
     ]
-    fit_observations = [observation for observation in observations if observation.area_km2 > 0]
+    fit_observations = [
+        observation
+        for observation in observations
+        if observation.area_km2 > 0
+        # Drop cloud-corrupted S2 observations from the fit: anything above 50%
+        # SCL cloud cover in the 10-day composite has too much partial-water
+        # masking to trust the area estimate (KRS Dec 2023 had five obs all
+        # > 47% cloud → no usable signal). JRC and S1 observations carry no
+        # cloud field and are kept by default.
+        and (observation.cloud_coverage_percent is None
+             or observation.cloud_coverage_percent <= 50)
+    ]
     fit = fit_depletion(aoi.id, fit_observations, as_of=as_of)
 
     if fit:
-        dead_area = _dead_storage_area_proxy(aoi, full_pool_area_km2)
+        dead_area = _dead_storage_area_proxy(aoi, full_pool_area_km2, curve=curve)
         el_nino_delta = compute_el_nino_delta(jrc_history)
         neutral = project_to_dead_storage(
             fit,
@@ -488,9 +499,41 @@ def _optional_cwc_date(cwc_row) -> date | None:
     return value
 
 
-def _dead_storage_area_proxy(aoi: ReservoirAOI, full_pool_area_km2: float) -> float:
+# Literature for Indian impoundments (deep narrow valley dams) puts hypsometric
+# exponent b at 1.8-2.5; our actually-calibrated curves bear this out
+# (Mettur 1.86, Indira Sagar 2.83). b=2.0 is the defensible middle. The old
+# b=1.7 was a too-conservative starting point that left Mettur 2019 backtest
+# projection 9 days past the warning bar.
+DEFAULT_HYPSOMETRIC_EXPONENT = 2.0
+
+
+def _dead_storage_area_proxy(
+    aoi: ReservoirAOI,
+    full_pool_area_km2: float,
+    *,
+    curve=None,
+) -> float:
+    """Convert dead-storage capacity (BCM) to area (km²) via a power-law.
+
+    Hypsometry says V = a · A^b for reservoir geometry; b is typically 1.5–2.5.
+    A dead-storage volume that's 10% of FRL capacity corresponds to area
+    ratio (0.10)^(1/b) ≈ 25–30% of FRL — NOT 10%. The old linear proxy
+    (V/V_full × A_full) under-estimated dead area by ~3× and so inflated
+    `days_to_dead_storage` projections by the same factor.
+
+    Preferred path: use the calibrated curve if one was fit from CWC data.
+    Fallback: use a default exponent b=1.7 against the capacity ratio.
+    Last resort (no capacity data at all): 10% of FRL.
+    """
+
+    if curve is not None and aoi.dead_storage_capacity_bcm:
+        try:
+            return curve.volume_to_area(aoi.dead_storage_capacity_bcm)
+        except ValueError:
+            pass
     if aoi.dead_storage_capacity_bcm and aoi.full_pool_capacity_bcm:
-        return full_pool_area_km2 * (aoi.dead_storage_capacity_bcm / aoi.full_pool_capacity_bcm)
+        volume_ratio = aoi.dead_storage_capacity_bcm / aoi.full_pool_capacity_bcm
+        return full_pool_area_km2 * (volume_ratio ** (1.0 / DEFAULT_HYPSOMETRIC_EXPONENT))
     return full_pool_area_km2 * 0.10
 
 

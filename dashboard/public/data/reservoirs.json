@@ -10,7 +10,7 @@
     "oni_latest": 0.11,
     "state": "neutral"
   },
-  "generated_at": "2026-05-19T13:44:47.916709Z",
+  "generated_at": "2026-05-19T20:56:26.134459Z",
   "model_version": "1.0.0",
   "national_aggregate": {
     "current_storage_bcm": 39.21,
@@ -41,6 +41,7 @@
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 149.336,
@@ -1050,6 +1051,7 @@
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 37.288,
@@ -7807,6 +7809,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 325.036,
@@ -11719,6 +11722,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 233.607,
@@ -12738,6 +12742,7 @@
         "el_nino_delta_static_years",
         "manual_bbox_needs_visual_check",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 389.155,
@@ -13747,6 +13752,7 @@
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 194.14,
@@ -14766,6 +14772,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 480.837,
@@ -15791,6 +15798,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 53.198,
@@ -16800,6 +16808,7 @@
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 55.579,
@@ -17803,6 +17812,7 @@
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 13.52,
@@ -18816,6 +18826,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 56.189,
@@ -19823,6 +19834,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 17.888,
@@ -20842,6 +20854,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 16.675,
@@ -21845,6 +21858,7 @@
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 43.334,
@@ -22858,6 +22872,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 23.711,
@@ -23867,6 +23882,7 @@
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 157.321,
@@ -24870,6 +24886,7 @@
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 11.145,
@@ -25889,6 +25906,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 77.219,
@@ -26908,6 +26926,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 59.016,
@@ -27927,6 +27946,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 222.956,
@@ -28946,6 +28966,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 70.839,
@@ -29965,6 +29986,7 @@
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
         "needs_cwc_calibration",
+        "rebuilt_from_csv",
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 118.702,
