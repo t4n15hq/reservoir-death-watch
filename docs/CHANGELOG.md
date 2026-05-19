@@ -4,6 +4,56 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 
 ---
 
+## 2026-05-19 — Provenance audit + Phase 3 writeup drafts (autonomous)
+
+User AFK; continued autonomously on the things that didn't need a call.
+
+**Data provenance (the "is any of this fabricated?" question):**
+
+- `docs/PROVENANCE.md` — every dashboard field, source, confidence tier.
+- `pipeline/scripts/audit_metadata.py` + `data_provenance.json` writer.
+  Honest counts: 25/25 observed via satellite, 3/25 CWC-calibrated,
+  0/25 lat/lon verified, 0/25 capacities verified, 0/25 population
+  verified. The "0 of 25" rows are next milestone for editorial metadata.
+- Dashboard "Data quality" card under the state band — six tiles
+  colour-coded by measured-vs-metadata and zero/partial/full status.
+- 5 new audit tests in `test_audit_metadata.py` pinning the counts.
+
+**Phase 3 writeup drafts:**
+
+- `site/src/content/methodology.md` (1100 words). Lead distinction
+  between observed area and derived storage; data-sources table;
+  twelve pipeline stages; why-linear-regression; backtest results
+  (3/4 pass, KRS 2023 documented failure); data-quality counts; what
+  the dashboard does NOT claim; what's coming.
+- `site/src/content/launch-post.md` (700 words). Lede on today's
+  numbers (5 critical, 5 warning, 66.5M downstream). Honest gaps
+  section.
+- `site/src/content/distribution/twitter-thread.md`. 6 tweets with
+  screenshot prompts. Hashtags + posting timing.
+- `site/src/content/distribution/journalist-emails.md`. 3 templates
+  (climate-desk / data-journalism / investigative) + triage table
+  for 7 target publications.
+- `site/src/content/distribution/hacker-news.md`. Show HN title +
+  first-comment draft + posting strategy + prep table for the 6
+  most-likely Qs.
+
+**Dashboard polish:**
+
+- Chart annotations: FRL line, dead-storage line, shaded 90-day
+  depletion-fit window. Pure visual; data unchanged.
+- Per-reservoir CSV download link in each detail panel.
+- Backtest snapshot generator script (`scripts/generate_backtest_snapshots.py`)
+  that writes `dashboard/public/data/backtest_<case_id>.json`. Each
+  payload carries a `backtest` block with verdict; dashboard surfaces
+  PASS/FAIL in hero on `?backtest=...`.
+
+5 new commits, all pushed. Tests 62 + 4 skip stays green; ruff clean;
+dashboard build green (1MB minified, 76KB gzipped — well under TDD §9
+budget).
+
+---
+
 ## 2026-05-19 — Phase 1 backtests: 3 of 4 pass after dead-storage fix
 
 Path D follow-up to the 1-of-4 finding earlier today. Two real modeling
