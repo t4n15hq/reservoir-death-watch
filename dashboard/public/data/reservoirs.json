@@ -2,15 +2,15 @@
   "data_sources_used": {
     "cwc_bulletin": "2026-04-09",
     "jrc_through": "2021-12",
-    "oni_month": null,
+    "oni_month": "2026-05",
     "s2_latest": "2026-05-18"
   },
   "enso": {
     "imd_monsoon_forecast": null,
-    "oni_latest": null,
-    "state": "unavailable"
+    "oni_latest": 0.11,
+    "state": "neutral"
   },
-  "generated_at": "2026-05-19T06:08:31.809082Z",
+  "generated_at": "2026-05-19T13:29:29.249555Z",
   "model_version": "1.0.0",
   "national_aggregate": {
     "current_storage_bcm": 42.602,

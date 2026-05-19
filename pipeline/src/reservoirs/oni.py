@@ -8,7 +8,11 @@ from typing import Literal
 import pandas as pd
 import requests
 
-ONI_URL = "https://origin.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php"
+# NOAA serves the same ONI table at two URLs; the .php form on `origin.cpc`
+# routinely stalls (verified May 2026), the ASCII mirror on `cpc` resolves
+# in well under a second. Stick with the mirror; the parser is identical
+# either way.
+ONI_URL = "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
 EnsoState = Literal[
     "el_nino_developing",
     "el_nino",
