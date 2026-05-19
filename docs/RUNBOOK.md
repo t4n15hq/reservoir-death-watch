@@ -134,6 +134,51 @@ See `docs/PHASES.md`. Writeup, three journalist cold-emails, Hacker News post.
 
 ---
 
+## CWC bulletin ingest
+
+Adds proper power-law area-to-volume calibration for the 22 reservoirs
+currently using the area-ratio storage proxy.
+
+1. Fetch the weekly bulletin PDF from CWC. Any path that works for you —
+   browser, VPN, IndiaWRIS export, etc. (the rsms.cwc.gov.in endpoint
+   is auth-walled from at least some networks; assume it might be
+   inaccessible from your CI/agent seat).
+
+2. Drop the PDF into `pipeline/data/cwc/raw_pdfs/` (filename ignored).
+
+3. Convert all PDFs in that folder to bulletin CSVs:
+
+   ```bash
+   cd pipeline
+   uv run python scripts/parse_local_cwc_pdfs.py
+   ```
+
+   Each PDF becomes `bulletin_YYYY_MM_DD.csv` in `pipeline/data/cwc/`
+   (the directory `cwc_scraper.load_cwc_storage` watches). Use
+   `--overwrite` to replace existing files when re-parsing.
+
+4. Rebuild snapshots for the affected reservoirs so they pick up the
+   new CWC calibration anchor:
+
+   ```bash
+   uv run python scripts/backfill_history.py --as-of $(date +%F) <ids...>
+   ```
+
+   Or, faster, just refresh storage from existing CSVs without re-hitting
+   Earth Engine:
+
+   ```bash
+   uv run python scripts/rebuild_storage_from_csv.py
+   ```
+
+5. Run the gate:
+
+   ```bash
+   uv run python scripts/run_phase0_gate.py --report-csv /tmp/gate.csv
+   ```
+
+---
+
 ## Dashboard
 
 ```bash
