@@ -12,7 +12,7 @@ import pandas as pd
 from reservoirs.aois import load_aois
 from reservoirs.area_volume import fit_power_law_curve
 from reservoirs.config import DASHBOARD_DATA_DIR, MODEL_VERSION
-from reservoirs.cwc_scraper import load_cwc_storage_csv
+from reservoirs.cwc_scraper import load_cwc_storage
 from reservoirs.export import write_json_atomic
 from reservoirs.healthcheck import ping_healthcheck
 from reservoirs.jrc import extract_jrc_history
@@ -30,6 +30,7 @@ from reservoirs.schemas import (
     ReservoirResult,
 )
 from reservoirs.sentinel import RecentArea, extract_recent_area, extract_s2_area_series
+from reservoirs.state_aggregates import build_state_aggregates
 
 PHASE0_RESERVOIRS = ("krs", "mettur", "indira_sagar")
 
@@ -279,6 +280,11 @@ def export_dashboard_data(
     output_dir: Path,
 ) -> None:
     write_json_atomic(output_dir / "reservoirs.json", snapshot)
+    state_aggregates = build_state_aggregates(
+        snapshot.reservoirs,
+        generated_at=snapshot.generated_at,
+    )
+    write_json_atomic(output_dir / "state_aggregates.json", state_aggregates)
     reservoir_dir = output_dir / "reservoirs"
     reservoir_dir.mkdir(parents=True, exist_ok=True)
     for reservoir_id, frame in csv_frames.items():
@@ -321,7 +327,7 @@ def _merge_history(
 
 def _load_cwc_storage_or_empty() -> pd.DataFrame:
     try:
-        return load_cwc_storage_csv()
+        return load_cwc_storage()
     except Exception as exc:
         print(f"CWC storage unavailable: {exc}")
         return pd.DataFrame()
@@ -367,11 +373,10 @@ def _calibrate_curve(
     else:
         flags.extend(["needs_cwc_calibration", "volume_area_ratio_proxy"])
 
-    if aoi.dead_storage_capacity_bcm and aoi.full_pool_capacity_bcm:
-        dead_area = full_pool_area_km2 * (
-            aoi.dead_storage_capacity_bcm / aoi.full_pool_capacity_bcm
-        )
-        points.append((dead_area, aoi.dead_storage_capacity_bcm))
+    # Deliberately *do not* anchor the curve with (dead_storage_area, dead_storage_capacity).
+    # We do not have a defensible dead-storage area; the linear-fraction proxy assumes
+    # V ∝ A which is exactly the relationship the power-law fit is supposed to discover.
+    # Including it flattens the exponent and biases mid-range storage estimates high.
 
     if len(points) < 2:
         return None, sorted(set(flags))
@@ -416,10 +421,20 @@ def _full_pool_area_km2(
     jrc_history: pd.DataFrame,
     current: RecentArea,
 ) -> float:
-    if aoi.aoi_area_km2:
-        return aoi.aoi_area_km2
+    """Best estimate of the FRL water-surface area.
+
+    The polygon's geometric area (``aoi.aoi_area_km2``) over-counts dry shoreline
+    captured by the digitization buffer. The observable proxy is the historical
+    maximum water area from JRC/Sentinel — that is what the curve should anchor
+    against. We fall back to the polygon area only when no observation has ever
+    been recorded inside the AOI.
+    """
+
     historical_max = float(jrc_history["area_km2"].max()) if not jrc_history.empty else 0.0
-    return max(historical_max, current.area_km2)
+    observed_max = max(historical_max, current.area_km2)
+    if observed_max > 0:
+        return observed_max
+    return aoi.aoi_area_km2 or 0.0
 
 
 def _area_ratio_storage(

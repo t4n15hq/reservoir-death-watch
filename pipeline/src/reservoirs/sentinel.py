@@ -33,6 +33,10 @@ SENTINEL_SCALE_M = {
 DEFAULT_GEOMETRY_SIMPLIFY_M = 100
 DEFAULT_SENTINEL_SCALE_M = 10
 
+# Reservoirs do not lose >50% of their surface area in a single 10-day step.
+# Drops beyond this are almost always cloud/SCL mask leakage, not real depletion.
+MAX_PLAUSIBLE_STEP_DROP_RATIO = 0.50
+
 
 def extract_recent_area(
     aoi: ReservoirAOI,
@@ -40,7 +44,12 @@ def extract_recent_area(
     as_of: date | None = None,
     days: int = 30,
 ) -> RecentArea:
-    """Extract the best recent area observation, using S1 when S2 is too cloudy."""
+    """Extract the best recent area observation, using S1 when S2 is too cloudy.
+
+    Falls back to Sentinel-1 for both expected failures (no S2 images, too cloudy)
+    and EE backend errors (some polygons reliably 500 out of S2 reduceRegion;
+    radar still works for those).
+    """
 
     try:
         area, observed_at, cloud_percent = extract_s2_recent(aoi, as_of=as_of, days=days)
@@ -48,6 +57,8 @@ def extract_recent_area(
             return RecentArea(area, observed_at, "sentinel_2", cloud_percent)
     except SentinelExtractionError:
         pass
+    except Exception as exc:  # noqa: BLE001 — EE 500s surface as generic EEException
+        print(f"{aoi.id}: Sentinel-2 unavailable ({exc}); trying Sentinel-1 SAR.")
 
     area, observed_at = extract_s1_recent(aoi, as_of=as_of, days=days)
     return RecentArea(area, observed_at, "sentinel_1", None)
@@ -145,11 +156,43 @@ def extract_s2_area_series(
     )
     if frame.empty:
         return frame
-    return (
+    deduped = (
         frame.groupby("date", as_index=False)
         .mean(numeric_only=True)
         .assign(data_source="sentinel_2")
     )
+    return drop_implausible_cloud_artifacts(deduped)
+
+
+def drop_implausible_cloud_artifacts(
+    series: pd.DataFrame,
+    *,
+    max_drop_ratio: float = MAX_PLAUSIBLE_STEP_DROP_RATIO,
+) -> pd.DataFrame:
+    """Remove single-observation outliers where area collapses then recovers.
+
+    Pattern we filter: prev=33 km², this=3.9 km², next=13 km². The middle
+    reading is masked by clouds bleeding through the SCL filter. We keep the
+    drop if the trend continues (sustained decline is real depletion); we
+    only drop a single observation whose neighbours bracket a much higher
+    value.
+    """
+
+    if len(series) < 3:
+        return series
+    sorted_series = series.sort_values("date").reset_index(drop=True)
+    keep = [True] * len(sorted_series)
+    areas = sorted_series["area_km2"].tolist()
+    for i in range(1, len(sorted_series) - 1):
+        prev_area = areas[i - 1]
+        this_area = areas[i]
+        next_area = areas[i + 1]
+        if prev_area <= 0 or next_area <= 0:
+            continue
+        neighbour_floor = min(prev_area, next_area)
+        if this_area < neighbour_floor * (1 - max_drop_ratio):
+            keep[i] = False
+    return sorted_series[keep].reset_index(drop=True)
 
 
 def extract_s1_recent(
@@ -207,13 +250,37 @@ def _s2_collection(geometry, start_date: date, end_date: date):
 def _geometry_for_aoi(aoi: ReservoirAOI):
     import ee
 
-    return ee.Geometry(aoi.polygon).simplify(
-        SENTINEL_GEOMETRY_SIMPLIFY_M.get(aoi.id, DEFAULT_GEOMETRY_SIMPLIFY_M)
-    )
+    return ee.Geometry(aoi.polygon).simplify(_simplify_for_aoi(aoi))
+
+
+def _simplify_for_aoi(aoi: ReservoirAOI) -> int:
+    """Pick a simplification tolerance proportional to AOI extent.
+
+    A 3990-vertex polygon (Bhakra) at 100m simplify is still complex enough
+    that GEE's reduceRegion runs out of resources. Coarser simplify for
+    larger polygons keeps reduceRegion tractable; we lose a bit of boundary
+    precision but only at edges of reservoirs that are already km across.
+    """
+
+    if aoi.id in SENTINEL_GEOMETRY_SIMPLIFY_M:
+        return SENTINEL_GEOMETRY_SIMPLIFY_M[aoi.id]
+    area = aoi.aoi_area_km2 or 0
+    if area > 200:
+        return 1_000
+    if area > 100:
+        return 500
+    return DEFAULT_GEOMETRY_SIMPLIFY_M
 
 
 def _scale_for_aoi(aoi: ReservoirAOI) -> int:
-    return SENTINEL_SCALE_M.get(aoi.id, DEFAULT_SENTINEL_SCALE_M)
+    if aoi.id in SENTINEL_SCALE_M:
+        return SENTINEL_SCALE_M[aoi.id]
+    # Polygons larger than ~100 km² blow GEE's per-call pixel budget at 10m,
+    # which surfaces as an opaque "An internal error has occurred". Drop to
+    # 30m for those — coarser but tractable in a single getInfo().
+    if aoi.aoi_area_km2 and aoi.aoi_area_km2 > 100:
+        return 30
+    return DEFAULT_SENTINEL_SCALE_M
 
 
 def _mask_s2_clouds(image):
@@ -251,7 +318,7 @@ def _water_area_km2(water, geometry, *, scale: int, band_name: str):
             geometry=geometry,
             scale=scale,
             maxPixels=1_000_000_000,
-            tileScale=4,
+            tileScale=8,
         )
         .get(band_name)
     )
