@@ -24,6 +24,11 @@ async function boot() {
 
   if (backtestCase) renderBacktestBanner(snapshot, backtestCase);
   renderHero(snapshot, backtestCase);
+  if (backtestCase && snapshot.backtest) {
+    // The backtest payload carries the case's pass/fail verdict — surface
+    // it in the hero so reviewers don't have to dig through flags.
+    renderBacktestVerdict(snapshot.backtest);
+  }
 
   const [stateAggregates, provenance] = await Promise.all([
     backtestCase ? Promise.resolve(null) : loadStateAggregates().catch(() => null),
@@ -67,15 +72,28 @@ function setActiveRow(reservoirId) {
 function renderBacktestBanner(snapshot, caseId) {
   const banner = document.createElement('div');
   banner.className = 'backtest-banner';
-  const generated = snapshot.generated_at
-    ? new Date(snapshot.generated_at).toISOString().slice(0, 10)
-    : 'unknown';
+  const meta = snapshot.backtest ?? {};
+  const asOf = meta.as_of ?? (snapshot.generated_at?.slice?.(0, 10) ?? 'unknown');
   banner.innerHTML = `
-    <strong>Backtest mode</strong> — showing model as of <code>${generated}</code>
+    <strong>Backtest mode</strong> — model as of <code>${asOf}</code>
     for case <code>${caseId}</code>.
     <a href="${window.location.pathname}">Exit backtest</a>
   `;
   document.body.insertBefore(banner, document.body.firstChild);
+}
+
+function renderBacktestVerdict(bt) {
+  const el = document.getElementById('hero-deck');
+  if (!el) return;
+  const expected = (bt.expected_tiers ?? []).join(' or ');
+  const verdict = bt.passed
+    ? `<span style="color:var(--stable);font-weight:600">PASS</span>`
+    : `<span style="color:var(--critical);font-weight:600">FAIL</span>`;
+  el.innerHTML = `
+    Historical backtest of <strong>${bt.reservoir_id}</strong> at <strong>${bt.as_of}</strong>.
+    Expected tier: <strong>${expected || 'unknown'}</strong>. Model said:
+    <strong>${bt.actual_tier}</strong>. ${verdict}
+  `;
 }
 
 function pickDefaultReservoir(snapshot) {
