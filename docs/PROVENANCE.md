@@ -1,0 +1,109 @@
+# Data Provenance
+
+Every value displayed on the Reservoir Death Watch dashboard, with its source
+and verification status. This file exists because AGENT.md non-negotiable #4
+("No fabricated data") needs more than a promise — it needs an auditable
+catalogue.
+
+Fields are grouped by confidence tier. The dashboard surfaces this in the
+"Data quality" panel under each reservoir's detail view, and aggregate counts
+appear in the footer.
+
+---
+
+## Tier 1 — Genuinely measured
+
+Pipeline-computed values traceable to a peer-reviewed satellite product or
+an authoritative public feed. These are the "real" numbers.
+
+| Dashboard field | Source | Notes |
+|---|---|---|
+| `current.area_km2` (surface area) | Sentinel-2 SR Harmonized via Earth Engine | MNDWI threshold > 0, SCL cloud mask, SRTM slope < 10° |
+| `current.area_km2` (when cloudy) | Sentinel-1 GRD via Earth Engine | VV backscatter < -15 dB; flagged `data_source = sentinel_1` |
+| `history` (JRC monthly) | JRC Global Surface Water 1.4 (Pekel et al. 2016 *Nature*) | Static, peer-reviewed; 1984–2021 |
+| `history` (Sentinel-2 weekly recent) | Sentinel-2 via Earth Engine | 10-day composites, last 150 days |
+| `fit` (depletion slope) | Linear regression on `history` window | r² and std error included |
+| `projection.*.days_to_dead_storage` | Linear extrapolation from fit | Honest extrapolation, not modelled |
+| `enso.oni_latest` | NOAA CPC ONI ASCII mirror | https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt |
+| `enso.state` | Threshold rule on `oni_latest` | docs/DATASETS.md §NOAA ONI |
+| `national_aggregate.*` | Sum over observed reservoirs | Derived from above |
+| `state_aggregates.*` | Group-by-state of observed reservoirs | Derived from above |
+
+---
+
+## Tier 2 — Real but caveated
+
+Pipeline outputs that depend on assumptions. Each surfaces a `flags` entry
+that the UI displays in the detail panel.
+
+| Field | Caveat | Flag |
+|---|---|---|
+| AOI polygon | Auto-derived from JRC `recurrence ≥ 50` seed, not visually reviewed | `first_pass_needs_manual_review` |
+| AOI polygon (Srisailam only) | Manual bbox; downstream extraction counts water inside | `manual_bbox_needs_visual_check` |
+| `current.estimated_storage_bcm` (22 of 25) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` |
+| `current.estimated_storage_bcm` (KRS / Mettur / Indira Sagar) | Power-law calibrated, but only one CWC anchor point | `cwc_calibrated_single_point`, `phase0_cwc_validation_incomplete` |
+| `current.cwc_reported_bcm` (3 of 25) | CWC bulletin 09.04.2026 only — six-month validation pending | `phase0_cwc_validation_incomplete` |
+| `current.cwc_reported_bcm` (22 of 25) | No CWC data | `needs_cwc_calibration` |
+| Dead-storage area used in projection | Power-law conversion with default b=2.0 when no calibrated curve exists | `dead_storage_area_proxy` |
+| `projection.el_nino_monsoon` | El Niño delta from static historical year list, not per-year ONI conditioning | `el_nino_delta_static_years` |
+| `fit.fit_quality` | `low_confidence` when r² ∈ [0.7, 0.85) | embedded in `fit` object |
+| `fit` missing | Insufficient observations (n < 6) or rejected (r² < 0.7) | `depletion_fit_unavailable` |
+
+---
+
+## Tier 3 — Metadata I supplied, not externally verified
+
+These values came from training-data knowledge during the PRD v2 scope pivot
+and have **not** been cross-checked against CWC's published register.
+
+| Field | Where it shows | Confidence | Action needed |
+|---|---|---|---|
+| `lat` / `lon` | Map pin location | Approximate (±5 km plausible) | Cross-check against CWC bulletin or OSM `way:` for each dam |
+| `full_pool_capacity_bcm` | "of X BCM" in storage line | Approximate (±10%) | CWC bulletin lists per-reservoir FRL capacity |
+| `dead_storage_capacity_bcm` | Drives `dead_storage_area` calculation | Approximate | Same source |
+| `population_served` | At-risk headline + detail byline | Rough estimate (order of magnitude) | Census 2011 + 2024 estimates for the named cities |
+| `city_served` (free-text) | "Supplies X" in detail byline | Editorial label | Verify the *primary* drinking water source per city's water utility |
+| `priority` | Sort order in list | Editorial; based on city population × CWC inclusion | n/a — internal ordering only |
+
+**Note:** if any Tier 3 row is wrong by more than the noted tolerance, the
+flag on that reservoir does not currently say so. The UI's "Data quality"
+card lists this gap.
+
+---
+
+## How to verify a row in Tier 3
+
+Standard workflow when you fetch a CWC bulletin or have time for a manual check:
+
+1. Open the CWC weekly bulletin PDF (e.g. via `pipeline/data/cwc/raw_pdfs/`).
+2. Match each reservoir's row by name; CWC publishes:
+   - Live capacity at FRL (BCM)
+   - Dead storage capacity (BCM)
+   - Lat/long (degrees minutes seconds)
+3. Update `docs/reservoirs.csv` for any field whose value differs by > 5%.
+4. If `lat`/`lon` shift by > 2 km, re-run `python scripts/seed_aois.py <id> --overwrite`
+   then `python scripts/backfill_history.py <id>` so the AOI follows the dam.
+5. The provenance script (`scripts/audit_metadata.py`) re-validates after.
+
+---
+
+## Counts at last audit
+
+Generated at the time of the most recent pipeline run. See `data_provenance.json`
+for the machine-readable form.
+
+| Class | Count |
+|---|---|
+| Reservoirs with Sentinel-2 observation in last 14 days | check `current.as_of` |
+| Reservoirs with CWC-calibrated curve | 3 of 25 |
+| Reservoirs with CWC reading | 3 of 25 |
+| Reservoirs with `volume_area_ratio_proxy` flag | 22 of 25 |
+| Reservoirs with `first_pass_needs_manual_review` AOI | 22 of 25 |
+| Reservoirs with verified `lat/lon` against CWC bulletin | **0 of 25** |
+| Reservoirs with verified `full_pool_capacity_bcm` against CWC | **0 of 25** |
+| Reservoirs with verified `population_served` against census | **0 of 25** |
+
+**The "0 of 25" rows are the next milestone for Tier 3 confidence.** They
+require either fetching CWC bulletins locally (auth-walled from this seat;
+see `docs/RUNBOOK.md`) or accepting that those metadata fields stay
+"approximate" until verified.

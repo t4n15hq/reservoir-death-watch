@@ -1,5 +1,6 @@
 import {
   loadBacktestSnapshot,
+  loadDataProvenance,
   loadSnapshot,
   loadStateAggregates,
   readBacktestParam,
@@ -9,6 +10,7 @@ import { renderDetail, renderEmpty } from './detail.js';
 import { renderHero } from './hero.js';
 import { renderReservoirList } from './list.js';
 import { renderStateBand } from './rollup.js';
+import { renderDataQuality } from './quality.js';
 
 async function boot() {
   const backtestCase = readBacktestParam();
@@ -23,8 +25,12 @@ async function boot() {
   if (backtestCase) renderBacktestBanner(snapshot, backtestCase);
   renderHero(snapshot, backtestCase);
 
-  const stateAggregates = backtestCase ? null : await loadStateAggregates().catch(() => null);
+  const [stateAggregates, provenance] = await Promise.all([
+    backtestCase ? Promise.resolve(null) : loadStateAggregates().catch(() => null),
+    backtestCase ? Promise.resolve(null) : loadDataProvenance().catch(() => null),
+  ]);
   renderStateBand(document.getElementById('states-band'), snapshot, stateAggregates);
+  renderDataQuality(document.getElementById('quality-section'), provenance);
 
   const map = await initMap('map');
 

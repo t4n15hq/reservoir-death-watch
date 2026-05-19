@@ -28,6 +28,13 @@ export async function loadStateAggregates() {
   return response.json();
 }
 
+export async function loadDataProvenance() {
+  const path = 'data/data_provenance.json';
+  const response = await fetch(path);
+  if (!response.ok) return null;
+  return response.json();
+}
+
 export async function loadBacktestSnapshot(caseId) {
   const path = `data/backtest_${caseId}.json`;
   const response = await fetch(path);

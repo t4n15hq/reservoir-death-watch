@@ -1,0 +1,1114 @@
+{
+  "counts": {
+    "aoi_visually_reviewed": 0,
+    "capacity_verified_against_cwc": 3,
+    "lat_lon_verified": 0,
+    "observed_with_satellite": 25,
+    "population_verified_against_census": 0,
+    "storage_cwc_calibrated": 3,
+    "total_reservoirs": 25
+  },
+  "generated_at": "2026-05-19T21:27:42.914312Z",
+  "reservoirs": [
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Delhi NCR, Punjab, Haryana",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 2.04,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 9.34,
+        "verified": false
+      },
+      "id": "bhakra",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          31.4106,
+          76.4339
+        ],
+        "verified": false
+      },
+      "name": "Bhakra",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 33000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Delhi, UP cities",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.84,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 3.54,
+        "verified": false
+      },
+      "id": "tehri",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          30.3779,
+          78.4806
+        ],
+        "verified": false
+      },
+      "name": "Tehri",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 33000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Bengaluru, Mysuru",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-15",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "CWC bulletin",
+        "value": 0.13,
+        "verified": true
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin",
+        "value": 1.37,
+        "verified": true
+      },
+      "id": "krs",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          12.4244,
+          76.5719
+        ],
+        "verified": false
+      },
+      "name": "Krishnaraja Sagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 13500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Chennai (via Veeranam transfer), TN agri",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "CWC bulletin",
+        "value": 0.21,
+        "verified": true
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin",
+        "value": 2.65,
+        "verified": true
+      },
+      "id": "mettur",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          11.786,
+          77.7995
+        ],
+        "verified": false
+      },
+      "name": "Mettur",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 10000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Aurangabad, Marathwada cities",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.74,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 2.91,
+        "verified": false
+      },
+      "id": "jayakwadi",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          19.4818,
+          75.3697
+        ],
+        "verified": false
+      },
+      "name": "Jayakwadi",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 9500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Indore region, MP/Maharashtra",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "CWC bulletin",
+        "value": 3.39,
+        "verified": true
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin",
+        "value": 12.21,
+        "verified": true
+      },
+      "id": "indira_sagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          22.2944,
+          76.4717
+        ],
+        "verified": false
+      },
+      "name": "Indira Sagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 3500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Hyderabad, Vijayawada/Guntur",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 3.31,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 11.56,
+        "verified": false
+      },
+      "id": "nagarjuna_sagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          16.5728,
+          79.3119
+        ],
+        "verified": false
+      },
+      "name": "Nagarjuna Sagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 15000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "manual_bbox_needs_visual_check",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Hyderabad, Telangana cities",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 2.12,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 8.72,
+        "verified": false
+      },
+      "id": "srisailam",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          16.0833,
+          78.9
+        ],
+        "verified": false
+      },
+      "name": "Srisailam",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 10000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Ahmedabad, Vadodara, Rajkot",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 1.87,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 9.5,
+        "verified": false
+      },
+      "id": "sardar_sarovar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          21.8333,
+          73.75
+        ],
+        "verified": false
+      },
+      "name": "Sardar Sarovar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 10000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Surat",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 1.4,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 7.41,
+        "verified": false
+      },
+      "id": "ukai",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          21.25,
+          73.5833
+        ],
+        "verified": false
+      },
+      "name": "Ukai",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 7000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Bengaluru",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-15",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.03,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.55,
+        "verified": false
+      },
+      "id": "kabini",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          11.9678,
+          76.3439
+        ],
+        "verified": false
+      },
+      "name": "Kabini",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 13500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Bengaluru",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-15",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.04,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.94,
+        "verified": false
+      },
+      "id": "hemavathy",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          12.8408,
+          76.1014
+        ],
+        "verified": false
+      },
+      "name": "Hemavathy",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 13500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Bengaluru (regulator)",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-15",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.04,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.23,
+        "verified": false
+      },
+      "id": "harangi",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          12.4583,
+          75.9
+        ],
+        "verified": false
+      },
+      "name": "Harangi",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 13500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Coimbatore",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-12",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.1,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.93,
+        "verified": false
+      },
+      "id": "bhavanisagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          11.45,
+          77.0667
+        ],
+        "verified": false
+      },
+      "name": "Bhavanisagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 2500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Madurai",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.02,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.17,
+        "verified": false
+      },
+      "id": "vaigai",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          10.05,
+          77.59
+        ],
+        "verified": false
+      },
+      "name": "Vaigai",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 1500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Madurai, Theni",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.1,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.44,
+        "verified": false
+      },
+      "id": "mullaperiyar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          9.5333,
+          77.1333
+        ],
+        "verified": false
+      },
+      "name": "Mullaperiyar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 2500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Kochi, Thiruvananthapuram (power-linked)",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.45,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 1.46,
+        "verified": false
+      },
+      "id": "idukki",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          9.8453,
+          76.9633
+        ],
+        "verified": false
+      },
+      "name": "Idukki",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 4000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Kochi",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.1,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 1.09,
+        "verified": false
+      },
+      "id": "idamalayar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          10.2,
+          76.66
+        ],
+        "verified": false
+      },
+      "name": "Idamalayar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 2500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Jaipur, Tonk",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.06,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 1.1,
+        "verified": false
+      },
+      "id": "bisalpur",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          25.9333,
+          75.45
+        ],
+        "verified": false
+      },
+      "name": "Bisalpur",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 4000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Pune",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.0,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.05,
+        "verified": false
+      },
+      "id": "khadakwasla",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          18.44,
+          73.77
+        ],
+        "verified": false
+      },
+      "name": "Khadakwasla",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 7000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Asansol, Dhanbad, Burdwan (DVC grid)",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.08,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 1.36,
+        "verified": false
+      },
+      "id": "maithon",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          23.7833,
+          86.8167
+        ],
+        "verified": false
+      },
+      "name": "Maithon",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 4500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Asansol, DVC industrial belt",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.1,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 1.5,
+        "verified": false
+      },
+      "id": "panchet",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          23.6667,
+          86.75
+        ],
+        "verified": false
+      },
+      "name": "Panchet",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 4500000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Jabalpur",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.45,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 3.18,
+        "verified": false
+      },
+      "id": "bargi",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          22.9417,
+          79.9333
+        ],
+        "verified": false
+      },
+      "name": "Bargi",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 1200000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Nagpur",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.1,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 1.24,
+        "verified": false
+      },
+      "id": "totladoh",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          21.7333,
+          79.2
+        ],
+        "verified": false
+      },
+      "name": "Totladoh",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 3000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "first_pass_needs_manual_review",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Hyderabad",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "2026-05-17",
+        "data_source": "sentinel_2"
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.04,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": 0.85,
+        "verified": false
+      },
+      "id": "singur",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          17.75,
+          77.9333
+        ],
+        "verified": false
+      },
+      "name": "Singur",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": 10000000,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "area_ratio_proxy"
+      }
+    }
+  ]
+}
