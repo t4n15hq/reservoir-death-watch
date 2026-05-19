@@ -6,6 +6,7 @@ import pytest
 
 from reservoirs.cwc_scraper import (
     CWCFormatError,
+    load_cwc_storage,
     load_cwc_storage_csv,
     parse_bulletin_text,
     parse_weekly_report_text,
@@ -91,3 +92,58 @@ def test_load_cwc_storage_csv_validates_phase0_rows() -> None:
 
     assert set(frame["reservoir_id"]) == {"krs", "mettur", "indira_sagar"}
     assert frame["source_url"].str.contains("rsms.cwc.gov.in").all()
+
+
+def test_load_cwc_storage_merges_directory_bulletins(tmp_path):
+    bulletin_a = tmp_path / "bulletin_2026_04_09.csv"
+    bulletin_b = tmp_path / "bulletin_2026_04_16.csv"
+    header = (
+        "reservoir_id,cwc_name,date,live_capacity_at_frl_bcm,live_storage_bcm,"
+        "percent_frl,normal_storage_bcm,percent_normal,source_url,source_lines\n"
+    )
+    bulletin_a.write_text(
+        header + "krs,KRS,2026-04-09,1.163,0.48,41.30,0.355,30.54,https://example/a.pdf,L1\n"
+    )
+    bulletin_b.write_text(
+        header + "krs,KRS,2026-04-16,1.163,0.45,38.69,0.330,28.40,https://example/b.pdf,L1\n"
+    )
+
+    frame = load_cwc_storage(
+        directory=tmp_path,
+        bulletin_glob="bulletin_*.csv",
+        phase0_fallback=None,
+    )
+
+    assert sorted(frame["date"].astype(str).tolist()) == ["2026-04-09", "2026-04-16"]
+    later = frame.loc[frame["date"] == date(2026, 4, 16), "live_storage_bcm"].iloc[0]
+    assert later == pytest.approx(0.45)
+
+
+def test_load_cwc_storage_dedupes_overlap(tmp_path):
+    bulletin = tmp_path / "bulletin_2026_04_09.csv"
+    header = (
+        "reservoir_id,cwc_name,date,live_capacity_at_frl_bcm,live_storage_bcm,"
+        "percent_frl,normal_storage_bcm,percent_normal,source_url,source_lines\n"
+    )
+    bulletin.write_text(
+        header + "krs,KRS,2026-04-09,1.163,0.51,43.85,0.355,30.54,https://example/b.pdf,L1\n"
+    )
+    fallback = tmp_path / "phase0.csv"
+    fallback.write_text(
+        header + "krs,KRS,2026-04-09,1.163,0.48,41.30,0.355,30.54,https://example/a.pdf,L1\n"
+    )
+
+    frame = load_cwc_storage(
+        directory=tmp_path,
+        bulletin_glob="bulletin_*.csv",
+        phase0_fallback=fallback,
+    )
+
+    assert len(frame) == 1
+    # The directory bulletin loads last, so its value wins on overlap.
+    assert frame.iloc[0]["live_storage_bcm"] == pytest.approx(0.51)
+
+
+def test_load_cwc_storage_raises_when_nothing_available(tmp_path):
+    with pytest.raises(CWCFormatError):
+        load_cwc_storage(directory=tmp_path, phase0_fallback=None)

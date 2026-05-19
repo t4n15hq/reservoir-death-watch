@@ -12,7 +12,13 @@ from pathlib import Path
 
 import pandas as pd
 
-from reservoirs.config import CWC_NAME_ALIASES_CSV, CWC_PHASE0_STORAGE_CSV, RESERVOIRS_CSV
+from reservoirs.config import (
+    CWC_BULLETINS_GLOB,
+    CWC_DIR,
+    CWC_NAME_ALIASES_CSV,
+    CWC_PHASE0_STORAGE_CSV,
+    RESERVOIRS_CSV,
+)
 
 
 class CWCFormatError(ValueError):
@@ -146,27 +152,60 @@ def load_cwc_name_aliases(
     return aliases
 
 
+CWC_STORAGE_REQUIRED_COLUMNS = (
+    "reservoir_id",
+    "cwc_name",
+    "date",
+    "live_capacity_at_frl_bcm",
+    "live_storage_bcm",
+    "percent_frl",
+    "normal_storage_bcm",
+    "percent_normal",
+    "source_url",
+    "source_lines",
+)
+
+
 def load_cwc_storage_csv(path: Path = CWC_PHASE0_STORAGE_CSV) -> pd.DataFrame:
-    """Load checked-in CWC storage rows with strict column validation."""
+    """Load a single CWC storage CSV with strict column validation."""
 
     frame = pd.read_csv(path)
-    required = {
-        "reservoir_id",
-        "cwc_name",
-        "date",
-        "live_capacity_at_frl_bcm",
-        "live_storage_bcm",
-        "percent_frl",
-        "normal_storage_bcm",
-        "percent_normal",
-        "source_url",
-        "source_lines",
-    }
-    missing = required.difference(frame.columns)
+    missing = set(CWC_STORAGE_REQUIRED_COLUMNS).difference(frame.columns)
     if missing:
         raise CWCFormatError(f"CWC storage CSV missing columns: {sorted(missing)}")
     frame["date"] = pd.to_datetime(frame["date"]).dt.date
     return frame
+
+
+def load_cwc_storage(
+    *,
+    directory: Path = CWC_DIR,
+    bulletin_glob: str = CWC_BULLETINS_GLOB,
+    phase0_fallback: Path | None = CWC_PHASE0_STORAGE_CSV,
+) -> pd.DataFrame:
+    """Load every available CWC storage CSV under `directory` and concatenate.
+
+    Picks up `bulletin_*.csv` siblings dropped in by Tanishq as the six-month
+    Phase 0 validation set fills out. The Phase 0 fallback CSV is still loaded
+    if present so single-bulletin runs continue to work.
+    """
+
+    paths: list[Path] = []
+    if phase0_fallback is not None and phase0_fallback.exists():
+        paths.append(phase0_fallback)
+    if directory.exists():
+        paths.extend(sorted(directory.glob(bulletin_glob)))
+
+    if not paths:
+        raise CWCFormatError(f"no CWC storage CSVs found under {directory}")
+
+    frames = [load_cwc_storage_csv(path) for path in paths]
+    combined = pd.concat(frames, ignore_index=True)
+    return (
+        combined.drop_duplicates(subset=["reservoir_id", "date"], keep="last")
+        .sort_values(["reservoir_id", "date"])
+        .reset_index(drop=True)
+    )
 
 
 def parse_bulletin_pdf(
