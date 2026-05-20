@@ -25,6 +25,7 @@ export async function renderDetail(container, reservoir) {
   const stale = !pending && isStale(reservoir);
   const ageDays = pending ? null : daysSince(current.as_of);
   const flags = reservoir.flags ?? [];
+  const hasCwcReference = current.cwc_reported_bcm != null;
 
   container.innerHTML = `
     <div class="detail">
@@ -48,6 +49,7 @@ export async function renderDetail(container, reservoir) {
       ${pending ? '<div class="banner banner--pending">Awaiting first satellite observation. AOI not yet digitized for this reservoir.</div>' : ''}
       ${stale ? '<div class="banner banner--stale">Stale data — most recent observation is older than 14 days.</div>' : ''}
       ${!pending && flags.includes('current_only_no_history') ? '<div class="banner banner--info">Current observation only — no historical trace or depletion fit yet.</div>' : ''}
+      ${!pending && !hasCwcReference ? `<div class="banner banner--cwc-missing">No CWC live-storage row is loaded for this reservoir in the current snapshot. Storage is shown using the ${storageDerivation(flags)} until a matching CWC bulletin row is added.</div>` : ''}
 
       ${pending ? '' : renderHeadlineProjection(neutral, elNino)}
 
@@ -64,9 +66,9 @@ export async function renderDetail(container, reservoir) {
 
         <dt>CWC reference</dt>
         <dd>${
-          current.cwc_reported_bcm != null
-            ? `${formatBcm(current.cwc_reported_bcm)} BCM <span class="muted">as of ${current.cwc_as_of ?? '—'} (authoritative)</span>`
-            : '<span class="muted">no CWC reading for this reservoir yet</span>'
+          hasCwcReference
+            ? `${formatBcm(current.cwc_reported_bcm)} BCM <span class="muted">as of ${current.cwc_as_of ?? '—'} (authoritative CWC live storage)</span>`
+            : `<span class="cwc-missing">not loaded</span> <span class="muted">(${storageDerivation(flags)})</span>`
         }</dd>
 
         <dt>Source</dt>

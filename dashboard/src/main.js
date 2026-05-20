@@ -14,6 +14,7 @@ import { renderDataQuality } from './quality.js';
 
 async function boot() {
   const backtestCase = readBacktestParam();
+  if (backtestCase) document.body.classList.add('is-backtest');
   let snapshot;
   try {
     snapshot = backtestCase ? await loadBacktestSnapshot(backtestCase) : await loadSnapshot();

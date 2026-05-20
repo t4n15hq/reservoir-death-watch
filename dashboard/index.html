@@ -14,7 +14,74 @@
     <link rel="stylesheet" href="/src/styles/main.css" />
   </head>
   <body>
-    <header class="hero">
+    <section class="landing" aria-label="Project overview">
+      <div class="landing__inner">
+        <div class="landing__copy">
+          <p class="landing__eyebrow">India water stress · satellite + CWC ground truth</p>
+          <h1 class="landing__title">Reservoir Death Watch</h1>
+          <p class="landing__lead">
+            A public early-warning dashboard for the 25 CWC-monitored reservoirs that
+            supply India's major cities. It tracks satellite-observed surface area,
+            derives storage transparently, and flags reservoirs approaching dead storage.
+          </p>
+          <div class="landing__actions" aria-label="Primary actions">
+            <a class="landing__cta landing__cta--primary" href="#dashboard">Open live dashboard</a>
+            <a class="landing__cta landing__cta--secondary" href="#method-summary">Read methodology</a>
+          </div>
+        </div>
+        <div class="landing__status" aria-label="Current project status">
+          <span><strong>25</strong> city-serving reservoirs</span>
+          <span><strong>3/4</strong> historical backtests passing</span>
+          <span><strong>CWC</strong> remains ground truth</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="method-summary" id="method-summary" aria-label="Methodology summary">
+      <div class="method-summary__intro">
+        <p class="section-kicker">What this is</p>
+        <h2>Satellite area is observed.<br />Storage and risk are derived.</h2>
+      </div>
+      <div class="method-grid">
+        <article class="method-tile">
+          <span class="method-tile__num">01</span>
+          <h3>Observe water area</h3>
+          <p>
+            Sentinel-2 measures current reservoir surface area. Sentinel-1 is the fallback
+            when monsoon clouds make optical imagery unusable.
+          </p>
+        </article>
+        <article class="method-tile">
+          <span class="method-tile__num">02</span>
+          <h3>Anchor to CWC</h3>
+          <p>
+            CWC bulletins provide authoritative storage readings. Where a reservoir has no
+            CWC calibration yet, the dashboard labels the storage estimate as a proxy.
+          </p>
+        </article>
+        <article class="method-tile">
+          <span class="method-tile__num">03</span>
+          <h3>Project depletion</h3>
+          <p>
+            A linear regression over recent surface-area observations projects days to dead
+            storage under neutral and El Niño-suppressed monsoon scenarios.
+          </p>
+        </article>
+        <article class="method-tile method-tile--caveat">
+          <span class="method-tile__num">04</span>
+          <h3>Surface uncertainty</h3>
+          <p>
+            The dashboard shows stale data, missing fits, unreviewed AOIs, and backtest
+            misses instead of smoothing them away. KRS 2023 remains the known hard case.
+          </p>
+        </article>
+      </div>
+      <div class="method-summary__cta">
+        <a class="landing__cta landing__cta--primary" href="#dashboard">View the data</a>
+      </div>
+    </section>
+
+    <header class="hero" id="dashboard">
       <div class="hero__topline">
         <span class="hero__kicker">India · 25 city-serving reservoirs</span>
         <span class="hero__meta" id="generated-meta">Loading…</span>

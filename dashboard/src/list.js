@@ -21,6 +21,10 @@ export function renderReservoirList(container, snapshot, { onSelect }) {
     row.dataset.id = reservoir.id;
 
     const city = reservoir.city_served || '—';
+    const hasCwcReference = reservoir.current?.cwc_reported_bcm != null;
+    const cwcLabel = hasCwcReference
+      ? `CWC ${reservoir.current?.cwc_as_of ?? 'loaded'}`
+      : 'CWC ref missing';
     const valueLabel = pending
       ? 'pending'
       : days != null
@@ -33,6 +37,7 @@ export function renderReservoirList(container, snapshot, { onSelect }) {
       <span class="reservoir-row__body">
         <span class="reservoir-row__name">${reservoir.name}</span>
         <span class="reservoir-row__city">${city}</span>
+        <span class="reservoir-row__meta ${hasCwcReference ? 'reservoir-row__meta--ok' : 'reservoir-row__meta--missing'}">${cwcLabel}</span>
       </span>
       <span class="${valueClass}">${valueLabel}</span>
     `;
