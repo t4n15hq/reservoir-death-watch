@@ -77,8 +77,24 @@ jobs:
           python scripts/fetch_cwc_bulletin.py \
             --weeks-back "$WEEKS" \
             $HINT_FLAG \
-            --timeout 25
+            --timeout 25 \
+            --verbose
           echo "rc=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Diagnostic — direct curl to CWC host
+        if: always()
+        run: |
+          # Single, well-formed URL. If Azure is reachable at all, we'll see the HTTP code.
+          echo "## DNS"
+          getent hosts rsms.cwc.gov.in || echo "DNS lookup failed"
+          echo
+          echo "## Plain GET (HEAD-equivalent) with realistic UA"
+          curl -sS -o /tmp/cwc_probe.bin -w "code=%{http_code} size=%{size_download} time=%{time_total}\n" \
+            -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+            "https://rsms.cwc.gov.in/admin/storage/bulletins/bulletin-08-05-2026-95.pdf" || echo "curl failed: $?"
+          echo
+          echo "## First 200 bytes of response"
+          head -c 200 /tmp/cwc_probe.bin || true; echo
 
       - name: Stage any new bulletin artifacts
         id: stage

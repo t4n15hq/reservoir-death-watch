@@ -95,17 +95,23 @@ def try_fetch(
     *,
     session: requests.Session,
     timeout: int,
+    verbose: bool = False,
 ) -> bytes | None:
     """Return PDF bytes if successful, None otherwise."""
 
     try:
         resp = session.get(url, timeout=timeout, allow_redirects=True)
     except requests.RequestException as exc:
-        print(f"  request error: {exc}", file=sys.stderr)
+        if verbose:
+            print(f"    {url} → exception: {type(exc).__name__}: {exc}")
         return None
     if resp.status_code != 200:
+        if verbose:
+            print(f"    {url} → HTTP {resp.status_code} ({len(resp.content)} bytes)")
         return None
     if not looks_like_pdf(resp.content):
+        if verbose:
+            print(f"    {url} → HTTP 200 but not a PDF ({len(resp.content)} bytes)")
         return None
     return resp.content
 
@@ -174,6 +180,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-dir", type=Path, default=CWC_DIR / "raw_pdfs")
     parser.add_argument("--no-parse", action="store_true",
                         help="Skip auto-parsing the downloaded PDFs to CSV.")
+    parser.add_argument("--verbose", action="store_true",
+                        help="Log status code / exception per URL attempt.")
     return parser.parse_args()
 
 
@@ -191,7 +199,7 @@ def main() -> int:
         print(f"\n→ {bulletin_date:%Y-%m-%d}")
         urls = candidate_urls_for(bulletin_date, args.hint_index)
         for url in urls:
-            content = try_fetch(url, session=session, timeout=args.timeout)
+            content = try_fetch(url, session=session, timeout=args.timeout, verbose=args.verbose)
             if content is not None:
                 path = save_pdf(content, bulletin_date, args.out_dir)
                 print(f"  ✓ {url} → {path.name} ({len(content)} bytes)")
