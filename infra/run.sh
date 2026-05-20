@@ -17,6 +17,24 @@ LOG="$LOG_DIR/run-$(date -u +%Y-%m-%d).log"
   cd "$REPO"
   # shellcheck disable=SC1091
   source "$VENV/bin/activate"
+
+  # Try to grab this week's CWC bulletin BEFORE the main pipeline runs.
+  # Failure here is non-fatal — the pipeline can still produce satellite-
+  # only output. If the fetch fails we ping a Discord webhook (if
+  # configured) so the on-call knows to grab the PDF manually.
+  echo "--- CWC bulletin fetch ---"
+  if python pipeline/scripts/fetch_cwc_bulletin.py --weeks-back 2 --timeout 20; then
+    echo "CWC fetch ok"
+  else
+    echo "CWC fetch failed; continuing with previously-loaded bulletins"
+    if [[ -n "${RDW_DISCORD_WEBHOOK:-}" ]]; then
+      curl -fsS -X POST -H "Content-Type: application/json" \
+        -d '{"content":"⚠️ Reservoir Death Watch: weekly CWC bulletin auto-fetch failed. Please download manually from rsms.cwc.gov.in and drop into pipeline/data/cwc/raw_pdfs/, then run scripts/parse_local_cwc_pdfs.py."}' \
+        "$RDW_DISCORD_WEBHOOK" > /dev/null || true
+    fi
+  fi
+
+  echo "--- main pipeline ---"
   python -m reservoirs.pipeline --as-of "$(date -u +%F)"
   echo "=== Run end: $(date -u) ==="
 } >> "$LOG" 2>&1

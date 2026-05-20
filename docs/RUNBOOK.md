@@ -139,43 +139,61 @@ See `docs/PHASES.md`. Writeup, three journalist cold-emails, Hacker News post.
 Adds proper power-law area-to-volume calibration for the 22 reservoirs
 currently using the area-ratio storage proxy.
 
-1. Fetch the weekly bulletin PDF from CWC. Any path that works for you —
-   browser, VPN, IndiaWRIS export, etc. (the rsms.cwc.gov.in endpoint
-   is auth-walled from at least some networks; assume it might be
-   inaccessible from your CI/agent seat).
+### Automated (preferred when your network has access)
 
-2. Drop the PDF into `pipeline/data/cwc/raw_pdfs/` (filename ignored).
+```bash
+cd pipeline
+uv run python scripts/fetch_cwc_bulletin.py --weeks-back 4
+```
 
-3. Convert all PDFs in that folder to bulletin CSVs:
+Tries the last four Thursdays' bulletins from `rsms.cwc.gov.in`, drops
+any PDFs that come back into `pipeline/data/cwc/raw_pdfs/`, then
+auto-runs the parser to produce `bulletin_*.csv`. Exit code 0 means at
+least one bulletin landed; non-zero means none did.
+
+The `infra/run.sh` cron entry calls this on every Sunday run, before
+the main pipeline. If the fetch fails (CWC's RSMS is auth-walled from
+some networks), the cron pings the configured Discord webhook so you
+get a manual-action notice; the rest of the pipeline still runs against
+whatever bulletins are already cached.
+
+### Manual (when the auto-fetch can't reach CWC)
+
+If `fetch_cwc_bulletin.py` reports `no candidate URL worked`, the
+network the script is running on doesn't have access (CWC blocks some
+IP ranges). Download in a browser from any working network and:
+
+1. Drop the PDF into `pipeline/data/cwc/raw_pdfs/` (filename ignored).
+
+2. Parse:
 
    ```bash
-   cd pipeline
    uv run python scripts/parse_local_cwc_pdfs.py
    ```
 
    Each PDF becomes `bulletin_YYYY_MM_DD.csv` in `pipeline/data/cwc/`
-   (the directory `cwc_scraper.load_cwc_storage` watches). Use
-   `--overwrite` to replace existing files when re-parsing.
+   where the directory loader picks it up.
 
-4. Rebuild snapshots for the affected reservoirs so they pick up the
-   new CWC calibration anchor:
+### After either path, refresh the snapshot
 
-   ```bash
-   uv run python scripts/backfill_history.py --as-of $(date +%F) <ids...>
-   ```
+Fast path — refresh storage from existing CSVs without re-hitting GEE:
 
-   Or, faster, just refresh storage from existing CSVs without re-hitting
-   Earth Engine:
+```bash
+uv run python scripts/rebuild_storage_from_csv.py
+```
 
-   ```bash
-   uv run python scripts/rebuild_storage_from_csv.py
-   ```
+Or, full path — re-run the depletion fit for specific reservoirs that
+now have CWC calibration:
 
-5. Run the gate:
+```bash
+uv run python scripts/backfill_history.py --as-of $(date +%F) <ids...>
+```
 
-   ```bash
-   uv run python scripts/run_phase0_gate.py --report-csv /tmp/gate.csv
-   ```
+Then run the gate:
+
+```bash
+uv run python scripts/run_phase0_gate.py --report-csv /tmp/gate.csv
+```
 
 ---
 
