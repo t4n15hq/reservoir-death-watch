@@ -106,9 +106,6 @@ for the machine-readable form.
 | Reservoirs with verified `population_served` against census | **0 of 25** |
 
 **The "0 of 25" rows are the next milestone for Tier 3 confidence.** They
-require either fetching CWC data via `data.gov.in` (canonical source —
-see `docs/RUNBOOK.md` for API setup) or accepting that those metadata
-fields stay "approximate" until verified. The old `rsms.cwc.gov.in`
-path is dead — the `/admin/...` URL returns 401 from every network
-including the user's own browser, and `cwc.gov.in` as a whole is
-currently 401-walled for anonymous users.
+require either fetching CWC bulletins locally (auth-walled from this seat;
+see `docs/RUNBOOK.md`) or accepting that those metadata fields stay
+"approximate" until verified.

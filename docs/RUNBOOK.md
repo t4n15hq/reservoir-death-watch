@@ -139,60 +139,64 @@ See `docs/PHASES.md`. Writeup, three journalist cold-emails, Hacker News post.
 Adds proper power-law area-to-volume calibration for the 22 reservoirs
 currently using the area-ratio storage proxy.
 
-> **Dead end:** `rsms.cwc.gov.in/admin/storage/bulletins/...` returns
-> HTTP 401 from every network we tested (laptop, Azure runners,
-> Anthropic egress, in-browser). It was never a stable public path.
-> The old `fetch_cwc_bulletin.py` is now a deprecated stub pointing
-> at the replacement below.
+### Automated path A: GitHub Actions (no machine required)
 
-### Canonical path: data.gov.in API
+`.github/workflows/fetch-cwc-bulletin.yml` runs every Friday 03:30 UTC
+on a GitHub-hosted runner. The runner egresses from Azure IPs — a
+completely different IP space from your laptop or Hermes, so if CWC
+doesn't block Azure ranges this is fully automated.
 
-The CWC daily reservoir feed is published as resource
-`1fc2148c-fc41-46f5-a364-bdc03f77053f` on
-[data.gov.in](https://www.data.gov.in/resource/daily-data-reservoir-level-central-water-commission-cwc).
-JSON, stable, free, daily-resolution. One-time setup:
+- On success: opens a PR titled "Weekly CWC bulletin pull" containing
+  the new PDF + parsed CSV. Merge → run `python scripts/rebuild_storage_from_csv.py`
+  → done.
+- On failure: the workflow records "no bulletin pulled" in its summary
+  but does NOT fail with a red ✗ (this is a best-effort task; we don't
+  want it to spam Actions noise).
 
-1. Register at <https://www.data.gov.in/>.
-2. Generate a key from your profile (Resources → API key, or similar).
-3. Store the key in **one** of:
-   - `~/.secrets/reservoir-death-watch/data_gov_in.key` (recommended)
-   - `$DATA_GOV_IN_API_KEY` env var
-   - the `--api-key` flag
+You can also fire it manually via Actions → "fetch-cwc-bulletin" →
+"Run workflow", with optional `hint_index` (NN guess for
+`bulletin-DD-MM-YYYY-NN.pdf`) and `weeks_back` inputs.
 
-Run it:
+If the PR opens consistently every Friday, the runner has CWC access —
+turn on auto-merge for the `automated` label and walk away.
+
+If it never opens a PR, Azure IPs are blocked too — fall through to
+path B or C.
+
+### Automated path B: local cron (when your network has CWC access)
 
 ```bash
 cd pipeline
-uv run python scripts/fetch_data_gov_in.py --days-back 14 --verbose
+uv run python scripts/fetch_cwc_bulletin.py --weeks-back 4
 ```
 
-It paginates the resource, filters to our 25 tracked reservoirs via
-`pipeline/data/cwc/cwc_name_aliases.csv`, and writes
-`bulletin_YYYY_MM_DD.csv` files in the same schema as the PDF parser
-output. Existing CSVs are preserved unless the API has strictly more
-rows.
+Tries the last four Thursdays' bulletins from `rsms.cwc.gov.in`, drops
+any PDFs that come back into `pipeline/data/cwc/raw_pdfs/`, then
+auto-runs the parser to produce `bulletin_*.csv`. Exit code 0 means at
+least one bulletin landed; non-zero means none did.
 
-### Automated: GitHub Actions
+The `infra/run.sh` cron entry calls this on every Sunday run, before
+the main pipeline. If the fetch fails (CWC's RSMS is auth-walled from
+some networks), the cron pings the configured Discord webhook so you
+get a manual-action notice; the rest of the pipeline still runs against
+whatever bulletins are already cached.
 
-`.github/workflows/fetch-cwc-bulletin.yml` runs every Friday 03:30 UTC
-and on manual dispatch. It reads `DATA_GOV_IN_API_KEY` from a repo
-secret (Settings → Secrets and variables → Actions → New repository
-secret). On any new CSVs it opens a PR with label `automated, data`.
+### Automated path C: manual fallback when both auto paths fail
 
-### Manual fallback: weekly bulletin PDFs
+If `fetch_cwc_bulletin.py` reports `no candidate URL worked`, the
+network the script is running on doesn't have access (CWC blocks some
+IP ranges). Download in a browser from any working network and:
 
-The data.gov.in resource carries `live_storage` and `capacity_at_frl`
-but **not** `normal_storage` or `percent_normal` (long-period averages).
-Those only come from the weekly bulletin PDF. If you need them, grab
-a PDF in a browser when `cwc.gov.in` is reachable, drop it into
-`pipeline/data/cwc/raw_pdfs/`, and run:
+1. Drop the PDF into `pipeline/data/cwc/raw_pdfs/` (filename ignored).
 
-```bash
-uv run python scripts/parse_local_cwc_pdfs.py
-```
+2. Parse:
 
-That CSV is strictly richer and will supersede the data.gov.in row for
-the same date.
+   ```bash
+   uv run python scripts/parse_local_cwc_pdfs.py
+   ```
+
+   Each PDF becomes `bulletin_YYYY_MM_DD.csv` in `pipeline/data/cwc/`
+   where the directory loader picks it up.
 
 ### After either path, refresh the snapshot
 

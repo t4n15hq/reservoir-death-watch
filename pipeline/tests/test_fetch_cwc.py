@@ -1,119 +1,84 @@
-"""Tests for the offline parts of `scripts/fetch_data_gov_in.py`.
+"""Tests for the offline parts of `scripts/fetch_cwc_bulletin.py`.
 
-We don't try to mock HTTP calls — the value of the script is in
-(a) column-name resolution across schema drift, (b) record →
-bulletin-CSV transformation, (c) MCM → BCM conversion math. Those
-are all pure functions.
-
-The earlier `fetch_cwc_bulletin.py` (RSMS PDF scraper) is now a
-deprecated stub and has no test surface.
+We don't try to mock the actual HTTP calls — the value of the script is
+in (a) URL pattern generation, (b) PDF magic-byte detection, (c) the
+Thursday-window date logic. Those are all pure functions.
 """
 
 from __future__ import annotations
 
+# Importable as a module via PYTHONPATH=scripts (pytest.ini_options.pythonpath
+# in pyproject.toml is set to ["src"], so we need an explicit path adjustment).
 import sys
 from datetime import date
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
-from fetch_data_gov_in import (  # noqa: E402
-    CWC_STORAGE_REQUIRED_COLUMNS,
-    RESOURCE_ID,
-    pick,
-    to_bulletin_rows,
+from fetch_cwc_bulletin import (  # noqa: E402
+    NN_SEARCH_WIDTH,
+    RSMS_TEMPLATE,
+    candidate_urls_for,
+    looks_like_pdf,
+    thursdays_in_window,
 )
 
 
-def test_pick_finds_canonical_name() -> None:
-    record = {"reservoir_name": "Mettur", "state": "Tamil Nadu"}
-    assert pick(record, "reservoir_name") == "Mettur"
-    assert pick(record, "state") == "Tamil Nadu"
+def test_looks_like_pdf_accepts_pdf_magic_bytes() -> None:
+    assert looks_like_pdf(b"%PDF-1.7\n%\xe2\xe3\xcf\xd3\n...") is True
 
 
-def test_pick_falls_back_through_candidates() -> None:
-    # data.gov.in has at times used title-case, ALL-CAPS, and "Dam_Name".
-    record_titlecase = {"Reservoir_Name": "Mettur"}
-    record_allcaps = {"RESERVOIR": "Mettur"}
-    record_damname = {"Dam_Name": "Mettur"}
-    assert pick(record_titlecase, "reservoir_name") == "Mettur"
-    assert pick(record_allcaps, "reservoir_name") == "Mettur"
-    assert pick(record_damname, "reservoir_name") == "Mettur"
+def test_looks_like_pdf_rejects_html_error_pages() -> None:
+    err_blob = b'{"status":"401","message":"Unauthorized"}'
+    assert looks_like_pdf(err_blob) is False
+    assert looks_like_pdf(b"<html><body>Not Found</body></html>") is False
 
 
-def test_pick_returns_none_for_missing_or_empty() -> None:
-    assert pick({}, "reservoir_name") is None
-    assert pick({"reservoir_name": ""}, "reservoir_name") is None
-    assert pick({"reservoir_name": "NA"}, "reservoir_name") is None
+def test_thursdays_in_window_returns_thursdays_most_recent_first() -> None:
+    days = thursdays_in_window(4)
+    assert len(days) == 4
+    for d in days:
+        assert d.weekday() == 3, f"{d} is not a Thursday"
+    # Strictly descending — most recent first.
+    for i in range(len(days) - 1):
+        assert days[i] > days[i + 1]
+    # Span should be exactly 3 weeks (4 Thursdays = 3 gaps of 7 days each).
+    assert (days[0] - days[-1]).days == 21
 
 
-def test_to_bulletin_rows_writes_required_columns() -> None:
-    records = [
-        {
-            "reservoir_name": "Mettur",
-            "date": "2026-04-09",
-            "current_live_storage": "1254.0",  # MCM
-            "live_capacity_at_frl": "2647.0",  # MCM
-            "percentage_storage": "47.37",
-        }
-    ]
-    aliases = {"Mettur": "mettur"}
-    frame = to_bulletin_rows(records, aliases=aliases, since=None)
-    assert list(frame.columns) == list(CWC_STORAGE_REQUIRED_COLUMNS)
-    assert len(frame) == 1
-    row = frame.iloc[0]
-    assert row["reservoir_id"] == "mettur"
-    # MCM → BCM conversion (divide by 1000).
-    assert abs(row["live_storage_bcm"] - 1.254) < 1e-9
-    assert abs(row["live_capacity_at_frl_bcm"] - 2.647) < 1e-9
-    assert abs(row["percent_frl"] - 47.37) < 1e-6
-    # Daily feed doesn't carry long-period averages.
-    assert row["normal_storage_bcm"] is None or str(row["normal_storage_bcm"]) == "nan"
-    assert row["percent_normal"] is None or str(row["percent_normal"]) == "nan"
-    assert row["source_url"].endswith(RESOURCE_ID)
+def test_candidate_urls_for_uses_hint_index_window() -> None:
+    sample_date = date(2026, 4, 9)  # Thursday — matches our existing bulletin
+    urls = candidate_urls_for(sample_date, hint_index=91)
+
+    expected_count = 2 * NN_SEARCH_WIDTH + 1
+    assert len(urls) == expected_count
+    # All should use the same date format CWC uses.
+    for url in urls:
+        assert "09-04-2026" in url
+        assert url.startswith(RSMS_TEMPLATE.split("{")[0])
 
 
-def test_to_bulletin_rows_drops_unknown_reservoirs() -> None:
-    records = [
-        {"reservoir_name": "Mettur", "date": "2026-04-09",
-         "current_live_storage": "1254", "live_capacity_at_frl": "2647"},
-        {"reservoir_name": "SomeOtherDam", "date": "2026-04-09",
-         "current_live_storage": "100", "live_capacity_at_frl": "200"},
-    ]
-    frame = to_bulletin_rows(records, aliases={"Mettur": "mettur"}, since=None)
-    assert len(frame) == 1
-    assert frame.iloc[0]["reservoir_id"] == "mettur"
+def test_candidate_urls_for_no_hint_uses_default_spread() -> None:
+    sample_date = date(2026, 4, 9)
+    urls = candidate_urls_for(sample_date, hint_index=None)
+    # Default spread should at least include the known-good index 91.
+    assert any("-91.pdf" in u for u in urls)
+    assert all("09-04-2026" in u for u in urls)
 
 
-def test_to_bulletin_rows_alias_match_is_case_insensitive() -> None:
-    records = [
-        {"reservoir_name": "METTUR", "date": "2026-04-09",
-         "current_live_storage": "1254", "live_capacity_at_frl": "2647"},
-    ]
-    frame = to_bulletin_rows(records, aliases={"Mettur": "mettur"}, since=None)
-    assert len(frame) == 1
-    assert frame.iloc[0]["reservoir_id"] == "mettur"
+def test_candidate_urls_skip_non_positive_indices() -> None:
+    sample_date = date(2026, 4, 9)
+    # hint_index=2 would produce some negative indices in the -NN_SEARCH_WIDTH
+    # neighbourhood; those should be filtered out.
+    urls = candidate_urls_for(sample_date, hint_index=2)
+    indices = [int(u.rsplit("-", 1)[1].split(".")[0]) for u in urls]
+    assert all(i > 0 for i in indices)
 
 
-def test_to_bulletin_rows_filters_by_since() -> None:
-    records = [
-        {"reservoir_name": "Mettur", "date": "2026-04-09",
-         "current_live_storage": "1254", "live_capacity_at_frl": "2647"},
-        {"reservoir_name": "Mettur", "date": "2026-01-01",
-         "current_live_storage": "1500", "live_capacity_at_frl": "2647"},
-    ]
-    frame = to_bulletin_rows(
-        records, aliases={"Mettur": "mettur"}, since=date(2026, 3, 1)
-    )
-    assert len(frame) == 1
-    assert frame.iloc[0]["date"] == date(2026, 4, 9)
-
-
-def test_to_bulletin_rows_computes_percent_when_missing() -> None:
-    # If the API omits percentage_storage we compute it from the two values.
-    records = [
-        {"reservoir_name": "Mettur", "date": "2026-04-09",
-         "current_live_storage": "1000", "live_capacity_at_frl": "2000"},
-    ]
-    frame = to_bulletin_rows(records, aliases={"Mettur": "mettur"}, since=None)
-    assert abs(frame.iloc[0]["percent_frl"] - 50.0) < 1e-9
+@pytest.mark.parametrize("weeks_back", [1, 2, 4, 8])
+def test_thursdays_window_arbitrary_lengths(weeks_back: int) -> None:
+    days = thursdays_in_window(weeks_back)
+    assert len(days) == weeks_back
+    assert all(d.weekday() == 3 for d in days)
