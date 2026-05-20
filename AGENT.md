@@ -119,8 +119,9 @@ Sunsetting is a valid ending. Most personal projects deserve this ending.
 - `docs/PHASES.md` — phase-gated plan with definition-of-done per phase
 - `docs/BACKTESTS.md` — exact validation cases
 - `docs/DATASETS.md` — every dataset, what it's for, how stale it is
-- `docs/reservoirs.csv` — the 166 reservoirs and their metadata
+- `docs/reservoirs.csv` — the 25 city-serving reservoirs and their metadata
 - `docs/SCHEMAS.md` — data contracts between pipeline stages
+- `docs/PROVENANCE.md` — every dashboard field, its source, and verification status
 - `docs/QUESTIONS.md` — open questions for Tanishq (you write to this)
 - `docs/IDEAS.md` — scope-expansion ideas to defer (you write to this)
 - `docs/CHANGELOG.md` — phase-completion log (you write to this)

@@ -413,7 +413,7 @@ Single domain (e.g. `reservoirs.tanishq.dev`).
 - Site (Astro SSG) served at root.
 - Dashboard JS app served at `/app` or as embedded components within Astro pages.
 
-Decide before Phase 4: are dashboard and site one Astro project with islands, or two projects? **Recommend: one Astro project, with the interactive dashboard as Astro islands.** Simpler deploy, single domain, no auth-domain shenanigans.
+Decide before Phase 3 (writeup): are dashboard and site one Astro project with islands, or two projects? **Recommend: one Astro project, with the interactive dashboard as Astro islands.** Simpler deploy, single domain, no auth-domain shenanigans.
 
 ### 6.3 Data fetching
 
@@ -553,8 +553,8 @@ These tests run nightly against the current pipeline. If they ever fail, the mod
 
 ## 9. Performance budget
 
-- Full pipeline run (166 reservoirs): target < 30 minutes on GEE free tier.
-- JSON output: < 2 MB uncompressed, < 400 KB gzipped.
+- Full pipeline run (25 city-serving reservoirs, current scope): target < 30 minutes on GEE free tier. Measured: ~22 min for 22 reservoirs in the May 2026 backfill, scales linearly.
+- JSON output: < 2 MB uncompressed, < 400 KB gzipped. Measured: 860 KB uncompressed, 76 KB gzipped — well under budget.
 - Dashboard initial load: < 3 seconds on 4G.
 - Detail panel open: < 1 second.
 
@@ -587,9 +587,9 @@ If you encounter any of these and feel the urge, write the idea down in IDEAS.md
 
 ## 12. Open questions
 
-These need Tanishq's decision before Phase 0:
+These need Tanishq's decision before Phase 3 (public writeup):
 
-- Domain: `reservoirs.tanishq.dev`? `indiawater.live`? Other? **(Required by Phase 4)**
+- Domain: `reservoirs.tanishq.dev`? `indiawater.live`? Other? **(Required by Phase 3)**
 - Repo visibility: public from day 0, or private until Phase 3? **(Defaults to public — say so if you disagree)**
 - Astro vs separate site/dashboard projects: **(Recommended: one Astro project, islands for interactive)**
 

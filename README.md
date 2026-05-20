@@ -10,30 +10,30 @@ A live public dashboard covering the 25 CWC-monitored reservoirs that supply Ind
 
 Updated weekly via a cron job. Validated against three historical water crises (Bengaluru 2024, Chennai/Mettur 2019, Marathwada/Jayakwadi 2016 & 2019).
 
-**Dashboard:** (URL TBD, Phase 4)
-**Methodology writeup:** (URL TBD, Phase 4)
-**Source data:** (CSV per reservoir, Phase 2)
+**Dashboard:** (URL TBD, Phase 3)
+**Methodology writeup:** drafts at `site/src/content/methodology.md` and `site/src/content/launch-post.md`
+**Source data:** Per-reservoir CSVs at `dashboard/public/data/reservoirs/`
 
 ---
 
 ## Status
 
-Phase 0 in progress.
+**Phase 1 — mostly done, not closed.** All 25 city-serving reservoirs have AOIs + at least one satellite observation; 3 of 4 historical backtests pass.
 
-Implemented so far:
-- Python pipeline scaffold and local tests.
-- Earth Engine service account auth.
-- First-pass JRC-derived AOIs for KRS, Mettur, and Indira Sagar.
-- Phase 0 extraction output in `dashboard/public/data/`.
-- CWC 09.04.2026 Phase 0 rows checked in as ground-truth calibration input.
+Implemented:
+- Full pipeline: JRC monthly history, Sentinel-2 area, Sentinel-1 SAR fallback, area-to-volume calibration (power-law where CWC anchor available), depletion regression, dual-scenario projection, tier classification.
+- Dashboard: editorial hero + ranked reservoir list + maplibre map of India + per-reservoir detail panel with history chart + data-quality provenance card.
+- Hetzner infra scaffold (`infra/run.sh`, cron entry, freshness check, README).
+- CWC bulletin auto-fetcher with graceful manual fallback.
+- 72 unit/integration tests passing; ruff clean.
 
-Not yet Phase 0 complete:
-- AOIs need manual review.
-- Current volume estimates are CWC-calibrated from one bulletin only; six-month validation is still pending. Drop additional `bulletin_*.csv` files into `pipeline/data/cwc/` and run `python scripts/run_phase0_gate.py` for the ±10% check.
-- First gate run against `2026-04-09`: KRS passes (−8.6%); Mettur (+21.2%) and Indira Sagar (+38.9%) miss high — area-to-volume calibration / AOI extent needs investigation, per `docs/PHASES.md` failure handling for Phase 0.
-- NOAA ONI fetch currently times out from this environment, so live ENSO state may be unavailable.
+**Not yet Phase 1 closed** — blockers before public distribution:
+- **CWC ground truth gap:** only 3 of 25 reservoirs have CWC-calibrated storage curves. The other 22 use area-ratio proxy (flagged `volume_area_ratio_proxy`). Six-month ±10% validation requires more bulletins. See `docs/RUNBOOK.md`.
+- **KRS 2023 backtest fails:** 5 Sentinel-2 observations in the 90-day window all have 47–64% cloud cover; no usable depletion fit possible. Investigation steps 2 and 3 (per AGENT.md non-negotiable #2 failure handling) still pending — may end up as spec reframe in `docs/QUESTIONS.md`.
+- **0 of 25 manual AOI reviews** — see `docs/PROVENANCE.md` for the trust catalogue.
+- **0 of 25 coordinates / capacities verified against CWC's published register** — editorial metadata pending cross-check.
 
-See `docs/PHASES.md` for the build plan.
+See `docs/PHASES.md` for the full plan and `docs/PROVENANCE.md` for honest counts.
 
 ---
 
@@ -47,7 +47,8 @@ Reference docs:
 - `docs/BACKTESTS.md` — validation cases (these must pass before "shipped")
 - `docs/DATASETS.md` — every dataset, why it's here
 - `docs/SCHEMAS.md` — data contracts
-- `docs/reservoirs.csv` — the 25 priority reservoirs (expand to 166 in Phase 3)
+- `docs/reservoirs.csv` — the 25 city-serving reservoirs (PRD v2 scope)
+- `docs/PROVENANCE.md` — every dashboard field, its source, and verification status
 
 Write to:
 - `docs/QUESTIONS.md` when you hit a fork the docs don't cover
@@ -75,4 +76,4 @@ Build it out per `docs/TDD.md` §1.
 
 ## License
 
-TBD before Phase 4 (public release).
+TBD before Phase 3 (public release / writeup).
