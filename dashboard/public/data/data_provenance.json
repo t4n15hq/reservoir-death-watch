@@ -1,14 +1,17 @@
 {
   "counts": {
     "aoi_visually_reviewed": 0,
-    "capacity_verified_against_cwc": 3,
+    "capacity_verified_against_cwc": 0,
+    "cwc_reference_available": 3,
+    "dead_storage_capacity_verified": 0,
+    "full_pool_capacity_from_cwc": 3,
     "lat_lon_verified": 0,
     "observed_with_satellite": 25,
     "population_verified_against_census": 0,
     "storage_cwc_calibrated": 3,
     "total_reservoirs": 25
   },
-  "generated_at": "2026-05-19T21:27:42.914312Z",
+  "generated_at": "2026-05-20T02:20:27.500965Z",
   "reservoirs": [
     {
       "aoi": {
@@ -23,6 +26,11 @@
       "current_observation": {
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -68,6 +76,11 @@
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 0.84,
@@ -112,14 +125,19 @@
         "as_of": "2026-05-15",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": "2026-04-09",
+        "available": true,
+        "reported_bcm": 0.48
+      },
       "dead_storage_capacity_bcm": {
-        "source": "CWC bulletin",
+        "source": "approximate (training-data knowledge)",
         "value": 0.13,
-        "verified": true
+        "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "CWC bulletin",
-        "value": 1.37,
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.163,
         "verified": true
       },
       "id": "krs",
@@ -156,14 +174,19 @@
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": "2026-04-09",
+        "available": true,
+        "reported_bcm": 1.254
+      },
       "dead_storage_capacity_bcm": {
-        "source": "CWC bulletin",
+        "source": "approximate (training-data knowledge)",
         "value": 0.21,
-        "verified": true
+        "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "CWC bulletin",
-        "value": 2.65,
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 2.647,
         "verified": true
       },
       "id": "mettur",
@@ -199,6 +222,11 @@
       "current_observation": {
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -244,14 +272,19 @@
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": "2026-04-09",
+        "available": true,
+        "reported_bcm": 4.192
+      },
       "dead_storage_capacity_bcm": {
-        "source": "CWC bulletin",
+        "source": "approximate (training-data knowledge)",
         "value": 3.39,
-        "verified": true
+        "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "CWC bulletin",
-        "value": 12.21,
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 9.745,
         "verified": true
       },
       "id": "indira_sagar",
@@ -287,6 +320,11 @@
       "current_observation": {
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -332,6 +370,11 @@
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 2.12,
@@ -375,6 +418,11 @@
       "current_observation": {
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -420,6 +468,11 @@
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 1.4,
@@ -463,6 +516,11 @@
       "current_observation": {
         "as_of": "2026-05-15",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -508,6 +566,11 @@
         "as_of": "2026-05-15",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 0.04,
@@ -551,6 +614,11 @@
       "current_observation": {
         "as_of": "2026-05-15",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -596,6 +664,11 @@
         "as_of": "2026-05-12",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 0.1,
@@ -639,6 +712,11 @@
       "current_observation": {
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -684,6 +762,11 @@
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 0.1,
@@ -727,6 +810,11 @@
       "current_observation": {
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -772,6 +860,11 @@
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 0.1,
@@ -815,6 +908,11 @@
       "current_observation": {
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -860,6 +958,11 @@
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 0.0,
@@ -903,6 +1006,11 @@
       "current_observation": {
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -948,6 +1056,11 @@
         "as_of": "2026-05-18",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 0.1,
@@ -991,6 +1104,11 @@
       "current_observation": {
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -1036,6 +1154,11 @@
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
       },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
+      },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
         "value": 0.1,
@@ -1079,6 +1202,11 @@
       "current_observation": {
         "as_of": "2026-05-17",
         "data_source": "sentinel_2"
+      },
+      "cwc_reference": {
+        "as_of": null,
+        "available": false,
+        "reported_bcm": null
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",

@@ -34,14 +34,19 @@ def test_cwc_anchored_count_pins_at_three(provenance):
     """As of last audit: KRS, Mettur, Indira Sagar. Goes up when you add
     more CWC bulletin CSVs (drop into pipeline/data/cwc/)."""
 
+    assert provenance["counts"]["cwc_reference_available"] == 3, (
+        "CWC reference count changed. If you added a bulletin, update this "
+        "expected value AND re-confirm docs/PROVENANCE.md counts."
+    )
     assert provenance["counts"]["storage_cwc_calibrated"] == 3, (
         "CWC-calibrated count changed. If you added a bulletin, update this "
         "expected value AND re-confirm docs/PROVENANCE.md counts."
     )
 
 
-def test_metadata_verification_is_zero_by_default(provenance):
-    """No reservoir has lat/lon, capacity, or population verified yet.
+def test_metadata_verification_is_explicit(provenance):
+    """Only CWC-covered reservoirs have FRL capacity from CWC; no reservoir
+    has lat/lon, dead-storage capacity, or population externally sourced yet.
 
     These start at zero and tick up as you populate `coord_verified_at`,
     `population_source` columns in docs/reservoirs.csv. The dashboard's
@@ -51,12 +56,26 @@ def test_metadata_verification_is_zero_by_default(provenance):
 
     c = provenance["counts"]
     assert c["lat_lon_verified"] == 0, "bump test when coord_verified_at populated"
-    assert c["capacity_verified_against_cwc"] == 0 or c["capacity_verified_against_cwc"] == 3, (
-        "CWC anchor count drives capacity verification: 3 (Phase 0) or 0 (no data)"
+    assert c["full_pool_capacity_from_cwc"] == 3, "bump test when CWC rows change"
+    assert c["dead_storage_capacity_verified"] == 0, (
+        "bump test only after adding an explicit dead-storage source"
+    )
+    assert c["capacity_verified_against_cwc"] == 0, (
+        "full capacity is not fully verified until both FRL and dead-storage "
+        "capacity have external sources"
     )
     assert c["population_verified_against_census"] == 0, (
         "bump test when population_source populated"
     )
+
+
+def test_cwc_capacity_values_come_from_cwc_rows(provenance):
+    by_id = {r["id"]: r for r in provenance["reservoirs"]}
+
+    assert by_id["krs"]["full_pool_capacity_bcm"]["value"] == 1.163
+    assert by_id["indira_sagar"]["full_pool_capacity_bcm"]["value"] == 9.745
+    assert by_id["krs"]["full_pool_capacity_bcm"]["source"].startswith("CWC bulletin")
+    assert by_id["indira_sagar"]["dead_storage_capacity_bcm"]["verified"] is False
 
 
 def test_every_reservoir_classified(provenance):

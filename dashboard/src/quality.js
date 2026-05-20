@@ -18,31 +18,37 @@ export function renderDataQuality(container, provenance) {
       kind: 'measured',
     },
     {
-      label: 'CWC-calibrated storage',
-      verified: c.storage_cwc_calibrated ?? 0,
-      hint: 'Power-law area-to-volume curve fit against a CWC bulletin row.',
+      label: 'CWC reference loaded',
+      verified: c.cwc_reference_available ?? 0,
+      hint: 'Reservoirs with an authoritative CWC live-storage row in this snapshot.',
       kind: 'measured',
     },
     {
-      label: 'AOI visually reviewed',
+      label: 'CWC-calibrated storage',
+      verified: c.storage_cwc_calibrated ?? 0,
+      hint: 'Power-law area-to-volume curve fit against the loaded CWC row.',
+      kind: 'measured',
+    },
+    {
+      label: 'FRL capacity from CWC',
+      verified: c.full_pool_capacity_from_cwc ?? 0,
+      hint: 'Live capacity at FRL loaded from CWC. Dead-storage capacity is still unsourced.',
+      kind: 'measured',
+    },
+    {
+      label: 'AOI marked reviewed',
       verified: c.aoi_visually_reviewed ?? 0,
-      hint: 'Polygon checked by hand. Auto-derived AOIs are honest proxies, not verified.',
+      hint: 'Polygon checked by hand. Auto-derived AOIs remain honest proxies.',
       kind: 'metadata',
     },
     {
-      label: 'Capacity verified',
-      verified: c.capacity_verified_against_cwc ?? 0,
-      hint: 'Full-pool & dead-storage capacity cross-checked against a CWC bulletin.',
-      kind: 'metadata',
-    },
-    {
-      label: 'Coordinates verified',
+      label: 'Coordinates checked',
       verified: c.lat_lon_verified ?? 0,
       hint: 'Dam lat/lon cross-checked against CWC bulletin or OpenStreetMap.',
       kind: 'metadata',
     },
     {
-      label: 'Population verified',
+      label: 'Population sourced',
       verified: c.population_verified_against_census ?? 0,
       hint: 'Beneficiary population sourced from census or utility data, not estimated.',
       kind: 'metadata',
@@ -76,15 +82,15 @@ export function renderDataQuality(container, provenance) {
       <div class="quality-card__head">
         <h2>Data quality</h2>
         <p>
-          What's been measured vs derived vs my unverified metadata. Honest counts —
+          What is loaded, derived, or still unsourced in this snapshot. Honest counts —
           see <a href="https://github.com/t4n15hq/reservoir-death-watch/blob/main/docs/PROVENANCE.md">docs/PROVENANCE.md</a> for per-field sources.
           ${generated ? `<span class="quality-card__gen">audited ${generated} UTC</span>` : ''}
         </p>
       </div>
       <div class="quality-grid">${tilesHtml}</div>
       <div class="quality-card__foot">
-        <span class="quality-key"><span class="quality-key__dot quality-key__dot--measured"></span> measured / derived from satellite + CWC</span>
-        <span class="quality-key"><span class="quality-key__dot quality-key__dot--metadata"></span> editorial metadata — needs CWC bulletin or census cross-check</span>
+        <span class="quality-key"><span class="quality-key__dot quality-key__dot--measured"></span> measured / loaded from satellite + CWC</span>
+        <span class="quality-key"><span class="quality-key__dot quality-key__dot--metadata"></span> metadata or capacity fields needing manual source work</span>
       </div>
     </div>
   `;

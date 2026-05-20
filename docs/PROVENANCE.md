@@ -6,8 +6,8 @@ and verification status. This file exists because AGENT.md non-negotiable #4
 catalogue.
 
 Fields are grouped by confidence tier. The dashboard surfaces this in the
-"Data quality" panel under each reservoir's detail view, and aggregate counts
-appear in the footer.
+"Data quality" card, and each reservoir detail panel exposes whether a CWC
+live-storage reference is loaded for that row.
 
 ---
 
@@ -43,7 +43,7 @@ that the UI displays in the detail panel.
 | `current.estimated_storage_bcm` (22 of 25) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` |
 | `current.estimated_storage_bcm` (KRS / Mettur / Indira Sagar) | Power-law calibrated, but only one CWC anchor point | `cwc_calibrated_single_point`, `phase0_cwc_validation_incomplete` |
 | `current.cwc_reported_bcm` (3 of 25) | CWC bulletin 09.04.2026 only — six-month validation pending | `phase0_cwc_validation_incomplete` |
-| `current.cwc_reported_bcm` (22 of 25) | No CWC data | `needs_cwc_calibration` |
+| `current.cwc_reported_bcm` (22 of 25) | No matching CWC row is loaded into this snapshot yet | `needs_cwc_calibration` |
 | Dead-storage area used in projection | Power-law conversion with default b=2.0 when no calibrated curve exists | `dead_storage_area_proxy` |
 | `projection.el_nino_monsoon` | El Niño delta from static historical year list, not per-year ONI conditioning | `el_nino_delta_static_years` |
 | `fit.fit_quality` | `low_confidence` when r² ∈ [0.7, 0.85) | embedded in `fit` object |
@@ -59,8 +59,9 @@ and have **not** been cross-checked against CWC's published register.
 | Field | Where it shows | Confidence | Action needed |
 |---|---|---|---|
 | `lat` / `lon` | Map pin location | Approximate (±5 km plausible) | Cross-check against CWC bulletin or OSM `way:` for each dam |
-| `full_pool_capacity_bcm` | "of X BCM" in storage line | Approximate (±10%) | CWC bulletin lists per-reservoir FRL capacity |
-| `dead_storage_capacity_bcm` | Drives `dead_storage_area` calculation | Approximate | Same source |
+| `full_pool_capacity_bcm` (3 of 25) | "of X BCM" in storage line | CWC `live_capacity_at_frl_bcm` loaded for KRS, Mettur, Indira Sagar | Load more CWC rows |
+| `full_pool_capacity_bcm` (22 of 25) | "of X BCM" in storage line | Approximate (±10%) | CWC bulletin lists per-reservoir FRL capacity |
+| `dead_storage_capacity_bcm` | Drives `dead_storage_area` calculation | Approximate | Add an explicit dead-storage source; the current Phase 0 CSV does not carry it |
 | `population_served` | At-risk headline + detail byline | Rough estimate (order of magnitude) | Census 2011 + 2024 estimates for the named cities |
 | `city_served` (free-text) | "Supplies X" in detail byline | Editorial label | Verify the *primary* drinking water source per city's water utility |
 | `priority` | Sort order in list | Editorial; based on city population × CWC inclusion | n/a — internal ordering only |
@@ -94,13 +95,14 @@ for the machine-readable form.
 
 | Class | Count |
 |---|---|
-| Reservoirs with Sentinel-2 observation in last 14 days | check `current.as_of` |
+| Reservoirs with satellite observation | 25 of 25 |
+| Reservoirs with CWC live-storage reference loaded | 3 of 25 |
 | Reservoirs with CWC-calibrated curve | 3 of 25 |
-| Reservoirs with CWC reading | 3 of 25 |
 | Reservoirs with `volume_area_ratio_proxy` flag | 22 of 25 |
-| Reservoirs with `first_pass_needs_manual_review` AOI | 22 of 25 |
+| Reservoirs with unreviewed AOI | 25 of 25 |
 | Reservoirs with verified `lat/lon` against CWC bulletin | **0 of 25** |
-| Reservoirs with verified `full_pool_capacity_bcm` against CWC | **0 of 25** |
+| Reservoirs with FRL capacity loaded from CWC | 3 of 25 |
+| Reservoirs with verified `dead_storage_capacity_bcm` | **0 of 25** |
 | Reservoirs with verified `population_served` against census | **0 of 25** |
 
 **The "0 of 25" rows are the next milestone for Tier 3 confidence.** They
