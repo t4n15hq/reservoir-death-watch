@@ -11,7 +11,7 @@
     "reservoir_id": "krs"
   },
   "data_sources_used": {
-    "cwc_bulletin": "2026-04-09",
+    "cwc_bulletin": null,
     "jrc_through": "2021-12",
     "oni_month": null,
     "s2_latest": "2023-12-27"
@@ -40,10 +40,10 @@
       "current": {
         "area_km2": 65.571,
         "as_of": "2023-12-27",
-        "cwc_as_of": "2026-04-09",
-        "cwc_reported_bcm": 0.48,
+        "cwc_as_of": null,
+        "cwc_reported_bcm": null,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.675,
+        "estimated_storage_bcm": 0.796,
         "percent_full": 58.1
       },
       "dead_storage_capacity_bcm": 0.13,
@@ -55,7 +55,7 @@
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 112.922,
-      "full_pool_capacity_bcm": 1.163,
+      "full_pool_capacity_bcm": 1.37,
       "history": [
         {
           "area_km2": 0.0,

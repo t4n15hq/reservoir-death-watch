@@ -170,8 +170,8 @@ def test_dead_storage_area_uses_power_law_not_linear() -> None:
     """Regression: the dead-storage area proxy must NOT assume V proportional to A.
 
     Linear proxy made dead_area = 10% of FRL_area for typical reservoirs with
-    10% volume ratio, but proper hypsometry gives dead_area ≈ 26% of FRL_area
-    (with b=1.7). The 2.6x error inflated days-to-dead-storage projections
+    10% volume ratio, but proper hypsometry gives dead_area ≈ 32% of FRL_area
+    (with b=2.0). The 3x error inflated days-to-dead-storage projections
     proportionally and was the main cause of the Mettur 2019 / Jayakwadi 2016
     backtest failures (199d/214d when the model should have flagged crisis).
     """

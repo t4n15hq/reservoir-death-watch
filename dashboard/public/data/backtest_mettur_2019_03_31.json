@@ -12,7 +12,7 @@
     "reservoir_id": "mettur"
   },
   "data_sources_used": {
-    "cwc_bulletin": "2026-04-09",
+    "cwc_bulletin": null,
     "jrc_through": "2019-03",
     "oni_month": null,
     "s2_latest": "2019-03-30"
@@ -41,10 +41,10 @@
       "current": {
         "area_km2": 64.55,
         "as_of": "2019-03-30",
-        "cwc_as_of": "2026-04-09",
-        "cwc_reported_bcm": 1.254,
+        "cwc_as_of": null,
+        "cwc_reported_bcm": null,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 1.302,
+        "estimated_storage_bcm": 1.304,
         "percent_full": 49.2
       },
       "dead_storage_capacity_bcm": 0.21,
@@ -66,7 +66,7 @@
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 131.205,
-      "full_pool_capacity_bcm": 2.647,
+      "full_pool_capacity_bcm": 2.65,
       "history": [
         {
           "area_km2": 0.0,

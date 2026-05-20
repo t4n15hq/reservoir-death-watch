@@ -77,7 +77,7 @@ def run_pipeline(
         data_sources_used=DataSourcesUsed(
             jrc_through=_latest_jrc_month(results),
             s2_latest=max(result.current.as_of for result in results),
-            cwc_bulletin=_latest_cwc_date(cwc_storage),
+            cwc_bulletin=_latest_cwc_date(cwc_storage, as_of=run_as_of),
             oni_month=None,
         ),
         enso=_fetch_enso_summary(),
@@ -102,7 +102,7 @@ def build_reservoir_result(
     cwc_storage: pd.DataFrame | None = None,
 ) -> tuple[ReservoirResult, pd.DataFrame]:
     full_pool_area_km2 = _full_pool_area_km2(aoi, jrc_history, current)
-    cwc_row = _cwc_row_for_reservoir(cwc_storage, aoi.id)
+    cwc_row = _cwc_row_for_reservoir(cwc_storage, aoi.id, as_of=as_of)
     full_capacity = _full_capacity_bcm(aoi, cwc_row)
     cwc_reported = _optional_cwc_value(cwc_row, "live_storage_bcm")
     cwc_as_of = _optional_cwc_date(cwc_row)
@@ -344,16 +344,28 @@ def _load_cwc_storage_or_empty() -> pd.DataFrame:
         return pd.DataFrame()
 
 
-def _latest_cwc_date(cwc_storage: pd.DataFrame) -> date | None:
+def _latest_cwc_date(cwc_storage: pd.DataFrame, *, as_of: date | None = None) -> date | None:
     if cwc_storage.empty:
         return None
-    return max(cwc_storage["date"])
+    available = cwc_storage
+    if as_of is not None:
+        available = available[available["date"] <= as_of]
+    if available.empty:
+        return None
+    return max(available["date"])
 
 
-def _cwc_row_for_reservoir(cwc_storage: pd.DataFrame | None, reservoir_id: str):
+def _cwc_row_for_reservoir(
+    cwc_storage: pd.DataFrame | None,
+    reservoir_id: str,
+    *,
+    as_of: date | None = None,
+):
     if cwc_storage is None or cwc_storage.empty:
         return None
     matches = cwc_storage[cwc_storage["reservoir_id"] == reservoir_id].sort_values("date")
+    if as_of is not None:
+        matches = matches[matches["date"] <= as_of]
     if matches.empty:
         return None
     return matches.iloc[-1]
@@ -522,7 +534,7 @@ def _dead_storage_area_proxy(
     `days_to_dead_storage` projections by the same factor.
 
     Preferred path: use the calibrated curve if one was fit from CWC data.
-    Fallback: use a default exponent b=1.7 against the capacity ratio.
+    Fallback: use a default exponent b=2.0 against the capacity ratio.
     Last resort (no capacity data at all): 10% of FRL.
     """
 

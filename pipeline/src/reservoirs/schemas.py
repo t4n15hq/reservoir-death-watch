@@ -172,6 +172,18 @@ class EnsoSummary(BaseModel):
     imd_monsoon_forecast: str | None = None
 
 
+class BacktestSummary(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    case_id: str
+    reservoir_id: str
+    as_of: date
+    expected_tiers: list[Tier]
+    actual_tier: Tier
+    passed: bool
+    generated_at: datetime
+
+
 class DashboardSnapshot(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -181,3 +193,4 @@ class DashboardSnapshot(BaseModel):
     enso: EnsoSummary
     national_aggregate: NationalAggregate
     reservoirs: list[ReservoirResult]
+    backtest: BacktestSummary | None = Field(default=None, exclude=True)

@@ -12,7 +12,7 @@
     "reservoir_id": "jayakwadi"
   },
   "data_sources_used": {
-    "cwc_bulletin": "2026-04-09",
+    "cwc_bulletin": null,
     "jrc_through": "2019-03",
     "oni_month": null,
     "s2_latest": "2019-03-31"
