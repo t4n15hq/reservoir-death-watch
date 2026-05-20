@@ -13,7 +13,7 @@ adopt it without rewrites.
 - `src/content/launch-post.md` — the launch announcement, per
   `docs/PRD.md` §7 distribution plan. Drafted; not yet published.
 
-## Phase 4 deliverables (per `docs/PHASES.md`)
+## Phase 3 deliverables (per `docs/PHASES.md`)
 
 - Astro project scaffold reading these markdown files.
 - `/methodology` route rendering `methodology.md`.

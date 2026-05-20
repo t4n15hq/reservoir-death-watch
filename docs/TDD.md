@@ -543,7 +543,9 @@ def test_jayakwadi_2016_2019_flagged():
     assert s2019.reservoirs[0].tier in ("critical", "warning")
 ```
 
-These tests run nightly against the current pipeline. If they ever fail, the model has regressed.
+These tests are Earth Engine-bound and opt in with `RDW_RUN_BACKTESTS=1`.
+Run them before claiming Phase 1 or "shipped" status. If they ever fail
+after being made passing, the model has regressed.
 
 ### 8.3 Integration test
 

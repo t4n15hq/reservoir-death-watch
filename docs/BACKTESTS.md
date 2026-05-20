@@ -130,7 +130,9 @@ cd pipeline
 uv run pytest tests/test_backtest.py -v
 ```
 
-They also run as part of CI on every PR. A PR cannot be merged if backtests fail.
+The metadata/collection check runs in CI on every PR. The live backtests are
+Earth Engine-bound and opt in via `RDW_RUN_BACKTESTS=1`; run them manually
+before claiming Phase 1 or "shipped" status.
 
 ---
 

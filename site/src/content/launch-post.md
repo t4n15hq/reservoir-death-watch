@@ -22,7 +22,7 @@ is privately asking: *which of our reservoirs runs dry first, and when?*
 
 A live dashboard tracking the 25 CWC-monitored reservoirs that supply
 India's major cities — Delhi, Bengaluru, Chennai (indirect), Hyderabad,
-Mumbai (via the DVC industrial belt), Ahmedabad, Surat, Jaipur, Pune,
+DVC industrial belt, Ahmedabad, Surat, Jaipur, Pune,
 Coimbatore, Madurai, Aurangabad, Jabalpur, Nagpur, Kochi.
 
 For each reservoir, the dashboard shows:
@@ -77,8 +77,8 @@ in the satellite observations and lose the property I care about most:
 if a number on the dashboard surprises you, you can reproduce the math
 from the published CSV in a spreadsheet.
 
-Full methodology, the three historical backtests it's been validated
-against, and the things it doesn't claim, are at [/methodology](/methodology).
+Full methodology, the historical backtest status, and the things it doesn't
+claim, are at [/methodology](/methodology).
 
 ## What it doesn't do
 
@@ -108,10 +108,13 @@ bottom of the page. As of launch:
 
 - 22 of 25 reservoirs are using an area-ratio storage proxy because I
   only have one CWC bulletin (April 9, 2026, Phase 0 calibration set).
+- 3 of 25 reservoirs have a loaded CWC live-storage reference and FRL
+  capacity from that bulletin.
 - 0 of 25 lat/long coordinates have been verified against CWC's
   published register — they're from my training-data knowledge and could
   be off by a couple of km.
-- 0 of 25 population-served numbers have been census-verified.
+- 0 of 25 dead-storage capacities or population-served numbers have an
+  external source attached yet.
 
 These are the next milestones. The system architecture supports drop-in
 verification: drop a CWC PDF into the right folder, run one command, and

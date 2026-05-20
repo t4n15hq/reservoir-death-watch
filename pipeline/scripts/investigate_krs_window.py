@@ -73,9 +73,9 @@ def run_variant(
         )
         return
     days = None
-    # Quick days-to-dead estimate using a 12 km² dead-storage area (b=2.0
+    # Quick days-to-dead estimate using a 38 km² dead-storage area (b=2.0
     # on the known KRS capacity ratio 0.13/1.163 ≈ 0.112 → A_dead/A_full ≈ 0.335
-    # × 113 km² FRL ≈ 38 km²). Use 65 km² as current area (last KRS obs).
+    # × 113 km² FRL ≈ 38 km²). Use 65.57 km² as current area (last KRS obs).
     if fit.slope_km2_per_day < 0:
         days = (65.57 - 38) / -fit.slope_km2_per_day
     print(
@@ -103,7 +103,7 @@ def main() -> int:
         (90, 6, 50),
         # Loosen cloud filter
         (90, 6, 70),
-        (90, 6, 100),  # no filter
+        (90, 6, None),
         # Lower min_observations
         (90, 5, 50),
         (90, 4, 50),
@@ -115,7 +115,7 @@ def main() -> int:
         (150, 6, 50),
         (150, 6, 70),
         # Most permissive
-        (150, 4, 100),
+        (150, 4, None),
     ]
     for window, min_obs, cloud in variants:
         run_variant(pairs, window_days=window, min_observations=min_obs, cloud_threshold=cloud)

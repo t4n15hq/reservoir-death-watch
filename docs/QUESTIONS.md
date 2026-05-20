@@ -40,7 +40,7 @@ When `status: resolved`, append the resolution and move the question to the bott
 
 **Options considered:**
 
-- **A. Reframe BACKTESTS.md to accept {critical, warning, stable} for KRS 2023, with an explicit "satellite-blind during heavy monsoon cloud cover" justification in the test docstring.** Most honest. Phase 1 closes. The dashboard's `cwc_reported_bcm` field would catch the same reservoir whenever a CWC reading is loaded. Cost: weakens the "we caught the 2024 Bengaluru crisis" claim that motivated picking KRS 2023 as Case 1 in the first place.
+- **A. Reframe BACKTESTS.md to accept {critical, warning} for KRS 2023, with an explicit "satellite-blind during heavy monsoon cloud cover" justification in the test docstring.** Most honest. Phase 1 closes. The dashboard's `cwc_reported_bcm` field would catch the same reservoir whenever a CWC reading is loaded. Cost: weakens the "we caught the 2024 Bengaluru crisis" claim that motivated picking KRS 2023 as Case 1 in the first place.
 
 - **B. Generate a synthetic critical signal from low percent_full when no fit exists.** Add to `compute_tier`: `if fit is None and current_percent_full < 20: return "critical"`. Would catch KRS *IF* its storage estimate were also calibrated to 16% — but for KRS 2023 backtest there's no CWC anchor in 2023, so storage uses area-ratio proxy = 58%. This option also doesn't help.
 
@@ -58,13 +58,13 @@ When `status: resolved`, append the resolution and move the question to the bott
 
 ### 2026-05-18: Domain name
 
-**Context:** Need a public URL before Phase 4 (writeup distribution).
+**Context:** Need a public URL before Phase 3 (writeup distribution).
 **Options:**
 - `reservoirs.tanishq.dev` — uses existing personal subdomain pattern
 - `indiawater.live` — better SEO, more memorable, but needs separate registration and renewal
 - `reservoirwatch.in` — .in feels right for India focus
 
-**Provisional answer:** `reservoirs.tanishq.dev` for Phase 1–3 (no domain shopping needed). Decide on a vanity domain before Phase 4.
+**Provisional answer:** `reservoirs.tanishq.dev` for Phase 1–2 (no domain shopping needed). Decide on a vanity domain before Phase 3.
 **Status:** superseded by the 2026-05-18 CWC single-bulletin calibration below.
 
 ### 2026-05-18: Phase 0 CWC source access

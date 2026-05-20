@@ -173,6 +173,8 @@ satellite-only monitoring during heavy cloud cover, not something to hide.
 Of the 25 reservoirs on the dashboard:
 
 - **25 have Sentinel-2 observations in the last week.**
+- **3 have loaded CWC live-storage references** (KRS, Mettur, Indira
+  Sagar — April 9, 2026 Phase 0 bulletin rows).
 - **3 have CWC-calibrated area-to-volume curves** (KRS, Mettur, Indira
   Sagar — Phase 0 calibration set).
 - **22 are using an area-ratio proxy** for storage, flagged on each
@@ -180,7 +182,8 @@ Of the 25 reservoirs on the dashboard:
 - **0 reservoirs have lat/lon verified against CWC's published register
   or OpenStreetMap.** These came from training-data knowledge during
   scope definition; they're approximate but plausible (within ±5 km).
-  Same goes for `full_pool_capacity_bcm` and `population_served`.
+- **3 reservoirs have FRL capacity loaded from CWC; 0 have dead-storage
+  capacity or population served externally sourced.**
 
 Full provenance per field is at
 [`docs/PROVENANCE.md`](https://github.com/t4n15hq/reservoir-death-watch/blob/main/docs/PROVENANCE.md).

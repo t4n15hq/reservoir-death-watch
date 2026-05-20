@@ -28,10 +28,10 @@ Implemented:
 - 72 unit/integration tests passing; ruff clean.
 
 **Not yet Phase 1 closed** — blockers before public distribution:
-- **CWC ground truth gap:** only 3 of 25 reservoirs have CWC-calibrated storage curves. The other 22 use area-ratio proxy (flagged `volume_area_ratio_proxy`). Six-month ±10% validation requires more bulletins. See `docs/RUNBOOK.md`.
+- **CWC ground truth gap:** only 3 of 25 reservoirs have loaded CWC live-storage references and CWC-calibrated storage curves. The other 22 use area-ratio proxy (flagged `volume_area_ratio_proxy`). Six-month ±10% validation requires more bulletins. See `docs/RUNBOOK.md`.
 - **KRS 2023 backtest fails:** 5 Sentinel-2 observations in the 90-day window all have 47–64% cloud cover; no usable depletion fit possible. Investigation steps 2 and 3 (per AGENT.md non-negotiable #2 failure handling) still pending — may end up as spec reframe in `docs/QUESTIONS.md`.
 - **0 of 25 manual AOI reviews** — see `docs/PROVENANCE.md` for the trust catalogue.
-- **0 of 25 coordinates / capacities verified against CWC's published register** — editorial metadata pending cross-check.
+- **0 of 25 coordinates / dead-storage capacities verified against CWC's published register** — FRL capacity is loaded from CWC for the same 3 reservoirs, but the rest of the metadata still needs cross-check.
 
 See `docs/PHASES.md` for the full plan and `docs/PROVENANCE.md` for honest counts.
 

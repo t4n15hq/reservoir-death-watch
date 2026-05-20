@@ -4,6 +4,30 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 
 ---
 
+## 2026-05-19 — CWC coverage visibility + provenance count fix
+
+- Made CWC coverage visible in the reservoir list and detail panel. Rows now
+  show `CWC YYYY-MM-DD` or `CWC ref missing`, and missing CWC rows get an
+  explicit detail-panel warning instead of the vague "no CWC reading yet".
+- Split the data-quality counts so they no longer imply dead-storage capacity
+  is CWC-verified. The dashboard now distinguishes loaded CWC reference rows
+  (3/25), CWC-calibrated storage curves (3/25), FRL capacity from CWC (3/25),
+  and dead-storage capacity verified (0/25).
+- Fixed `audit_metadata.py` to report CWC FRL capacity values from the CWC row
+  itself instead of marking stale CSV capacity values as CWC-verified.
+
+## 2026-05-19 — Backtest artifact temporal fix
+
+- Fixed historical pipeline runs so CWC bulletin rows are only used when
+  `cwc.date <= as_of`. Backtest snapshots no longer display the 2026-04-09
+  CWC bulletin inside 2016/2019/2023 historical views.
+- Added schema coverage for the dashboard's `backtest` metadata block and
+  tests that prevent future CWC leakage in checked-in backtest artifacts.
+- Cleaned stale phase/validation copy in the site docs and KRS investigation
+  helper.
+- Verified: ruff clean; 76 pass + 4 Earth Engine backtests skipped; dashboard
+  build green; Phase 0 single-bulletin gate still passes.
+
 ## 2026-05-19 — Provenance audit + Phase 3 writeup drafts (autonomous)
 
 User AFK; continued autonomously on the things that didn't need a call.
