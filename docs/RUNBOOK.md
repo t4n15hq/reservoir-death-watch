@@ -139,7 +139,31 @@ See `docs/PHASES.md`. Writeup, three journalist cold-emails, Hacker News post.
 Adds proper power-law area-to-volume calibration for the 22 reservoirs
 currently using the area-ratio storage proxy.
 
-### Automated (preferred when your network has access)
+### Automated path A: GitHub Actions (no machine required)
+
+`.github/workflows/fetch-cwc-bulletin.yml` runs every Friday 03:30 UTC
+on a GitHub-hosted runner. The runner egresses from Azure IPs — a
+completely different IP space from your laptop or Hermes, so if CWC
+doesn't block Azure ranges this is fully automated.
+
+- On success: opens a PR titled "Weekly CWC bulletin pull" containing
+  the new PDF + parsed CSV. Merge → run `python scripts/rebuild_storage_from_csv.py`
+  → done.
+- On failure: the workflow records "no bulletin pulled" in its summary
+  but does NOT fail with a red ✗ (this is a best-effort task; we don't
+  want it to spam Actions noise).
+
+You can also fire it manually via Actions → "fetch-cwc-bulletin" →
+"Run workflow", with optional `hint_index` (NN guess for
+`bulletin-DD-MM-YYYY-NN.pdf`) and `weeks_back` inputs.
+
+If the PR opens consistently every Friday, the runner has CWC access —
+turn on auto-merge for the `automated` label and walk away.
+
+If it never opens a PR, Azure IPs are blocked too — fall through to
+path B or C.
+
+### Automated path B: local cron (when your network has CWC access)
 
 ```bash
 cd pipeline
@@ -157,7 +181,7 @@ some networks), the cron pings the configured Discord webhook so you
 get a manual-action notice; the rest of the pipeline still runs against
 whatever bulletins are already cached.
 
-### Manual (when the auto-fetch can't reach CWC)
+### Automated path C: manual fallback when both auto paths fail
 
 If `fetch_cwc_bulletin.py` reports `no candidate URL worked`, the
 network the script is running on doesn't have access (CWC blocks some

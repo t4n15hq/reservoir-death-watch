@@ -1,0 +1,137 @@
+name: fetch-cwc-bulletin
+
+# Why this exists: rsms.cwc.gov.in returns HTTP 401 from at least
+# two networks I can reach (local dev + Hetzner) — the block appears to
+# be IP-based, not browser-detection. GitHub-hosted runners egress from
+# Azure data centres which sit on a completely different IP space; if
+# CWC's blocklist doesn't include Azure ranges, this workflow can do
+# the fetch automatically.
+#
+# Runs every Friday morning UTC (CWC publishes Thursdays). If a new
+# bulletin lands, the workflow opens a pull request adding the PDF +
+# parsed CSV. If the fetch fails, the workflow exits successfully but
+# its job summary records "no bulletin pulled this week" — no scary
+# red ✗ in the Actions tab for a known-best-effort task.
+#
+# Manually triggerable via the Actions UI ("Run workflow") for ad-hoc
+# pulls or backfilling missed weeks.
+
+on:
+  schedule:
+    # Friday 03:30 UTC ≈ 09:00 IST — bulletin should be live by then.
+    - cron: "30 3 * * 5"
+  workflow_dispatch:
+    inputs:
+      weeks_back:
+        description: "How many recent Thursdays to attempt (default 4)"
+        required: false
+        default: "4"
+      hint_index:
+        description: "Best guess at the RSMS NN index (optional)"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: cwc-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: pipeline
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install pipeline
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Attempt CWC fetch
+        id: fetch
+        continue-on-error: true
+        env:
+          PYTHONPATH: src
+        run: |
+          WEEKS="${{ github.event.inputs.weeks_back || '4' }}"
+          HINT_FLAG=""
+          if [ -n "${{ github.event.inputs.hint_index }}" ]; then
+            HINT_FLAG="--hint-index ${{ github.event.inputs.hint_index }}"
+          fi
+          # The script exits 0 only if at least one PDF was successfully
+          # fetched AND parsed. Capture exit code for the summary below.
+          set +e
+          python scripts/fetch_cwc_bulletin.py \
+            --weeks-back "$WEEKS" \
+            $HINT_FLAG \
+            --timeout 25
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Stage any new bulletin artifacts
+        id: stage
+        run: |
+          cd ..  # back to repo root for git
+          if git diff --quiet pipeline/data/cwc/; then
+            echo "no_changes=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::no new CWC bulletin pulled this run (network may be blocked, or no new bulletin since last fetch)"
+          else
+            echo "no_changes=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::new CWC artifacts staged"
+            git diff --stat pipeline/data/cwc/
+          fi
+
+      - name: Open pull request on success
+        if: steps.stage.outputs.no_changes == 'false'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "data(cwc): weekly bulletin pull ($(date -u +%Y-%m-%d))"
+          title: "Weekly CWC bulletin pull"
+          body: |
+            Automated fetch from `rsms.cwc.gov.in` succeeded from the GitHub-Actions runner.
+
+            New / updated files in `pipeline/data/cwc/` are staged. After merge:
+
+            ```bash
+            cd pipeline
+            uv run python scripts/rebuild_storage_from_csv.py
+            ```
+
+            …will refresh the dashboard's storage estimates against the new calibration anchors.
+
+            If this PR is opened consistently every week, the runner is on Azure IPs that CWC doesn't block, and you can leave the auto-merge on. If you see this PR rarely or never, the workflow is the wrong path and you should fall back to manual ingest per `docs/RUNBOOK.md`.
+          branch: cwc-auto-fetch
+          delete-branch: true
+          labels: |
+            automated
+            data
+
+      - name: Summarise run
+        run: |
+          echo "## CWC fetch run summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ steps.stage.outputs.no_changes }}" = "false" ]; then
+            echo "✅ Fetched at least one new bulletin — pull request opened." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "⚠️ No new bulletin pulled. This is expected if:" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "- CWC has IP-blocked GitHub-Actions runners (Azure egress)" >> "$GITHUB_STEP_SUMMARY"
+            echo "- This week's bulletin hasn't published yet" >> "$GITHUB_STEP_SUMMARY"
+            echo "- The bulletin URL pattern (RSMS NN index) has shifted" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "Fall back to the manual workflow in \`docs/RUNBOOK.md\`." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "fetch script exit code: \`${{ steps.fetch.outputs.rc }}\`" >> "$GITHUB_STEP_SUMMARY"
