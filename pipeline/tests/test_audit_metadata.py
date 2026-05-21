@@ -27,15 +27,15 @@ def provenance() -> dict:
 
 def test_total_reservoirs_matches_csv(provenance):
     rows = list(csv.DictReader(RESERVOIRS_CSV.open()))
-    assert provenance["counts"]["total_reservoirs"] == len(rows) == 25
+    assert provenance["counts"]["total_reservoirs"] == len(rows) == 53
 
 
 def test_cwc_anchored_count_pins_current_bulletin_ingest(provenance):
-    """As of the 2026-05-20 audit, seven local CWC bulletins match 24
-    reservoirs. Panchet has a CWC reference but no usable curve because the
-    latest row reports 100% FRL; Mullaperiyar is still unmatched."""
+    """As of the expanded-scope audit, seven local CWC bulletins match 52
+    reservoirs. Expanded rows are pending satellite AOIs, so only the observed
+    core rows can be counted as CWC-calibrated curves."""
 
-    assert provenance["counts"]["cwc_reference_available"] == 24, (
+    assert provenance["counts"]["cwc_reference_available"] == 52, (
         "CWC reference count changed. If you added a bulletin, update this "
         "expected value AND re-confirm docs/PROVENANCE.md counts."
     )
@@ -57,7 +57,7 @@ def test_metadata_verification_is_explicit(provenance):
 
     c = provenance["counts"]
     assert c["lat_lon_verified"] == 0, "bump test when coord_verified_at populated"
-    assert c["full_pool_capacity_from_cwc"] == 24, "bump test when CWC rows change"
+    assert c["full_pool_capacity_from_cwc"] == 52, "bump test when CWC rows change"
     assert c["dead_storage_capacity_verified"] == 0, (
         "bump test only after adding an explicit dead-storage source"
     )
@@ -75,6 +75,7 @@ def test_cwc_capacity_values_come_from_cwc_rows(provenance):
 
     assert by_id["krs"]["full_pool_capacity_bcm"]["value"] == 1.163
     assert by_id["indira_sagar"]["full_pool_capacity_bcm"]["value"] == 9.745
+    assert by_id["hirakud"]["full_pool_capacity_bcm"]["value"] == 5.378
     assert by_id["krs"]["full_pool_capacity_bcm"]["source"].startswith("CWC bulletin")
     assert by_id["indira_sagar"]["dead_storage_capacity_bcm"]["verified"] is False
 

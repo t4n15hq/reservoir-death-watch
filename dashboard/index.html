@@ -20,9 +20,10 @@
           <p class="landing__eyebrow">India water stress · satellite + CWC ground truth</p>
           <h1 class="landing__title">Reservoir Death Watch</h1>
           <p class="landing__lead">
-            A public early-warning dashboard for the 25 CWC-monitored reservoirs that
-            supply India's major cities. It tracks satellite-observed surface area,
-            derives storage transparently, and flags reservoirs approaching dead storage.
+            A public early-warning dashboard for India's major reservoir systems:
+            the 25 city-serving core reservoirs plus an expanding CWC state-coverage
+            watchlist. It tracks satellite-observed surface area, derives storage
+            transparently, and flags reservoirs approaching dead storage.
           </p>
           <div class="landing__actions" aria-label="Primary actions">
             <a class="landing__cta landing__cta--primary" href="#dashboard">Open live dashboard</a>
@@ -30,9 +31,9 @@
           </div>
         </div>
         <div class="landing__status" aria-label="Current project status">
-          <span><strong>25</strong> city-serving reservoirs</span>
+          <span><strong>25</strong> core city reservoirs</span>
+          <span><strong>28</strong> expanded CWC reservoirs</span>
           <span><strong>3/4</strong> historical backtests passing</span>
-          <span><strong>CWC</strong> remains ground truth</span>
         </div>
       </div>
     </section>
@@ -83,7 +84,7 @@
 
     <header class="hero" id="dashboard">
       <div class="hero__topline">
-        <span class="hero__kicker">India · 25 city-serving reservoirs</span>
+        <span class="hero__kicker">India · core + expanded CWC reservoir coverage</span>
         <span class="hero__meta" id="generated-meta">Loading…</span>
       </div>
       <h1 class="hero__title">Reservoir Death Watch</h1>
@@ -97,7 +98,24 @@
       <section class="app__list" aria-label="Reservoirs ranked by criticality">
         <div class="list-head">
           <h2>All reservoirs</h2>
-          <p>Ranked by days to dead storage.</p>
+          <p id="list-count">Ranked by days to dead storage.</p>
+          <div class="list-controls" aria-label="Reservoir filters">
+            <div class="scope-toggle" role="group" aria-label="Scope">
+              <button type="button" class="scope-toggle__button is-active" data-scope="core_city">Core</button>
+              <button type="button" class="scope-toggle__button" data-scope="expanded_cwc">Expanded</button>
+              <button type="button" class="scope-toggle__button" data-scope="all">All</button>
+            </div>
+            <label class="filter-field">
+              <span>State</span>
+              <select id="state-filter">
+                <option value="all">All states</option>
+              </select>
+            </label>
+            <label class="filter-field">
+              <span>Search</span>
+              <input id="reservoir-search" type="search" placeholder="Reservoir or city" />
+            </label>
+          </div>
         </div>
         <ol class="reservoir-list" id="reservoir-list"></ol>
       </section>
@@ -110,6 +128,7 @@
           <span class="legend__dot legend__dot--watch"></span> watch
           <span class="legend__dot legend__dot--stable"></span> stable
           <span class="legend__dot legend__dot--stale"></span> stale
+          <span class="legend__dot legend__dot--pending"></span> pending
         </div>
       </section>
 

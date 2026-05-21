@@ -77,6 +77,7 @@ def test_state_aggregates_groups_and_counts_tiers() -> None:
     assert [s["state"] for s in out["states"]] == ["Karnataka", "Tamil Nadu"]
     karnataka = out["states"][0]
     assert karnataka["reservoir_count"] == 2
+    assert karnataka["observed_count"] == 2
     assert karnataka["total_capacity_bcm"] == 4.0
     assert karnataka["current_storage_bcm"] == 1.9
     assert karnataka["tier_counts"] == {
@@ -92,3 +93,21 @@ def test_state_aggregates_handles_missing_capacity() -> None:
     reservoirs = [_result("foo", "X", 0.0, 0.0, "stable")]
     out = build_state_aggregates(reservoirs, generated_at=datetime(2026, 1, 1, tzinfo=UTC))
     assert out["states"][0]["percent_full"] == 0.0
+
+
+def test_state_aggregates_excludes_pending_rows_from_storage_rollups() -> None:
+    observed = _result("krs", "Karnataka", 1.0, 0.4, "critical")
+    pending = _result("almatti", "Karnataka", 3.0, 0.0, "stable")
+    pending.flags = ["awaiting_first_observation"]
+
+    out = build_state_aggregates(
+        [observed, pending],
+        generated_at=datetime(2026, 5, 18, tzinfo=UTC),
+    )
+
+    state = out["states"][0]
+    assert state["reservoir_count"] == 2
+    assert state["observed_count"] == 1
+    assert state["total_capacity_bcm"] == 1.0
+    assert state["percent_full"] == 40.0
+    assert state["tier_counts"]["stable"] == 0

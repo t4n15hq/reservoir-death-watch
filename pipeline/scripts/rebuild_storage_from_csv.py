@@ -86,6 +86,7 @@ def rebuild_one(reservoir_id: str, data_dir: Path, cwc_storage: pd.DataFrame) ->
 
     return {
         "reservoir_id": reservoir_id,
+        "scope": aoi.scope,
         "full_pool_area_km2": full_pool_area,
         "full_capacity_bcm": full_capacity,
         "cwc_as_of": cwc_row["date"] if cwc_row is not None else None,
@@ -140,6 +141,7 @@ def update_snapshot_json(data_dir: Path, infos: dict[str, dict]) -> None:
         reservoir["current"]["estimated_storage_bcm"] = round(storage, 3)
         reservoir["current"]["percent_full"] = round(percent_full, 1)
         reservoir["current"]["data_source"] = str(latest["data_source"])
+        reservoir["scope"] = info.get("scope") or reservoir.get("scope", "core_city")
         cwc_as_of = info.get("cwc_as_of")
         reservoir["current"]["cwc_as_of"] = cwc_as_of.isoformat() if cwc_as_of else None
         cwc_reported = info.get("cwc_reported_bcm")
@@ -152,6 +154,8 @@ def update_snapshot_json(data_dir: Path, infos: dict[str, dict]) -> None:
         current_flags.difference_update(
             {
                 "cwc_calibrated_single_point",
+                "core_city",
+                "expanded_cwc",
                 "low_volume_confidence",
                 "needs_cwc_calibration",
                 "phase0_cwc_validation_incomplete",

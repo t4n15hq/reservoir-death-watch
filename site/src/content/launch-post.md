@@ -1,7 +1,7 @@
 ---
 title: Launching Reservoir Death Watch
 slug: blog/launch
-description: A satellite-derived early warning dashboard for the 25 reservoirs that supply India's major cities.
+description: A satellite-derived early warning dashboard for India's core city-serving reservoirs and expanded CWC state coverage.
 date: 2026-05-19
 ---
 
@@ -20,10 +20,11 @@ is privately asking: *which of our reservoirs runs dry first, and when?*
 
 ## What it shows
 
-A live dashboard tracking the 25 CWC-monitored reservoirs that supply
+A live dashboard tracking the 25 CWC-monitored core reservoirs that supply
 India's major cities — Delhi, Bengaluru, Chennai (indirect), Hyderabad,
-DVC industrial belt, Ahmedabad, Surat, Jaipur, Pune,
-Coimbatore, Madurai, Aurangabad, Jabalpur, Nagpur, Kochi.
+DVC industrial belt, Ahmedabad, Surat, Jaipur, Pune, Coimbatore, Madurai,
+Aurangabad, Jabalpur, Nagpur, Kochi — plus an expanded CWC state-coverage
+watchlist.
 
 For each reservoir, the dashboard shows:
 
@@ -106,15 +107,17 @@ appreciated; reuse is encouraged.
 I'm honest about this in the dashboard's "Data quality" card at the
 bottom of the page. As of the latest CWC ingest:
 
-- 2 of 25 reservoirs are still using an area-ratio storage proxy:
+- 28 of 53 reservoirs are expanded CWC rows awaiting AOI seeding and
+  Sentinel/JRC backfill.
+- 2 observed reservoirs are still using an area-ratio storage proxy:
   Mullaperiyar needs a defensible CWC name match, and Panchet needs a
   non-100%-full CWC anchor before the power-law fit is meaningful.
-- 24 of 25 reservoirs have a loaded CWC live-storage reference and FRL
+- 52 of 53 reservoirs have a loaded CWC live-storage reference and FRL
   capacity from local April-May 2026 bulletins.
-- 0 of 25 lat/long coordinates have been verified against CWC's
+- 0 of 53 lat/long coordinates have been verified against CWC's
   published register — they're from my training-data knowledge and could
   be off by a couple of km.
-- 0 of 25 dead-storage capacities or population-served numbers have an
+- 0 of 53 dead-storage capacities or population-served numbers have an
   external source attached yet.
 
 These are the next milestones. The system architecture supports drop-in

@@ -24,9 +24,12 @@ REQUIRED_FIELDS = (
     "lon",
     "priority",
     "aoi_file",
+    "scope",
 )
 ID_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
-EXPECTED_ROWS = 25
+EXPECTED_ROWS = 53
+EXPECTED_CORE_ROWS = 25
+ALLOWED_SCOPES = {"core_city", "expanded_cwc"}
 
 # Coarse India lat/lon bounding box, slightly padded for offshore island groups.
 LAT_RANGE = (6.0, 37.0)
@@ -40,16 +43,23 @@ def rows() -> list[dict[str, str]]:
 
 def test_row_count_matches_curated_universe(rows):
     assert len(rows) == EXPECTED_ROWS, (
-        f"expected {EXPECTED_ROWS} curated city-serving reservoirs, got {len(rows)}. "
+        f"expected {EXPECTED_ROWS} curated core + expanded reservoirs, got {len(rows)}. "
         f"See docs/PRD.md for scope rationale."
     )
 
 
-def test_every_row_has_city_served(rows):
-    """Scope is city-serving; an empty city_served means the row is off-thesis."""
+def test_every_row_has_city_or_region_label(rows):
+    """Rows must show an understandable beneficiary label in the UI."""
 
     missing = [r["id"] for r in rows if not r.get("city_served", "").strip()]
     assert not missing, f"rows without city_served: {missing}"
+
+
+def test_scope_is_explicit_and_core_count_is_pinned(rows):
+    bad = [r["id"] for r in rows if r.get("scope") not in ALLOWED_SCOPES]
+    assert not bad, f"rows with invalid scope: {bad}"
+    core = [r for r in rows if r["scope"] == "core_city"]
+    assert len(core) == EXPECTED_CORE_ROWS
 
 
 def test_required_fields_present(rows):

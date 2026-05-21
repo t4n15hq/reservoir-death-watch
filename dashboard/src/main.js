@@ -39,35 +39,136 @@ async function boot() {
   renderDataQuality(document.getElementById('quality-section'), provenance);
 
   const map = await initMap('map');
+  const filters = {
+    scope: 'core_city',
+    state: 'all',
+    query: '',
+  };
+  let selectedReservoir = null;
 
   const selectByReservoir = (reservoir, { fly = true } = {}) => {
+    selectedReservoir = reservoir;
     renderDetail(document.getElementById('detail-pane'), reservoir);
     setActivePin(reservoir.id);
     setActiveRow(reservoir.id);
     if (fly) focusReservoir(map, reservoir);
   };
 
-  plotReservoirs(map, snapshot, {
-    onSelect: (r) => selectByReservoir(r),
-  });
+  setupFilters(snapshot, filters, () => renderFilteredReservoirs());
 
-  renderReservoirList(document.getElementById('reservoir-list'), snapshot, {
-    onSelect: (r) => selectByReservoir(r),
-  });
+  function renderFilteredReservoirs() {
+    const filtered = filterReservoirs(snapshot.reservoirs ?? [], filters);
+    updateListCount(filtered, snapshot.reservoirs ?? [], filters);
 
-  const initial = pickDefaultReservoir(snapshot);
-  if (initial) {
-    // Render detail without flying — let the user see the full India view first.
-    selectByReservoir(initial, { fly: false });
-  } else {
-    renderEmpty(document.getElementById('detail-pane'));
+    plotReservoirs(map, filtered, {
+      onSelect: (r) => selectByReservoir(r),
+    });
+
+    renderReservoirList(document.getElementById('reservoir-list'), filtered, {
+      onSelect: (r) => selectByReservoir(r),
+    });
+
+    if (selectedReservoir && filtered.some((r) => r.id === selectedReservoir.id)) {
+      setActivePin(selectedReservoir.id);
+      setActiveRow(selectedReservoir.id);
+      return;
+    }
+
+    const initial = pickDefaultReservoir({ reservoirs: filtered });
+    if (initial) {
+      // Render detail without flying — let the user see the current map extent first.
+      selectByReservoir(initial, { fly: false });
+    } else {
+      selectedReservoir = null;
+      renderEmpty(document.getElementById('detail-pane'));
+    }
   }
+
+  renderFilteredReservoirs();
 }
 
 function setActiveRow(reservoirId) {
   document.querySelectorAll('.reservoir-row').forEach((el) => {
     el.classList.toggle('is-active', el.dataset.id === reservoirId);
   });
+}
+
+function setupFilters(snapshot, filters, onChange) {
+  const stateSelect = document.getElementById('state-filter');
+  const search = document.getElementById('reservoir-search');
+  const scopeButtons = document.querySelectorAll('.scope-toggle__button');
+
+  if (stateSelect) {
+    const states = [...new Set((snapshot.reservoirs ?? []).map((r) => r.state).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b));
+    stateSelect.innerHTML = [
+      '<option value="all">All states</option>',
+      ...states.map((state) => `<option value="${escapeAttr(state)}">${state}</option>`),
+    ].join('');
+    stateSelect.addEventListener('change', () => {
+      filters.state = stateSelect.value;
+      onChange();
+    });
+  }
+
+  if (search) {
+    search.addEventListener('input', () => {
+      filters.query = search.value.trim().toLowerCase();
+      onChange();
+    });
+  }
+
+  scopeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      filters.scope = button.dataset.scope ?? 'core_city';
+      scopeButtons.forEach((b) => b.classList.toggle('is-active', b === button));
+      onChange();
+    });
+  });
+}
+
+function filterReservoirs(reservoirs, filters) {
+  const query = filters.query;
+  return reservoirs.filter((reservoir) => {
+    if (filters.scope !== 'all' && (reservoir.scope ?? 'core_city') !== filters.scope) {
+      return false;
+    }
+    if (filters.state !== 'all' && reservoir.state !== filters.state) {
+      return false;
+    }
+    if (!query) return true;
+    const haystack = [
+      reservoir.name,
+      reservoir.city_served,
+      reservoir.state,
+      reservoir.river,
+      reservoir.id,
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+    return haystack.includes(query);
+  });
+}
+
+function updateListCount(filtered, reservoirs, filters) {
+  const el = document.getElementById('list-count');
+  if (!el) return;
+  const scopeText = filters.scope === 'all'
+    ? 'all scopes'
+    : filters.scope === 'expanded_cwc'
+      ? 'expanded CWC'
+      : 'core city';
+  const observed = filtered.filter((r) => !(r.flags ?? []).includes('awaiting_first_observation')).length;
+  el.textContent = `${filtered.length} of ${reservoirs.length} reservoirs · ${observed} observed · ${scopeText}`;
+}
+
+function escapeAttr(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;');
 }
 
 function renderBacktestBanner(snapshot, caseId) {

@@ -18,6 +18,7 @@ export function renderStateBand(container, snapshot, stateAggregates = null) {
         <div class="state-row">
           <span class="state-row__name">${s.state}</span>
           <span class="state-row__pct">${formatPercent(s.percent_full)}</span>
+          <span class="state-row__observed">${s.observed_count ?? s.reservoir_count}/${s.reservoir_count}</span>
           <span class="state-row__tiers">
             ${tierBadge('critical', s.tier_counts?.critical)}
             ${tierBadge('warning', s.tier_counts?.warning)}
@@ -33,7 +34,7 @@ export function renderStateBand(container, snapshot, stateAggregates = null) {
     <div class="states-card">
       <div class="states-card__head">
         <h2>By state</h2>
-        <p>${states.length} states · sorted by critical + warning counts.</p>
+        <p>${states.length} states · observed/total shown per state.</p>
       </div>
       <div class="states-grid">${rows}</div>
     </div>

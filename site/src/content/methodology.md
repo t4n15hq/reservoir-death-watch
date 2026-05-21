@@ -1,16 +1,16 @@
 ---
 title: Methodology
 slug: methodology
-description: How Reservoir Death Watch turns Sentinel-2 surface-area observations into days-to-dead-storage projections for 25 city-serving Indian reservoirs.
+description: How Reservoir Death Watch turns Sentinel-2 surface-area observations into days-to-dead-storage projections for core and expanded CWC Indian reservoirs.
 ---
 
 # Methodology
 
 This is a public dashboard for the 25 reservoirs that supply India's major
-cities. It tracks them weekly via satellite, anchors the satellite-derived
-storage estimates to the Central Water Commission's published volumes where
-available, and projects forward to a "days to dead storage" number under two
-monsoon scenarios.
+cities, plus an expanded CWC state-coverage watchlist. It tracks observed rows
+weekly via satellite, anchors satellite-derived storage estimates to the
+Central Water Commission's published volumes where available, and projects
+forward to a "days to dead storage" number under two monsoon scenarios.
 
 Everything here is reproducible from the open-source code at
 [`reservoir-death-watch`](https://github.com/t4n15hq/reservoir-death-watch).
@@ -170,21 +170,24 @@ satellite-only monitoring during heavy cloud cover, not something to hide.
 
 ## Data quality
 
-Of the 25 reservoirs on the dashboard:
+Of the 53 reservoirs on the dashboard:
 
-- **25 have Sentinel-2 observations in the last week.**
-- **24 have loaded CWC live-storage references** from local April-May
+- **25 core reservoirs have Sentinel-2 observations in the last week.**
+- **28 expanded CWC reservoirs are present as pending rows** with CWC
+  storage/capacity loaded but AOIs and Sentinel/JRC histories not backfilled
+  yet.
+- **52 have loaded CWC live-storage references** from local April-May
   2026 CWC bulletin PDFs.
 - **23 have CWC-calibrated area-to-volume curves.** Panchet has a CWC
   row, but that row is at exactly 100% FRL, so it cannot fit a useful
   two-point power-law curve yet.
-- **2 are using an area-ratio proxy** for storage: Mullaperiyar, which
+- **2 observed rows are using an area-ratio proxy** for storage: Mullaperiyar, which
   still lacks a defensible matched CWC row, and Panchet, pending a
   non-full CWC anchor.
 - **0 reservoirs have lat/lon verified against CWC's published register
   or OpenStreetMap.** These came from training-data knowledge during
   scope definition; they're approximate but plausible (within ±5 km).
-- **24 reservoirs have FRL capacity loaded from CWC; 0 have dead-storage
+- **52 reservoirs have FRL capacity loaded from CWC; 0 have dead-storage
   capacity or population served externally sourced.**
 
 Full provenance per field is at

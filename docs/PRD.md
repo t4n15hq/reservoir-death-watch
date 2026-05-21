@@ -6,7 +6,7 @@
 
 This is the WHY and WHAT. The HOW lives in `TDD.md`. The phase plan lives in `PHASES.md`. The constitution lives in `../AGENT.md`.
 
-**v2 change:** Scope tightened from "all 166 CWC-monitored reservoirs" to "the 25 reservoirs supplying India's major cities." The earlier 166-universe framing inherited CWC's bookkeeping choice rather than making a product choice; the city-serving cut sharpens the story (KRS dead in 89 days → Bengaluru) and makes 25 × ~10 verifiable fields tractable instead of 166 × ~10. Mumbai's BMC-managed system is deferred to `IDEAS.md` since it requires a separate data scraper.
+**v2 change:** Scope tightened from "all 166 CWC-monitored reservoirs" to "the 25 reservoirs supplying India's major cities." The earlier 166-universe framing inherited CWC's bookkeeping choice rather than making a product choice; the city-serving cut sharpens the story (KRS dead in 89 days → Bengaluru). **v2.1 expansion:** keep that 25-reservoir core as the default view, but add an `expanded_cwc` watchlist so covered states have broader CWC context. Mumbai's BMC-managed system is still deferred to `IDEAS.md` since it requires a separate data scraper.
 
 ---
 
@@ -14,7 +14,7 @@ This is the WHY and WHAT. The HOW lives in `TDD.md`. The phase plan lives in `PH
 
 When the reservoirs supplying India's major cities empty before the monsoon refills them — as happened to Bengaluru in 2024 (KRS at 16%), Chennai in 2019 (four reservoirs dry), and is now visibly happening to the Krishna and Kaveri basins — tens of millions of urban Indians lose reliable drinking water.
 
-Twenty-five CWC-monitored reservoirs anchor the drinking-water supply for roughly two-thirds of India's metro population: Delhi (Bhakra, Tehri), Bengaluru (KRS, Kabini, Hemavathy, Harangi), Chennai (Mettur via the Veeranam transfer), Hyderabad (Nagarjuna Sagar, Srisailam, Singur), Ahmedabad (Sardar Sarovar), Surat (Ukai), Jaipur (Bisalpur), Pune (Khadakwasla), Coimbatore (Bhavani Sagar), Madurai (Vaigai), Aurangabad (Jayakwadi), Jabalpur (Bargi), Nagpur (Totladoh/Pench), Kochi (Idamalayar, Idukki), and the DVC industrial belt (Maithon, Panchet). The full list lives in `reservoirs.csv`.
+Twenty-five CWC-monitored reservoirs anchor the drinking-water supply for roughly two-thirds of India's metro population: Delhi (Bhakra, Tehri), Bengaluru (KRS, Kabini, Hemavathy, Harangi), Chennai (Mettur via the Veeranam transfer), Hyderabad (Nagarjuna Sagar, Srisailam, Singur), Ahmedabad (Sardar Sarovar), Surat (Ukai), Jaipur (Bisalpur), Pune (Khadakwasla), Coimbatore (Bhavani Sagar), Madurai (Vaigai), Aurangabad (Jayakwadi), Jabalpur (Bargi), Nagpur (Totladoh/Pench), Kochi (Idamalayar, Idukki), and the DVC industrial belt (Maithon, Panchet). A second tier of expanded CWC rows adds state context without changing the default core story. The full list lives in `reservoirs.csv`.
 
 CWC publishes weekly storage data as a 30-page PDF. ISRO Bhuvan hosts imagery. Nobody fuses the satellite history, the live observations, the ground-truth volumes, and the El Niño signal into a single, public-facing answer to the question every urban water utility is privately asking:
 
@@ -44,7 +44,8 @@ Wants advance warning of which of their feeder reservoirs is on track for emerge
 
 ### What it shows
 
-- **National map** of India with the 25 city-serving reservoirs, color-coded by criticality tier and labelled with the city they supply.
+- **National map** of India with the 25 city-serving core reservoirs by default, plus an expanded CWC scope toggle.
+- **Filters** for Core / Expanded / All, state, and reservoir/city search.
 - **City view**: each major city's primary feeders grouped, with an aggregate "days of water under each monsoon scenario."
 - **Reservoir detail pages**: multi-decade history, current surface area, two-scenario projection (neutral monsoon vs El Niño monsoon), CSV download, methodology link.
 - **Backtest mode**: rewind the model to a historical date and reproduce findings.

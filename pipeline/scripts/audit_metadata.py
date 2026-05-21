@@ -106,13 +106,24 @@ def snapshot_entry_classification(
         "aoi": {
             "verified": not any(
                 f in flags
-                for f in ("first_pass_needs_manual_review", "manual_bbox_needs_visual_check")
+                for f in (
+                    "awaiting_first_observation",
+                    "first_pass_needs_manual_review",
+                    "manual_bbox_needs_visual_check",
+                    "needs_aoi_seeding",
+                )
             ),
             "flag": next(
                 (
                     f
                     for f in flags
-                    if f in ("first_pass_needs_manual_review", "manual_bbox_needs_visual_check")
+                    if f
+                    in (
+                        "awaiting_first_observation",
+                        "first_pass_needs_manual_review",
+                        "manual_bbox_needs_visual_check",
+                        "needs_aoi_seeding",
+                    )
                 ),
                 None,
             ),

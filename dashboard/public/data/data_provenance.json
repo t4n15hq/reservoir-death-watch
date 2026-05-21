@@ -2,16 +2,16 @@
   "counts": {
     "aoi_visually_reviewed": 0,
     "capacity_verified_against_cwc": 0,
-    "cwc_reference_available": 24,
+    "cwc_reference_available": 52,
     "dead_storage_capacity_verified": 0,
-    "full_pool_capacity_from_cwc": 24,
+    "full_pool_capacity_from_cwc": 52,
     "lat_lon_verified": 0,
     "observed_with_satellite": 25,
     "population_verified_against_census": 0,
     "storage_cwc_calibrated": 23,
-    "total_reservoirs": 25
+    "total_reservoirs": 53
   },
-  "generated_at": "2026-05-21T01:15:07.682931Z",
+  "generated_at": "2026-05-21T16:04:08.822342Z",
   "reservoirs": [
     {
       "aoi": {
@@ -1236,6 +1236,1378 @@
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Andhra Pradesh Krishna basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.648
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.3,
+        "verified": true
+      },
+      "id": "pulichintala",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          16.775,
+          80.008
+        ],
+        "verified": false
+      },
+      "name": "Pulichintala",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Andhra Pradesh Pennar basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 1.296
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.994,
+        "verified": true
+      },
+      "id": "somasila",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          14.483,
+          79.316
+        ],
+        "verified": false
+      },
+      "name": "Somasila",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Andhra Pradesh coastal supply",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.098
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.508,
+        "verified": true
+      },
+      "id": "yeleru",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          17.3,
+          82.1
+        ],
+        "verified": false
+      },
+      "name": "Yeleru",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Gujarat Mahi basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.674
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.472,
+        "verified": true
+      },
+      "id": "kadana",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          23.283,
+          73.833
+        ],
+        "verified": false
+      },
+      "name": "Kadana",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Gujarat Panam basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.303
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.697,
+        "verified": true
+      },
+      "id": "panam",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          22.9,
+          73.6
+        ],
+        "verified": false
+      },
+      "name": "Panam",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Gujarat Sabarmati basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.1
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.153,
+        "verified": true
+      },
+      "id": "hathmati",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          23.59,
+          72.95
+        ],
+        "verified": false
+      },
+      "name": "Hathmati",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Himachal Pradesh Beas basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 2.269
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 6.157,
+        "verified": true
+      },
+      "id": "pong_dam",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          31.963,
+          76.087
+        ],
+        "verified": false
+      },
+      "name": "Pong Dam",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Himachal Pradesh Sutlej basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.071
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.089,
+        "verified": true
+      },
+      "id": "kol_dam",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          31.37,
+          76.89
+        ],
+        "verified": false
+      },
+      "name": "Kol Dam",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Jharkhand Damodar basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.281
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.821,
+        "verified": true
+      },
+      "id": "tenughat",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          23.74,
+          85.89
+        ],
+        "verified": false
+      },
+      "name": "Tenughat",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Jharkhand Damodar basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.079
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.176,
+        "verified": true
+      },
+      "id": "konar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          23.91,
+          85.75
+        ],
+        "verified": false
+      },
+      "name": "Konar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Jharkhand DVC basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.023
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.142,
+        "verified": true
+      },
+      "id": "tilaiya",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          24.32,
+          85.54
+        ],
+        "verified": false
+      },
+      "name": "Tilaiya",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Madhya Pradesh Chambal basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 4.332
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 6.827,
+        "verified": true
+      },
+      "id": "gandhi_sagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          24.7,
+          75.56
+        ],
+        "verified": false
+      },
+      "name": "Gandhi Sagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Madhya Pradesh Narmada basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.324
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.944,
+        "verified": true
+      },
+      "id": "tawa",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          22.56,
+          77.97
+        ],
+        "verified": false
+      },
+      "name": "Tawa",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Madhya Pradesh Narmada basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.15
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.299,
+        "verified": true
+      },
+      "id": "omkareshwar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          22.24,
+          76.15
+        ],
+        "verified": false
+      },
+      "name": "Omkareshwar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Rajasthan Mahi basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.636
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.711,
+        "verified": true
+      },
+      "id": "mahi_bajaj_sagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          23.54,
+          74.45
+        ],
+        "verified": false
+      },
+      "name": "Mahi Bajaj Sagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Rajasthan Chambal basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.519
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.436,
+        "verified": true
+      },
+      "id": "rana_pratap_sagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          24.9,
+          75.58
+        ],
+        "verified": false
+      },
+      "name": "Rana Pratap Sagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Rajasthan Jawai basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.059
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.193,
+        "verified": true
+      },
+      "id": "jawai",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          25.05,
+          73.15
+        ],
+        "verified": false
+      },
+      "name": "Jawai Dam",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Telangana Godavari basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.505
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 2.3,
+        "verified": true
+      },
+      "id": "sriramsagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          18.97,
+          78.33
+        ],
+        "verified": false
+      },
+      "name": "Sriramsagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Telangana Manair basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.189
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.621,
+        "verified": true
+      },
+      "id": "lower_manair",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          18.38,
+          79.3
+        ],
+        "verified": false
+      },
+      "name": "Lower Manair",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Telangana Manjira basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.219
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.482,
+        "verified": true
+      },
+      "id": "nizam_sagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          18.24,
+          77.98
+        ],
+        "verified": false
+      },
+      "name": "Nizam Sagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Uttarakhand Ramganga basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 1.119
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 2.196,
+        "verified": true
+      },
+      "id": "ramganga",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          29.54,
+          78.76
+        ],
+        "verified": false
+      },
+      "name": "Ramganga",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Uttarakhand Terai reservoir",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.019
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.176,
+        "verified": true
+      },
+      "id": "nanak_sagar",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          28.96,
+          79.81
+        ],
+        "verified": false
+      },
+      "name": "Nanak Sagar",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Odisha Mahanadi basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 1.27
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 5.378,
+        "verified": true
+      },
+      "id": "hirakud",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          21.57,
+          83.87
+        ],
+        "verified": false
+      },
+      "name": "Hirakud",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Odisha Brahmani basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.562
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 3.432,
+        "verified": true
+      },
+      "id": "rengali",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          21.28,
+          85.04
+        ],
+        "verified": false
+      },
+      "name": "Rengali",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Odisha Indravati basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.499
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.456,
+        "verified": true
+      },
+      "id": "upper_indravati",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          19.31,
+          82.84
+        ],
+        "verified": false
+      },
+      "name": "Upper Indravati",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Chhattisgarh Hasdeo basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 1.659
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 3.046,
+        "verified": true
+      },
+      "id": "minimata_bango",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          22.6,
+          82.63
+        ],
+        "verified": false
+      },
+      "name": "Minimata Bango",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Chhattisgarh Mahanadi basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.395
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.767,
+        "verified": true
+      },
+      "id": "mahanadi_chhattisgarh",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          20.63,
+          81.55
+        ],
+        "verified": false
+      },
+      "name": "Mahanadi",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
+      }
+    },
+    {
+      "aoi": {
+        "flag": "awaiting_first_observation",
+        "verified": false
+      },
+      "city_served": {
+        "source": "editorial label",
+        "value": "Chhattisgarh Tandula basin",
+        "verified": false
+      },
+      "current_observation": {
+        "as_of": "1900-01-01",
+        "data_source": "stale"
+      },
+      "cwc_reference": {
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.144
+      },
+      "dead_storage_capacity_bcm": {
+        "source": "approximate (training-data knowledge)",
+        "value": null,
+        "verified": false
+      },
+      "full_pool_capacity_bcm": {
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.312,
+        "verified": true
+      },
+      "id": "tandula",
+      "lat_lon": {
+        "source": "approximate (training-data knowledge)",
+        "value": [
+          20.68,
+          81.28
+        ],
+        "verified": false
+      },
+      "name": "Tandula",
+      "population_served": {
+        "source": "approximate (order-of-magnitude estimate)",
+        "value": null,
+        "verified": false
+      },
+      "storage_calibration": {
+        "cwc_anchored": false,
+        "method": "pending"
       }
     }
   ]

@@ -10,6 +10,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 AreaSource = Literal["jrc", "sentinel_2", "sentinel_1"]
 CurrentSource = Literal["sentinel_2", "sentinel_1", "stale"]
 Tier = Literal["critical", "warning", "watch", "stable"]
+ReservoirScope = Literal["core_city", "expanded_cwc"]
 FitQuality = Literal["good", "low_confidence", "rejected"]
 ConfidenceFlag = Literal["high", "medium", "low"]
 Scenario = Literal["neutral_monsoon", "el_nino_monsoon"]
@@ -35,6 +36,7 @@ class ReservoirAOI(BaseModel):
     aoi_area_km2: float | None = None
     aoi_review_status: str | None = None
     polygon: dict[str, Any]
+    scope: ReservoirScope = "core_city"
     notes: str = ""
 
     @field_validator("polygon")
@@ -138,6 +140,7 @@ class ReservoirResult(BaseModel):
     projection: dict[Scenario, Projection]
     tier: Tier
     model_version: str
+    scope: ReservoirScope = "core_city"
     flags: list[str] = Field(default_factory=list)
 
 

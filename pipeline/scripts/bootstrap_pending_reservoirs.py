@@ -21,6 +21,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from reservoirs.config import DASHBOARD_DATA_DIR, MODEL_VERSION, RESERVOIRS_CSV
+from reservoirs.cwc_scraper import load_cwc_storage
 from reservoirs.schemas import DashboardSnapshot
 from reservoirs.state_aggregates import build_state_aggregates
 
@@ -28,7 +29,7 @@ PLACEHOLDER_AS_OF = "1900-01-01"
 PLACEHOLDER_FLAGS = ["awaiting_first_observation", "needs_aoi_seeding"]
 
 
-def make_placeholder(row: dict[str, str]) -> dict:
+def make_placeholder(row: dict[str, str], cwc_row: dict | None = None) -> dict:
     """Build a schema-valid `reservoirs.json` entry for a reservoir we haven't
     actually observed yet. Storage values are zero (honest), tier is the
     lowest-severity bucket so it can't masquerade as a real critical signal,
@@ -41,6 +42,14 @@ def make_placeholder(row: dict[str, str]) -> dict:
     def opt_int(value: str) -> int | None:
         return int(value) if value else None
 
+    cwc_reported = opt_float(str(cwc_row.get("live_storage_bcm", ""))) if cwc_row else None
+    cwc_as_of = cwc_row.get("date").isoformat() if cwc_row else None
+    cwc_capacity = (
+        opt_float(str(cwc_row.get("live_capacity_at_frl_bcm", ""))) if cwc_row else None
+    )
+    scope = row.get("scope") or "core_city"
+    flags = list(PLACEHOLDER_FLAGS)
+
     return {
         "id": row["id"],
         "name": row["name"],
@@ -51,14 +60,16 @@ def make_placeholder(row: dict[str, str]) -> dict:
         "lat": float(row["lat"]),
         "lon": float(row["lon"]),
         "full_pool_area_km2": None,
-        "full_pool_capacity_bcm": opt_float(row.get("full_pool_capacity_bcm") or ""),
+        "full_pool_capacity_bcm": (
+            cwc_capacity or opt_float(row.get("full_pool_capacity_bcm") or "")
+        ),
         "dead_storage_capacity_bcm": opt_float(row.get("dead_storage_capacity_bcm") or ""),
         "current": {
             "as_of": PLACEHOLDER_AS_OF,
             "area_km2": 0.0,
             "estimated_storage_bcm": 0.0,
-            "cwc_reported_bcm": None,
-            "cwc_as_of": None,
+            "cwc_reported_bcm": cwc_reported,
+            "cwc_as_of": cwc_as_of,
             "percent_full": 0.0,
             "data_source": "stale",
         },
@@ -82,15 +93,28 @@ def make_placeholder(row: dict[str, str]) -> dict:
         },
         "tier": "stable",
         "model_version": MODEL_VERSION,
-        "flags": list(PLACEHOLDER_FLAGS),
+        "scope": scope,
+        "flags": flags,
     }
 
 
-def merge_placeholders(snapshot: dict, csv_rows: list[dict[str, str]]) -> dict:
+def merge_placeholders(
+    snapshot: dict,
+    csv_rows: list[dict[str, str]],
+    cwc_latest: dict[str, dict],
+) -> dict:
     by_id = {r["id"]: r for r in snapshot.get("reservoirs", [])}
     for row in csv_rows:
         if row["id"] not in by_id:
-            by_id[row["id"]] = make_placeholder(row)
+            by_id[row["id"]] = make_placeholder(row, cwc_latest.get(row["id"]))
+        else:
+            by_id[row["id"]]["scope"] = row.get("scope") or by_id[row["id"]].get(
+                "scope",
+                "core_city",
+            )
+            flags = set(by_id[row["id"]].get("flags") or [])
+            flags.difference_update({"core_city", "expanded_cwc"})
+            by_id[row["id"]]["flags"] = sorted(flags)
     # Re-sort to follow priority order from CSV (so the JSON's reservoir list
     # is deterministic and matches what tier/aggregate computations expect).
     priority_index = {row["id"]: int(row["priority"]) for row in csv_rows}
@@ -166,15 +190,27 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def latest_cwc_by_reservoir() -> dict[str, dict]:
+    try:
+        cwc = load_cwc_storage()
+    except Exception:  # noqa: BLE001
+        return {}
+    latest: dict[str, dict] = {}
+    for record in cwc.sort_values("date").to_dict("records"):
+        latest[str(record["reservoir_id"])] = record
+    return latest
+
+
 def main() -> int:
     args = parse_args()
     snapshot_path = args.data_dir / "reservoirs.json"
     with snapshot_path.open() as handle:
         snapshot = json.load(handle)
     csv_rows = list(csv.DictReader(args.reservoirs_csv.open()))
+    cwc_latest = latest_cwc_by_reservoir()
 
     before = len(snapshot["reservoirs"])
-    snapshot = merge_placeholders(snapshot, csv_rows)
+    snapshot = merge_placeholders(snapshot, csv_rows, cwc_latest)
     snapshot = recompute_aggregates(snapshot)
     snapshot["generated_at"] = datetime.now(UTC).isoformat().replace("+00:00", "Z")
 

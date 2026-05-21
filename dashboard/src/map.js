@@ -10,6 +10,7 @@ const PENDING_COLOR = '#b0aba0';
 
 // Track pin DOM elements so we can highlight the active reservoir from list clicks.
 const pinElements = new Map();
+let markers = [];
 
 export async function initMap(elementId) {
   // Carto Positron — minimal label noise, lets the pins do the talking.
@@ -41,9 +42,11 @@ export async function initMap(elementId) {
   return map;
 }
 
-export function plotReservoirs(map, snapshot, { onSelect }) {
+export function plotReservoirs(map, reservoirs, { onSelect }) {
+  for (const marker of markers) marker.remove();
+  markers = [];
   pinElements.clear();
-  for (const reservoir of snapshot.reservoirs) {
+  for (const reservoir of reservoirs) {
     const pending = awaitingFirstObservation(reservoir);
     const stale = !pending && isStale(reservoir);
     const el = document.createElement('button');
@@ -60,7 +63,10 @@ export function plotReservoirs(map, snapshot, { onSelect }) {
     el.setAttribute('aria-label', tooltip);
     el.addEventListener('click', () => onSelect(reservoir));
 
-    new maplibregl.Marker({ element: el }).setLngLat([reservoir.lon, reservoir.lat]).addTo(map);
+    const marker = new maplibregl.Marker({ element: el })
+      .setLngLat([reservoir.lon, reservoir.lat])
+      .addTo(map);
+    markers.push(marker);
     pinElements.set(reservoir.id, el);
   }
 }

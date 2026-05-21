@@ -6,7 +6,7 @@ A satellite-driven early warning system for India's draining reservoirs.
 
 ## What this is
 
-A live public dashboard covering the 25 CWC-monitored reservoirs that supply India's major cities — Delhi, Bengaluru, Chennai, Hyderabad, Ahmedabad, Surat, Jaipur, Pune, Coimbatore, Madurai, Aurangabad, Jabalpur, Nagpur, Kochi, and the DVC industrial belt. For each reservoir, the system projects days-to-dead-storage under two scenarios — neutral monsoon and El Niño-suppressed monsoon — using Sentinel-2 satellite imagery for live extent, JRC Global Surface Water for multi-decade historical context, CWC bulletins as ground truth, and NOAA ONI for El Niño conditioning.
+A live public dashboard covering a 25-reservoir city-serving core plus an expanded CWC state-coverage watchlist. The core set covers Delhi, Bengaluru, Chennai, Hyderabad, Ahmedabad, Surat, Jaipur, Pune, Coimbatore, Madurai, Aurangabad, Jabalpur, Nagpur, Kochi, and the DVC industrial belt. Expanded rows add CWC-backed reservoirs so each covered state has broader context. For observed reservoirs, the system projects days-to-dead-storage under neutral and El Niño-suppressed monsoon scenarios using Sentinel-2 satellite imagery, JRC Global Surface Water, CWC bulletins, and NOAA ONI.
 
 Updated weekly via a cron job. Validated against three historical water crises (Bengaluru 2024, Chennai/Mettur 2019, Marathwada/Jayakwadi 2016 & 2019).
 
@@ -18,20 +18,20 @@ Updated weekly via a cron job. Validated against three historical water crises (
 
 ## Status
 
-**Phase 1 — mostly done, not closed.** All 25 city-serving reservoirs have AOIs + at least one satellite observation; 3 of 4 historical backtests pass.
+**Phase 1 — expanded, not closed.** All 25 core city-serving reservoirs have AOIs + at least one satellite observation; 28 expanded CWC reservoirs are present as pending rows with CWC storage/capacity loaded, awaiting AOI seeding and Sentinel backfill. 3 of 4 historical backtests pass.
 
 Implemented:
 - Full pipeline: JRC monthly history, Sentinel-2 area, Sentinel-1 SAR fallback, area-to-volume calibration (power-law where CWC anchor available), depletion regression, dual-scenario projection, tier classification.
-- Dashboard: editorial hero + ranked reservoir list + maplibre map of India + per-reservoir detail panel with history chart + data-quality provenance card.
+- Dashboard: editorial hero + ranked reservoir list + maplibre map of India + per-reservoir detail panel with history chart + data-quality provenance card + state/search/scope filters.
 - Hetzner infra scaffold (`infra/run.sh`, cron entry, freshness check, README).
 - CWC bulletin auto-fetcher with graceful manual fallback.
 - Python unit/integration tests and ruff checks passing.
 
 **Not yet Phase 1 closed** — blockers before public distribution:
-- **CWC validation gap:** 24 of 25 reservoirs now have loaded CWC live-storage references from cached April-May 2026 bulletins, and 23 have usable CWC-calibrated storage curves. Mullaperiyar still has no defensible matched CWC row; Panchet has a CWC row but remains on the area-ratio proxy because the current CWC anchor is exactly 100% full and cannot fit a power-law curve. Six-month ±10% validation still requires more bulletins. See `docs/RUNBOOK.md`.
-- **KRS 2023 backtest fails:** 5 Sentinel-2 observations in the 90-day window all have 47–64% cloud cover; no usable depletion fit possible. Investigation steps 2 and 3 (per AGENT.md non-negotiable #2 failure handling) still pending — may end up as spec reframe in `docs/QUESTIONS.md`.
-- **0 of 25 manual AOI reviews** — see `docs/PROVENANCE.md` for the trust catalogue.
-- **0 of 25 coordinates / dead-storage capacities verified against CWC's published register** — FRL capacity is loaded from CWC for 24 reservoirs, but coordinates, dead storage, and population metadata still need cross-check.
+- **Expanded coverage gap:** 52 of 53 reservoirs have loaded CWC live-storage references, but only the 25 core rows have satellite observations today. Expanded rows are intentionally flagged `awaiting_first_observation` / `needs_aoi_seeding` until AOIs are seeded and backfilled.
+- **CWC validation gap:** 23 observed reservoirs have usable CWC-calibrated storage curves. Mullaperiyar still has no defensible matched CWC row; Panchet has a CWC row but remains on the area-ratio proxy because the current CWC anchor is exactly 100% full and cannot fit a power-law curve. Six-month ±10% validation still requires more bulletins. See `docs/RUNBOOK.md`.
+- **KRS 2023 backtest fails:** 5 Sentinel-2 observations in the 90-day window all have 47–64% cloud cover; no usable depletion fit possible.
+- **0 of 53 manual AOI reviews / coordinate checks / dead-storage capacity checks** — see `docs/PROVENANCE.md` for the trust catalogue.
 
 See `docs/PHASES.md` for the full plan and `docs/PROVENANCE.md` for honest counts.
 
@@ -47,7 +47,7 @@ Reference docs:
 - `docs/BACKTESTS.md` — validation cases (these must pass before "shipped")
 - `docs/DATASETS.md` — every dataset, why it's here
 - `docs/SCHEMAS.md` — data contracts
-- `docs/reservoirs.csv` — the 25 city-serving reservoirs (PRD v2 scope)
+- `docs/reservoirs.csv` — 25 core city-serving reservoirs + expanded CWC state coverage
 - `docs/PROVENANCE.md` — every dashboard field, its source, and verification status
 
 Write to:

@@ -10,18 +10,18 @@
     "oni_latest": 0.11,
     "state": "neutral"
   },
-  "generated_at": "2026-05-19T20:56:26.134459Z",
+  "generated_at": "2026-05-21T15:59:39.903605Z",
   "model_version": "1.0.0",
   "national_aggregate": {
-    "current_storage_bcm": 39.21,
+    "current_storage_bcm": 20.365,
     "people_at_risk_el_nino": 0,
     "people_at_risk_neutral": 66500000,
-    "percent_full": 48.0,
+    "percent_full": 33.7,
     "reservoirs_critical": 5,
     "reservoirs_stable": 8,
     "reservoirs_warning": 5,
     "reservoirs_watch": 7,
-    "total_capacity_bcm": 81.625
+    "total_capacity_bcm": 60.419
   },
   "reservoirs": [
     {
@@ -1031,6 +1031,7 @@
         }
       },
       "river": "Sutlej",
+      "scope": "core_city",
       "state": "Himachal Pradesh",
       "tier": "watch"
     },
@@ -2035,6 +2036,7 @@
         }
       },
       "river": "Bhagirathi",
+      "scope": "core_city",
       "state": "Uttarakhand",
       "tier": "watch"
     },
@@ -4915,6 +4917,7 @@
         }
       },
       "river": "Kaveri",
+      "scope": "core_city",
       "state": "Karnataka",
       "tier": "critical"
     },
@@ -7779,6 +7782,7 @@
         }
       },
       "river": "Kaveri",
+      "scope": "core_city",
       "state": "Tamil Nadu",
       "tier": "stable"
     },
@@ -8805,6 +8809,7 @@
         }
       },
       "river": "Godavari",
+      "scope": "core_city",
       "state": "Maharashtra",
       "tier": "warning"
     },
@@ -11691,6 +11696,7 @@
         }
       },
       "river": "Narmada",
+      "scope": "core_city",
       "state": "Madhya Pradesh",
       "tier": "warning"
     },
@@ -12711,6 +12717,7 @@
         }
       },
       "river": "Krishna",
+      "scope": "core_city",
       "state": "Andhra Pradesh",
       "tier": "watch"
     },
@@ -13731,6 +13738,7 @@
         }
       },
       "river": "Krishna",
+      "scope": "core_city",
       "state": "Andhra Pradesh",
       "tier": "critical"
     },
@@ -14741,6 +14749,7 @@
         }
       },
       "river": "Narmada",
+      "scope": "core_city",
       "state": "Gujarat",
       "tier": "watch"
     },
@@ -15767,6 +15776,7 @@
         }
       },
       "river": "Tapi",
+      "scope": "core_city",
       "state": "Gujarat",
       "tier": "warning"
     },
@@ -16787,6 +16797,7 @@
         }
       },
       "river": "Kaveri",
+      "scope": "core_city",
       "state": "Karnataka",
       "tier": "warning"
     },
@@ -17791,6 +17802,7 @@
         }
       },
       "river": "Kaveri",
+      "scope": "core_city",
       "state": "Karnataka",
       "tier": "stable"
     },
@@ -18795,6 +18807,7 @@
         }
       },
       "river": "Kaveri",
+      "scope": "core_city",
       "state": "Karnataka",
       "tier": "stable"
     },
@@ -19803,6 +19816,7 @@
         }
       },
       "river": "Bhavani",
+      "scope": "core_city",
       "state": "Tamil Nadu",
       "tier": "warning"
     },
@@ -20823,6 +20837,7 @@
         }
       },
       "river": "Vaigai",
+      "scope": "core_city",
       "state": "Tamil Nadu",
       "tier": "critical"
     },
@@ -21837,6 +21852,7 @@
         }
       },
       "river": "Periyar",
+      "scope": "core_city",
       "state": "Kerala",
       "tier": "stable"
     },
@@ -22841,6 +22857,7 @@
         }
       },
       "river": "Periyar",
+      "scope": "core_city",
       "state": "Kerala",
       "tier": "stable"
     },
@@ -23861,6 +23878,7 @@
         }
       },
       "river": "Periyar",
+      "scope": "core_city",
       "state": "Kerala",
       "tier": "stable"
     },
@@ -24865,6 +24883,7 @@
         }
       },
       "river": "Banas",
+      "scope": "core_city",
       "state": "Rajasthan",
       "tier": "stable"
     },
@@ -25875,6 +25894,7 @@
         }
       },
       "river": "Mutha",
+      "scope": "core_city",
       "state": "Maharashtra",
       "tier": "watch"
     },
@@ -26895,6 +26915,7 @@
         }
       },
       "river": "Damodar",
+      "scope": "core_city",
       "state": "Jharkhand",
       "tier": "critical"
     },
@@ -27915,6 +27936,7 @@
         }
       },
       "river": "Damodar",
+      "scope": "core_city",
       "state": "Jharkhand",
       "tier": "critical"
     },
@@ -28935,6 +28957,7 @@
         }
       },
       "river": "Narmada",
+      "scope": "core_city",
       "state": "Madhya Pradesh",
       "tier": "watch"
     },
@@ -29955,6 +29978,7 @@
         }
       },
       "river": "Pench",
+      "scope": "core_city",
       "state": "Maharashtra",
       "tier": "stable"
     },
@@ -30975,8 +30999,1325 @@
         }
       },
       "river": "Manjira",
+      "scope": "core_city",
       "state": "Telangana",
       "tier": "watch"
+    },
+    {
+      "city_served": "Andhra Pradesh Krishna basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.648,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 1.3,
+      "history": [],
+      "id": "pulichintala",
+      "lat": 16.775,
+      "lon": 80.008,
+      "model_version": "1.0.0",
+      "name": "Pulichintala",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Krishna",
+      "scope": "expanded_cwc",
+      "state": "Andhra Pradesh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Andhra Pradesh Pennar basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 1.296,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 1.994,
+      "history": [],
+      "id": "somasila",
+      "lat": 14.483,
+      "lon": 79.316,
+      "model_version": "1.0.0",
+      "name": "Somasila",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Pennar",
+      "scope": "expanded_cwc",
+      "state": "Andhra Pradesh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Andhra Pradesh coastal supply",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.098,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.508,
+      "history": [],
+      "id": "yeleru",
+      "lat": 17.3,
+      "lon": 82.1,
+      "model_version": "1.0.0",
+      "name": "Yeleru",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Yeleru",
+      "scope": "expanded_cwc",
+      "state": "Andhra Pradesh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Gujarat Mahi basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.674,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 1.472,
+      "history": [],
+      "id": "kadana",
+      "lat": 23.283,
+      "lon": 73.833,
+      "model_version": "1.0.0",
+      "name": "Kadana",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Mahi",
+      "scope": "expanded_cwc",
+      "state": "Gujarat",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Gujarat Panam basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.303,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.697,
+      "history": [],
+      "id": "panam",
+      "lat": 22.9,
+      "lon": 73.6,
+      "model_version": "1.0.0",
+      "name": "Panam",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Panam",
+      "scope": "expanded_cwc",
+      "state": "Gujarat",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Gujarat Sabarmati basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.1,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.153,
+      "history": [],
+      "id": "hathmati",
+      "lat": 23.59,
+      "lon": 72.95,
+      "model_version": "1.0.0",
+      "name": "Hathmati",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Hathmati",
+      "scope": "expanded_cwc",
+      "state": "Gujarat",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Himachal Pradesh Beas basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 2.269,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 6.157,
+      "history": [],
+      "id": "pong_dam",
+      "lat": 31.963,
+      "lon": 76.087,
+      "model_version": "1.0.0",
+      "name": "Pong Dam",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Beas",
+      "scope": "expanded_cwc",
+      "state": "Himachal Pradesh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Himachal Pradesh Sutlej basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.071,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.089,
+      "history": [],
+      "id": "kol_dam",
+      "lat": 31.37,
+      "lon": 76.89,
+      "model_version": "1.0.0",
+      "name": "Kol Dam",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Sutlej",
+      "scope": "expanded_cwc",
+      "state": "Himachal Pradesh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Jharkhand Damodar basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.281,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.821,
+      "history": [],
+      "id": "tenughat",
+      "lat": 23.74,
+      "lon": 85.89,
+      "model_version": "1.0.0",
+      "name": "Tenughat",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Damodar",
+      "scope": "expanded_cwc",
+      "state": "Jharkhand",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Jharkhand Damodar basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.079,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.176,
+      "history": [],
+      "id": "konar",
+      "lat": 23.91,
+      "lon": 85.75,
+      "model_version": "1.0.0",
+      "name": "Konar",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Konar",
+      "scope": "expanded_cwc",
+      "state": "Jharkhand",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Jharkhand DVC basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.023,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.142,
+      "history": [],
+      "id": "tilaiya",
+      "lat": 24.32,
+      "lon": 85.54,
+      "model_version": "1.0.0",
+      "name": "Tilaiya",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Barakar",
+      "scope": "expanded_cwc",
+      "state": "Jharkhand",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Madhya Pradesh Chambal basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 4.332,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 6.827,
+      "history": [],
+      "id": "gandhi_sagar",
+      "lat": 24.7,
+      "lon": 75.56,
+      "model_version": "1.0.0",
+      "name": "Gandhi Sagar",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Chambal",
+      "scope": "expanded_cwc",
+      "state": "Madhya Pradesh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Madhya Pradesh Narmada basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.324,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 1.944,
+      "history": [],
+      "id": "tawa",
+      "lat": 22.56,
+      "lon": 77.97,
+      "model_version": "1.0.0",
+      "name": "Tawa",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Tawa",
+      "scope": "expanded_cwc",
+      "state": "Madhya Pradesh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Madhya Pradesh Narmada basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.15,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.299,
+      "history": [],
+      "id": "omkareshwar",
+      "lat": 22.24,
+      "lon": 76.15,
+      "model_version": "1.0.0",
+      "name": "Omkareshwar",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Narmada",
+      "scope": "expanded_cwc",
+      "state": "Madhya Pradesh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Rajasthan Mahi basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.636,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 1.711,
+      "history": [],
+      "id": "mahi_bajaj_sagar",
+      "lat": 23.54,
+      "lon": 74.45,
+      "model_version": "1.0.0",
+      "name": "Mahi Bajaj Sagar",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Mahi",
+      "scope": "expanded_cwc",
+      "state": "Rajasthan",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Rajasthan Chambal basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.519,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 1.436,
+      "history": [],
+      "id": "rana_pratap_sagar",
+      "lat": 24.9,
+      "lon": 75.58,
+      "model_version": "1.0.0",
+      "name": "Rana Pratap Sagar",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Chambal",
+      "scope": "expanded_cwc",
+      "state": "Rajasthan",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Rajasthan Jawai basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.059,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.193,
+      "history": [],
+      "id": "jawai",
+      "lat": 25.05,
+      "lon": 73.15,
+      "model_version": "1.0.0",
+      "name": "Jawai Dam",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Jawai",
+      "scope": "expanded_cwc",
+      "state": "Rajasthan",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Telangana Godavari basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.505,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 2.3,
+      "history": [],
+      "id": "sriramsagar",
+      "lat": 18.97,
+      "lon": 78.33,
+      "model_version": "1.0.0",
+      "name": "Sriramsagar",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Godavari",
+      "scope": "expanded_cwc",
+      "state": "Telangana",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Telangana Manair basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.189,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.621,
+      "history": [],
+      "id": "lower_manair",
+      "lat": 18.38,
+      "lon": 79.3,
+      "model_version": "1.0.0",
+      "name": "Lower Manair",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Manair",
+      "scope": "expanded_cwc",
+      "state": "Telangana",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Telangana Manjira basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.219,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.482,
+      "history": [],
+      "id": "nizam_sagar",
+      "lat": 18.24,
+      "lon": 77.98,
+      "model_version": "1.0.0",
+      "name": "Nizam Sagar",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Manjira",
+      "scope": "expanded_cwc",
+      "state": "Telangana",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Uttarakhand Ramganga basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 1.119,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 2.196,
+      "history": [],
+      "id": "ramganga",
+      "lat": 29.54,
+      "lon": 78.76,
+      "model_version": "1.0.0",
+      "name": "Ramganga",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Ramganga",
+      "scope": "expanded_cwc",
+      "state": "Uttarakhand",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Uttarakhand Terai reservoir",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.019,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.176,
+      "history": [],
+      "id": "nanak_sagar",
+      "lat": 28.96,
+      "lon": 79.81,
+      "model_version": "1.0.0",
+      "name": "Nanak Sagar",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Nanak Sagar",
+      "scope": "expanded_cwc",
+      "state": "Uttarakhand",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Odisha Mahanadi basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 1.27,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 5.378,
+      "history": [],
+      "id": "hirakud",
+      "lat": 21.57,
+      "lon": 83.87,
+      "model_version": "1.0.0",
+      "name": "Hirakud",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Mahanadi",
+      "scope": "expanded_cwc",
+      "state": "Odisha",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Odisha Brahmani basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.562,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 3.432,
+      "history": [],
+      "id": "rengali",
+      "lat": 21.28,
+      "lon": 85.04,
+      "model_version": "1.0.0",
+      "name": "Rengali",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Brahmani",
+      "scope": "expanded_cwc",
+      "state": "Odisha",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Odisha Indravati basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.499,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 1.456,
+      "history": [],
+      "id": "upper_indravati",
+      "lat": 19.31,
+      "lon": 82.84,
+      "model_version": "1.0.0",
+      "name": "Upper Indravati",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Indravati",
+      "scope": "expanded_cwc",
+      "state": "Odisha",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Chhattisgarh Hasdeo basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 1.659,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 3.046,
+      "history": [],
+      "id": "minimata_bango",
+      "lat": 22.6,
+      "lon": 82.63,
+      "model_version": "1.0.0",
+      "name": "Minimata Bango",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Hasdeo",
+      "scope": "expanded_cwc",
+      "state": "Chhattisgarh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Chhattisgarh Mahanadi basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.395,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.767,
+      "history": [],
+      "id": "mahanadi_chhattisgarh",
+      "lat": 20.63,
+      "lon": 81.55,
+      "model_version": "1.0.0",
+      "name": "Mahanadi",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Mahanadi",
+      "scope": "expanded_cwc",
+      "state": "Chhattisgarh",
+      "tier": "stable"
+    },
+    {
+      "city_served": "Chhattisgarh Tandula basin",
+      "current": {
+        "area_km2": 0.0,
+        "as_of": "1900-01-01",
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.144,
+        "data_source": "stale",
+        "estimated_storage_bcm": 0.0,
+        "percent_full": 0.0
+      },
+      "dead_storage_capacity_bcm": null,
+      "fit": null,
+      "flags": [
+        "awaiting_first_observation",
+        "needs_aoi_seeding"
+      ],
+      "full_pool_area_km2": null,
+      "full_pool_capacity_bcm": 0.312,
+      "history": [],
+      "id": "tandula",
+      "lat": 20.68,
+      "lon": 81.28,
+      "model_version": "1.0.0",
+      "name": "Tandula",
+      "population_served": null,
+      "projection": {
+        "el_nino_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "el_nino_monsoon"
+        },
+        "neutral_monsoon": {
+          "confidence_interval_days": null,
+          "days_to_dead_storage": null,
+          "dead_storage_date": null,
+          "method": "linear_extrapolation",
+          "scenario": "neutral_monsoon"
+        }
+      },
+      "river": "Tandula",
+      "scope": "expanded_cwc",
+      "state": "Chhattisgarh",
+      "tier": "stable"
     }
   ]
 }

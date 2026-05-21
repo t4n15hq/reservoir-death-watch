@@ -28,6 +28,7 @@ class ReservoirAOI(BaseModel):
     aoi_area_km2: float | None       # optional GeoJSON-derived area metadata
     aoi_review_status: str | None    # e.g. "first_pass_needs_manual_review"
     polygon: GeoJSONPolygon       # full-pool boundary
+    scope: Literal["core_city", "expanded_cwc"]
 ```
 
 ### `AreaObservation`
@@ -109,6 +110,7 @@ class ReservoirResult(BaseModel):
     projection_neutral: Projection
     projection_el_nino: Projection
     tier: Literal["critical", "warning", "watch", "stable"]
+    scope: Literal["core_city", "expanded_cwc"]
     flags: list[str]                          # e.g. ["low_volume_confidence", "monsoon_cloud_cover"]
 ```
 
@@ -177,6 +179,7 @@ Pre-computed state rollups.
     {
       "state": "Karnataka",
       "reservoir_count": 14,
+      "observed_count": 10,
       "total_capacity_bcm": 31.2,
       "current_storage_bcm": 12.4,
       "percent_full": 39.7,
@@ -217,8 +220,9 @@ The master list. Columns:
 | `lon` | float | yes | |
 | `full_pool_capacity_bcm` | float | no | From CWC where published |
 | `dead_storage_capacity_bcm` | float | no | From CWC where published |
-| `priority` | int | yes | 1–166, dictates Phase ordering |
+| `priority` | int | yes | Contiguous display/backfill order |
 | `aoi_file` | string | yes | Path to GeoJSON: `pipeline/data/aois/{id}.geojson` |
+| `scope` | string | yes | `core_city` for the 25 observed city-serving rows; `expanded_cwc` for broader CWC state coverage |
 | `notes` | string | no | Free text |
 
 ---

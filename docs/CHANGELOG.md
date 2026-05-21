@@ -4,6 +4,23 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 
 ---
 
+## 2026-05-21 — Expanded CWC scope + dashboard filters
+
+- Expanded `docs/reservoirs.csv` from 25 core city-serving reservoirs to
+  53 total rows: 25 `core_city` + 28 `expanded_cwc` reservoirs selected to
+  improve state coverage.
+- Added `scope` to the pipeline/dashboard schema and surfaced Core /
+  Expanded / All controls in the dashboard, alongside state filtering and
+  reservoir/city search.
+- Re-parsed all cached CWC PDFs with the expanded alias set. Each weekly CSV
+  now carries 52 matched CWC rows; Mullaperiyar remains the only unmatched row.
+- Added pending dashboard placeholders for expanded reservoirs. They carry CWC
+  storage/capacity where available, but are explicitly flagged
+  `awaiting_first_observation` and `needs_aoi_seeding` until AOIs and
+  Sentinel/JRC histories are backfilled.
+- Updated state rollups and provenance logic so pending rows do not dilute
+  observed storage percentages or masquerade as AOI-reviewed.
+
 ## 2026-05-20 — CWC VPN ingest + calibration count correction
 
 - Confirmed CWC/RSMS access works from the India VPN and fetched seven weekly

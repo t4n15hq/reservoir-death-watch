@@ -258,6 +258,7 @@ def build_reservoir_result(
         },
         tier=tier,
         model_version=MODEL_VERSION,
+        scope=aoi.scope,
         flags=sorted(set(flags)),
     )
     return result, history_for_csv

@@ -48,6 +48,7 @@ def load_aois(
                     aoi_area_km2=_optional_float(str(properties.get("area_km2", ""))),
                     aoi_review_status=properties.get("review_status"),
                     polygon=geometry,
+                    scope=row.get("scope") or "core_city",
                     notes=row["notes"],
                 )
             )

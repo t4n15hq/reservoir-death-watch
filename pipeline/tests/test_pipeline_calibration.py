@@ -43,6 +43,7 @@ def _aoi(
         aoi_area_km2=aoi_area_km2,
         aoi_review_status=None,
         polygon=POLYGON,
+        scope="core_city",
         notes="",
     )
 

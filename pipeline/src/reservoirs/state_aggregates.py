@@ -26,17 +26,23 @@ def build_state_aggregates(
     states = []
     for state in sorted(buckets):
         members = buckets[state]
-        total_capacity = sum(m.full_pool_capacity_bcm or 0 for m in members)
-        current_storage = sum(m.current.estimated_storage_bcm for m in members)
+        observed = [
+            member
+            for member in members
+            if "awaiting_first_observation" not in (member.flags or [])
+        ]
+        total_capacity = sum(m.full_pool_capacity_bcm or 0 for m in observed)
+        current_storage = sum(m.current.estimated_storage_bcm for m in observed)
         percent_full = round((current_storage / total_capacity) * 100, 1) if total_capacity else 0.0
         states.append(
             {
                 "state": state,
                 "reservoir_count": len(members),
+                "observed_count": len(observed),
                 "total_capacity_bcm": round(total_capacity, 3),
                 "current_storage_bcm": round(current_storage, 3),
                 "percent_full": percent_full,
-                "tier_counts": _tier_counts(members),
+                "tier_counts": _tier_counts(observed),
                 "reservoir_ids": sorted(m.id for m in members),
             }
         )

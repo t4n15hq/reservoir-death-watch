@@ -41,20 +41,18 @@ What's still required:
 
 ---
 
-## Phase 1 — scale to 25
+## Phase 1 — scale core to 25
 
 Prerequisites (these can run in any order):
 
-1. **Add the 22 missing AOIs.** Every reservoir in `docs/reservoirs.csv` needs
-   a polygon at `pipeline/data/aois/{id}.geojson`. The seeder handles the
-   priority-1 reservoirs already configured (KRS, Mettur, Indira Sagar,
-   Jayakwadi). For the rest:
+1. **Add the missing core AOIs.** Every `core_city` reservoir in
+   `docs/reservoirs.csv` needs a polygon at `pipeline/data/aois/{id}.geojson`.
+   For a batch run:
 
    ```bash
-   uv run python scripts/seed_aois.py jayakwadi hirakud bhakra tehri nagarjuna_sagar \
-     almatti tungabhadra sardar_sarovar srisailam ukai pong gandhi_sagar \
-     rana_pratap_sagar harangi bhadra linganamakki idukki mullaperiyar \
-     bargi tawa koyna ujjani --overwrite
+   uv run python scripts/seed_aois.py \
+     $(uv run python -c "import csv; print(' '.join(r['id'] for r in csv.DictReader(open('../docs/reservoirs.csv')) if r['scope']=='core_city'))") \
+     --overwrite
    ```
 
    Each first-pass polygon is flagged `first_pass_needs_manual_review`. Open
@@ -62,32 +60,18 @@ Prerequisites (these can run in any order):
    merge with upstream rivers. `seed_aois.py` writes one feature per file —
    the pipeline's loader enforces that.
 
-2. **Extract the full CWC bulletin (all 25 rows) into `pipeline/data/cwc/`.**
-   The parser supports it via `parse_bulletin_pdf`:
+2. **Extract CWC bulletin rows into `pipeline/data/cwc/`.**
+   The current local parser handles all aliases in `docs/reservoirs.csv`:
 
    ```bash
-   uv run python -c "
-   from pathlib import Path
-   from reservoirs.cwc_scraper import load_cwc_name_aliases, parse_bulletin_pdf
-   aliases = load_cwc_name_aliases()
-   frame = parse_bulletin_pdf(
-       Path('/path/to/bulletin-DD-MM-YYYY.pdf'),
-       reservoir_aliases=aliases,
-       source_url='https://rsms.cwc.gov.in/.../bulletin.pdf',
-   )
-   frame['source_lines'] = ''
-   frame.to_csv('pipeline/data/cwc/bulletin_YYYY_MM_DD.csv', index=False)
-   "
+   uv run python scripts/parse_local_cwc_pdfs.py --overwrite
    ```
 
-   Aliases for all 25 priority reservoirs are pre-loaded in
-   `pipeline/data/cwc/cwc_name_aliases.csv`.
-
-3. **Run the pipeline against all 25:**
+3. **Run the pipeline against the 25 core rows:**
 
    ```bash
    uv run python -m reservoirs.pipeline \
-     $(awk -F, 'NR>1 {printf "--reservoir %s ", $1}' ../docs/reservoirs.csv)
+     $(uv run python -c "import csv; print(' '.join('--reservoir '+r['id'] for r in csv.DictReader(open('../docs/reservoirs.csv')) if r['scope']=='core_city'))")
    ```
 
 4. **Run the backtest suite** (requires Earth Engine creds + Jayakwadi AOI):
@@ -104,10 +88,33 @@ Prerequisites (these can run in any order):
 
 ---
 
+## Phase 1B — expanded CWC rows
+
+Expanded rows are allowed to exist as pending placeholders. To turn them into
+fully observed rows:
+
+```bash
+uv run python scripts/seed_aois.py \
+  $(uv run python -c "import csv; print(' '.join(r['id'] for r in csv.DictReader(open('../docs/reservoirs.csv')) if r['scope']=='expanded_cwc'))") \
+  --overwrite
+
+uv run python scripts/backfill_history.py --as-of $(date +%F) \
+  $(uv run python -c "import csv; print(' '.join(r['id'] for r in csv.DictReader(open('../docs/reservoirs.csv')) if r['scope']=='expanded_cwc'))")
+```
+
+After any metadata-only expansion, keep the dashboard honest with:
+
+```bash
+uv run python scripts/bootstrap_pending_reservoirs.py
+uv run python scripts/audit_metadata.py
+```
+
+---
+
 ## Phase 2 — Hetzner automation
 
-`docs/reservoirs.csv` is now scoped to the 25 city-serving reservoirs.
-Phase 2 is about getting the weekly cron stable on Hermes — no scope growth.
+The dashboard scope can include pending expanded rows, but Phase 2 is about
+getting the weekly cron stable on Hermes — no further scope growth.
 
 - Build out `infra/` per `docs/TDD.md` §7. Files already exist in `infra/`;
   follow `infra/README.md` for the one-time Hetzner setup.
