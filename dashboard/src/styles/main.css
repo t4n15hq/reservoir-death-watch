@@ -657,27 +657,83 @@ body.is-backtest .method-summary {
 .legend__dot--watch { background: var(--watch); }
 .legend__dot--stable { background: var(--stable); }
 .legend__dot--stale { background: var(--stale); border: 1px dashed var(--ink-2); background: transparent; }
-.legend__dot--pending { background: var(--muted-2); border: 1px dotted var(--ink-2); }
+.legend__dot--pending { background: transparent; border: 1px dotted var(--ink-2); }
+.legend__swatch {
+  display: inline-block;
+  width: 16px;
+  height: 9px;
+  margin-right: 0.25rem;
+  vertical-align: middle;
+}
+.legend__swatch--aoi {
+  border: 1px solid rgba(77, 139, 105, 0.75);
+  background: rgba(77, 139, 105, 0.14);
+}
 
 /* Map pins */
 .pin {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  border: 2px solid white;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.2);
+  border: 2px solid #fffdf6;
+  background: var(--pin-color);
+  box-shadow:
+    0 0 0 1px rgba(20, 20, 20, 0.34),
+    0 2px 5px rgba(20, 20, 20, 0.22);
   cursor: pointer;
   padding: 0;
-  transition: transform 100ms ease;
+  position: relative;
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
 }
-.pin:hover, .pin.is-active { transform: scale(1.45); z-index: 2; }
+
+.pin::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.pin:hover,
+.pin.is-active {
+  transform: scale(1.35);
+  z-index: 2;
+}
+
+.pin:hover::after,
+.pin.is-active::after {
+  opacity: 1;
+}
+
+.pin--critical {
+  width: 18px;
+  height: 18px;
+  box-shadow:
+    0 0 0 2px rgba(184, 59, 59, 0.24),
+    0 0 0 5px rgba(184, 59, 59, 0.11),
+    0 2px 6px rgba(20, 20, 20, 0.24);
+}
+
+.pin--critical::after { border-color: rgba(184, 59, 59, 0.42); }
+.pin--warning::after { border-color: rgba(212, 132, 45, 0.42); }
+.pin--watch::after { border-color: rgba(198, 165, 63, 0.4); }
+.pin--stable::after { border-color: rgba(77, 139, 105, 0.38); }
+
 .pin--stale {
   border-style: dashed;
+  background: transparent;
 }
 .pin--pending {
+  background: rgba(255, 253, 246, 0.92);
+  box-shadow:
+    0 0 0 1px rgba(20, 20, 20, 0.28),
+    0 2px 5px rgba(20, 20, 20, 0.16);
   border-style: dotted;
-  opacity: 0.6;
+  opacity: 0.86;
 }
+.pin--pending::after { border-color: rgba(74, 93, 108, 0.36); }
 
 /* ============================================================
    DETAIL PANEL

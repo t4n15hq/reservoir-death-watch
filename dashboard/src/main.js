@@ -5,7 +5,7 @@ import {
   loadStateAggregates,
   readBacktestParam,
 } from './data.js';
-import { initMap, plotReservoirs, focusReservoir, setActivePin } from './map.js';
+import { initMap, plotReservoirs, focusReservoir, fitReservoirs, setActivePin } from './map.js';
 import { renderDetail, renderEmpty } from './detail.js';
 import { renderHero } from './hero.js';
 import { renderReservoirList } from './list.js';
@@ -45,6 +45,7 @@ async function boot() {
     query: '',
   };
   let selectedReservoir = null;
+  let hasRenderedFilters = false;
 
   const selectByReservoir = (reservoir, { fly = true } = {}) => {
     selectedReservoir = reservoir;
@@ -63,6 +64,7 @@ async function boot() {
     plotReservoirs(map, filtered, {
       onSelect: (r) => selectByReservoir(r),
     });
+    fitReservoirs(map, filtered, { animate: hasRenderedFilters });
 
     renderReservoirList(document.getElementById('reservoir-list'), filtered, {
       onSelect: (r) => selectByReservoir(r),
@@ -82,6 +84,7 @@ async function boot() {
       selectedReservoir = null;
       renderEmpty(document.getElementById('detail-pane'));
     }
+    hasRenderedFilters = true;
   }
 
   renderFilteredReservoirs();

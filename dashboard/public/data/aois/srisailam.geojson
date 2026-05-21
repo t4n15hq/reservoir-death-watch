@@ -1,0 +1,41 @@
+{
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          78.18,
+          15.83
+        ],
+        [
+          78.92,
+          15.83
+        ],
+        [
+          78.92,
+          16.2
+        ],
+        [
+          78.18,
+          16.2
+        ],
+        [
+          78.18,
+          15.83
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "properties": {
+    "area_km2": 3239.313,
+    "centroid_distance_m": 0.0,
+    "generated_at": "2026-05-19T13:40:42.001684+00:00",
+    "id": "srisailam",
+    "method": "manual_bbox;lon=78.18-78.92;lat=15.83-16.2;strategy=recurrence",
+    "name": "Srisailam",
+    "review_status": "manual_bbox_needs_visual_check",
+    "ring_cleanup_applied": true,
+    "source": "manual_bbox"
+  },
+  "type": "Feature"
+}
