@@ -21,6 +21,9 @@ from fetch_cwc_bulletin import (  # noqa: E402
     NN_SEARCH_WIDTH,
     RSMS_TEMPLATE,
     candidate_urls_for,
+    date_from_text,
+    dated_pdf_urls_from_html,
+    estimated_indices_for,
     looks_like_pdf,
     thursdays_in_window,
 )
@@ -68,6 +71,18 @@ def test_candidate_urls_for_no_hint_uses_default_spread() -> None:
     assert all("09-04-2026" in u for u in urls)
 
 
+def test_candidate_urls_for_no_hint_uses_known_index_anchors() -> None:
+    urls = candidate_urls_for(date(2026, 2, 26), hint_index=None)
+
+    assert any("-84.pdf" in u for u in urls)
+    assert all("26-02-2026" in u for u in urls)
+
+
+def test_estimated_indices_project_future_weeks_from_nearest_anchor() -> None:
+    # 2026-05-14 is five Thursdays after the known 2026-04-09 index 91.
+    assert 96 in estimated_indices_for(date(2026, 5, 14))
+
+
 def test_candidate_urls_skip_non_positive_indices() -> None:
     sample_date = date(2026, 4, 9)
     # hint_index=2 would produce some negative indices in the -NN_SEARCH_WIDTH
@@ -82,3 +97,30 @@ def test_thursdays_window_arbitrary_lengths(weeks_back: int) -> None:
     days = thursdays_in_window(weeks_back)
     assert len(days) == weeks_back
     assert all(d.weekday() == 3 for d in days)
+
+
+def test_date_from_text_extracts_cwc_publication_date() -> None:
+    assert date_from_text("LIVE STORAGE STATUS AS ON 14.05.2026") == date(2026, 5, 14)
+    assert date_from_text("bulletin-14-05-2026-96.pdf") is None
+
+
+def test_dated_pdf_urls_from_html_extracts_listing_downloads() -> None:
+    html = """
+    <tr>
+      <td>LIVE STORAGE STATUS OF 166 RESERVOIRS IN THE COUNTRY AS ON 14.05.2026</td>
+      <td><a href="/sites/default/files/bulletin-14-05-2026.pdf">Download</a></td>
+    </tr>
+    <tr>
+      <td>Not a PDF</td>
+      <td><a href="/about">About</a></td>
+    </tr>
+    """
+
+    links = dated_pdf_urls_from_html(html, "https://www.cwc.gov.in/reservoir-level-storage-bulletin")
+
+    assert links == [
+        (
+            date(2026, 5, 14),
+            "https://www.cwc.gov.in/sites/default/files/bulletin-14-05-2026.pdf",
+        )
+    ]

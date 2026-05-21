@@ -139,7 +139,51 @@ See `docs/PHASES.md`. Writeup, three journalist cold-emails, Hacker News post.
 Adds proper power-law area-to-volume calibration for the 22 reservoirs
 currently using the area-ratio storage proxy.
 
-### Automated path A: GitHub Actions (no machine required)
+### What we know about CWC access
+
+Official path, in order of preference:
+
+1. CWC's public reservoir bulletin listing:
+   `https://www.cwc.gov.in/reservoir-level-storage-bulletin`
+2. RSMS public portal launched by CWC:
+   `https://rsms.cwc.gov.in/frameWork/web/public-dashboard`
+3. Direct RSMS PDFs:
+   `https://rsms.cwc.gov.in/admin/storage/bulletins/bulletin-DD-MM-YYYY-NN.pdf`
+
+PIB confirms CWC issues the storage bulletin weekly on Thursdays and that the
+public can download bulletins from the RSMS portal. In practice, some networks
+still receive HTTP 401 from `rsms.cwc.gov.in`, so the fetcher tries the CWC
+listing page first, then falls back to direct RSMS URL guesses.
+
+### Automated path A: official listing + RSMS URL fetch
+
+Run locally from any network that can reach CWC:
+
+```bash
+cd pipeline
+uv run python scripts/fetch_cwc_bulletin.py --weeks-back 8 --verbose
+```
+
+The script now:
+
+1. Scans CWC's official reservoir bulletin listing for PDF download links.
+2. For missing dates, tries direct RSMS `bulletin-DD-MM-YYYY-NN.pdf` URLs.
+3. Estimates `NN` from known public anchors:
+   - `26.02.2026` -> `84`
+   - `09.04.2026` -> `91`
+4. Saves PDFs into `pipeline/data/cwc/raw_pdfs/`.
+5. Parses PDFs into `pipeline/data/cwc/bulletin_YYYY_MM_DD.csv`.
+
+If this succeeds, run:
+
+```bash
+uv run python scripts/rebuild_storage_from_csv.py
+```
+
+That is the fastest path to update the dashboard without re-hitting Earth
+Engine.
+
+### Automated path B: GitHub Actions (no machine required)
 
 `.github/workflows/fetch-cwc-bulletin.yml` runs every Friday 03:30 UTC
 on a GitHub-hosted runner. The runner egresses from Azure IPs — a
@@ -163,7 +207,7 @@ turn on auto-merge for the `automated` label and walk away.
 If it never opens a PR, Azure IPs are blocked too — fall through to
 path B or C.
 
-### Automated path B: local cron (when your network has CWC access)
+### Automated path C: local cron (when your network has CWC access)
 
 ```bash
 cd pipeline
@@ -181,7 +225,7 @@ some networks), the cron pings the configured Discord webhook so you
 get a manual-action notice; the rest of the pipeline still runs against
 whatever bulletins are already cached.
 
-### Automated path C: manual fallback when both auto paths fail
+### Automated path D: manual fallback when auto paths fail
 
 If `fetch_cwc_bulletin.py` reports `no candidate URL worked`, the
 network the script is running on doesn't have access (CWC blocks some
