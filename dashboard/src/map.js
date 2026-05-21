@@ -1,5 +1,5 @@
 import maplibregl from 'maplibre-gl';
-import { awaitingFirstObservation, isStale, tierColor } from './data.js';
+import { awaitingFirstObservation, isStale } from './data.js';
 
 const INDIA_BOUNDS = [
   [67.0, 6.5],
@@ -11,6 +11,11 @@ const AOI_SOURCE_ID = 'reservoir-aois';
 const AOI_FILL_LAYER_ID = 'reservoir-aois-fill';
 const AOI_LINE_LAYER_ID = 'reservoir-aois-line';
 const AOI_ACTIVE_LAYER_ID = 'reservoir-aois-active-line';
+const POINT_SOURCE_ID = 'reservoir-points';
+const POINT_RING_LAYER_ID = 'reservoir-points-ring';
+const POINT_LAYER_ID = 'reservoir-points';
+const POINT_ACTIVE_LAYER_ID = 'reservoir-points-active';
+const POINT_HIT_LAYER_ID = 'reservoir-points-hit';
 const TIER_COLORS = {
   critical: '#b83b3b',
   warning: '#d4842d',
@@ -20,10 +25,9 @@ const TIER_COLORS = {
   pending: PENDING_COLOR,
 };
 
-// Track pin DOM elements so we can highlight the active reservoir from list clicks.
-const pinElements = new Map();
 const aoiCache = new Map();
-let markers = [];
+let currentReservoirsById = new Map();
+let currentOnSelect = null;
 let overlayMap = null;
 let overlayRequestId = 0;
 
@@ -56,47 +60,26 @@ export async function initMap(elementId) {
   await new Promise((resolve) => map.on('load', resolve));
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
   installAoiLayers(map);
+  installPointLayers(map);
   overlayMap = map;
   return map;
 }
 
 export function plotReservoirs(map, reservoirs, { onSelect }) {
   overlayMap = map;
-  for (const marker of markers) marker.remove();
-  markers = [];
-  pinElements.clear();
+  currentOnSelect = onSelect;
+  currentReservoirsById = new Map(reservoirs.map((reservoir) => [reservoir.id, reservoir]));
+  removeLegacyDomMarkers(map);
   renderAoiOverlays(map, reservoirs);
-  for (const reservoir of reservoirs) {
-    const pending = awaitingFirstObservation(reservoir);
-    const stale = !pending && isStale(reservoir);
-    const el = document.createElement('button');
-    el.type = 'button';
-    const tier = pending ? 'pending' : stale ? 'stale' : reservoir.tier;
-    el.className = `pin pin--${tier}`;
-    el.style.setProperty('--pin-color', TIER_COLORS[tier] ?? tierColor(reservoir.tier));
-    const tierLabel = pending ? 'awaiting first observation' : reservoir.tier;
-    const days = reservoir.projection?.neutral_monsoon?.days_to_dead_storage;
-    const tooltip = days != null
-      ? `${reservoir.name} — ${tierLabel} · ${days}d to dead storage`
-      : `${reservoir.name} — ${tierLabel}`;
-    el.title = tooltip;
-    el.setAttribute('aria-label', tooltip);
-    el.addEventListener('click', () => onSelect(reservoir));
-
-    const marker = new maplibregl.Marker({ element: el })
-      .setLngLat([reservoir.lon, reservoir.lat])
-      .addTo(map);
-    markers.push(marker);
-    pinElements.set(reservoir.id, el);
-  }
+  renderPointLayer(map, reservoirs);
 }
 
 export function setActivePin(reservoirId) {
-  for (const [id, el] of pinElements.entries()) {
-    el.classList.toggle('is-active', id === reservoirId);
-  }
   if (overlayMap?.getLayer(AOI_ACTIVE_LAYER_ID)) {
     overlayMap.setFilter(AOI_ACTIVE_LAYER_ID, ['==', ['get', 'id'], reservoirId]);
+  }
+  if (overlayMap?.getLayer(POINT_ACTIVE_LAYER_ID)) {
+    overlayMap.setFilter(POINT_ACTIVE_LAYER_ID, ['==', ['get', 'id'], reservoirId]);
   }
 }
 
@@ -110,6 +93,20 @@ export function fitReservoirs(map, reservoirs, { animate = true } = {}) {
     map.fitBounds(INDIA_BOUNDS, {
       duration: animate ? 500 : 0,
       padding: 50,
+    });
+    return;
+  }
+
+  const west = Math.min(...visible.map((r) => r.lon));
+  const east = Math.max(...visible.map((r) => r.lon));
+  const south = Math.min(...visible.map((r) => r.lat));
+  const north = Math.max(...visible.map((r) => r.lat));
+  const isNationalView = visible.length > 12 || (east - west > 9 && north - south > 12);
+  if (isNationalView) {
+    map.easeTo({
+      center: [80.8, 21.6],
+      zoom: 4.15,
+      duration: animate ? 500 : 0,
     });
     return;
   }
@@ -135,6 +132,175 @@ export function fitReservoirs(map, reservoirs, { animate = true } = {}) {
     maxZoom: 6.8,
     padding: { top: 54, right: 54, bottom: 54, left: 54 },
   });
+}
+
+function installPointLayers(map) {
+  if (!map.getSource(POINT_SOURCE_ID)) {
+    map.addSource(POINT_SOURCE_ID, {
+      type: 'geojson',
+      data: emptyFeatureCollection(),
+    });
+  }
+
+  if (!map.getLayer(POINT_RING_LAYER_ID)) {
+    map.addLayer({
+      id: POINT_RING_LAYER_ID,
+      type: 'circle',
+      source: POINT_SOURCE_ID,
+      paint: {
+        'circle-radius': [
+          'match',
+          ['get', 'tier'],
+          'critical',
+          16,
+          'warning',
+          13,
+          0,
+        ],
+        'circle-color': colorExpression(),
+        'circle-opacity': [
+          'match',
+          ['get', 'tier'],
+          'critical',
+          0.2,
+          'warning',
+          0.13,
+          0,
+        ],
+      },
+    });
+  }
+
+  if (!map.getLayer(POINT_LAYER_ID)) {
+    map.addLayer({
+      id: POINT_LAYER_ID,
+      type: 'circle',
+      source: POINT_SOURCE_ID,
+      paint: {
+        'circle-radius': [
+          'match',
+          ['get', 'tier'],
+          'critical',
+          8.5,
+          'warning',
+          7.6,
+          'pending',
+          7.6,
+          7,
+        ],
+        'circle-color': [
+          'match',
+          ['get', 'tier'],
+          'pending',
+          'rgba(255,253,246,0.94)',
+          'stale',
+          'rgba(255,253,246,0.82)',
+          'critical',
+          TIER_COLORS.critical,
+          'warning',
+          TIER_COLORS.warning,
+          'watch',
+          TIER_COLORS.watch,
+          'stable',
+          TIER_COLORS.stable,
+          TIER_COLORS.pending,
+        ],
+        'circle-stroke-color': [
+          'match',
+          ['get', 'tier'],
+          'pending',
+          STALE_COLOR,
+          'stale',
+          STALE_COLOR,
+          '#fffdf6',
+        ],
+        'circle-stroke-width': [
+          'match',
+          ['get', 'tier'],
+          'pending',
+          2,
+          'stale',
+          2,
+          2.2,
+        ],
+        'circle-opacity': 0.96,
+      },
+    });
+  }
+
+  if (!map.getLayer(POINT_ACTIVE_LAYER_ID)) {
+    map.addLayer({
+      id: POINT_ACTIVE_LAYER_ID,
+      type: 'circle',
+      source: POINT_SOURCE_ID,
+      filter: ['==', ['get', 'id'], ''],
+      paint: {
+        'circle-radius': 12,
+        'circle-color': 'rgba(0,0,0,0)',
+        'circle-stroke-color': '#141414',
+        'circle-stroke-width': 2.6,
+        'circle-stroke-opacity': 0.85,
+      },
+    });
+  }
+
+  if (!map.getLayer(POINT_HIT_LAYER_ID)) {
+    map.addLayer({
+      id: POINT_HIT_LAYER_ID,
+      type: 'circle',
+      source: POINT_SOURCE_ID,
+      paint: {
+        'circle-radius': 16,
+        'circle-color': 'rgba(0,0,0,0.01)',
+        'circle-stroke-width': 0,
+      },
+    });
+    map.on('click', POINT_HIT_LAYER_ID, (event) => {
+      const id = event.features?.[0]?.properties?.id;
+      const reservoir = currentReservoirsById.get(id);
+      if (reservoir && currentOnSelect) currentOnSelect(reservoir);
+    });
+    map.on('mouseenter', POINT_HIT_LAYER_ID, () => {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', POINT_HIT_LAYER_ID, () => {
+      map.getCanvas().style.cursor = '';
+    });
+  }
+}
+
+function renderPointLayer(map, reservoirs) {
+  const source = map.getSource(POINT_SOURCE_ID);
+  if (!source) return;
+  source.setData({
+    type: 'FeatureCollection',
+    features: reservoirs
+      .filter((r) => Number.isFinite(r.lon) && Number.isFinite(r.lat))
+      .map((reservoir) => {
+        const pending = awaitingFirstObservation(reservoir);
+        const stale = !pending && isStale(reservoir);
+        const tier = pending ? 'pending' : stale ? 'stale' : reservoir.tier;
+        return {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [reservoir.lon, reservoir.lat],
+          },
+          properties: {
+            id: reservoir.id,
+            name: reservoir.name,
+            tier,
+          },
+        };
+      }),
+  });
+}
+
+function removeLegacyDomMarkers(map) {
+  // Older dev-server bundles used MapLibre HTML markers; clear any that HMR
+  // left behind so only native map-layer points remain.
+  const container = map.getContainer();
+  container.querySelectorAll('.maplibregl-marker').forEach((marker) => marker.remove());
 }
 
 function installAoiLayers(map) {
