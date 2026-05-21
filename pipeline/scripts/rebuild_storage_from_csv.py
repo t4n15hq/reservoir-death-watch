@@ -88,6 +88,10 @@ def rebuild_one(reservoir_id: str, data_dir: Path, cwc_storage: pd.DataFrame) ->
         "reservoir_id": reservoir_id,
         "full_pool_area_km2": full_pool_area,
         "full_capacity_bcm": full_capacity,
+        "cwc_as_of": cwc_row["date"] if cwc_row is not None else None,
+        "cwc_reported_bcm": (
+            float(cwc_row["live_storage_bcm"]) if cwc_row is not None else None
+        ),
         "curve_a": curve.coefficient_a if curve else None,
         "curve_b": curve.exponent_b if curve else None,
         "flags": flags,
@@ -136,11 +140,27 @@ def update_snapshot_json(data_dir: Path, infos: dict[str, dict]) -> None:
         reservoir["current"]["estimated_storage_bcm"] = round(storage, 3)
         reservoir["current"]["percent_full"] = round(percent_full, 1)
         reservoir["current"]["data_source"] = str(latest["data_source"])
+        cwc_as_of = info.get("cwc_as_of")
+        reservoir["current"]["cwc_as_of"] = cwc_as_of.isoformat() if cwc_as_of else None
+        cwc_reported = info.get("cwc_reported_bcm")
+        reservoir["current"]["cwc_reported_bcm"] = (
+            round(float(cwc_reported), 3) if cwc_reported is not None else None
+        )
         reservoir["full_pool_area_km2"] = round(info["full_pool_area_km2"], 3)
         reservoir["full_pool_capacity_bcm"] = full_capacity
-        if "rebuilt_from_csv" not in reservoir.get("flags", []):
-            reservoir.setdefault("flags", []).append("rebuilt_from_csv")
-            reservoir["flags"] = sorted(set(reservoir["flags"]))
+        current_flags = set(reservoir.get("flags", []))
+        current_flags.difference_update(
+            {
+                "cwc_calibrated_single_point",
+                "low_volume_confidence",
+                "needs_cwc_calibration",
+                "phase0_cwc_validation_incomplete",
+                "volume_area_ratio_proxy",
+            }
+        )
+        current_flags.update(info.get("flags") or [])
+        current_flags.add("rebuilt_from_csv")
+        reservoir["flags"] = sorted(current_flags)
 
     tmp = path.with_suffix(".json.tmp")
     with tmp.open("w") as handle:

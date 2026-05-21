@@ -104,12 +104,13 @@ appreciated; reuse is encouraged.
 ## What's missing
 
 I'm honest about this in the dashboard's "Data quality" card at the
-bottom of the page. As of launch:
+bottom of the page. As of the latest CWC ingest:
 
-- 22 of 25 reservoirs are using an area-ratio storage proxy because I
-  only have one CWC bulletin (April 9, 2026, Phase 0 calibration set).
-- 3 of 25 reservoirs have a loaded CWC live-storage reference and FRL
-  capacity from that bulletin.
+- 2 of 25 reservoirs are still using an area-ratio storage proxy:
+  Mullaperiyar needs a defensible CWC name match, and Panchet needs a
+  non-100%-full CWC anchor before the power-law fit is meaningful.
+- 24 of 25 reservoirs have a loaded CWC live-storage reference and FRL
+  capacity from local April-May 2026 bulletins.
 - 0 of 25 lat/long coordinates have been verified against CWC's
   published register — they're from my training-data knowledge and could
   be off by a couple of km.
@@ -118,7 +119,8 @@ bottom of the page. As of launch:
 
 These are the next milestones. The system architecture supports drop-in
 verification: drop a CWC PDF into the right folder, run one command, and
-the calibration switches from proxy to power-law automatically.
+the calibration switches from proxy to power-law automatically when the
+row provides a usable anchor.
 
 ## What I'd love help with
 

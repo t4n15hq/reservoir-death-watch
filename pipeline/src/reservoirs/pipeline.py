@@ -384,13 +384,14 @@ def _calibrate_curve(
         return None, ["needs_cwc_calibration", "volume_area_ratio_proxy"]
 
     points = [(full_pool_area_km2, full_capacity_bcm)]
+    cwc_anchor_added = False
     if cwc_row is not None:
         cwc_date = _optional_cwc_date(cwc_row)
         cwc_storage = _optional_cwc_value(cwc_row, "live_storage_bcm")
         nearest_area, days_apart = _nearest_area_for_date(history, cwc_date)
         if nearest_area is not None and cwc_storage and days_apart <= 14:
             points.append((nearest_area, cwc_storage))
-            flags.extend(["cwc_calibrated_single_point", "phase0_cwc_validation_incomplete"])
+            cwc_anchor_added = True
         else:
             flags.extend(["needs_cwc_calibration", "volume_area_ratio_proxy"])
     else:
@@ -410,6 +411,8 @@ def _calibrate_curve(
         flags.extend(["needs_cwc_calibration", "volume_area_ratio_proxy"])
         return None, sorted(set(flags))
 
+    if cwc_anchor_added:
+        flags.extend(["cwc_calibrated_single_point", "phase0_cwc_validation_incomplete"])
     if curve.r_squared < 0.85:
         flags.append("low_volume_confidence")
     return curve, sorted(set(flags))

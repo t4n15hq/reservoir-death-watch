@@ -25,13 +25,13 @@ Implemented:
 - Dashboard: editorial hero + ranked reservoir list + maplibre map of India + per-reservoir detail panel with history chart + data-quality provenance card.
 - Hetzner infra scaffold (`infra/run.sh`, cron entry, freshness check, README).
 - CWC bulletin auto-fetcher with graceful manual fallback.
-- 72 unit/integration tests passing; ruff clean.
+- Python unit/integration tests and ruff checks passing.
 
 **Not yet Phase 1 closed** — blockers before public distribution:
-- **CWC ground truth gap:** only 3 of 25 reservoirs have loaded CWC live-storage references and CWC-calibrated storage curves. The other 22 use area-ratio proxy (flagged `volume_area_ratio_proxy`). Six-month ±10% validation requires more bulletins. See `docs/RUNBOOK.md`.
+- **CWC validation gap:** 24 of 25 reservoirs now have loaded CWC live-storage references from cached April-May 2026 bulletins, and 23 have usable CWC-calibrated storage curves. Mullaperiyar still has no defensible matched CWC row; Panchet has a CWC row but remains on the area-ratio proxy because the current CWC anchor is exactly 100% full and cannot fit a power-law curve. Six-month ±10% validation still requires more bulletins. See `docs/RUNBOOK.md`.
 - **KRS 2023 backtest fails:** 5 Sentinel-2 observations in the 90-day window all have 47–64% cloud cover; no usable depletion fit possible. Investigation steps 2 and 3 (per AGENT.md non-negotiable #2 failure handling) still pending — may end up as spec reframe in `docs/QUESTIONS.md`.
 - **0 of 25 manual AOI reviews** — see `docs/PROVENANCE.md` for the trust catalogue.
-- **0 of 25 coordinates / dead-storage capacities verified against CWC's published register** — FRL capacity is loaded from CWC for the same 3 reservoirs, but the rest of the metadata still needs cross-check.
+- **0 of 25 coordinates / dead-storage capacities verified against CWC's published register** — FRL capacity is loaded from CWC for 24 reservoirs, but coordinates, dead storage, and population metadata still need cross-check.
 
 See `docs/PHASES.md` for the full plan and `docs/PROVENANCE.md` for honest counts.
 

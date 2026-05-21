@@ -87,6 +87,59 @@ def test_parse_weekly_report_text_extracts_detailed_rows() -> None:
     ].iloc[0] == pytest.approx(3.537)
 
 
+def test_parse_weekly_report_text_skips_summary_mentions_before_detail_row() -> None:
+    text = """
+    Name of Reservoir having storage less than 50% of normal storage %
+    VAIGAI 12.47
+    Table-03 STATEWISE DISTRIBUTION AS ON: 14.05.2026
+    Tamil Nadu 9 ▪ ALIYAR ▪ VAIGAI ▪ 21.25 ▪ 12.47
+    REGION/STATE WISE WEEKLY REPORT OF 166 IMPORTANT RESERVOIRS OF INDIA
+    160 VAIGAI Tamil Nadu 61.000 6.000 279.200 0.172 14.05.2026
+    265.591 0.007 4.05 273.870 0.070 40.70 0.056 32.49 9.96 12.47
+    """
+
+    frame = parse_weekly_report_text(
+        text,
+        reservoir_aliases={"Vaigai": "vaigai"},
+        source_url="https://example.test/bulletin.pdf",
+    )
+
+    assert len(frame) == 1
+    row = frame.iloc[0]
+    assert row["reservoir_id"] == "vaigai"
+    assert row["date"] == date(2026, 5, 14)
+    assert row["live_capacity_at_frl_bcm"] == pytest.approx(0.172)
+    assert row["live_storage_bcm"] == pytest.approx(0.007)
+    assert row["percent_frl"] == pytest.approx(4.05)
+    assert row["normal_storage_bcm"] == pytest.approx(0.056)
+    assert row["percent_normal"] == pytest.approx(32.49)
+
+
+def test_parse_weekly_report_text_skips_basinwise_summary_before_detail_row() -> None:
+    text = """
+    Uttarakhand 3 ▪ TEHRI ▪ 20.85 West Bengal 2 ▪ KANGSABATI ▪ 31.50
+    10 WEEKLY REPORT - BASINWISE 14.05.2026 SR. NO. BASIN NAME LIVE CAPACITY
+    AT FRL (BCM) THIS YEAR'S STORAGE
+    142 TEHRI Uttarakhand 2351.000 1000.000 830.000 2.615 14.05.2026
+    742.460 0.036 1.38 746.580 0.123 4.70 0.174 6.64 29.42 20.85
+    """
+
+    frame = parse_weekly_report_text(
+        text,
+        reservoir_aliases={"Tehri": "tehri"},
+        source_url="https://example.test/bulletin.pdf",
+    )
+
+    assert len(frame) == 1
+    row = frame.iloc[0]
+    assert row["reservoir_id"] == "tehri"
+    assert row["live_capacity_at_frl_bcm"] == pytest.approx(2.615)
+    assert row["live_storage_bcm"] == pytest.approx(0.036)
+    assert row["percent_frl"] == pytest.approx(1.38)
+    assert row["normal_storage_bcm"] == pytest.approx(0.174)
+    assert row["percent_normal"] == pytest.approx(6.64)
+
+
 def test_load_cwc_storage_csv_validates_phase0_rows() -> None:
     frame = load_cwc_storage_csv()
 

@@ -45,7 +45,7 @@ That's deliberate. Per the methodology:
 **Tweet 5** (with provenance "Data quality" card screenshot):
 
 Honest about gaps:
-- 22 of 25 reservoirs use a storage proxy because we only have 1 CWC bulletin checked in
+- 2 of 25 reservoirs still use a storage proxy; 24 now have CWC reference rows
 - 0 of 25 lat/lon coordinates have been verified against CWC's published register
 - KRS 2023 backtest fails — Dec 2023 had no usable cloud-free satellite obs
 

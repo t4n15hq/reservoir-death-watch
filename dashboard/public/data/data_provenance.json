@@ -2,16 +2,16 @@
   "counts": {
     "aoi_visually_reviewed": 0,
     "capacity_verified_against_cwc": 0,
-    "cwc_reference_available": 3,
+    "cwc_reference_available": 24,
     "dead_storage_capacity_verified": 0,
-    "full_pool_capacity_from_cwc": 3,
+    "full_pool_capacity_from_cwc": 24,
     "lat_lon_verified": 0,
     "observed_with_satellite": 25,
     "population_verified_against_census": 0,
-    "storage_cwc_calibrated": 3,
+    "storage_cwc_calibrated": 23,
     "total_reservoirs": 25
   },
-  "generated_at": "2026-05-20T02:20:27.500965Z",
+  "generated_at": "2026-05-21T01:15:07.682931Z",
   "reservoirs": [
     {
       "aoi": {
@@ -28,9 +28,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 1.985
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -38,9 +38,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 9.34,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 6.229,
+        "verified": true
       },
       "id": "bhakra",
       "lat_lon": {
@@ -58,8 +58,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -77,9 +77,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.036
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -87,9 +87,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 3.54,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 2.615,
+        "verified": true
       },
       "id": "tehri",
       "lat_lon": {
@@ -107,8 +107,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -126,9 +126,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": "2026-04-09",
+        "as_of": "2026-05-14",
         "available": true,
-        "reported_bcm": 0.48
+        "reported_bcm": 0.21
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -175,9 +175,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": "2026-04-09",
+        "as_of": "2026-05-14",
         "available": true,
-        "reported_bcm": 1.254
+        "reported_bcm": 1.17
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -224,9 +224,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.902
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -234,9 +234,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 2.91,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 2.171,
+        "verified": true
       },
       "id": "jayakwadi",
       "lat_lon": {
@@ -254,8 +254,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -273,9 +273,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": "2026-04-09",
+        "as_of": "2026-05-14",
         "available": true,
-        "reported_bcm": 4.192
+        "reported_bcm": 2.715
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -322,9 +322,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.724
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -332,9 +332,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 11.56,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 5.108,
+        "verified": true
       },
       "id": "nagarjuna_sagar",
       "lat_lon": {
@@ -352,8 +352,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -371,9 +371,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 1.013
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -381,9 +381,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 8.72,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 6.013,
+        "verified": true
       },
       "id": "srisailam",
       "lat_lon": {
@@ -401,8 +401,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -420,9 +420,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 3.11
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -430,9 +430,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 9.5,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 5.76,
+        "verified": true
       },
       "id": "sardar_sarovar",
       "lat_lon": {
@@ -450,8 +450,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -469,9 +469,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 3.088
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -479,9 +479,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 7.41,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 6.615,
+        "verified": true
       },
       "id": "ukai",
       "lat_lon": {
@@ -499,8 +499,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -518,9 +518,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.05
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -528,9 +528,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 0.55,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.444,
+        "verified": true
       },
       "id": "kabini",
       "lat_lon": {
@@ -548,8 +548,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -567,9 +567,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.338
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -577,9 +577,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 0.94,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.927,
+        "verified": true
       },
       "id": "hemavathy",
       "lat_lon": {
@@ -597,8 +597,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -616,9 +616,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.064
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -626,9 +626,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 0.23,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.22,
+        "verified": true
       },
       "id": "harangi",
       "lat_lon": {
@@ -646,8 +646,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -665,9 +665,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.204
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -675,9 +675,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 0.93,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.792,
+        "verified": true
       },
       "id": "bhavanisagar",
       "lat_lon": {
@@ -695,8 +695,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -714,9 +714,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.007
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -724,9 +724,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 0.17,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.172,
+        "verified": true
       },
       "id": "vaigai",
       "lat_lon": {
@@ -744,8 +744,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -812,9 +812,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.393
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -822,9 +822,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
         "value": 1.46,
-        "verified": false
+        "verified": true
       },
       "id": "idukki",
       "lat_lon": {
@@ -842,8 +842,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -861,9 +861,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.255
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -871,9 +871,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 1.09,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.018,
+        "verified": true
       },
       "id": "idamalayar",
       "lat_lon": {
@@ -891,8 +891,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -910,9 +910,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.803
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -920,9 +920,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 1.1,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.076,
+        "verified": true
       },
       "id": "bisalpur",
       "lat_lon": {
@@ -940,8 +940,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -959,9 +959,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.031
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -969,9 +969,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 0.05,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.056,
+        "verified": true
       },
       "id": "khadakwasla",
       "lat_lon": {
@@ -989,8 +989,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1008,9 +1008,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.275
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -1018,9 +1018,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 1.36,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.471,
+        "verified": true
       },
       "id": "maithon",
       "lat_lon": {
@@ -1038,8 +1038,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1057,9 +1057,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.184
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -1067,9 +1067,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 1.5,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.184,
+        "verified": true
       },
       "id": "panchet",
       "lat_lon": {
@@ -1106,9 +1106,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.783
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -1116,9 +1116,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
         "value": 3.18,
-        "verified": false
+        "verified": true
       },
       "id": "bargi",
       "lat_lon": {
@@ -1136,8 +1136,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1155,9 +1155,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.525
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -1165,9 +1165,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 1.24,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 1.091,
+        "verified": true
       },
       "id": "totladoh",
       "lat_lon": {
@@ -1185,8 +1185,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1204,9 +1204,9 @@
         "data_source": "sentinel_2"
       },
       "cwc_reference": {
-        "as_of": null,
-        "available": false,
-        "reported_bcm": null
+        "as_of": "2026-05-14",
+        "available": true,
+        "reported_bcm": 0.171
       },
       "dead_storage_capacity_bcm": {
         "source": "approximate (training-data knowledge)",
@@ -1214,9 +1214,9 @@
         "verified": false
       },
       "full_pool_capacity_bcm": {
-        "source": "approximate (training-data knowledge)",
-        "value": 0.85,
-        "verified": false
+        "source": "CWC bulletin live_capacity_at_frl_bcm",
+        "value": 0.822,
+        "verified": true
       },
       "id": "singur",
       "lat_lon": {
@@ -1234,8 +1234,8 @@
         "verified": false
       },
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "area_ratio_proxy"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     }
   ]

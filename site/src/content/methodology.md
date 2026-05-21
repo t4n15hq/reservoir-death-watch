@@ -173,16 +173,18 @@ satellite-only monitoring during heavy cloud cover, not something to hide.
 Of the 25 reservoirs on the dashboard:
 
 - **25 have Sentinel-2 observations in the last week.**
-- **3 have loaded CWC live-storage references** (KRS, Mettur, Indira
-  Sagar — April 9, 2026 Phase 0 bulletin rows).
-- **3 have CWC-calibrated area-to-volume curves** (KRS, Mettur, Indira
-  Sagar — Phase 0 calibration set).
-- **22 are using an area-ratio proxy** for storage, flagged on each
-  reservoir's detail panel.
+- **24 have loaded CWC live-storage references** from local April-May
+  2026 CWC bulletin PDFs.
+- **23 have CWC-calibrated area-to-volume curves.** Panchet has a CWC
+  row, but that row is at exactly 100% FRL, so it cannot fit a useful
+  two-point power-law curve yet.
+- **2 are using an area-ratio proxy** for storage: Mullaperiyar, which
+  still lacks a defensible matched CWC row, and Panchet, pending a
+  non-full CWC anchor.
 - **0 reservoirs have lat/lon verified against CWC's published register
   or OpenStreetMap.** These came from training-data knowledge during
   scope definition; they're approximate but plausible (within ±5 km).
-- **3 reservoirs have FRL capacity loaded from CWC; 0 have dead-storage
+- **24 reservoirs have FRL capacity loaded from CWC; 0 have dead-storage
   capacity or population served externally sourced.**
 
 Full provenance per field is at
@@ -204,8 +206,8 @@ Phase 1 ship.
 
 ## What's coming
 
-- More CWC bulletins added, replacing the area-ratio proxy with proper
-  calibration on the remaining 22 reservoirs.
+- More CWC bulletins added, replacing the two remaining area-ratio
+  proxies and building a six-month validation set.
 - Manual visual review of every AOI.
 - CHIRPS catchment rainfall as a secondary projection input during
   monsoon.

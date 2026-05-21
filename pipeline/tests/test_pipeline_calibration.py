@@ -232,3 +232,34 @@ def test_curve_returns_none_when_only_full_pool_anchor() -> None:
 
     assert curve is None
     assert "needs_cwc_calibration" in flags
+
+
+def test_curve_failure_does_not_mark_storage_as_cwc_calibrated() -> None:
+    """A CWC row can verify capacity without yielding a usable curve."""
+
+    aoi = _aoi(reservoir_id="panchet", full_pool_capacity_bcm=0.184, aoi_area_km2=59.0)
+    history = pd.DataFrame(
+        [
+            {"date": date(2026, 5, 12), "area_km2": 15.9, "data_source": "sentinel_2"},
+        ]
+    )
+    cwc_row = pd.Series(
+        {
+            "reservoir_id": "panchet",
+            "date": date(2026, 5, 14),
+            "live_storage_bcm": 0.184,
+        }
+    )
+
+    curve, flags = _calibrate_curve(
+        aoi,
+        full_pool_area_km2=59.0,
+        full_capacity_bcm=0.184,
+        history=history,
+        cwc_row=cwc_row,
+    )
+
+    assert curve is None
+    assert "needs_cwc_calibration" in flags
+    assert "volume_area_ratio_proxy" in flags
+    assert "cwc_calibrated_single_point" not in flags

@@ -40,10 +40,10 @@ that the UI displays in the detail panel.
 |---|---|---|
 | AOI polygon | Auto-derived from JRC `recurrence ≥ 50` seed, not visually reviewed | `first_pass_needs_manual_review` |
 | AOI polygon (Srisailam only) | Manual bbox; downstream extraction counts water inside | `manual_bbox_needs_visual_check` |
-| `current.estimated_storage_bcm` (22 of 25) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` |
-| `current.estimated_storage_bcm` (KRS / Mettur / Indira Sagar) | Power-law calibrated, but only one CWC anchor point | `cwc_calibrated_single_point`, `phase0_cwc_validation_incomplete` |
-| `current.cwc_reported_bcm` (3 of 25) | CWC bulletin 09.04.2026 only — six-month validation pending | `phase0_cwc_validation_incomplete` |
-| `current.cwc_reported_bcm` (22 of 25) | No matching CWC row is loaded into this snapshot yet | `needs_cwc_calibration` |
+| `current.estimated_storage_bcm` (2 of 25) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` |
+| `current.estimated_storage_bcm` (23 of 25) | Power-law calibrated, but only one usable CWC anchor point per reservoir | `cwc_calibrated_single_point`, `phase0_cwc_validation_incomplete` |
+| `current.cwc_reported_bcm` (24 of 25) | Latest matching local CWC bulletin row from 02.04.2026-14.05.2026 — six-month validation pending | `phase0_cwc_validation_incomplete` |
+| `current.cwc_reported_bcm` (1 of 25) | No defensible matching CWC row is loaded into this snapshot yet | `needs_cwc_calibration` |
 | Dead-storage area used in projection | Power-law conversion with default b=2.0 when no calibrated curve exists | `dead_storage_area_proxy` |
 | `projection.el_nino_monsoon` | El Niño delta from static historical year list, not per-year ONI conditioning | `el_nino_delta_static_years` |
 | `fit.fit_quality` | `low_confidence` when r² ∈ [0.7, 0.85) | embedded in `fit` object |
@@ -59,8 +59,8 @@ and have **not** been cross-checked against CWC's published register.
 | Field | Where it shows | Confidence | Action needed |
 |---|---|---|---|
 | `lat` / `lon` | Map pin location | Approximate (±5 km plausible) | Cross-check against CWC bulletin or OSM `way:` for each dam |
-| `full_pool_capacity_bcm` (3 of 25) | "of X BCM" in storage line | CWC `live_capacity_at_frl_bcm` loaded for KRS, Mettur, Indira Sagar | Load more CWC rows |
-| `full_pool_capacity_bcm` (22 of 25) | "of X BCM" in storage line | Approximate (±10%) | CWC bulletin lists per-reservoir FRL capacity |
+| `full_pool_capacity_bcm` (24 of 25) | "of X BCM" in storage line | CWC `live_capacity_at_frl_bcm` loaded from local bulletin rows | Continue six-month bulletin collection |
+| `full_pool_capacity_bcm` (1 of 25) | "of X BCM" in storage line | Approximate (±10%) | Needs a defensible CWC row match |
 | `dead_storage_capacity_bcm` | Drives `dead_storage_area` calculation | Approximate | Add an explicit dead-storage source; the current Phase 0 CSV does not carry it |
 | `population_served` | At-risk headline + detail byline | Rough estimate (order of magnitude) | Census 2011 + 2024 estimates for the named cities |
 | `city_served` (free-text) | "Supplies X" in detail byline | Editorial label | Verify the *primary* drinking water source per city's water utility |
@@ -96,16 +96,15 @@ for the machine-readable form.
 | Class | Count |
 |---|---|
 | Reservoirs with satellite observation | 25 of 25 |
-| Reservoirs with CWC live-storage reference loaded | 3 of 25 |
-| Reservoirs with CWC-calibrated curve | 3 of 25 |
-| Reservoirs with `volume_area_ratio_proxy` flag | 22 of 25 |
+| Reservoirs with CWC live-storage reference loaded | 24 of 25 |
+| Reservoirs with CWC-calibrated curve | 23 of 25 |
+| Reservoirs with `volume_area_ratio_proxy` flag | 2 of 25 |
 | Reservoirs with unreviewed AOI | 25 of 25 |
 | Reservoirs with verified `lat/lon` against CWC bulletin | **0 of 25** |
-| Reservoirs with FRL capacity loaded from CWC | 3 of 25 |
+| Reservoirs with FRL capacity loaded from CWC | 24 of 25 |
 | Reservoirs with verified `dead_storage_capacity_bcm` | **0 of 25** |
 | Reservoirs with verified `population_served` against census | **0 of 25** |
 
 **The "0 of 25" rows are the next milestone for Tier 3 confidence.** They
-require either fetching CWC bulletins locally (auth-walled from this seat;
-see `docs/RUNBOOK.md`) or accepting that those metadata fields stay
-"approximate" until verified.
+require manual cross-checks against CWC/OSM/census sources; until then those
+metadata fields stay "approximate" in the dashboard.

@@ -136,8 +136,10 @@ See `docs/PHASES.md`. Writeup, three journalist cold-emails, Hacker News post.
 
 ## CWC bulletin ingest
 
-Adds proper power-law area-to-volume calibration for the 22 reservoirs
-currently using the area-ratio storage proxy.
+Adds or extends CWC-grounded area-to-volume calibration. As of the
+2026-05-20 local ingest, 23 reservoirs have usable CWC-calibrated curves,
+Panchet has a CWC reference but still needs a non-100%-full anchor, and
+Mullaperiyar still needs a defensible CWC row match.
 
 ### What we know about CWC access
 

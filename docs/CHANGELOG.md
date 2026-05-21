@@ -4,6 +4,22 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 
 ---
 
+## 2026-05-20 — CWC VPN ingest + calibration count correction
+
+- Confirmed CWC/RSMS access works from the India VPN and fetched seven weekly
+  bulletin PDFs covering 02.04.2026-14.05.2026 into
+  `pipeline/data/cwc/raw_pdfs/`.
+- Parsed those PDFs into checked-in `bulletin_YYYY_MM_DD.csv` files. Added
+  safe CWC aliases for `LOWER BHAWANI` → Bhavanisagar and `KHADAKVASLA` →
+  Khadakwasla, bringing CWC reference coverage to 24/25 reservoirs.
+- Rebuilt dashboard storage CSVs and `reservoirs.json` from the cached CWC
+  rows. Current machine audit: 24/25 CWC references, 23/25 CWC-calibrated
+  storage curves, 24/25 FRL capacities from CWC, 2/25 area-ratio proxies.
+- Fixed calibration flag refresh so a reservoir with a CWC row but no usable
+  curve is not counted as CWC-calibrated. Panchet now stays on the proxy
+  because its current CWC anchor is exactly 100% FRL; Mullaperiyar remains
+  unmatched pending a defensible CWC name match.
+
 ## 2026-05-19 — CWC coverage visibility + provenance count fix
 
 - Made CWC coverage visible in the reservoir list and detail panel. Rows now

@@ -29,23 +29,23 @@
       "current": {
         "area_km2": 92.14,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 1.985,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 5.763,
-        "percent_full": 61.7
+        "estimated_storage_bcm": 2.284,
+        "percent_full": 36.7
       },
       "dead_storage_capacity_bcm": 2.04,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 149.336,
-      "full_pool_capacity_bcm": 9.34,
+      "full_pool_capacity_bcm": 6.229,
       "history": [
         {
           "area_km2": 38.02789920529574,
@@ -1039,23 +1039,23 @@
       "current": {
         "area_km2": 7.221,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.036,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.686,
-        "percent_full": 19.4
+        "estimated_storage_bcm": 0.041,
+        "percent_full": 1.6
       },
       "dead_storage_capacity_bcm": 0.84,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 37.288,
-      "full_pool_capacity_bcm": 3.54,
+      "full_pool_capacity_bcm": 2.615,
       "history": [
         {
           "area_km2": 34.34705117711884,
@@ -2043,11 +2043,11 @@
       "current": {
         "area_km2": 12.974,
         "as_of": "2026-05-15",
-        "cwc_as_of": "2026-04-09",
-        "cwc_reported_bcm": 0.48,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.21,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.197,
-        "percent_full": 16.9
+        "estimated_storage_bcm": 0.21,
+        "percent_full": 18.1
       },
       "dead_storage_capacity_bcm": 0.13,
       "fit": {
@@ -4923,8 +4923,8 @@
       "current": {
         "area_km2": 84.807,
         "as_of": "2026-05-17",
-        "cwc_as_of": "2026-04-09",
-        "cwc_reported_bcm": 1.254,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 1.17,
         "data_source": "sentinel_2",
         "estimated_storage_bcm": 1.17,
         "percent_full": 44.2
@@ -7787,11 +7787,11 @@
       "current": {
         "area_km2": 203.34,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.902,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 1.82,
-        "percent_full": 62.6
+        "estimated_storage_bcm": 1.447,
+        "percent_full": 66.6
       },
       "dead_storage_capacity_bcm": 0.74,
       "fit": {
@@ -7805,15 +7805,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 325.036,
-      "full_pool_capacity_bcm": 2.91,
+      "full_pool_capacity_bcm": 2.171,
       "history": [
         {
           "area_km2": 171.1295252036513,
@@ -8813,11 +8813,11 @@
       "current": {
         "area_km2": 498.981,
         "as_of": "2026-05-18",
-        "cwc_as_of": "2026-04-09",
-        "cwc_reported_bcm": 4.192,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 2.715,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 2.06,
-        "percent_full": 21.1
+        "estimated_storage_bcm": 2.64,
+        "percent_full": 27.1
       },
       "dead_storage_capacity_bcm": 3.39,
       "fit": {
@@ -8835,7 +8835,6 @@
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "low_volume_confidence",
         "phase0_cwc_validation_incomplete",
         "rebuilt_from_csv"
       ],
@@ -11700,11 +11699,11 @@
       "current": {
         "area_km2": 144.855,
         "as_of": "2026-05-17",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.724,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 7.168,
-        "percent_full": 62.0
+        "estimated_storage_bcm": 0.724,
+        "percent_full": 14.2
       },
       "dead_storage_capacity_bcm": 3.31,
       "fit": {
@@ -11718,15 +11717,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 233.607,
-      "full_pool_capacity_bcm": 11.56,
+      "full_pool_capacity_bcm": 5.108,
       "history": [
         {
           "area_km2": 188.07979620932338,
@@ -12720,11 +12719,11 @@
       "current": {
         "area_km2": 88.353,
         "as_of": "2026-05-17",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 1.013,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 1.98,
-        "percent_full": 22.7
+        "estimated_storage_bcm": 1.013,
+        "percent_full": 16.8
       },
       "dead_storage_capacity_bcm": 2.12,
       "fit": {
@@ -12738,15 +12737,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "manual_bbox_needs_visual_check",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 389.155,
-      "full_pool_capacity_bcm": 8.72,
+      "full_pool_capacity_bcm": 6.013,
       "history": [
         {
           "area_km2": 340.5139027531644,
@@ -13740,23 +13739,23 @@
       "current": {
         "area_km2": 102.435,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 3.11,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 5.013,
-        "percent_full": 52.8
+        "estimated_storage_bcm": 3.343,
+        "percent_full": 58.0
       },
       "dead_storage_capacity_bcm": 1.87,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 194.14,
-      "full_pool_capacity_bcm": 9.5,
+      "full_pool_capacity_bcm": 5.76,
       "history": [
         {
           "area_km2": 154.5213897629775,
@@ -14750,11 +14749,11 @@
       "current": {
         "area_km2": 301.921,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 3.088,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 4.653,
-        "percent_full": 62.8
+        "estimated_storage_bcm": 3.057,
+        "percent_full": 46.2
       },
       "dead_storage_capacity_bcm": 1.4,
       "fit": {
@@ -14768,15 +14767,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 480.837,
-      "full_pool_capacity_bcm": 7.41,
+      "full_pool_capacity_bcm": 6.615,
       "history": [
         {
           "area_km2": 316.8722652809735,
@@ -15776,11 +15775,11 @@
       "current": {
         "area_km2": 25.543,
         "as_of": "2026-05-15",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.05,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.264,
-        "percent_full": 48.0
+        "estimated_storage_bcm": 0.05,
+        "percent_full": 11.3
       },
       "dead_storage_capacity_bcm": 0.03,
       "fit": {
@@ -15794,15 +15793,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 53.198,
-      "full_pool_capacity_bcm": 0.55,
+      "full_pool_capacity_bcm": 0.444,
       "history": [
         {
           "area_km2": 47.20383503477717,
@@ -16796,23 +16795,23 @@
       "current": {
         "area_km2": 37.618,
         "as_of": "2026-05-15",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.338,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.636,
-        "percent_full": 67.7
+        "estimated_storage_bcm": 0.338,
+        "percent_full": 36.5
       },
       "dead_storage_capacity_bcm": 0.04,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 55.579,
-      "full_pool_capacity_bcm": 0.94,
+      "full_pool_capacity_bcm": 0.927,
       "history": [
         {
           "area_km2": 24.028418542935892,
@@ -17800,23 +17799,23 @@
       "current": {
         "area_km2": 8.366,
         "as_of": "2026-05-15",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.064,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.142,
-        "percent_full": 61.9
+        "estimated_storage_bcm": 0.064,
+        "percent_full": 29.1
       },
       "dead_storage_capacity_bcm": 0.04,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 13.52,
-      "full_pool_capacity_bcm": 0.23,
+      "full_pool_capacity_bcm": 0.22,
       "history": [
         {
           "area_km2": 5.466494722644063,
@@ -18804,11 +18803,11 @@
       "current": {
         "area_km2": 31.329,
         "as_of": "2026-05-12",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.204,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.519,
-        "percent_full": 55.8
+        "estimated_storage_bcm": 0.204,
+        "percent_full": 25.8
       },
       "dead_storage_capacity_bcm": 0.1,
       "fit": {
@@ -18822,15 +18821,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 56.189,
-      "full_pool_capacity_bcm": 0.93,
+      "full_pool_capacity_bcm": 0.792,
       "history": [
         {
           "area_km2": 54.161634459475366,
@@ -19812,11 +19811,11 @@
       "current": {
         "area_km2": 3.668,
         "as_of": "2026-05-17",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.007,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.035,
-        "percent_full": 20.5
+        "estimated_storage_bcm": 0.007,
+        "percent_full": 4.1
       },
       "dead_storage_capacity_bcm": 0.02,
       "fit": {
@@ -19830,15 +19829,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 17.888,
-      "full_pool_capacity_bcm": 0.17,
+      "full_pool_capacity_bcm": 0.172,
       "history": [
         {
           "area_km2": 12.054876315330802,
@@ -21846,20 +21845,20 @@
       "current": {
         "area_km2": 32.291,
         "as_of": "2026-05-17",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.393,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 1.088,
-        "percent_full": 74.5
+        "estimated_storage_bcm": 0.393,
+        "percent_full": 26.9
       },
       "dead_storage_capacity_bcm": 0.45,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 43.334,
       "full_pool_capacity_bcm": 1.46,
@@ -22850,11 +22849,11 @@
       "current": {
         "area_km2": 18.315,
         "as_of": "2026-05-17",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.255,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.842,
-        "percent_full": 77.2
+        "estimated_storage_bcm": 0.255,
+        "percent_full": 25.0
       },
       "dead_storage_capacity_bcm": 0.1,
       "fit": {
@@ -22868,15 +22867,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 23.711,
-      "full_pool_capacity_bcm": 1.09,
+      "full_pool_capacity_bcm": 1.018,
       "history": [
         {
           "area_km2": 22.811878856689304,
@@ -23870,23 +23869,23 @@
       "current": {
         "area_km2": 139.171,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.803,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.973,
-        "percent_full": 88.5
+        "estimated_storage_bcm": 0.946,
+        "percent_full": 87.9
       },
       "dead_storage_capacity_bcm": 0.06,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 157.321,
-      "full_pool_capacity_bcm": 1.1,
+      "full_pool_capacity_bcm": 1.076,
       "history": [
         {
           "area_km2": 16.838580950596256,
@@ -24874,23 +24873,23 @@
       "current": {
         "area_km2": 8.705,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.031,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.039,
-        "percent_full": 78.1
+        "estimated_storage_bcm": 0.03,
+        "percent_full": 53.7
       },
       "dead_storage_capacity_bcm": 0.0,
       "fit": null,
       "flags": [
+        "cwc_calibrated_single_point",
         "depletion_fit_unavailable",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 11.145,
-      "full_pool_capacity_bcm": 0.05,
+      "full_pool_capacity_bcm": 0.056,
       "history": [
         {
           "area_km2": 8.68155628715263,
@@ -25884,11 +25883,11 @@
       "current": {
         "area_km2": 24.79,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.275,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.437,
-        "percent_full": 32.1
+        "estimated_storage_bcm": 0.357,
+        "percent_full": 75.8
       },
       "dead_storage_capacity_bcm": 0.08,
       "fit": {
@@ -25902,15 +25901,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 77.219,
-      "full_pool_capacity_bcm": 1.36,
+      "full_pool_capacity_bcm": 0.471,
       "history": [
         {
           "area_km2": 65.95723819031225,
@@ -26904,10 +26903,10 @@
       "current": {
         "area_km2": 15.91,
         "as_of": "2026-05-18",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.184,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.404,
+        "estimated_storage_bcm": 0.05,
         "percent_full": 27.0
       },
       "dead_storage_capacity_bcm": 0.1,
@@ -26930,7 +26929,7 @@
         "volume_area_ratio_proxy"
       ],
       "full_pool_area_km2": 59.016,
-      "full_pool_capacity_bcm": 1.5,
+      "full_pool_capacity_bcm": 0.184,
       "history": [
         {
           "area_km2": 45.57064833688627,
@@ -27924,11 +27923,11 @@
       "current": {
         "area_km2": 129.231,
         "as_of": "2026-05-17",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.783,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 1.843,
-        "percent_full": 58.0
+        "estimated_storage_bcm": 0.783,
+        "percent_full": 24.6
       },
       "dead_storage_capacity_bcm": 0.45,
       "fit": {
@@ -27942,12 +27941,12 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 222.956,
       "full_pool_capacity_bcm": 3.18,
@@ -28944,11 +28943,11 @@
       "current": {
         "area_km2": 49.379,
         "as_of": "2026-05-17",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.525,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.864,
-        "percent_full": 69.7
+        "estimated_storage_bcm": 0.525,
+        "percent_full": 48.1
       },
       "dead_storage_capacity_bcm": 0.1,
       "fit": {
@@ -28962,15 +28961,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 70.839,
-      "full_pool_capacity_bcm": 1.24,
+      "full_pool_capacity_bcm": 1.091,
       "history": [
         {
           "area_km2": 50.162142664671535,
@@ -29964,11 +29963,11 @@
       "current": {
         "area_km2": 48.972,
         "as_of": "2026-05-17",
-        "cwc_as_of": null,
-        "cwc_reported_bcm": null,
+        "cwc_as_of": "2026-05-14",
+        "cwc_reported_bcm": 0.171,
         "data_source": "sentinel_2",
-        "estimated_storage_bcm": 0.351,
-        "percent_full": 41.3
+        "estimated_storage_bcm": 0.171,
+        "percent_full": 20.8
       },
       "dead_storage_capacity_bcm": 0.04,
       "fit": {
@@ -29982,15 +29981,15 @@
         "window_days": 90
       },
       "flags": [
+        "cwc_calibrated_single_point",
         "dead_storage_area_proxy",
         "el_nino_delta_static_years",
         "first_pass_needs_manual_review",
-        "needs_cwc_calibration",
-        "rebuilt_from_csv",
-        "volume_area_ratio_proxy"
+        "phase0_cwc_validation_incomplete",
+        "rebuilt_from_csv"
       ],
       "full_pool_area_km2": 118.702,
-      "full_pool_capacity_bcm": 0.85,
+      "full_pool_capacity_bcm": 0.822,
       "history": [
         {
           "area_km2": 82.99065328698372,

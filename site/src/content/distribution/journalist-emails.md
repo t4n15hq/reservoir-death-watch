@@ -64,8 +64,8 @@ Headline: 5 of 25 currently critical, 5 warning. KRS (Bengaluru) at
 I think you'll find the data-quality card at the bottom of the
 dashboard interesting — it's an honest itemisation of which fields are
 measured satellite observations vs my unverified metadata. Of 25
-reservoirs, 22 are using a storage proxy because I only have one CWC
-bulletin loaded; the path to fixing that is documented.
+reservoirs, 24 now have CWC reference rows and 2 still use a storage
+proxy; the path to fixing those remaining proxy cases is documented.
 
 Source data: Sentinel-2 (10m, weekly), JRC Global Surface Water (30m,
 monthly, 1984–2021), CWC weekly bulletins, NOAA ONI.

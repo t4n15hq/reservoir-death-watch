@@ -114,17 +114,19 @@ def parse_weekly_report_text(
     for cwc_name, cwc_name_normalized, reservoir_id in aliases:
         if reservoir_id in seen:
             continue
-        match = _find_normalized_alias(normalized_text, cwc_name_normalized)
-        if not match:
-            continue
-        row = _parse_weekly_report_row(
-            normalized_text[match.end() : match.end() + 700],
-            reservoir_id=reservoir_id,
-            cwc_name=cwc_name,
-            source_url=source_url,
-        )
-        rows.append(row)
-        seen.add(reservoir_id)
+        for match in _find_normalized_aliases(normalized_text, cwc_name_normalized):
+            try:
+                row = _parse_weekly_report_row(
+                    normalized_text[match.end() : match.end() + 700],
+                    reservoir_id=reservoir_id,
+                    cwc_name=cwc_name,
+                    source_url=source_url,
+                )
+            except CWCFormatError:
+                continue
+            rows.append(row)
+            seen.add(reservoir_id)
+            break
 
     if not rows:
         raise CWCFormatError("no CWC weekly report rows matched the alias map")
@@ -276,10 +278,10 @@ def _suffix_after_name(line: str, cwc_name: str) -> str:
     return match.group(1) if match else line
 
 
-def _find_normalized_alias(text: str, normalized_alias: str) -> re.Match[str] | None:
+def _find_normalized_aliases(text: str, normalized_alias: str) -> list[re.Match[str]]:
     words = [re.escape(word) for word in normalized_alias.split()]
     pattern = re.compile(r"\b" + r"\s+".join(words) + r"\b", re.IGNORECASE)
-    return pattern.search(text)
+    return list(pattern.finditer(text))
 
 
 def _parse_weekly_report_row(
@@ -292,13 +294,20 @@ def _parse_weekly_report_row(
     date_match = _DATE_TOKEN.search(text_after_name)
     if not date_match:
         raise CWCFormatError(f"matched {reservoir_id} but found no row date")
+    if date_match.start() > 220:
+        raise CWCFormatError(f"matched {reservoir_id} outside a reservoir table row")
+    leading_text = text_after_name[: date_match.start()]
+    if re.search(r"\b(BASIN|PROJECTS|REPORT|STATEWISE|STORAGE|TABLE)\b", leading_text):
+        raise CWCFormatError(f"matched {reservoir_id} inside a summary table")
 
     row_date = _parse_date_token(date_match.group(0))
-    before_numbers = _numbers_in_line(text_after_name[: date_match.start()])
+    before_numbers = _numbers_in_line(leading_text)
     after_numbers = _numbers_in_line(text_after_name[date_match.end() :])
 
-    if len(before_numbers) < 2 or len(after_numbers) < 3:
+    if len(before_numbers) < 4 or len(after_numbers) < 3:
         raise CWCFormatError(f"matched {reservoir_id} but row has too few numeric columns")
+    if len(before_numbers) > 6:
+        raise CWCFormatError(f"matched {reservoir_id} but row has too many leading columns")
 
     if after_numbers[0] <= 100 and before_numbers[-1] <= before_numbers[-2]:
         live_capacity = before_numbers[-2]

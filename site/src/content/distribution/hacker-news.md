@@ -32,8 +32,8 @@ Lead with "Show HN: ", keep under ~75 chars, no emoji, no buzzwords.
 >
 > - Surface area observed from Sentinel-2 (10m, weekly)
 > - Storage estimated via CWC-calibrated hypsometric curve where I have
->   ground-truth bulletins (3 of 25 so far), or a clearly-labelled
->   area-ratio proxy otherwise (22 of 25)
+>   usable ground-truth bulletin anchors (23 of 25 so far), or a
+>   clearly-labelled area-ratio proxy otherwise (2 of 25)
 > - Days-to-dead-storage projected via linear regression on the recent
 >   90-day series
 > - Validated against three historical crises (KRS 2024, Mettur 2019,
@@ -52,7 +52,8 @@ Lead with "Show HN: ", keep under ~75 chars, no emoji, no buzzwords.
 > Honest about gaps in the "Data quality" card at the bottom of the
 > dashboard:
 >
-> - 22 of 25 reservoirs use area-ratio proxy (need more CWC bulletins)
+> - 2 of 25 reservoirs use area-ratio proxy (need a Mullaperiyar CWC
+>   name match and a non-full Panchet anchor)
 > - 0 of 25 lat/lon coordinates verified against CWC's register
 > - KRS Dec 2023 backtest fails — no usable cloud-free satellite obs
 >
@@ -85,7 +86,7 @@ Lead with "Show HN: ", keep under ~75 chars, no emoji, no buzzwords.
 
 ## What NOT to do on HN
 
-- Don't oversell. The 22-of-25 proxy gap is a real limitation; lead
+- Don't oversell. The 2-of-25 proxy gap is a real limitation; lead
   with it, don't bury it
 - Don't argue back at skeptical commenters — they're usually right about
   *some* part of their critique

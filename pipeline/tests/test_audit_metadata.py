@@ -30,15 +30,16 @@ def test_total_reservoirs_matches_csv(provenance):
     assert provenance["counts"]["total_reservoirs"] == len(rows) == 25
 
 
-def test_cwc_anchored_count_pins_at_three(provenance):
-    """As of last audit: KRS, Mettur, Indira Sagar. Goes up when you add
-    more CWC bulletin CSVs (drop into pipeline/data/cwc/)."""
+def test_cwc_anchored_count_pins_current_bulletin_ingest(provenance):
+    """As of the 2026-05-20 audit, seven local CWC bulletins match 24
+    reservoirs. Panchet has a CWC reference but no usable curve because the
+    latest row reports 100% FRL; Mullaperiyar is still unmatched."""
 
-    assert provenance["counts"]["cwc_reference_available"] == 3, (
+    assert provenance["counts"]["cwc_reference_available"] == 24, (
         "CWC reference count changed. If you added a bulletin, update this "
         "expected value AND re-confirm docs/PROVENANCE.md counts."
     )
-    assert provenance["counts"]["storage_cwc_calibrated"] == 3, (
+    assert provenance["counts"]["storage_cwc_calibrated"] == 23, (
         "CWC-calibrated count changed. If you added a bulletin, update this "
         "expected value AND re-confirm docs/PROVENANCE.md counts."
     )
@@ -56,7 +57,7 @@ def test_metadata_verification_is_explicit(provenance):
 
     c = provenance["counts"]
     assert c["lat_lon_verified"] == 0, "bump test when coord_verified_at populated"
-    assert c["full_pool_capacity_from_cwc"] == 3, "bump test when CWC rows change"
+    assert c["full_pool_capacity_from_cwc"] == 24, "bump test when CWC rows change"
     assert c["dead_storage_capacity_verified"] == 0, (
         "bump test only after adding an explicit dead-storage source"
     )
