@@ -23,7 +23,7 @@ import csv
 import json
 from datetime import UTC, datetime
 
-from reservoirs.config import DASHBOARD_DATA_DIR, RESERVOIRS_CSV
+from reservoirs.config import DASHBOARD_DATA_DIR, REPO_ROOT, RESERVOIRS_CSV
 from reservoirs.cwc_scraper import load_cwc_storage
 
 
@@ -70,10 +70,12 @@ def snapshot_entry_classification(
     full_capacity_verified = cwc_live_capacity is not None
     coord_verified = bool(row.get("coord_verified_at"))
     population_verified = bool(row.get("population_source"))
+    aoi_available = _repo_path_exists(row.get("aoi_file"))
 
     return {
         "id": rid,
         "name": row["name"],
+        "scope": row.get("scope") or "core_city",
         "lat_lon": {
             "value": [float(row["lat"]), float(row["lon"])],
             "verified": coord_verified,
@@ -104,6 +106,7 @@ def snapshot_entry_classification(
             "source": "editorial label",
         },
         "aoi": {
+            "available": aoi_available,
             "verified": not any(
                 f in flags
                 for f in (
@@ -166,6 +169,7 @@ def aggregate_counts(per_reservoir: list[dict]) -> dict:
         and r["dead_storage_capacity_bcm"]["verified"]
     )
     pop_v = sum(1 for r in per_reservoir if r["population_served"]["verified"])
+    aoi_available = sum(1 for r in per_reservoir if r["aoi"]["available"])
     aoi_v = sum(1 for r in per_reservoir if r["aoi"]["verified"])
     cwc_reference = sum(1 for r in per_reservoir if r["cwc_reference"]["available"])
     cwc_calibrated = sum(
@@ -181,6 +185,7 @@ def aggregate_counts(per_reservoir: list[dict]) -> dict:
     return {
         "total_reservoirs": total,
         "observed_with_satellite": observed,
+        "aoi_available": aoi_available,
         "aoi_visually_reviewed": aoi_v,
         "cwc_reference_available": cwc_reference,
         "storage_cwc_calibrated": cwc_calibrated,
@@ -225,6 +230,13 @@ def _opt_int(value: str | None) -> int | None:
         return None
 
 
+def _repo_path_exists(value: str | None) -> bool:
+    if not value:
+        return False
+    path = REPO_ROOT / value
+    return path.exists()
+
+
 def main() -> int:
     provenance = build_provenance()
     path = DASHBOARD_DATA_DIR / "data_provenance.json"
@@ -238,6 +250,7 @@ def main() -> int:
     print(f"Wrote {path}")
     print(f"  total reservoirs:                       {counts['total_reservoirs']}")
     print(f"  observed (≥1 satellite obs):            {counts['observed_with_satellite']}")
+    print(f"  AOI GeoJSON available:                  {counts['aoi_available']}")
     print(f"  AOI visually reviewed:                  {counts['aoi_visually_reviewed']}")
     print(f"  CWC reference rows loaded:              {counts['cwc_reference_available']}")
     print(f"  storage CWC-calibrated:                 {counts['storage_cwc_calibrated']}")

@@ -36,14 +36,19 @@ async function boot() {
     backtestCase ? Promise.resolve(null) : loadDataProvenance().catch(() => null),
   ]);
   renderStateBand(document.getElementById('states-band'), snapshot, stateAggregates);
-  renderDataQuality(document.getElementById('quality-section'), provenance);
-
-  const map = await initMap('map');
   const filters = {
     scope: 'core_city',
     state: 'all',
     query: '',
   };
+  renderDataQuality(
+    document.getElementById('quality-section'),
+    provenance,
+    filterReservoirs(snapshot.reservoirs ?? [], filters),
+    filters,
+  );
+
+  const map = await initMap('map');
   let selectedReservoir = null;
   let hasRenderedFilters = false;
 
@@ -60,6 +65,7 @@ async function boot() {
   function renderFilteredReservoirs() {
     const filtered = filterReservoirs(snapshot.reservoirs ?? [], filters);
     updateListCount(filtered, snapshot.reservoirs ?? [], filters);
+    renderDataQuality(document.getElementById('quality-section'), provenance, filtered, filters);
 
     plotReservoirs(map, filtered, {
       onSelect: (r) => selectByReservoir(r),

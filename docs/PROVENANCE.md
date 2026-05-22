@@ -101,6 +101,7 @@ for the machine-readable form.
 | Reservoirs with CWC live-storage reference loaded | 52 of 53 |
 | Reservoirs with CWC-calibrated curve | 23 of 53 |
 | Reservoirs with `volume_area_ratio_proxy` flag | 2 of 53 |
+| Reservoirs with AOI GeoJSON available | 25 of 53 |
 | Reservoirs with AOI seeded but unreviewed | 25 of 53 |
 | Reservoirs awaiting AOI seeding | 28 of 53 |
 | Reservoirs with verified `lat/lon` against CWC bulletin | **0 of 53** |
@@ -108,6 +109,9 @@ for the machine-readable form.
 | Reservoirs with verified `dead_storage_capacity_bcm` | **0 of 53** |
 | Reservoirs with verified `population_served` against census | **0 of 53** |
 
-**The "0 of 53" rows are the next milestone for Tier 3 confidence.** They
-require manual cross-checks against CWC/OSM/census sources; until then those
-metadata fields stay "approximate" in the dashboard.
+The dashboard separates **operational coverage** from **manual source checks**:
+the 25 core reservoirs have satellite observations and AOI polygons, while the
+28 expanded reservoirs are CWC-backed watchlist rows awaiting AOI seeding. The
+"0 of 53" rows are the next milestone for Tier 3 confidence. They require
+manual cross-checks against CWC/OSM/census sources; until then those metadata
+fields stay "approximate" in the dashboard.

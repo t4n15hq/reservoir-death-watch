@@ -58,6 +58,7 @@ def test_metadata_verification_is_explicit(provenance):
     c = provenance["counts"]
     assert c["lat_lon_verified"] == 0, "bump test when coord_verified_at populated"
     assert c["full_pool_capacity_from_cwc"] == 52, "bump test when CWC rows change"
+    assert c["aoi_available"] == 25, "bump test when expanded AOIs are seeded"
     assert c["dead_storage_capacity_verified"] == 0, (
         "bump test only after adding an explicit dead-storage source"
     )
@@ -88,6 +89,16 @@ def test_every_reservoir_classified(provenance):
     rows = list(csv.DictReader(RESERVOIRS_CSV.open()))
     csv_ids = {r["id"] for r in rows}
     assert seen_ids == csv_ids
+
+
+def test_core_aoi_files_are_distinct_from_manual_review(provenance):
+    by_id = {r["id"]: r for r in provenance["reservoirs"]}
+
+    assert by_id["srisailam"]["scope"] == "core_city"
+    assert by_id["srisailam"]["aoi"]["available"] is True
+    assert by_id["srisailam"]["aoi"]["verified"] is False
+    assert by_id["hirakud"]["scope"] == "expanded_cwc"
+    assert by_id["hirakud"]["aoi"]["available"] is False
 
 
 def test_storage_method_is_one_of_known_classifications(provenance):

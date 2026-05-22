@@ -1027,11 +1027,22 @@ body.is-backtest .method-summary {
   margin-left: 0.5rem;
 }
 
+.quality-group + .quality-group { margin-top: 1rem; }
+.quality-group__label {
+  margin-bottom: 0.45rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .quality-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.7rem;
 }
+.quality-grid--compact { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 
 .quality-tile {
   background: var(--panel-soft);
@@ -1044,6 +1055,7 @@ body.is-backtest .method-summary {
 .quality-tile--zero { border-left: 3px solid var(--critical); }
 .quality-tile--partial { border-left: 3px solid var(--warning); }
 .quality-tile--full { border-left: 3px solid var(--stable); }
+.quality-tile--todo { border-left: 3px solid var(--muted-2); }
 
 .quality-tile__count { display: flex; align-items: baseline; gap: 0.35rem; }
 .quality-tile__num {
@@ -1057,6 +1069,7 @@ body.is-backtest .method-summary {
 .quality-tile--zero .quality-tile__num { color: var(--critical); }
 .quality-tile--partial .quality-tile__num { color: var(--warning); }
 .quality-tile--full .quality-tile__num { color: var(--stable); }
+.quality-tile--todo .quality-tile__num { color: var(--muted); }
 .quality-tile__total { font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 .quality-tile__label {
@@ -1082,6 +1095,7 @@ body.is-backtest .method-summary {
 .quality-tile--zero .quality-tile__bar span { background: var(--critical); }
 .quality-tile--partial .quality-tile__bar span { background: var(--warning); }
 .quality-tile--full .quality-tile__bar span { background: var(--stable); }
+.quality-tile--todo .quality-tile__bar span { background: var(--muted-2); }
 
 .quality-tile__hint {
   font-size: 0.72rem;
@@ -1105,8 +1119,8 @@ body.is-backtest .method-summary {
   height: 8px;
   border-radius: 50%;
 }
-.quality-key__dot--measured { background: var(--stable); }
-.quality-key__dot--metadata { background: var(--warning); }
+.quality-key__dot--coverage { background: var(--stable); }
+.quality-key__dot--backlog { background: var(--muted-2); }
 
 /* ============================================================
    FOOTER

@@ -1,5 +1,6 @@
 {
   "counts": {
+    "aoi_available": 25,
     "aoi_visually_reviewed": 0,
     "capacity_verified_against_cwc": 0,
     "cwc_reference_available": 52,
@@ -11,10 +12,11 @@
     "storage_cwc_calibrated": 23,
     "total_reservoirs": 53
   },
-  "generated_at": "2026-05-21T16:04:08.822342Z",
+  "generated_at": "2026-05-22T17:54:23.005601Z",
   "reservoirs": [
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -57,6 +59,7 @@
         "value": 33000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -64,6 +67,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -106,6 +110,7 @@
         "value": 33000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -113,6 +118,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -155,6 +161,7 @@
         "value": 13500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -162,6 +169,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -204,6 +212,7 @@
         "value": 10000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -211,6 +220,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -253,6 +263,7 @@
         "value": 9500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -260,6 +271,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -302,6 +314,7 @@
         "value": 3500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -309,6 +322,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -351,6 +365,7 @@
         "value": 15000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -358,6 +373,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
@@ -400,6 +416,7 @@
         "value": 10000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -407,6 +424,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -449,6 +467,7 @@
         "value": 10000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -456,6 +475,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -498,6 +518,7 @@
         "value": 7000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -505,6 +526,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -547,6 +569,7 @@
         "value": 13500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -554,6 +577,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -596,6 +620,7 @@
         "value": 13500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -603,6 +628,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -645,6 +671,7 @@
         "value": 13500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -652,6 +679,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -694,6 +722,7 @@
         "value": 2500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -701,6 +730,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -743,6 +773,7 @@
         "value": 1500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -750,6 +781,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -792,6 +824,7 @@
         "value": 2500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "area_ratio_proxy"
@@ -799,6 +832,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -841,6 +875,7 @@
         "value": 4000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -848,6 +883,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -890,6 +926,7 @@
         "value": 2500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -897,6 +934,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -939,6 +977,7 @@
         "value": 4000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -946,6 +985,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -988,6 +1028,7 @@
         "value": 7000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -995,6 +1036,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -1037,6 +1079,7 @@
         "value": 4500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -1044,6 +1087,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -1086,6 +1130,7 @@
         "value": 4500000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "area_ratio_proxy"
@@ -1093,6 +1138,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -1135,6 +1181,7 @@
         "value": 1200000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -1142,6 +1189,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -1184,6 +1232,7 @@
         "value": 3000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -1191,6 +1240,7 @@
     },
     {
       "aoi": {
+        "available": true,
         "flag": "first_pass_needs_manual_review",
         "verified": false
       },
@@ -1233,6 +1283,7 @@
         "value": 10000000,
         "verified": false
       },
+      "scope": "core_city",
       "storage_calibration": {
         "cwc_anchored": true,
         "method": "cwc_calibrated_power_law"
@@ -1240,6 +1291,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1282,6 +1334,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1289,6 +1342,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1331,6 +1385,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1338,6 +1393,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1380,6 +1436,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1387,6 +1444,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1429,6 +1487,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1436,6 +1495,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1478,6 +1538,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1485,6 +1546,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1527,6 +1589,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1534,6 +1597,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1576,6 +1640,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1583,6 +1648,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1625,6 +1691,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1632,6 +1699,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1674,6 +1742,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1681,6 +1750,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1723,6 +1793,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1730,6 +1801,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1772,6 +1844,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1779,6 +1852,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1821,6 +1895,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1828,6 +1903,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1870,6 +1946,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1877,6 +1954,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1919,6 +1997,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1926,6 +2005,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -1968,6 +2048,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -1975,6 +2056,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2017,6 +2099,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2024,6 +2107,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2066,6 +2150,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2073,6 +2158,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2115,6 +2201,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2122,6 +2209,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2164,6 +2252,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2171,6 +2260,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2213,6 +2303,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2220,6 +2311,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2262,6 +2354,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2269,6 +2362,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2311,6 +2405,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2318,6 +2413,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2360,6 +2456,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2367,6 +2464,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2409,6 +2507,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2416,6 +2515,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2458,6 +2558,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2465,6 +2566,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2507,6 +2609,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2514,6 +2617,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2556,6 +2660,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"
@@ -2563,6 +2668,7 @@
     },
     {
       "aoi": {
+        "available": false,
         "flag": "awaiting_first_observation",
         "verified": false
       },
@@ -2605,6 +2711,7 @@
         "value": null,
         "verified": false
       },
+      "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
         "method": "pending"

@@ -190,6 +190,40 @@ Pre-computed state rollups.
 }
 ```
 
+### `dashboard/public/data/data_provenance.json`
+
+Per-field trust metadata consumed by the Data Quality panel.
+
+```json
+{
+  "counts": {
+    "total_reservoirs": 53,
+    "observed_with_satellite": 25,
+    "aoi_available": 25,
+    "aoi_visually_reviewed": 0,
+    "cwc_reference_available": 52,
+    "storage_cwc_calibrated": 23,
+    "lat_lon_verified": 0,
+    "full_pool_capacity_from_cwc": 52,
+    "dead_storage_capacity_verified": 0,
+    "population_verified_against_census": 0
+  },
+  "reservoirs": [
+    {
+      "id": "srisailam",
+      "scope": "core_city",
+      "aoi": {"available": true, "verified": false},
+      "lat_lon": {"verified": false},
+      "population_served": {"verified": false}
+    }
+  ]
+}
+```
+
+`aoi.available` means a GeoJSON polygon artifact exists and can be rendered on
+the map. `aoi.verified` is stricter: it only becomes true after manual visual
+review.
+
 ### `dashboard/public/data/backtest_{case}.json`
 
 Same shape as `reservoirs.json`, but `as_of` rewound. One file per case:
