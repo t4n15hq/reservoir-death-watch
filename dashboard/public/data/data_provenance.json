@@ -1,18 +1,18 @@
 {
   "counts": {
-    "aoi_available": 25,
+    "aoi_available": 53,
     "aoi_visually_reviewed": 0,
     "capacity_verified_against_cwc": 0,
     "cwc_reference_available": 52,
     "dead_storage_capacity_verified": 0,
     "full_pool_capacity_from_cwc": 52,
     "lat_lon_verified": 0,
-    "observed_with_satellite": 25,
+    "observed_with_satellite": 53,
     "population_verified_against_census": 0,
     "storage_cwc_calibrated": 23,
     "total_reservoirs": 53
   },
-  "generated_at": "2026-05-22T17:54:23.005601Z",
+  "generated_at": "2026-05-22T18:27:37.849146Z",
   "reservoirs": [
     {
       "aoi": {
@@ -1291,8 +1291,8 @@
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1301,8 +1301,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-22",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1337,13 +1337,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1352,8 +1352,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-22",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1388,13 +1388,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1403,8 +1403,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-19",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1439,13 +1439,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1454,8 +1454,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1490,13 +1490,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1505,8 +1505,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1541,13 +1541,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1556,8 +1556,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1592,13 +1592,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1607,8 +1607,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1643,13 +1643,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1658,8 +1658,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1694,13 +1694,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1709,8 +1709,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1745,13 +1745,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1760,8 +1760,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1796,13 +1796,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1811,8 +1811,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1847,13 +1847,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1862,8 +1862,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1898,13 +1898,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1913,8 +1913,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-20",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -1949,13 +1949,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -1964,8 +1964,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2000,13 +2000,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -2015,8 +2015,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2051,13 +2051,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -2066,8 +2066,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-18",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2102,13 +2102,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -2117,8 +2117,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2153,13 +2153,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "first_pass_needs_manual_review",
         "verified": false
       },
       "city_served": {
@@ -2168,8 +2168,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-22",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2204,13 +2204,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2219,8 +2219,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-22",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2255,13 +2255,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2270,8 +2270,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-22",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2306,13 +2306,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2321,8 +2321,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-20",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2357,13 +2357,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2372,8 +2372,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-20",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2408,13 +2408,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2423,8 +2423,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2459,13 +2459,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2474,8 +2474,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-21",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2510,13 +2510,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2525,8 +2525,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-19",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2561,13 +2561,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2576,8 +2576,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-19",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2612,13 +2612,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2627,8 +2627,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-22",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2663,13 +2663,13 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     },
     {
       "aoi": {
-        "available": false,
-        "flag": "awaiting_first_observation",
+        "available": true,
+        "flag": "manual_bbox_needs_visual_check",
         "verified": false
       },
       "city_served": {
@@ -2678,8 +2678,8 @@
         "verified": false
       },
       "current_observation": {
-        "as_of": "1900-01-01",
-        "data_source": "stale"
+        "as_of": "2026-05-22",
+        "data_source": "sentinel_2"
       },
       "cwc_reference": {
         "as_of": "2026-05-14",
@@ -2714,7 +2714,7 @@
       "scope": "expanded_cwc",
       "storage_calibration": {
         "cwc_anchored": false,
-        "method": "pending"
+        "method": "area_ratio_proxy"
       }
     }
   ]

@@ -1,0 +1,41 @@
+{
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          83.25,
+          21.25
+        ],
+        [
+          84.15,
+          21.25
+        ],
+        [
+          84.15,
+          21.85
+        ],
+        [
+          83.25,
+          21.85
+        ],
+        [
+          83.25,
+          21.25
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "properties": {
+    "area_km2": 6182.052,
+    "centroid_distance_m": 0.0,
+    "generated_at": "2026-05-22T18:13:09.052793+00:00",
+    "id": "hirakud",
+    "method": "manual_bbox;lon=83.25-84.15;lat=21.25-21.85;strategy=recurrence",
+    "name": "Hirakud",
+    "review_status": "manual_bbox_needs_visual_check",
+    "ring_cleanup_applied": true,
+    "source": "manual_bbox"
+  },
+  "type": "Feature"
+}

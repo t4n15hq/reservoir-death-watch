@@ -37,7 +37,7 @@ async function boot() {
   ]);
   renderStateBand(document.getElementById('states-band'), snapshot, stateAggregates);
   const filters = {
-    scope: 'core_city',
+    scope: 'all',
     state: 'all',
     query: '',
   };
@@ -48,16 +48,17 @@ async function boot() {
     filters,
   );
 
-  const map = await initMap('map');
+  let map = null;
+  let mapReady = false;
   let selectedReservoir = null;
-  let hasRenderedFilters = false;
+  let hasRenderedMap = false;
 
   const selectByReservoir = (reservoir, { fly = true } = {}) => {
     selectedReservoir = reservoir;
     renderDetail(document.getElementById('detail-pane'), reservoir);
     setActivePin(reservoir.id);
     setActiveRow(reservoir.id);
-    if (fly) focusReservoir(map, reservoir);
+    if (fly && mapReady && map) focusReservoir(map, reservoir);
   };
 
   setupFilters(snapshot, filters, () => renderFilteredReservoirs());
@@ -67,10 +68,13 @@ async function boot() {
     updateListCount(filtered, snapshot.reservoirs ?? [], filters);
     renderDataQuality(document.getElementById('quality-section'), provenance, filtered, filters);
 
-    plotReservoirs(map, filtered, {
-      onSelect: (r) => selectByReservoir(r),
-    });
-    fitReservoirs(map, filtered, { animate: hasRenderedFilters });
+    if (mapReady && map) {
+      plotReservoirs(map, filtered, {
+        onSelect: (r) => selectByReservoir(r),
+      });
+      fitReservoirs(map, filtered, { animate: hasRenderedMap });
+      hasRenderedMap = true;
+    }
 
     renderReservoirList(document.getElementById('reservoir-list'), filtered, {
       onSelect: (r) => selectByReservoir(r),
@@ -90,10 +94,18 @@ async function boot() {
       selectedReservoir = null;
       renderEmpty(document.getElementById('detail-pane'));
     }
-    hasRenderedFilters = true;
   }
 
   renderFilteredReservoirs();
+  initMap('map')
+    .then((readyMap) => {
+      map = readyMap;
+      mapReady = true;
+      renderFilteredReservoirs();
+    })
+    .catch((err) => {
+      console.warn(`Map failed to initialize: ${err.message}`);
+    });
 }
 
 function setActiveRow(reservoirId) {

@@ -1,0 +1,41 @@
+{
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          77.83,
+          18.1
+        ],
+        [
+          78.08,
+          18.1
+        ],
+        [
+          78.08,
+          18.32
+        ],
+        [
+          77.83,
+          18.32
+        ],
+        [
+          77.83,
+          18.1
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "properties": {
+    "area_km2": 643.071,
+    "centroid_distance_m": 0.0,
+    "generated_at": "2026-05-22T18:13:09.051469+00:00",
+    "id": "nizam_sagar",
+    "method": "manual_bbox;lon=77.83-78.08;lat=18.1-18.32;strategy=recurrence",
+    "name": "Nizam Sagar",
+    "review_status": "manual_bbox_needs_visual_check",
+    "ring_cleanup_applied": true,
+    "source": "manual_bbox"
+  },
+  "type": "Feature"
+}

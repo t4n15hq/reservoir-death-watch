@@ -196,10 +196,10 @@ Per-field trust metadata consumed by the Data Quality panel.
 
 ```json
 {
-  "counts": {
+    "counts": {
     "total_reservoirs": 53,
-    "observed_with_satellite": 25,
-    "aoi_available": 25,
+    "observed_with_satellite": 53,
+    "aoi_available": 53,
     "aoi_visually_reviewed": 0,
     "cwc_reference_available": 52,
     "storage_cwc_calibrated": 23,
@@ -256,7 +256,7 @@ The master list. Columns:
 | `dead_storage_capacity_bcm` | float | no | From CWC where published |
 | `priority` | int | yes | Contiguous display/backfill order |
 | `aoi_file` | string | yes | Path to GeoJSON: `pipeline/data/aois/{id}.geojson` |
-| `scope` | string | yes | `core_city` for the 25 observed city-serving rows; `expanded_cwc` for broader CWC state coverage |
+| `scope` | string | yes | `core_city` for the 25 city-serving rows; `expanded_cwc` for broader CWC state coverage |
 | `notes` | string | no | Free text |
 
 ---

@@ -90,22 +90,28 @@ Prerequisites (these can run in any order):
 
 ## Phase 1B — expanded CWC rows
 
-Expanded rows are allowed to exist as pending placeholders. To turn them into
-fully observed rows:
+Expanded rows now have first-pass AOIs and current Sentinel observations. To
+rebuild that current-observed layer, run:
 
 ```bash
 uv run python scripts/seed_aois.py \
   $(uv run python -c "import csv; print(' '.join(r['id'] for r in csv.DictReader(open('../docs/reservoirs.csv')) if r['scope']=='expanded_cwc'))") \
   --overwrite
 
+uv run python scripts/quick_extract_current.py \
+  $(uv run python -c "import csv; print(' '.join(r['id'] for r in csv.DictReader(open('../docs/reservoirs.csv')) if r['scope']=='expanded_cwc'))")
+```
+
+To close Phase 1B, run the slower historical backfill for expanded rows:
+
+```bash
 uv run python scripts/backfill_history.py --as-of $(date +%F) \
   $(uv run python -c "import csv; print(' '.join(r['id'] for r in csv.DictReader(open('../docs/reservoirs.csv')) if r['scope']=='expanded_cwc'))")
 ```
 
-After any metadata-only expansion, keep the dashboard honest with:
+After any metadata or AOI change, keep the dashboard honest with:
 
 ```bash
-uv run python scripts/bootstrap_pending_reservoirs.py
 uv run python scripts/audit_metadata.py
 ```
 
@@ -113,8 +119,8 @@ uv run python scripts/audit_metadata.py
 
 ## Phase 2 — Hetzner automation
 
-The dashboard scope can include pending expanded rows, but Phase 2 is about
-getting the weekly cron stable on Hermes — no further scope growth.
+The dashboard scope includes current-observed expanded rows, but Phase 2 is
+about getting the weekly cron stable on Hermes — no further scope growth.
 
 - Build out `infra/` per `docs/TDD.md` §7. Files already exist in `infra/`;
   follow `infra/README.md` for the one-time Hetzner setup.

@@ -80,6 +80,69 @@ AOI_CONFIG = {
         "nearby_buffer_m": 30_000,
         "simplify_m": 120,
     },
+    # Expanded CWC reservoirs below are first-pass boxes used to get honest
+    # current Sentinel observations online. They are intentionally flagged
+    # `manual_bbox_needs_visual_check` by `_build_bbox_aoi`.
+    "lower_manair": {
+        "manual_bbox": (79.15, 18.25, 79.45, 18.50),
+        "min_area_km2": 5,
+        "nearby_buffer_m": 10_000,
+        "simplify_m": 90,
+    },
+    "nizam_sagar": {
+        "manual_bbox": (77.83, 18.10, 78.08, 18.32),
+        "min_area_km2": 5,
+        "nearby_buffer_m": 10_000,
+        "simplify_m": 90,
+    },
+    "ramganga": {
+        "manual_bbox": (78.55, 29.42, 79.00, 29.72),
+        "min_area_km2": 20,
+        "nearby_buffer_m": 15_000,
+        "simplify_m": 120,
+    },
+    "nanak_sagar": {
+        "manual_bbox": (79.75, 28.88, 79.92, 29.00),
+        "min_area_km2": 3,
+        "nearby_buffer_m": 8_000,
+        "simplify_m": 75,
+    },
+    "hirakud": {
+        "manual_bbox": (83.25, 21.25, 84.15, 21.85),
+        "min_area_km2": 50,
+        "nearby_buffer_m": 25_000,
+        "simplify_m": 150,
+    },
+    "rengali": {
+        "manual_bbox": (84.75, 21.12, 85.25, 21.48),
+        "min_area_km2": 25,
+        "nearby_buffer_m": 15_000,
+        "simplify_m": 120,
+    },
+    "upper_indravati": {
+        "manual_bbox": (82.55, 19.15, 83.05, 19.55),
+        "min_area_km2": 15,
+        "nearby_buffer_m": 12_000,
+        "simplify_m": 120,
+    },
+    "minimata_bango": {
+        "manual_bbox": (82.40, 22.35, 82.90, 22.78),
+        "min_area_km2": 25,
+        "nearby_buffer_m": 15_000,
+        "simplify_m": 120,
+    },
+    "mahanadi_chhattisgarh": {
+        "manual_bbox": (81.35, 20.45, 81.75, 20.78),
+        "min_area_km2": 8,
+        "nearby_buffer_m": 10_000,
+        "simplify_m": 90,
+    },
+    "tandula": {
+        "manual_bbox": (81.16, 20.56, 81.42, 20.82),
+        "min_area_km2": 5,
+        "nearby_buffer_m": 10_000,
+        "simplify_m": 90,
+    },
 }
 
 
@@ -370,4 +433,3 @@ def write_geojson(path: Path, feature: dict, *, overwrite: bool) -> None:
 
 if __name__ == "__main__":
     main()
-

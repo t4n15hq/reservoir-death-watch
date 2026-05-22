@@ -67,16 +67,17 @@ CWC reservoirs to make state-level comparison useful.
 the dashboard scope to 53 reservoirs total.
 
 **Current status:** Expanded rows have CWC storage/capacity loaded from the
-cached April-May 2026 bulletins and render as pending in the dashboard. They
-are intentionally flagged `awaiting_first_observation` and `needs_aoi_seeding`
-until AOIs are seeded and Sentinel/JRC histories are backfilled.
+cached April-May 2026 bulletins and now have first-pass AOIs plus current
+Sentinel observations. They are intentionally flagged `current_only_no_history`
+and `needs_full_pipeline_run` until Sentinel/JRC histories are backfilled.
 
 **Gate:**
-- AOIs seeded for every expanded row.
+- AOIs seeded for every expanded row. Done for first-pass coverage; manual AOI
+  review remains separate.
 - Backfill history writes per-reservoir CSVs for every expanded row.
 - Dashboard filters keep the default Core view clean and make Expanded/All
   views searchable by state/reservoir.
-- Provenance card distinguishes observed rows from pending rows.
+- Provenance card distinguishes current-only rows from fully backfilled rows.
 
 ---
 
@@ -135,7 +136,7 @@ Only if Tanishq isn't bored and wants to keep going. This is a separate technica
 |---|---|---|
 | 0 | E2E pipeline on 3 reservoirs, within ±10% of CWC | Fix data extraction |
 | 1 | All 3 backtests pass, dashboard renders 25 core rows, ≥20 of 25 within ±10% of CWC | Debug model, do NOT proceed |
-| 1B | Expanded rows have AOIs + backfilled histories; filters stay usable | Keep expanded rows pending and labeled |
+| 1B | Expanded rows have AOIs + backfilled histories; filters stay usable | Keep expanded rows current-only and labeled |
 | 2 | 4 consecutive Sunday runs on Hetzner, ≥90% fresh | Fix infra before claiming live |
 | 3 | Writeup + 8 weeks stable + journalist email | Project is shipped |
 

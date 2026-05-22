@@ -1,0 +1,41 @@
+{
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          79.15,
+          18.25
+        ],
+        [
+          79.45,
+          18.25
+        ],
+        [
+          79.45,
+          18.5
+        ],
+        [
+          79.15,
+          18.5
+        ],
+        [
+          79.15,
+          18.25
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "properties": {
+    "area_km2": 876.081,
+    "centroid_distance_m": 0.0,
+    "generated_at": "2026-05-22T18:13:09.050597+00:00",
+    "id": "lower_manair",
+    "method": "manual_bbox;lon=79.15-79.45;lat=18.25-18.5;strategy=recurrence",
+    "name": "Lower Manair",
+    "review_status": "manual_bbox_needs_visual_check",
+    "ring_cleanup_applied": true,
+    "source": "manual_bbox"
+  },
+  "type": "Feature"
+}

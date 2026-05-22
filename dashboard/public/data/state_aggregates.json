@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-21T15:59:39.938152Z",
+  "generated_at": "2026-05-22T18:27:02.662131Z",
   "states": [
     {
-      "current_storage_bcm": 1.737,
-      "observed_count": 2,
-      "percent_full": 15.6,
+      "current_storage_bcm": 3.65,
+      "observed_count": 5,
+      "percent_full": 24.5,
       "reservoir_count": 5,
       "reservoir_ids": [
         "nagarjuna_sagar",
@@ -16,16 +16,16 @@
       "state": "Andhra Pradesh",
       "tier_counts": {
         "critical": 1,
-        "stable": 0,
+        "stable": 2,
         "warning": 0,
-        "watch": 1
+        "watch": 2
       },
-      "total_capacity_bcm": 11.121
+      "total_capacity_bcm": 14.923
     },
     {
-      "current_storage_bcm": 0,
-      "observed_count": 0,
-      "percent_full": 0.0,
+      "current_storage_bcm": 0.175,
+      "observed_count": 3,
+      "percent_full": 4.2,
       "reservoir_count": 3,
       "reservoir_ids": [
         "mahanadi_chhattisgarh",
@@ -34,17 +34,17 @@
       ],
       "state": "Chhattisgarh",
       "tier_counts": {
-        "critical": 0,
+        "critical": 3,
         "stable": 0,
         "warning": 0,
         "watch": 0
       },
-      "total_capacity_bcm": 0
+      "total_capacity_bcm": 4.125
     },
     {
-      "current_storage_bcm": 6.4,
-      "observed_count": 2,
-      "percent_full": 51.7,
+      "current_storage_bcm": 7.859,
+      "observed_count": 5,
+      "percent_full": 53.5,
       "reservoir_count": 5,
       "reservoir_ids": [
         "hathmati",
@@ -56,16 +56,16 @@
       "state": "Gujarat",
       "tier_counts": {
         "critical": 0,
-        "stable": 0,
+        "stable": 3,
         "warning": 1,
         "watch": 1
       },
-      "total_capacity_bcm": 12.375
+      "total_capacity_bcm": 14.697
     },
     {
-      "current_storage_bcm": 2.284,
-      "observed_count": 1,
-      "percent_full": 36.7,
+      "current_storage_bcm": 6.454,
+      "observed_count": 3,
+      "percent_full": 51.7,
       "reservoir_count": 3,
       "reservoir_ids": [
         "bhakra",
@@ -75,16 +75,16 @@
       "state": "Himachal Pradesh",
       "tier_counts": {
         "critical": 0,
-        "stable": 0,
-        "warning": 0,
+        "stable": 1,
+        "warning": 1,
         "watch": 1
       },
-      "total_capacity_bcm": 6.229
+      "total_capacity_bcm": 12.475
     },
     {
-      "current_storage_bcm": 0.407,
-      "observed_count": 2,
-      "percent_full": 62.1,
+      "current_storage_bcm": 1.28,
+      "observed_count": 5,
+      "percent_full": 71.3,
       "reservoir_count": 5,
       "reservoir_ids": [
         "konar",
@@ -96,11 +96,11 @@
       "state": "Jharkhand",
       "tier_counts": {
         "critical": 2,
-        "stable": 0,
+        "stable": 2,
         "warning": 0,
-        "watch": 0
+        "watch": 1
       },
-      "total_capacity_bcm": 0.655
+      "total_capacity_bcm": 1.794
     },
     {
       "current_storage_bcm": 0.662,
@@ -142,9 +142,9 @@
       "total_capacity_bcm": 2.918
     },
     {
-      "current_storage_bcm": 3.423,
-      "observed_count": 2,
-      "percent_full": 26.5,
+      "current_storage_bcm": 9.889,
+      "observed_count": 5,
+      "percent_full": 45.0,
       "reservoir_count": 5,
       "reservoir_ids": [
         "bargi",
@@ -156,11 +156,11 @@
       "state": "Madhya Pradesh",
       "tier_counts": {
         "critical": 0,
-        "stable": 0,
-        "warning": 1,
-        "watch": 1
+        "stable": 1,
+        "warning": 2,
+        "watch": 2
       },
-      "total_capacity_bcm": 12.925
+      "total_capacity_bcm": 21.995
     },
     {
       "current_storage_bcm": 2.002,
@@ -182,9 +182,9 @@
       "total_capacity_bcm": 3.318
     },
     {
-      "current_storage_bcm": 0,
-      "observed_count": 0,
-      "percent_full": 0.0,
+      "current_storage_bcm": 0.507,
+      "observed_count": 3,
+      "percent_full": 4.9,
       "reservoir_count": 3,
       "reservoir_ids": [
         "hirakud",
@@ -193,17 +193,17 @@
       ],
       "state": "Odisha",
       "tier_counts": {
-        "critical": 0,
+        "critical": 3,
         "stable": 0,
         "warning": 0,
         "watch": 0
       },
-      "total_capacity_bcm": 0
+      "total_capacity_bcm": 10.266
     },
     {
-      "current_storage_bcm": 0.946,
-      "observed_count": 1,
-      "percent_full": 87.9,
+      "current_storage_bcm": 3.41,
+      "observed_count": 4,
+      "percent_full": 77.2,
       "reservoir_count": 4,
       "reservoir_ids": [
         "bisalpur",
@@ -214,11 +214,11 @@
       "state": "Rajasthan",
       "tier_counts": {
         "critical": 0,
-        "stable": 1,
+        "stable": 4,
         "warning": 0,
         "watch": 0
       },
-      "total_capacity_bcm": 1.076
+      "total_capacity_bcm": 4.416
     },
     {
       "current_storage_bcm": 1.381,
@@ -240,9 +240,9 @@
       "total_capacity_bcm": 3.611
     },
     {
-      "current_storage_bcm": 0.171,
-      "observed_count": 1,
-      "percent_full": 20.8,
+      "current_storage_bcm": 1.568,
+      "observed_count": 4,
+      "percent_full": 37.1,
       "reservoir_count": 4,
       "reservoir_ids": [
         "lower_manair",
@@ -252,17 +252,17 @@
       ],
       "state": "Telangana",
       "tier_counts": {
-        "critical": 0,
-        "stable": 0,
+        "critical": 2,
+        "stable": 1,
         "warning": 0,
         "watch": 1
       },
-      "total_capacity_bcm": 0.822
+      "total_capacity_bcm": 4.225
     },
     {
-      "current_storage_bcm": 0.041,
-      "observed_count": 1,
-      "percent_full": 1.6,
+      "current_storage_bcm": 0.132,
+      "observed_count": 3,
+      "percent_full": 2.6,
       "reservoir_count": 3,
       "reservoir_ids": [
         "nanak_sagar",
@@ -271,12 +271,12 @@
       ],
       "state": "Uttarakhand",
       "tier_counts": {
-        "critical": 0,
+        "critical": 2,
         "stable": 0,
         "warning": 0,
         "watch": 1
       },
-      "total_capacity_bcm": 2.615
+      "total_capacity_bcm": 4.987
     }
   ]
 }

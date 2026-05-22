@@ -4,6 +4,21 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 
 ---
 
+## 2026-05-22 — All 53 reservoirs current-observed
+
+- Seeded first-pass AOIs for the 28 `expanded_cwc` reservoirs and copied those
+  GeoJSONs into the dashboard data bundle so map polygon overlays are available
+  for every row.
+- Ran current Sentinel extraction for every expanded reservoir. The dashboard
+  now has current observations for 53/53 reservoirs and no rows flagged
+  `awaiting_first_observation`.
+- Kept the expanded rows honest as `current_only_no_history` /
+  `needs_full_pipeline_run`; they use an area-ratio storage proxy until the
+  slower JRC/Sentinel history backfill and calibration pass runs.
+- Regenerated `data_provenance.json`, `reservoirs.json`, and
+  `state_aggregates.json`; the data-quality card now reports 53/53 satellite
+  observed and 53/53 AOIs available.
+
 ## 2026-05-21 — Expanded CWC scope + dashboard filters
 
 - Expanded `docs/reservoirs.csv` from 25 core city-serving reservoirs to

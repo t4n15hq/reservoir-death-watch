@@ -24,7 +24,7 @@ A live dashboard tracking the 25 CWC-monitored core reservoirs that supply
 India's major cities — Delhi, Bengaluru, Chennai (indirect), Hyderabad,
 DVC industrial belt, Ahmedabad, Surat, Jaipur, Pune, Coimbatore, Madurai,
 Aurangabad, Jabalpur, Nagpur, Kochi — plus an expanded CWC state-coverage
-watchlist.
+watchlist, for 53 currently observed reservoirs total.
 
 For each reservoir, the dashboard shows:
 
@@ -107,11 +107,12 @@ appreciated; reuse is encouraged.
 I'm honest about this in the dashboard's "Data quality" card at the
 bottom of the page. As of the latest CWC ingest:
 
-- 28 of 53 reservoirs are expanded CWC rows awaiting AOI seeding and
-  Sentinel/JRC backfill.
-- 2 observed reservoirs are still using an area-ratio storage proxy:
-  Mullaperiyar needs a defensible CWC name match, and Panchet needs a
-  non-100%-full CWC anchor before the power-law fit is meaningful.
+- 28 of 53 reservoirs are expanded CWC rows with current Sentinel observations
+  but no Sentinel/JRC history backfill yet.
+- 30 observed reservoirs are still using an area-ratio storage proxy: the 28
+  current-only expanded rows, Mullaperiyar, which needs a defensible CWC name
+  match, and Panchet, which needs a non-100%-full CWC anchor before the
+  power-law fit is meaningful.
 - 52 of 53 reservoirs have a loaded CWC live-storage reference and FRL
   capacity from local April-May 2026 bulletins.
 - 0 of 53 lat/long coordinates have been verified against CWC's

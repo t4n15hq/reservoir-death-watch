@@ -39,10 +39,9 @@ that the UI displays in the detail panel.
 | Field | Caveat | Flag |
 |---|---|---|
 | AOI polygon | Auto-derived from JRC `recurrence ≥ 50` seed, not visually reviewed | `first_pass_needs_manual_review` |
-| AOI polygon (Srisailam only) | Manual bbox; downstream extraction counts water inside | `manual_bbox_needs_visual_check` |
-| `current.estimated_storage_bcm` (2 observed rows) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` |
+| AOI polygon (manual bbox rows) | Manual bbox; downstream extraction counts water inside | `manual_bbox_needs_visual_check` |
+| `current.estimated_storage_bcm` (30 observed rows) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` or `needs_full_pipeline_run` |
 | `current.estimated_storage_bcm` (23 observed rows) | Power-law calibrated, but only one usable CWC anchor point per reservoir | `cwc_calibrated_single_point`, `phase0_cwc_validation_incomplete` |
-| `current.estimated_storage_bcm` (28 expanded rows) | Not computed yet; CWC rows are loaded but AOIs/Sentinel observations are pending | `awaiting_first_observation`, `needs_aoi_seeding` |
 | `current.cwc_reported_bcm` (52 of 53) | Latest matching local CWC bulletin row from 02.04.2026-14.05.2026 — six-month validation pending | `phase0_cwc_validation_incomplete` where calibrated |
 | `current.cwc_reported_bcm` (1 of 53) | No defensible matching CWC row is loaded into this snapshot yet | `needs_cwc_calibration` |
 | Dead-storage area used in projection | Power-law conversion with default b=2.0 when no calibrated curve exists | `dead_storage_area_proxy` |
@@ -97,21 +96,21 @@ for the machine-readable form.
 | Class | Count |
 |---|---|
 | Reservoirs in dashboard scope | 53 of 53 |
-| Reservoirs with satellite observation | 25 of 53 |
+| Reservoirs with satellite observation | 53 of 53 |
 | Reservoirs with CWC live-storage reference loaded | 52 of 53 |
 | Reservoirs with CWC-calibrated curve | 23 of 53 |
-| Reservoirs with `volume_area_ratio_proxy` flag | 2 of 53 |
-| Reservoirs with AOI GeoJSON available | 25 of 53 |
-| Reservoirs with AOI seeded but unreviewed | 25 of 53 |
-| Reservoirs awaiting AOI seeding | 28 of 53 |
+| Reservoirs with `volume_area_ratio_proxy` flag | 30 of 53 |
+| Reservoirs with AOI GeoJSON available | 53 of 53 |
+| Reservoirs with AOI seeded but unreviewed | 53 of 53 |
+| Reservoirs awaiting AOI seeding | 0 of 53 |
 | Reservoirs with verified `lat/lon` against CWC bulletin | **0 of 53** |
 | Reservoirs with FRL capacity loaded from CWC | 52 of 53 |
 | Reservoirs with verified `dead_storage_capacity_bcm` | **0 of 53** |
 | Reservoirs with verified `population_served` against census | **0 of 53** |
 
 The dashboard separates **operational coverage** from **manual source checks**:
-the 25 core reservoirs have satellite observations and AOI polygons, while the
-28 expanded reservoirs are CWC-backed watchlist rows awaiting AOI seeding. The
-"0 of 53" rows are the next milestone for Tier 3 confidence. They require
-manual cross-checks against CWC/OSM/census sources; until then those metadata
-fields stay "approximate" in the dashboard.
+all 53 reservoirs have current satellite observations and AOI polygons, while
+the 28 expanded reservoirs are current-only rows awaiting historical backfill
+and full area-to-volume calibration. The "0 of 53" rows are the next milestone
+for Tier 3 confidence. They require manual cross-checks against CWC/OSM/census
+sources; until then those metadata fields stay "approximate" in the dashboard.

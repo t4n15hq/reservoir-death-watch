@@ -32,8 +32,9 @@ def test_total_reservoirs_matches_csv(provenance):
 
 def test_cwc_anchored_count_pins_current_bulletin_ingest(provenance):
     """As of the expanded-scope audit, seven local CWC bulletins match 52
-    reservoirs. Expanded rows are pending satellite AOIs, so only the observed
-    core rows can be counted as CWC-calibrated curves."""
+    reservoirs. Expanded rows now have current Sentinel observations, but no
+    historical backfill, so only the core rows with usable CWC anchors can be
+    counted as CWC-calibrated curves."""
 
     assert provenance["counts"]["cwc_reference_available"] == 52, (
         "CWC reference count changed. If you added a bulletin, update this "
@@ -58,7 +59,7 @@ def test_metadata_verification_is_explicit(provenance):
     c = provenance["counts"]
     assert c["lat_lon_verified"] == 0, "bump test when coord_verified_at populated"
     assert c["full_pool_capacity_from_cwc"] == 52, "bump test when CWC rows change"
-    assert c["aoi_available"] == 25, "bump test when expanded AOIs are seeded"
+    assert c["aoi_available"] == 53, "bump test when AOI availability changes"
     assert c["dead_storage_capacity_verified"] == 0, (
         "bump test only after adding an explicit dead-storage source"
     )
@@ -98,7 +99,8 @@ def test_core_aoi_files_are_distinct_from_manual_review(provenance):
     assert by_id["srisailam"]["aoi"]["available"] is True
     assert by_id["srisailam"]["aoi"]["verified"] is False
     assert by_id["hirakud"]["scope"] == "expanded_cwc"
-    assert by_id["hirakud"]["aoi"]["available"] is False
+    assert by_id["hirakud"]["aoi"]["available"] is True
+    assert by_id["hirakud"]["aoi"]["verified"] is False
 
 
 def test_storage_method_is_one_of_known_classifications(provenance):

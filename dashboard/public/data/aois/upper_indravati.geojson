@@ -1,0 +1,41 @@
+{
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          82.55,
+          19.15
+        ],
+        [
+          83.05,
+          19.15
+        ],
+        [
+          83.05,
+          19.55
+        ],
+        [
+          82.55,
+          19.55
+        ],
+        [
+          82.55,
+          19.15
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "properties": {
+    "area_km2": 2322.673,
+    "centroid_distance_m": 0.0,
+    "generated_at": "2026-05-22T18:13:09.053718+00:00",
+    "id": "upper_indravati",
+    "method": "manual_bbox;lon=82.55-83.05;lat=19.15-19.55;strategy=recurrence",
+    "name": "Upper Indravati",
+    "review_status": "manual_bbox_needs_visual_check",
+    "ring_cleanup_applied": true,
+    "source": "manual_bbox"
+  },
+  "type": "Feature"
+}

@@ -7,7 +7,7 @@ description: How Reservoir Death Watch turns Sentinel-2 surface-area observation
 # Methodology
 
 This is a public dashboard for the 25 reservoirs that supply India's major
-cities, plus an expanded CWC state-coverage watchlist. It tracks observed rows
+cities, plus an expanded CWC state-coverage watchlist. It tracks all 53 rows
 weekly via satellite, anchors satellite-derived storage estimates to the
 Central Water Commission's published volumes where available, and projects
 forward to a "days to dead storage" number under two monsoon scenarios.
@@ -61,8 +61,9 @@ Summary:
    band — i.e. pixels that have been water in at least half the years
    observed by Landsat since 1984. The first-pass seed is then collapsed to
    its largest connected ring to keep Earth Engine's `reduceRegion`
-   tractable. Some AOIs (Srisailam) use a manual bounding box because the
-   reservoir is connected by river to a neighbour.
+   tractable. Some AOIs use a manual bounding box because the reservoir is
+   connected by river to a neighbour or the JRC connected component needs
+   visual cleanup.
 
 2. **Fetch JRC monthly history** (1984–2021) over the AOI. Pixel counts of
    `water == 2` → area in km².
@@ -111,8 +112,8 @@ Summary:
     - `stable` otherwise
 
 11. **Aggregate.** National and per-state rollups over only the
-    *observed* reservoirs — placeholders for reservoirs we haven't run yet
-    don't drag the totals down.
+    *observed* reservoirs. Current-only rows are included in storage totals
+    but still flagged until the full history/backfill run is complete.
 
 12. **Export.** Atomic write to
     `dashboard/public/data/reservoirs.json`,
@@ -172,18 +173,17 @@ satellite-only monitoring during heavy cloud cover, not something to hide.
 
 Of the 53 reservoirs on the dashboard:
 
-- **25 core reservoirs have Sentinel-2 observations in the last week.**
-- **28 expanded CWC reservoirs are present as pending rows** with CWC
-  storage/capacity loaded but AOIs and Sentinel/JRC histories not backfilled
-  yet.
+- **53 reservoirs have Sentinel observations in the current snapshot.**
+- **28 expanded CWC reservoirs are current-only rows** with CWC
+  storage/capacity loaded but Sentinel/JRC histories not backfilled yet.
 - **52 have loaded CWC live-storage references** from local April-May
   2026 CWC bulletin PDFs.
 - **23 have CWC-calibrated area-to-volume curves.** Panchet has a CWC
   row, but that row is at exactly 100% FRL, so it cannot fit a useful
   two-point power-law curve yet.
-- **2 observed rows are using an area-ratio proxy** for storage: Mullaperiyar, which
-  still lacks a defensible matched CWC row, and Panchet, pending a
-  non-full CWC anchor.
+- **30 observed rows are using an area-ratio proxy** for storage: the 28
+  current-only expanded rows, plus Mullaperiyar, which still lacks a defensible
+  matched CWC row, and Panchet, pending a non-full CWC anchor.
 - **0 reservoirs have lat/lon verified against CWC's published register
   or OpenStreetMap.** These came from training-data knowledge during
   scope definition; they're approximate but plausible (within ±5 km).

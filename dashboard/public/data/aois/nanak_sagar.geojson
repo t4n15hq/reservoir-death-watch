@@ -1,0 +1,41 @@
+{
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          79.75,
+          28.88
+        ],
+        [
+          79.92,
+          28.88
+        ],
+        [
+          79.92,
+          29.0
+        ],
+        [
+          79.75,
+          29.0
+        ],
+        [
+          79.75,
+          28.88
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "properties": {
+    "area_km2": 219.741,
+    "centroid_distance_m": 0.0,
+    "generated_at": "2026-05-22T18:13:09.052263+00:00",
+    "id": "nanak_sagar",
+    "method": "manual_bbox;lon=79.75-79.92;lat=28.88-29.0;strategy=recurrence",
+    "name": "Nanak Sagar",
+    "review_status": "manual_bbox_needs_visual_check",
+    "ring_cleanup_applied": true,
+    "source": "manual_bbox"
+  },
+  "type": "Feature"
+}

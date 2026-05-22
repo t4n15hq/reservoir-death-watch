@@ -1,0 +1,41 @@
+{
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          82.4,
+          22.35
+        ],
+        [
+          82.9,
+          22.35
+        ],
+        [
+          82.9,
+          22.78
+        ],
+        [
+          82.4,
+          22.78
+        ],
+        [
+          82.4,
+          22.35
+        ]
+      ]
+    ],
+    "type": "Polygon"
+  },
+  "properties": {
+    "area_km2": 2443.768,
+    "centroid_distance_m": 0.0,
+    "generated_at": "2026-05-22T18:13:09.054054+00:00",
+    "id": "minimata_bango",
+    "method": "manual_bbox;lon=82.4-82.9;lat=22.35-22.78;strategy=recurrence",
+    "name": "Minimata Bango",
+    "review_status": "manual_bbox_needs_visual_check",
+    "ring_cleanup_applied": true,
+    "source": "manual_bbox"
+  },
+  "type": "Feature"
+}

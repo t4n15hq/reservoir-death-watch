@@ -10,18 +10,18 @@
     "oni_latest": 0.11,
     "state": "neutral"
   },
-  "generated_at": "2026-05-21T15:59:39.903605Z",
+  "generated_at": "2026-05-22T18:27:02.609166Z",
   "model_version": "1.0.0",
   "national_aggregate": {
-    "current_storage_bcm": 20.365,
+    "current_storage_bcm": 39.88,
     "people_at_risk_el_nino": 0,
     "people_at_risk_neutral": 66500000,
-    "percent_full": 33.7,
-    "reservoirs_critical": 5,
-    "reservoirs_stable": 8,
-    "reservoirs_warning": 5,
-    "reservoirs_watch": 7,
-    "total_capacity_bcm": 60.419
+    "percent_full": 37.4,
+    "reservoirs_critical": 15,
+    "reservoirs_stable": 21,
+    "reservoirs_warning": 7,
+    "reservoirs_watch": 10,
+    "total_capacity_bcm": 106.504
   },
   "reservoirs": [
     {
@@ -31006,21 +31006,23 @@
     {
       "city_served": "Andhra Pradesh Krishna basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 45.65,
+        "as_of": "2026-05-22",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.648,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.609,
+        "percent_full": 46.8
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 97.467,
       "full_pool_capacity_bcm": 1.3,
       "history": [],
       "id": "pulichintala",
@@ -31048,26 +31050,28 @@
       "river": "Krishna",
       "scope": "expanded_cwc",
       "state": "Andhra Pradesh",
-      "tier": "stable"
+      "tier": "watch"
     },
     {
       "city_served": "Andhra Pradesh Pennar basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 60.793,
+        "as_of": "2026-05-22",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 1.296,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 1.002,
+        "percent_full": 50.2
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 120.989,
       "full_pool_capacity_bcm": 1.994,
       "history": [],
       "id": "somasila",
@@ -31100,21 +31104,23 @@
     {
       "city_served": "Andhra Pradesh coastal supply",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 29.124,
+        "as_of": "2026-05-19",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.098,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.302,
+        "percent_full": 59.4
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 49.028,
       "full_pool_capacity_bcm": 0.508,
       "history": [],
       "id": "yeleru",
@@ -31147,21 +31153,23 @@
     {
       "city_served": "Gujarat Mahi basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 63.173,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.674,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.924,
+        "percent_full": 62.8
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 100.641,
       "full_pool_capacity_bcm": 1.472,
       "history": [],
       "id": "kadana",
@@ -31194,21 +31202,23 @@
     {
       "city_served": "Gujarat Panam basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 6.736,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.303,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.389,
+        "percent_full": 55.9
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 12.057,
       "full_pool_capacity_bcm": 0.697,
       "history": [],
       "id": "panam",
@@ -31241,21 +31251,23 @@
     {
       "city_served": "Gujarat Sabarmati basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 6.139,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.1,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.146,
+        "percent_full": 95.7
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 6.413,
       "full_pool_capacity_bcm": 0.153,
       "history": [],
       "id": "hathmati",
@@ -31288,21 +31300,23 @@
     {
       "city_served": "Himachal Pradesh Beas basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 163.785,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 2.269,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 4.153,
+        "percent_full": 67.5
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 242.797,
       "full_pool_capacity_bcm": 6.157,
       "history": [],
       "id": "pong_dam",
@@ -31335,21 +31349,23 @@
     {
       "city_served": "Himachal Pradesh Sutlej basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 2.607,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.071,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.017,
+        "percent_full": 19.2
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 13.577,
       "full_pool_capacity_bcm": 0.089,
       "history": [],
       "id": "kol_dam",
@@ -31377,26 +31393,28 @@
       "river": "Sutlej",
       "scope": "expanded_cwc",
       "state": "Himachal Pradesh",
-      "tier": "stable"
+      "tier": "warning"
     },
     {
       "city_served": "Jharkhand Damodar basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 29.805,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.281,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.692,
+        "percent_full": 84.3
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 35.371,
       "full_pool_capacity_bcm": 0.821,
       "history": [],
       "id": "tenughat",
@@ -31429,21 +31447,23 @@
     {
       "city_served": "Jharkhand Damodar basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 13.811,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.079,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.111,
+        "percent_full": 63.0
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 21.935,
       "full_pool_capacity_bcm": 0.176,
       "history": [],
       "id": "konar",
@@ -31476,21 +31496,23 @@
     {
       "city_served": "Jharkhand DVC basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 17.035,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.023,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.07,
+        "percent_full": 49.2
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 34.657,
       "full_pool_capacity_bcm": 0.142,
       "history": [],
       "id": "tilaiya",
@@ -31518,26 +31540,28 @@
       "river": "Barakar",
       "scope": "expanded_cwc",
       "state": "Jharkhand",
-      "tier": "stable"
+      "tier": "watch"
     },
     {
       "city_served": "Madhya Pradesh Chambal basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 644.982,
+        "as_of": "2026-05-18",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 4.332,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 5.74,
+        "percent_full": 84.1
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 767.183,
       "full_pool_capacity_bcm": 6.827,
       "history": [],
       "id": "gandhi_sagar",
@@ -31570,21 +31594,23 @@
     {
       "city_served": "Madhya Pradesh Narmada basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 47.521,
+        "as_of": "2026-05-20",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.324,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.645,
+        "percent_full": 33.2
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 143.135,
       "full_pool_capacity_bcm": 1.944,
       "history": [],
       "id": "tawa",
@@ -31612,26 +31638,28 @@
       "river": "Tawa",
       "scope": "expanded_cwc",
       "state": "Madhya Pradesh",
-      "tier": "stable"
+      "tier": "watch"
     },
     {
       "city_served": "Madhya Pradesh Narmada basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 17.975,
+        "as_of": "2026-05-18",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.15,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.081,
+        "percent_full": 26.9
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 66.727,
       "full_pool_capacity_bcm": 0.299,
       "history": [],
       "id": "omkareshwar",
@@ -31659,26 +31687,28 @@
       "river": "Narmada",
       "scope": "expanded_cwc",
       "state": "Madhya Pradesh",
-      "tier": "stable"
+      "tier": "warning"
     },
     {
       "city_served": "Rajasthan Mahi basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 65.565,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.636,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 1.059,
+        "percent_full": 61.9
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 105.913,
       "full_pool_capacity_bcm": 1.711,
       "history": [],
       "id": "mahi_bajaj_sagar",
@@ -31711,21 +31741,23 @@
     {
       "city_served": "Rajasthan Chambal basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 114.818,
+        "as_of": "2026-05-18",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.519,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 1.307,
+        "percent_full": 91.0
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 126.169,
       "full_pool_capacity_bcm": 1.436,
       "history": [],
       "id": "rana_pratap_sagar",
@@ -31758,21 +31790,23 @@
     {
       "city_served": "Rajasthan Jawai basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 9.967,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.059,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.098,
+        "percent_full": 50.5
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 19.726,
       "full_pool_capacity_bcm": 0.193,
       "history": [],
       "id": "jawai",
@@ -31805,21 +31839,23 @@
     {
       "city_served": "Telangana Godavari basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 140.119,
+        "as_of": "2026-05-22",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.505,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 1.354,
+        "percent_full": 58.9
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "first_pass_needs_manual_review",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 238.062,
       "full_pool_capacity_bcm": 2.3,
       "history": [],
       "id": "sriramsagar",
@@ -31852,21 +31888,23 @@
     {
       "city_served": "Telangana Manair basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 10.994,
+        "as_of": "2026-05-22",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.189,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.008,
+        "percent_full": 1.3
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 876.081,
       "full_pool_capacity_bcm": 0.621,
       "history": [],
       "id": "lower_manair",
@@ -31894,26 +31932,28 @@
       "river": "Manair",
       "scope": "expanded_cwc",
       "state": "Telangana",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Telangana Manjira basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 46.063,
+        "as_of": "2026-05-22",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.219,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.035,
+        "percent_full": 7.2
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 643.071,
       "full_pool_capacity_bcm": 0.482,
       "history": [],
       "id": "nizam_sagar",
@@ -31941,26 +31981,28 @@
       "river": "Manjira",
       "scope": "expanded_cwc",
       "state": "Telangana",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Uttarakhand Ramganga basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 52.963,
+        "as_of": "2026-05-20",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 1.119,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.08,
+        "percent_full": 3.7
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 1445.242,
       "full_pool_capacity_bcm": 2.196,
       "history": [],
       "id": "ramganga",
@@ -31988,26 +32030,28 @@
       "river": "Ramganga",
       "scope": "expanded_cwc",
       "state": "Uttarakhand",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Uttarakhand Terai reservoir",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 13.792,
+        "as_of": "2026-05-20",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.019,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.011,
+        "percent_full": 6.3
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 219.741,
       "full_pool_capacity_bcm": 0.176,
       "history": [],
       "id": "nanak_sagar",
@@ -32035,26 +32079,28 @@
       "river": "Nanak Sagar",
       "scope": "expanded_cwc",
       "state": "Uttarakhand",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Odisha Mahanadi basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 187.125,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 1.27,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.163,
+        "percent_full": 3.0
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 6182.052,
       "full_pool_capacity_bcm": 5.378,
       "history": [],
       "id": "hirakud",
@@ -32082,26 +32128,28 @@
       "river": "Mahanadi",
       "scope": "expanded_cwc",
       "state": "Odisha",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Odisha Brahmani basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 184.383,
+        "as_of": "2026-05-21",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.562,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.307,
+        "percent_full": 8.9
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 2064.215,
       "full_pool_capacity_bcm": 3.432,
       "history": [],
       "id": "rengali",
@@ -32129,26 +32177,28 @@
       "river": "Brahmani",
       "scope": "expanded_cwc",
       "state": "Odisha",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Odisha Indravati basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 58.314,
+        "as_of": "2026-05-19",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.499,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.037,
+        "percent_full": 2.5
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 2322.673,
       "full_pool_capacity_bcm": 1.456,
       "history": [],
       "id": "upper_indravati",
@@ -32176,26 +32226,28 @@
       "river": "Indravati",
       "scope": "expanded_cwc",
       "state": "Odisha",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Chhattisgarh Hasdeo basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 96.978,
+        "as_of": "2026-05-19",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 1.659,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.121,
+        "percent_full": 4.0
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 2443.768,
       "full_pool_capacity_bcm": 3.046,
       "history": [],
       "id": "minimata_bango",
@@ -32223,26 +32275,28 @@
       "river": "Hasdeo",
       "scope": "expanded_cwc",
       "state": "Chhattisgarh",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Chhattisgarh Mahanadi basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 88.184,
+        "as_of": "2026-05-22",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.395,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.044,
+        "percent_full": 5.8
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 1520.706,
       "full_pool_capacity_bcm": 0.767,
       "history": [],
       "id": "mahanadi_chhattisgarh",
@@ -32270,26 +32324,28 @@
       "river": "Mahanadi",
       "scope": "expanded_cwc",
       "state": "Chhattisgarh",
-      "tier": "stable"
+      "tier": "critical"
     },
     {
       "city_served": "Chhattisgarh Tandula basin",
       "current": {
-        "area_km2": 0.0,
-        "as_of": "1900-01-01",
+        "area_km2": 23.915,
+        "as_of": "2026-05-22",
         "cwc_as_of": "2026-05-14",
         "cwc_reported_bcm": 0.144,
-        "data_source": "stale",
-        "estimated_storage_bcm": 0.0,
-        "percent_full": 0.0
+        "data_source": "sentinel_2",
+        "estimated_storage_bcm": 0.01,
+        "percent_full": 3.1
       },
       "dead_storage_capacity_bcm": null,
       "fit": null,
       "flags": [
-        "awaiting_first_observation",
-        "needs_aoi_seeding"
+        "current_only_no_history",
+        "manual_bbox_needs_visual_check",
+        "needs_full_pipeline_run",
+        "volume_area_ratio_proxy"
       ],
-      "full_pool_area_km2": null,
+      "full_pool_area_km2": 778.401,
       "full_pool_capacity_bcm": 0.312,
       "history": [],
       "id": "tandula",
@@ -32317,7 +32373,7 @@
       "river": "Tandula",
       "scope": "expanded_cwc",
       "state": "Chhattisgarh",
-      "tier": "stable"
+      "tier": "critical"
     }
   ]
 }
