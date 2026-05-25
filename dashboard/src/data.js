@@ -52,7 +52,11 @@ export async function loadReservoirHistory(reservoirId) {
     try {
       const response = await fetch(path, { cache: 'no-store' });
       if (!response.ok) throw new Error(`HTTP ${response.status} for ${path}`);
-      return parseCsv(await response.text());
+      const text = await response.text();
+      if (!isHistoryCsv(text)) {
+        throw new Error(`history CSV missing for ${reservoirId}`);
+      }
+      return parseCsv(text);
     } catch (err) {
       lastError = err;
       if (attempt === 0) {
@@ -61,6 +65,11 @@ export async function loadReservoirHistory(reservoirId) {
     }
   }
   throw lastError ?? new Error(`Unknown error loading ${path}`);
+}
+
+function isHistoryCsv(text) {
+  const firstLine = text.trimStart().split(/\r?\n/, 1)[0] ?? '';
+  return firstLine.split(',').includes('date') && firstLine.split(',').includes('area_km2');
 }
 
 function parseCsv(text) {
@@ -118,6 +127,14 @@ export function awaitingFirstObservation(reservoir) {
   if (flags.includes('awaiting_first_observation')) return true;
   const asOf = reservoir?.current?.as_of;
   return asOf === '1900-01-01';
+}
+
+export function isCurrentOnly(reservoir) {
+  return (reservoir?.flags ?? []).includes('current_only_no_history');
+}
+
+export function isFullyModeled(reservoir) {
+  return !awaitingFirstObservation(reservoir) && !isCurrentOnly(reservoir);
 }
 
 export function tierColor(tier) {

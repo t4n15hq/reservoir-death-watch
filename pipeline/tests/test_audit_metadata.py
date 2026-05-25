@@ -107,7 +107,13 @@ def test_storage_method_is_one_of_known_classifications(provenance):
     """Catches a schema drift where the audit classifies a reservoir into
     an unknown bucket."""
 
-    allowed = {"cwc_calibrated_power_law", "area_ratio_proxy", "pending", "unknown"}
+    allowed = {
+        "cwc_calibrated_power_law",
+        "cwc_live_reference",
+        "area_ratio_proxy",
+        "pending",
+        "unknown",
+    }
     for r in provenance["reservoirs"]:
         method = r["storage_calibration"]["method"]
         assert method in allowed, f"reservoir {r['id']} storage method '{method}' not recognised"

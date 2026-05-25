@@ -31,6 +31,11 @@ def build_state_aggregates(
             for member in members
             if "awaiting_first_observation" not in (member.flags or [])
         ]
+        modeled = [
+            member
+            for member in observed
+            if "current_only_no_history" not in (member.flags or [])
+        ]
         total_capacity = sum(m.full_pool_capacity_bcm or 0 for m in observed)
         current_storage = sum(m.current.estimated_storage_bcm for m in observed)
         percent_full = round((current_storage / total_capacity) * 100, 1) if total_capacity else 0.0
@@ -39,10 +44,11 @@ def build_state_aggregates(
                 "state": state,
                 "reservoir_count": len(members),
                 "observed_count": len(observed),
+                "modeled_count": len(modeled),
                 "total_capacity_bcm": round(total_capacity, 3),
                 "current_storage_bcm": round(current_storage, 3),
                 "percent_full": percent_full,
-                "tier_counts": _tier_counts(observed),
+                "tier_counts": _tier_counts(modeled),
                 "reservoir_ids": sorted(m.id for m in members),
             }
         )

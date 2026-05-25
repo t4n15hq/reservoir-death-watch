@@ -1,17 +1,20 @@
+import { isFullyModeled } from './data.js';
+
 export function renderHero(snapshot, backtestCase) {
   const reservoirs = snapshot.reservoirs ?? [];
   const observed = reservoirs.filter(
     (r) => !(r.flags ?? []).includes('awaiting_first_observation'),
   );
-  const agg = snapshot.national_aggregate ?? {};
+  const modeled = reservoirs.filter(isFullyModeled);
+  const modeledAgg = aggregateModeled(modeled);
 
-  const peopleAtRisk = (agg.people_at_risk_neutral ?? 0) + (agg.people_at_risk_el_nino ?? 0);
-  const criticalCount = agg.reservoirs_critical ?? 0;
-  const warningCount = agg.reservoirs_warning ?? 0;
+  const peopleAtRisk = modeledAgg.peopleAtRisk;
+  const criticalCount = modeledAgg.critical;
+  const warningCount = modeledAgg.warning;
 
   // Hero deck — lead with the most urgent reservoir if any are critical/warning.
   const deckEl = document.getElementById('hero-deck');
-  if (deckEl) deckEl.textContent = buildDeck(observed, snapshot, backtestCase);
+  if (deckEl) deckEl.textContent = buildDeck(modeled, snapshot, backtestCase);
 
   // Header meta line.
   const metaEl = document.getElementById('generated-meta');
@@ -24,7 +27,7 @@ export function renderHero(snapshot, backtestCase) {
       <div class="stat">
         <div class="stat__label">At-risk population</div>
         <div class="stat__value stat__value--critical">${formatPopulation(peopleAtRisk)}<span class="stat__suffix">people</span></div>
-        <div class="stat__hint">Downstream of critical + warning reservoirs.</div>
+        <div class="stat__hint">Downstream of fully modeled critical + warning reservoirs.</div>
       </div>
       <div class="stat">
         <div class="stat__label">Critical / Warning</div>
@@ -33,12 +36,12 @@ export function renderHero(snapshot, backtestCase) {
           <span class="stat__suffix">/</span>
           <span class="stat__value--warning">${warningCount}</span>
         </div>
-        <div class="stat__hint">of ${reservoirs.length} reservoirs (${observed.length} observed).</div>
+        <div class="stat__hint">of ${modeled.length} full-history reservoirs; ${observed.length}/${reservoirs.length} observed.</div>
       </div>
       <div class="stat">
-        <div class="stat__label">National live storage</div>
-        <div class="stat__value">${formatBcm(agg.current_storage_bcm)}<span class="stat__suffix">/ ${formatBcm(agg.total_capacity_bcm)} BCM</span></div>
-        <div class="stat__hint">${formatPercent(agg.percent_full)} of FRL across observed reservoirs.</div>
+        <div class="stat__label">Modeled live storage</div>
+        <div class="stat__value">${formatBcm(modeledAgg.currentStorage)}<span class="stat__suffix">/ ${formatBcm(modeledAgg.totalCapacity)} BCM</span></div>
+        <div class="stat__hint">${formatPercent(modeledAgg.percentFull)} of FRL across full-history reservoirs.</div>
       </div>
       <div class="stat">
         <div class="stat__label">ENSO state</div>
@@ -55,13 +58,34 @@ function buildDeck(observed, snapshot, backtestCase) {
   }
   const worst = pickHeadline(observed);
   if (!worst) {
-    return 'Satellite-derived early warning for the reservoirs supplying India\'s major cities.';
+    return 'Satellite-derived early warning for the reservoirs with full history and calibrated projections.';
   }
   const days = worst.projection?.neutral_monsoon?.days_to_dead_storage;
   if (days != null && days < 60) {
     return `${worst.name} — supplying ${worst.city_served || 'urban India'} — is ${days} days from dead storage under a neutral monsoon. ${othersAtTier(observed, 'critical')}`;
   }
-  return 'Satellite-derived early warning for the reservoirs supplying India\'s major cities. Updated weekly.';
+  return 'Satellite-derived early warning for fully modeled reservoirs. Current-only expanded rows are kept out of projected risk counts.';
+}
+
+function aggregateModeled(reservoirs) {
+  const totalCapacity = reservoirs.reduce((sum, r) => sum + (r.full_pool_capacity_bcm ?? 0), 0);
+  const currentStorage = reservoirs.reduce(
+    (sum, r) => sum + (r.current?.estimated_storage_bcm ?? 0),
+    0,
+  );
+  const critical = reservoirs.filter((r) => r.tier === 'critical').length;
+  const warning = reservoirs.filter((r) => r.tier === 'warning').length;
+  const peopleAtRisk = reservoirs
+    .filter((r) => r.tier === 'critical' || r.tier === 'warning')
+    .reduce((sum, r) => sum + (r.population_served ?? 0), 0);
+  return {
+    totalCapacity,
+    currentStorage,
+    percentFull: totalCapacity ? (currentStorage / totalCapacity) * 100 : null,
+    critical,
+    warning,
+    peopleAtRisk,
+  };
 }
 
 function pickHeadline(observed) {

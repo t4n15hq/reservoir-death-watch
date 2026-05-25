@@ -109,10 +109,11 @@ bottom of the page. As of the latest CWC ingest:
 
 - 28 of 53 reservoirs are expanded CWC rows with current Sentinel observations
   but no Sentinel/JRC history backfill yet.
-- 30 observed reservoirs are still using an area-ratio storage proxy: the 28
-  current-only expanded rows, Mullaperiyar, which needs a defensible CWC name
-  match, and Panchet, which needs a non-100%-full CWC anchor before the
-  power-law fit is meaningful.
+- 28 expanded reservoirs use CWC live storage directly for percent-full/tier
+  while they wait for Sentinel/JRC history backfill.
+- 2 observed reservoirs are still using an area-ratio storage proxy:
+  Mullaperiyar, which needs a defensible CWC name match, and Panchet, which
+  needs a non-100%-full CWC anchor before the power-law fit is meaningful.
 - 52 of 53 reservoirs have a loaded CWC live-storage reference and FRL
   capacity from local April-May 2026 bulletins.
 - 0 of 53 lat/long coordinates have been verified against CWC's

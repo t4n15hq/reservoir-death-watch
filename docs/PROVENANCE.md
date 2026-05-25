@@ -27,7 +27,7 @@ an authoritative public feed. These are the "real" numbers.
 | `enso.oni_latest` | NOAA CPC ONI ASCII mirror | https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt |
 | `enso.state` | Threshold rule on `oni_latest` | docs/DATASETS.md §NOAA ONI |
 | `national_aggregate.*` | Sum over observed reservoirs | Derived from above |
-| `state_aggregates.*` | Group-by-state of observed reservoirs | Derived from above |
+| `state_aggregates.*` | Group-by-state of observed reservoirs; tier badges count full-history rows only | Derived from above |
 
 ---
 
@@ -40,7 +40,8 @@ that the UI displays in the detail panel.
 |---|---|---|
 | AOI polygon | Auto-derived from JRC `recurrence ≥ 50` seed, not visually reviewed | `first_pass_needs_manual_review` |
 | AOI polygon (manual bbox rows) | Manual bbox; downstream extraction counts water inside | `manual_bbox_needs_visual_check` |
-| `current.estimated_storage_bcm` (30 observed rows) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` or `needs_full_pipeline_run` |
+| `current.estimated_storage_bcm` (28 current-only expanded rows) | Uses the loaded CWC live-storage row for percent/tier until historical backfill creates a satellite-derived curve | `storage_from_cwc_live_reference`, `current_only_no_history` |
+| `current.estimated_storage_bcm` (2 observed rows) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` |
 | `current.estimated_storage_bcm` (23 observed rows) | Power-law calibrated, but only one usable CWC anchor point per reservoir | `cwc_calibrated_single_point`, `phase0_cwc_validation_incomplete` |
 | `current.cwc_reported_bcm` (52 of 53) | Latest matching local CWC bulletin row from 02.04.2026-14.05.2026 — six-month validation pending | `phase0_cwc_validation_incomplete` where calibrated |
 | `current.cwc_reported_bcm` (1 of 53) | No defensible matching CWC row is loaded into this snapshot yet | `needs_cwc_calibration` |
@@ -99,7 +100,8 @@ for the machine-readable form.
 | Reservoirs with satellite observation | 53 of 53 |
 | Reservoirs with CWC live-storage reference loaded | 52 of 53 |
 | Reservoirs with CWC-calibrated curve | 23 of 53 |
-| Reservoirs with `volume_area_ratio_proxy` flag | 30 of 53 |
+| Reservoirs with CWC live-storage used directly | 28 of 53 |
+| Reservoirs with `volume_area_ratio_proxy` flag | 2 of 53 |
 | Reservoirs with AOI GeoJSON available | 53 of 53 |
 | Reservoirs with AOI seeded but unreviewed | 53 of 53 |
 | Reservoirs awaiting AOI seeding | 0 of 53 |

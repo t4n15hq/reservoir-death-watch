@@ -27,9 +27,11 @@ const TIER_COLORS = {
 
 const aoiCache = new Map();
 let currentReservoirsById = new Map();
+let currentOverlayReservoirs = [];
 let currentOnSelect = null;
 let overlayMap = null;
 let overlayRequestId = 0;
+let activeReservoirId = '';
 
 export async function initMap(elementId) {
   // Carto Positron — minimal label noise, lets the pins do the talking.
@@ -69,17 +71,22 @@ export function plotReservoirs(map, reservoirs, { onSelect }) {
   overlayMap = map;
   currentOnSelect = onSelect;
   currentReservoirsById = new Map(reservoirs.map((reservoir) => [reservoir.id, reservoir]));
+  currentOverlayReservoirs = reservoirs;
   removeLegacyDomMarkers(map);
   renderAoiOverlays(map, reservoirs);
   renderPointLayer(map, reservoirs);
 }
 
 export function setActivePin(reservoirId) {
+  activeReservoirId = reservoirId ?? '';
   if (overlayMap?.getLayer(AOI_ACTIVE_LAYER_ID)) {
     overlayMap.setFilter(AOI_ACTIVE_LAYER_ID, ['==', ['get', 'id'], reservoirId]);
   }
   if (overlayMap?.getLayer(POINT_ACTIVE_LAYER_ID)) {
     overlayMap.setFilter(POINT_ACTIVE_LAYER_ID, ['==', ['get', 'id'], reservoirId]);
+  }
+  if (overlayMap && currentOverlayReservoirs.length) {
+    renderAoiOverlays(overlayMap, currentOverlayReservoirs);
   }
 }
 
@@ -358,8 +365,13 @@ function installAoiLayers(map) {
 
 async function renderAoiOverlays(map, reservoirs) {
   const requestId = ++overlayRequestId;
+  const activeReservoir = activeReservoirId ? currentReservoirsById.get(activeReservoirId) : null;
+  const overlayReservoirs = reservoirs.filter((reservoir) => (
+    (reservoir.scope ?? 'core_city') === 'core_city'
+    || (activeReservoir && reservoir.id === activeReservoir.id)
+  ));
   const features = (
-    await Promise.all(reservoirs.map((reservoir) => aoiFeatureForReservoir(reservoir)))
+    await Promise.all(overlayReservoirs.map((reservoir) => aoiFeatureForReservoir(reservoir)))
   ).filter(Boolean);
   if (requestId !== overlayRequestId) return;
   const source = map.getSource(AOI_SOURCE_ID);
@@ -372,7 +384,6 @@ async function renderAoiOverlays(map, reservoirs) {
 }
 
 async function aoiFeatureForReservoir(reservoir) {
-  if ((reservoir.scope ?? 'core_city') !== 'core_city') return null;
   const feature = await loadAoiFeature(reservoir.id);
   if (!feature?.geometry) return null;
   const pending = awaitingFirstObservation(reservoir);

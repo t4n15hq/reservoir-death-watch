@@ -181,9 +181,11 @@ Of the 53 reservoirs on the dashboard:
 - **23 have CWC-calibrated area-to-volume curves.** Panchet has a CWC
   row, but that row is at exactly 100% FRL, so it cannot fit a useful
   two-point power-law curve yet.
-- **30 observed rows are using an area-ratio proxy** for storage: the 28
-  current-only expanded rows, plus Mullaperiyar, which still lacks a defensible
-  matched CWC row, and Panchet, pending a non-full CWC anchor.
+- **28 expanded rows use CWC live storage directly** for percent-full/tier
+  until the historical backfill can build satellite-derived curves.
+- **2 observed rows are using an area-ratio proxy** for storage: Mullaperiyar,
+  which still lacks a defensible matched CWC row, and Panchet, pending a
+  non-full CWC anchor.
 - **0 reservoirs have lat/lon verified against CWC's published register
   or OpenStreetMap.** These came from training-data knowledge during
   scope definition; they're approximate but plausible (within ±5 km).

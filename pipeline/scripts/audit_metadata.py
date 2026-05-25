@@ -150,6 +150,8 @@ def snapshot_entry_classification(
 def _storage_method(flags: list[str]) -> str:
     if "cwc_calibrated_single_point" in flags:
         return "cwc_calibrated_power_law"
+    if "storage_from_cwc_live_reference" in flags:
+        return "cwc_live_reference"
     if "volume_area_ratio_proxy" in flags:
         return "area_ratio_proxy"
     if "awaiting_first_observation" in flags:

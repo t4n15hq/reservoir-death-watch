@@ -4,8 +4,9 @@ take too long to backfill in one sitting.
 
 For each requested reservoir:
   1. Run the existing `extract_recent_area` to get a current S2 (or S1) area.
-  2. Use the AOI polygon's historical max water area as the FRL proxy.
-  3. Compute storage via the simple area-ratio proxy (no curve calibration).
+  2. Load the latest CWC live-storage row where available.
+  3. Use CWC live storage for percent-full/tier; fall back to an area-ratio
+     proxy only when CWC is missing.
   4. Update that reservoir's entry in `reservoirs.json` in place.
 
 Flags every updated reservoir with `current_only_no_history` so the dashboard
@@ -53,17 +54,21 @@ def quick_extract(
     cwc_as_of = cwc_row.get("date").isoformat() if cwc_row else None
     cwc_capacity = _opt_float(cwc_row.get("live_capacity_at_frl_bcm") if cwc_row else None)
 
-    # Use the AOI polygon's geometric area as a coarse FRL proxy for storage.
-    # The seed_aois recurrence band approximates the FRL footprint, so this is
-    # a reasonable upper bound until JRC backfill provides the true historical max.
+    # The current-only path can observe surface area before historical backfill
+    # exists. Prefer CWC live storage for percent/tier when available; otherwise
+    # use the AOI geometry as a coarse FRL proxy until the full pipeline runs.
     full_pool_area_km2 = aoi.aoi_area_km2 or current.area_km2
     capacity = cwc_capacity or aoi.full_pool_capacity_bcm or 0.0
-    storage = (
+    uses_cwc_storage = cwc_reported is not None and capacity > 0
+    storage = cwc_reported if uses_cwc_storage else (
         max(0.0, (current.area_km2 / full_pool_area_km2) * capacity)
         if full_pool_area_km2 > 0 and capacity > 0
         else 0.0
     )
     percent_full = (storage / capacity * 100) if capacity > 0 else 0.0
+    storage_flags = {"storage_from_cwc_live_reference"} if uses_cwc_storage else {
+        "volume_area_ratio_proxy"
+    }
 
     return {
         "id": aoi.id,
@@ -110,10 +115,9 @@ def quick_extract(
         "flags": sorted(
             {
                 "current_only_no_history",
-                "volume_area_ratio_proxy",
                 "needs_full_pipeline_run",
                 aoi.aoi_review_status or "first_pass_needs_manual_review",
-            }
+            } | storage_flags
         ),
     }
 
@@ -130,9 +134,9 @@ def _opt_float(value) -> float | None:
 def _coarse_tier(percent_full: float) -> str:
     """Without a depletion fit we cannot compute days-to-dead-storage.
 
-    Fall back to a percent-full heuristic for the pin colour. This is a
-    coarse proxy and is flagged with `current_only_no_history`; the proper
-    tier comes from the full pipeline + projection.
+    Fall back to a percent-full heuristic for the pin colour. Current-only
+    rows are flagged with `current_only_no_history`; proper projected risk
+    comes from the full pipeline + projection.
     """
 
     if percent_full < 15:
@@ -181,16 +185,21 @@ def recompute_aggregates(snapshot: dict) -> dict:
         for r in snapshot["reservoirs"]
         if "awaiting_first_observation" not in (r.get("flags") or [])
     ]
-    total_capacity = sum(r.get("full_pool_capacity_bcm") or 0 for r in observed)
-    current_storage = sum(r["current"]["estimated_storage_bcm"] or 0 for r in observed)
+    modeled = [
+        r
+        for r in observed
+        if "current_only_no_history" not in (r.get("flags") or [])
+    ]
+    total_capacity = sum(r.get("full_pool_capacity_bcm") or 0 for r in modeled)
+    current_storage = sum(r["current"]["estimated_storage_bcm"] or 0 for r in modeled)
 
     tiers = {"critical": 0, "warning": 0, "watch": 0, "stable": 0}
-    for r in observed:
+    for r in modeled:
         tiers[r["tier"]] = tiers.get(r["tier"], 0) + 1
 
     at_risk = sum(
         r.get("population_served") or 0
-        for r in observed
+        for r in modeled
         if r["tier"] in {"critical", "warning"}
     )
 

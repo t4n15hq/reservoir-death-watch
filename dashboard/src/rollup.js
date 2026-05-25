@@ -1,5 +1,7 @@
+import { awaitingFirstObservation, isFullyModeled } from './data.js';
+
 export function renderStateBand(container, snapshot, stateAggregates = null) {
-  const states = stateAggregates?.states ?? [];
+  const states = buildStates(snapshot, stateAggregates);
   if (!states.length) {
     container.innerHTML = '';
     return;
@@ -34,11 +36,49 @@ export function renderStateBand(container, snapshot, stateAggregates = null) {
     <div class="states-card">
       <div class="states-card__head">
         <h2>By state</h2>
-        <p>${states.length} states · observed/total shown per state.</p>
+        <p>${states.length} states · observed/total shown; tier badges count full-history rows.</p>
       </div>
       <div class="states-grid">${rows}</div>
     </div>
   `;
+}
+
+function buildStates(snapshot, stateAggregates) {
+  const reservoirs = snapshot?.reservoirs ?? [];
+  if (!reservoirs.length) return stateAggregates?.states ?? [];
+
+  const buckets = new Map();
+  for (const reservoir of reservoirs) {
+    const state = reservoir.state || 'Unknown';
+    if (!buckets.has(state)) buckets.set(state, []);
+    buckets.get(state).push(reservoir);
+  }
+
+  return [...buckets.entries()].map(([state, members]) => {
+    const observed = members.filter((r) => !awaitingFirstObservation(r));
+    const modeled = observed.filter(isFullyModeled);
+    const totalCapacity = observed.reduce((sum, r) => sum + (r.full_pool_capacity_bcm ?? 0), 0);
+    const currentStorage = observed.reduce(
+      (sum, r) => sum + (r.current?.estimated_storage_bcm ?? 0),
+      0,
+    );
+    return {
+      state,
+      reservoir_count: members.length,
+      observed_count: observed.length,
+      modeled_count: modeled.length,
+      percent_full: totalCapacity ? (currentStorage / totalCapacity) * 100 : null,
+      tier_counts: tierCounts(modeled),
+    };
+  });
+}
+
+function tierCounts(reservoirs) {
+  const counts = { critical: 0, warning: 0, watch: 0, stable: 0 };
+  for (const reservoir of reservoirs) {
+    if (counts[reservoir.tier] != null) counts[reservoir.tier] += 1;
+  }
+  return counts;
 }
 
 function tierBadge(tier, count) {

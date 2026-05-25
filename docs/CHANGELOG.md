@@ -18,6 +18,13 @@ Append entries on every meaningful change. Newest at top. Date format ISO.
 - Regenerated `data_provenance.json`, `reservoirs.json`, and
   `state_aggregates.json`; the data-quality card now reports 53/53 satellite
   observed and 53/53 AOIs available.
+- Follow-up launch hardening keeps current-only expanded rows out of hero
+  projected-risk counts, uses CWC live storage for their percent/tier when
+  available, hides missing history downloads, and only renders expanded AOIs
+  when selected.
+- Added `docs/AOI_REVIEW.md` with the first launch review queue for critical
+  core reservoirs. AOI review counts remain 0 until those polygons are checked
+  against a visual reference.
 
 ## 2026-05-21 — Expanded CWC scope + dashboard filters
 

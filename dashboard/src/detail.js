@@ -4,6 +4,7 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 import {
   awaitingFirstObservation,
   daysSince,
+  isCurrentOnly,
   isStale,
   loadReservoirHistory,
 } from './data.js';
@@ -22,6 +23,7 @@ export async function renderDetail(container, reservoir) {
   const neutral = projection.neutral_monsoon ?? {};
   const elNino = projection.el_nino_monsoon ?? {};
   const pending = awaitingFirstObservation(reservoir);
+  const currentOnly = isCurrentOnly(reservoir);
   const stale = !pending && isStale(reservoir);
   const ageDays = pending ? null : daysSince(current.as_of);
   const flags = reservoir.flags ?? [];
@@ -48,7 +50,7 @@ export async function renderDetail(container, reservoir) {
 
       ${pending ? '<div class="banner banner--pending">Awaiting first satellite observation. AOI not yet digitized for this reservoir.</div>' : ''}
       ${stale ? '<div class="banner banner--stale">Stale data — most recent observation is older than 14 days.</div>' : ''}
-      ${!pending && flags.includes('current_only_no_history') ? '<div class="banner banner--info">Current observation only — no historical trace or depletion fit yet.</div>' : ''}
+      ${!pending && currentOnly ? '<div class="banner banner--info">Current observation only — storage percent uses the loaded CWC live value where available. No historical trace or depletion fit yet.</div>' : ''}
       ${!pending && !hasCwcReference ? `<div class="banner banner--cwc-missing">No CWC live-storage row is loaded for this reservoir in the current snapshot. Storage is shown using the ${storageDerivation(flags)} until a matching CWC bulletin row is added.</div>` : ''}
 
       ${pending ? '' : renderHeadlineProjection(neutral, elNino)}
@@ -76,23 +78,28 @@ export async function renderDetail(container, reservoir) {
       </dl>
 
       <h3>Surface area history</h3>
-      <div class="chart-wrap"><canvas id="history-chart"></canvas></div>
+      <div class="chart-wrap">
+        ${pending || currentOnly ? '<p class="muted" style="padding:1rem 0">No history yet — the full Sentinel/JRC backfill has not run for this reservoir.</p>' : '<canvas id="history-chart"></canvas>'}
+      </div>
 
-      ${pending ? '' : `
+      ${!pending && !currentOnly ? `
         <p class="detail__download">
           <a href="data/reservoirs/${reservoir.id}.csv" download>Download full history CSV</a>
           · 15+ years of monthly JRC + recent Sentinel observations,
           area in km², derived storage, source label per row.
         </p>
-      `}
+      ` : currentOnly ? `
+        <p class="detail__download detail__download--muted">
+          Full history CSV will appear after the Sentinel/JRC backfill runs for this reservoir.
+        </p>
+      ` : ''}
 
       ${flags.length ? `<details class="flags"><summary>Data caveats (${flags.length})</summary><ul>${flags.map((f) => `<li><code>${f}</code></li>`).join('')}</ul></details>` : ''}
     </div>
   `;
 
-  if (pending) {
-    const wrap = container.querySelector('.chart-wrap');
-    if (wrap) wrap.innerHTML = '<p class="muted" style="padding:1rem 0">No history yet — pipeline has not run for this reservoir.</p>';
+  if (pending || currentOnly) {
+    clearActiveChart();
   } else {
     try {
       const history = await loadReservoirHistory(reservoir.id);
@@ -139,10 +146,7 @@ function drawHistoryChart(history, reservoir) {
   const canvas = document.getElementById('history-chart');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  if (activeChart) {
-    activeChart.destroy();
-    activeChart = null;
-  }
+  clearActiveChart();
   const points = history
     .filter((row) => row.area_km2 != null && row.area_km2 > 0 && row.date)
     .map((row) => ({ x: row.date.getTime(), y: row.area_km2, source: row.data_source }));
@@ -262,8 +266,16 @@ function drawHistoryChart(history, reservoir) {
   });
 }
 
+function clearActiveChart() {
+  if (activeChart) {
+    activeChart.destroy();
+    activeChart = null;
+  }
+}
+
 function storageDerivation(flags) {
   if (flags.includes('cwc_calibrated_single_point')) return 'CWC-calibrated curve';
+  if (flags.includes('storage_from_cwc_live_reference')) return 'CWC live storage';
   if (flags.includes('volume_area_ratio_proxy')) return 'area-ratio proxy';
   return 'derived';
 }

@@ -180,6 +180,7 @@ Pre-computed state rollups.
       "state": "Karnataka",
       "reservoir_count": 14,
       "observed_count": 10,
+      "modeled_count": 8,
       "total_capacity_bcm": 31.2,
       "current_storage_bcm": 12.4,
       "percent_full": 39.7,
@@ -189,6 +190,9 @@ Pre-computed state rollups.
   ]
 }
 ```
+
+`tier_counts` counts full-history/non-`current_only_no_history` rows only, so
+current-only expanded rows do not inflate projected critical/warning claims.
 
 ### `dashboard/public/data/data_provenance.json`
 
