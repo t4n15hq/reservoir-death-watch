@@ -60,7 +60,13 @@ export function renderDataQuality(container, provenance, reservoirs = null, filt
     {
       label: 'Coordinates source checked',
       verified: counts.latLonVerified,
-      hint: 'Dam lat/lon cross-checked against CWC bulletin or OpenStreetMap.',
+      hint: 'Dam lat/lon cross-checked against OpenStreetMap or another cited geospatial source.',
+      kind: 'backlog',
+    },
+    {
+      label: 'Dead-storage source checked',
+      verified: counts.deadStorageVerified,
+      hint: 'Dead-storage capacity has an external source. This drives days-to-dead-storage projections.',
       kind: 'backlog',
     },
     {
@@ -128,6 +134,7 @@ function countCurrentView(rows, fallbackCounts) {
       aoiAvailable: fallbackCounts?.aoi_available ?? 0,
       aoiVisuallyReviewed: fallbackCounts?.aoi_visually_reviewed ?? 0,
       latLonVerified: fallbackCounts?.lat_lon_verified ?? 0,
+      deadStorageVerified: fallbackCounts?.dead_storage_capacity_verified ?? 0,
       populationVerified: fallbackCounts?.population_verified_against_census ?? 0,
     };
   }
@@ -149,6 +156,9 @@ function countCurrentView(rows, fallbackCounts) {
     aoiAvailable: rows.filter(({ provenance }) => provenance?.aoi?.available).length,
     aoiVisuallyReviewed: rows.filter(({ provenance }) => provenance?.aoi?.verified).length,
     latLonVerified: rows.filter(({ provenance }) => provenance?.lat_lon?.verified).length,
+    deadStorageVerified: rows.filter(({ provenance }) => (
+      provenance?.dead_storage_capacity_bcm?.verified
+    )).length,
     populationVerified: rows.filter(({ provenance }) => provenance?.population_served?.verified).length,
   };
 }

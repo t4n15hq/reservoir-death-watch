@@ -1,0 +1,14 @@
+{
+  "aoi_available": 53,
+  "current_only_reservoirs": 0,
+  "cwc_reference_available": 52,
+  "fresh_percent": 100.0,
+  "fresh_within_14_days": 53,
+  "generated_at": "2026-05-25T22:45:38.444760Z",
+  "max_observation_age_days": 13,
+  "model_version": "1.0.0",
+  "observed_with_satellite": 53,
+  "snapshot_generated_at": "2026-05-25T22:44:42.429562Z",
+  "status": "ok",
+  "total_reservoirs": 53
+}

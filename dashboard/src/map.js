@@ -1,4 +1,3 @@
-import maplibregl from 'maplibre-gl';
 import { awaitingFirstObservation, isStale } from './data.js';
 
 const INDIA_BOUNDS = [
@@ -32,8 +31,10 @@ let currentOnSelect = null;
 let overlayMap = null;
 let overlayRequestId = 0;
 let activeReservoirId = '';
+let maplibreRuntime = null;
 
 export async function initMap(elementId) {
+  const maplibregl = await loadMaplibre();
   // Carto Positron — minimal label noise, lets the pins do the talking.
   const map = new maplibregl.Map({
     container: elementId,
@@ -132,13 +133,18 @@ export function fitReservoirs(map, reservoirs, { animate = true } = {}) {
     return;
   }
 
-  const bounds = new maplibregl.LngLatBounds();
-  for (const reservoir of visible) bounds.extend([reservoir.lon, reservoir.lat]);
-  map.fitBounds(bounds, {
+  map.fitBounds([[west, south], [east, north]], {
     duration: animate ? 550 : 0,
     maxZoom: 6.8,
     padding: { top: 54, right: 54, bottom: 54, left: 54 },
   });
+}
+
+async function loadMaplibre() {
+  if (!maplibreRuntime) {
+    maplibreRuntime = import('maplibre-gl').then((module) => module.default ?? module);
+  }
+  return maplibreRuntime;
 }
 
 function installPointLayers(map) {

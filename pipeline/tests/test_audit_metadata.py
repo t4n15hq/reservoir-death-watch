@@ -12,11 +12,12 @@ reservoir (e.g. drop a CWC bulletin for it, update coord_verified_at, etc.).
 from __future__ import annotations
 
 import csv
+from datetime import date
 
 import pytest
 
 from reservoirs.config import RESERVOIRS_CSV
-from scripts.audit_metadata import build_provenance  # type: ignore[import-not-found]
+from scripts.audit_metadata import build_health, build_provenance  # type: ignore[import-not-found]
 
 
 @pytest.fixture(scope="module")
@@ -32,15 +33,14 @@ def test_total_reservoirs_matches_csv(provenance):
 
 def test_cwc_anchored_count_pins_current_bulletin_ingest(provenance):
     """As of the expanded-scope audit, seven local CWC bulletins match 52
-    reservoirs. Expanded rows now have current Sentinel observations, but no
-    historical backfill, so only the core rows with usable CWC anchors can be
-    counted as CWC-calibrated curves."""
+    reservoirs. Expanded rows now have JRC history and current Sentinel
+    observations; dense recent Sentinel-2 series remains flagged separately."""
 
     assert provenance["counts"]["cwc_reference_available"] == 52, (
         "CWC reference count changed. If you added a bulletin, update this "
         "expected value AND re-confirm docs/PROVENANCE.md counts."
     )
-    assert provenance["counts"]["storage_cwc_calibrated"] == 23, (
+    assert provenance["counts"]["storage_cwc_calibrated"] == 51, (
         "CWC-calibrated count changed. If you added a bulletin, update this "
         "expected value AND re-confirm docs/PROVENANCE.md counts."
     )
@@ -48,16 +48,17 @@ def test_cwc_anchored_count_pins_current_bulletin_ingest(provenance):
 
 def test_metadata_verification_is_explicit(provenance):
     """Only CWC-covered reservoirs have FRL capacity from CWC; no reservoir
-    has lat/lon, dead-storage capacity, or population externally sourced yet.
+    has dead-storage capacity or population externally sourced yet.
 
-    These start at zero and tick up as you populate `coord_verified_at`,
-    `population_source` columns in docs/reservoirs.csv. The dashboard's
+    Coordinate verification ticks up as `coord_source` is populated; the
+    remaining source checks tick up as you fill `dead_storage_source` and
+    `population_source` in docs/reservoirs.csv. The dashboard's
     Data Quality card shows these explicitly so readers know what's
     measured vs editorial.
     """
 
     c = provenance["counts"]
-    assert c["lat_lon_verified"] == 0, "bump test when coord_verified_at populated"
+    assert c["lat_lon_verified"] == 10, "bump test when coord_source coverage changes"
     assert c["full_pool_capacity_from_cwc"] == 52, "bump test when CWC rows change"
     assert c["aoi_available"] == 53, "bump test when AOI availability changes"
     assert c["dead_storage_capacity_verified"] == 0, (
@@ -70,6 +71,31 @@ def test_metadata_verification_is_explicit(provenance):
     assert c["population_verified_against_census"] == 0, (
         "bump test when population_source populated"
     )
+
+
+def test_health_summary_tracks_freshness_and_current_only(provenance):
+    snapshot = {
+        "generated_at": "2026-05-25T00:00:00Z",
+        "model_version": "test",
+        "reservoirs": [
+            {"id": "fresh", "flags": [], "current": {"as_of": "2026-05-20"}},
+            {
+                "id": "current-only",
+                "flags": ["current_only_no_history"],
+                "current": {"as_of": "2026-05-18"},
+            },
+            {"id": "pending", "flags": [], "current": {"as_of": "1900-01-01"}},
+        ],
+    }
+
+    health = build_health(snapshot, provenance, today=date(2026, 5, 25))
+
+    assert health["status"] == "stale"
+    assert health["total_reservoirs"] == 3
+    assert health["fresh_within_14_days"] == 2
+    assert health["fresh_percent"] == 66.7
+    assert health["current_only_reservoirs"] == 1
+    assert health["max_observation_age_days"] == 7
 
 
 def test_cwc_capacity_values_come_from_cwc_rows(provenance):

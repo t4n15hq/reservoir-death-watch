@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-25T21:45:13.185078Z",
+  "generated_at": "2026-05-25T22:44:42.501786Z",
   "states": [
     {
       "current_storage_bcm": 3.779,
-      "modeled_count": 2,
+      "modeled_count": 5,
       "observed_count": 5,
       "percent_full": 25.3,
       "reservoir_count": 5,
@@ -17,15 +17,15 @@
       "state": "Andhra Pradesh",
       "tier_counts": {
         "critical": 1,
-        "stable": 0,
+        "stable": 2,
         "warning": 0,
-        "watch": 1
+        "watch": 2
       },
       "total_capacity_bcm": 14.923
     },
     {
       "current_storage_bcm": 2.198,
-      "modeled_count": 0,
+      "modeled_count": 3,
       "observed_count": 3,
       "percent_full": 53.3,
       "reservoir_count": 3,
@@ -39,13 +39,13 @@
         "critical": 0,
         "stable": 0,
         "warning": 0,
-        "watch": 0
+        "watch": 3
       },
       "total_capacity_bcm": 4.125
     },
     {
       "current_storage_bcm": 7.477,
-      "modeled_count": 2,
+      "modeled_count": 5,
       "observed_count": 5,
       "percent_full": 50.9,
       "reservoir_count": 5,
@@ -59,15 +59,15 @@
       "state": "Gujarat",
       "tier_counts": {
         "critical": 0,
-        "stable": 0,
+        "stable": 1,
         "warning": 1,
-        "watch": 1
+        "watch": 3
       },
       "total_capacity_bcm": 14.697
     },
     {
       "current_storage_bcm": 4.624,
-      "modeled_count": 1,
+      "modeled_count": 3,
       "observed_count": 3,
       "percent_full": 37.1,
       "reservoir_count": 3,
@@ -81,13 +81,13 @@
         "critical": 0,
         "stable": 0,
         "warning": 0,
-        "watch": 1
+        "watch": 3
       },
       "total_capacity_bcm": 12.475
     },
     {
       "current_storage_bcm": 0.79,
-      "modeled_count": 2,
+      "modeled_count": 5,
       "observed_count": 5,
       "percent_full": 44.0,
       "reservoir_count": 5,
@@ -103,7 +103,7 @@
         "critical": 2,
         "stable": 0,
         "warning": 0,
-        "watch": 0
+        "watch": 3
       },
       "total_capacity_bcm": 1.794
     },
@@ -150,7 +150,7 @@
     },
     {
       "current_storage_bcm": 8.229,
-      "modeled_count": 2,
+      "modeled_count": 5,
       "observed_count": 5,
       "percent_full": 37.4,
       "reservoir_count": 5,
@@ -166,7 +166,7 @@
         "critical": 0,
         "stable": 0,
         "warning": 1,
-        "watch": 1
+        "watch": 4
       },
       "total_capacity_bcm": 21.995
     },
@@ -192,7 +192,7 @@
     },
     {
       "current_storage_bcm": 2.331,
-      "modeled_count": 0,
+      "modeled_count": 3,
       "observed_count": 3,
       "percent_full": 22.7,
       "reservoir_count": 3,
@@ -206,13 +206,13 @@
         "critical": 0,
         "stable": 0,
         "warning": 0,
-        "watch": 0
+        "watch": 3
       },
       "total_capacity_bcm": 10.266
     },
     {
       "current_storage_bcm": 2.16,
-      "modeled_count": 1,
+      "modeled_count": 4,
       "observed_count": 4,
       "percent_full": 48.9,
       "reservoir_count": 4,
@@ -227,7 +227,7 @@
         "critical": 0,
         "stable": 1,
         "warning": 0,
-        "watch": 0
+        "watch": 3
       },
       "total_capacity_bcm": 4.416
     },
@@ -253,7 +253,7 @@
     },
     {
       "current_storage_bcm": 1.084,
-      "modeled_count": 1,
+      "modeled_count": 4,
       "observed_count": 4,
       "percent_full": 25.7,
       "reservoir_count": 4,
@@ -266,15 +266,15 @@
       "state": "Telangana",
       "tier_counts": {
         "critical": 0,
-        "stable": 0,
+        "stable": 2,
         "warning": 0,
-        "watch": 1
+        "watch": 2
       },
       "total_capacity_bcm": 4.225
     },
     {
       "current_storage_bcm": 1.179,
-      "modeled_count": 1,
+      "modeled_count": 3,
       "observed_count": 3,
       "percent_full": 23.6,
       "reservoir_count": 3,
@@ -288,7 +288,7 @@
         "critical": 0,
         "stable": 0,
         "warning": 0,
-        "watch": 1
+        "watch": 3
       },
       "total_capacity_bcm": 4.987
     }

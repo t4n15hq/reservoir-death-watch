@@ -19,3 +19,15 @@ These drive the public hero/risk narrative first.
 
 Keep `aoi_visually_reviewed` at `0` until the corresponding GeoJSON
 `review_status` is changed after a real visual pass.
+
+## Source fields to fill during review
+
+`docs/reservoirs.csv` has explicit source columns for launch verification:
+
+- `coord_source` / `coord_verified_at` for dam coordinates.
+- `dead_storage_source` for dead-storage capacity.
+- `population_source` for beneficiary population.
+
+The audit script only increments those verification counts after the source
+columns are populated. The current cached CWC weekly storage bulletins include
+live storage and FRL capacity, but not dead-storage capacity or coordinates.

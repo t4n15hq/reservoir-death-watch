@@ -262,6 +262,10 @@ The master list. Columns:
 | `aoi_file` | string | yes | Path to GeoJSON: `pipeline/data/aois/{id}.geojson` |
 | `scope` | string | yes | `core_city` for the 25 city-serving rows; `expanded_cwc` for broader CWC state coverage |
 | `notes` | string | no | Free text |
+| `coord_source` | string | no | Source URL/citation for dam lat/lon; marks coordinates verified when populated |
+| `coord_verified_at` | string | no | ISO date or short source label for coordinate verification |
+| `dead_storage_source` | string | no | Source URL/citation for dead-storage capacity; marks dead-storage capacity verified when populated |
+| `population_source` | string | no | Source URL/citation for population-served estimate; marks population verified when populated |
 
 ---
 

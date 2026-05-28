@@ -6,11 +6,11 @@ top-line count of what's verified vs unverified.
 Writes `dashboard/public/data/data_provenance.json` for the UI to consume.
 
 Definitions of "verified":
-- lat/lon: marked verified iff `coord_verified_at` is present in the CSV
-  (set by hand after a CWC bulletin or OSM cross-check).
+- lat/lon: marked verified iff `coord_source` or `coord_verified_at` is present
+  in the CSV (set by hand after a CWC bulletin or OSM cross-check).
 - full-pool/live capacity: verified iff a matching CWC row provides
   `live_capacity_at_frl_bcm`.
-- dead-storage capacity: unverified until an explicit source column is added.
+- dead-storage capacity: verified iff `dead_storage_source` is present in the CSV.
 - population: verified iff `population_source` is present in the CSV
   (set when a census reference is added).
 
@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import csv
 import json
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 
 from reservoirs.config import DASHBOARD_DATA_DIR, REPO_ROOT, RESERVOIRS_CSV
 from reservoirs.cwc_scraper import load_cwc_storage
@@ -55,6 +55,40 @@ def build_provenance() -> dict:
     }
 
 
+def build_health(snapshot: dict, provenance: dict, *, today: date | None = None) -> dict:
+    reservoirs = snapshot.get("reservoirs", [])
+    today = today or date.today()
+    ages: list[int] = []
+    current_only = 0
+    for reservoir in reservoirs:
+        flags = reservoir.get("flags") or []
+        if "current_only_no_history" in flags:
+            current_only += 1
+        as_of = reservoir.get("current", {}).get("as_of")
+        if not as_of or as_of == "1900-01-01":
+            continue
+        ages.append((today - date.fromisoformat(as_of)).days)
+
+    fresh_within_14_days = sum(1 for age in ages if age <= 14)
+    total = len(reservoirs)
+    fresh_pct = round((fresh_within_14_days / total) * 100, 1) if total else 0.0
+    status = "ok" if total and fresh_pct >= 90 else "stale"
+    return {
+        "generated_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+        "status": status,
+        "snapshot_generated_at": snapshot.get("generated_at"),
+        "model_version": snapshot.get("model_version"),
+        "total_reservoirs": total,
+        "observed_with_satellite": provenance["counts"]["observed_with_satellite"],
+        "fresh_within_14_days": fresh_within_14_days,
+        "fresh_percent": fresh_pct,
+        "max_observation_age_days": max(ages) if ages else None,
+        "current_only_reservoirs": current_only,
+        "cwc_reference_available": provenance["counts"]["cwc_reference_available"],
+        "aoi_available": provenance["counts"]["aoi_available"],
+    }
+
+
 def snapshot_entry_classification(
     row: dict, snapshot_entry: dict | None, cwc_latest: dict[str, dict]
 ) -> dict:
@@ -68,7 +102,8 @@ def snapshot_entry_classification(
 
     cwc_reference_available = current.get("cwc_reported_bcm") is not None
     full_capacity_verified = cwc_live_capacity is not None
-    coord_verified = bool(row.get("coord_verified_at"))
+    coord_verified = bool(row.get("coord_verified_at") or row.get("coord_source"))
+    dead_storage_verified = bool(row.get("dead_storage_source"))
     population_verified = bool(row.get("population_source"))
     aoi_available = _repo_path_exists(row.get("aoi_file"))
 
@@ -79,7 +114,9 @@ def snapshot_entry_classification(
         "lat_lon": {
             "value": [float(row["lat"]), float(row["lon"])],
             "verified": coord_verified,
-            "source": row.get("coord_verified_at") or "approximate (training-data knowledge)",
+            "source": row.get("coord_source")
+            or row.get("coord_verified_at")
+            or "approximate (training-data knowledge)",
         },
         "full_pool_capacity_bcm": {
             "value": cwc_live_capacity or _opt_float(row.get("full_pool_capacity_bcm")),
@@ -92,8 +129,8 @@ def snapshot_entry_classification(
         },
         "dead_storage_capacity_bcm": {
             "value": _opt_float(row.get("dead_storage_capacity_bcm")),
-            "verified": False,
-            "source": "approximate (training-data knowledge)",
+            "verified": dead_storage_verified,
+            "source": row.get("dead_storage_source") or "approximate (training-data knowledge)",
         },
         "population_served": {
             "value": _opt_int(row.get("population_served")),
@@ -248,15 +285,26 @@ def main() -> int:
         handle.write("\n")
     tmp.replace(path)
 
+    snapshot_path = DASHBOARD_DATA_DIR / "reservoirs.json"
+    snapshot = json.loads(snapshot_path.read_text()) if snapshot_path.exists() else {}
+    health = build_health(snapshot, provenance)
+    health_path = DASHBOARD_DATA_DIR.parent / "health.json"
+    health_tmp = health_path.with_suffix(".json.tmp")
+    with health_tmp.open("w") as handle:
+        json.dump(health, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+    health_tmp.replace(health_path)
+
     counts = provenance["counts"]
     print(f"Wrote {path}")
+    print(f"Wrote {health_path}")
     print(f"  total reservoirs:                       {counts['total_reservoirs']}")
     print(f"  observed (≥1 satellite obs):            {counts['observed_with_satellite']}")
     print(f"  AOI GeoJSON available:                  {counts['aoi_available']}")
     print(f"  AOI visually reviewed:                  {counts['aoi_visually_reviewed']}")
     print(f"  CWC reference rows loaded:              {counts['cwc_reference_available']}")
     print(f"  storage CWC-calibrated:                 {counts['storage_cwc_calibrated']}")
-    print(f"  lat/lon verified against CWC/OSM:       {counts['lat_lon_verified']}")
+    print(f"  lat/lon source-checked:                 {counts['lat_lon_verified']}")
     cap = counts["full_pool_capacity_from_cwc"]
     dead = counts["dead_storage_capacity_verified"]
     pop = counts["population_verified_against_census"]

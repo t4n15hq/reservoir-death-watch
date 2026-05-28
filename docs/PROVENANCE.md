@@ -21,7 +21,7 @@ an authoritative public feed. These are the "real" numbers.
 | `current.area_km2` (surface area) | Sentinel-2 SR Harmonized via Earth Engine | MNDWI threshold > 0, SCL cloud mask, SRTM slope < 10° |
 | `current.area_km2` (when cloudy) | Sentinel-1 GRD via Earth Engine | VV backscatter < -15 dB; flagged `data_source = sentinel_1` |
 | `history` (JRC monthly) | JRC Global Surface Water 1.4 (Pekel et al. 2016 *Nature*) | Static, peer-reviewed; 1984–2021 |
-| `history` (Sentinel-2 weekly recent) | Sentinel-2 via Earth Engine | 10-day composites, last 150 days |
+| `history` (Sentinel-2 weekly recent) | Sentinel-2 via Earth Engine | 10-day composites, last 150 days where the dense series has completed; expanded rows with `sentinel_2_series_backfill_pending` have JRC history plus the current Sentinel point |
 | `fit` (depletion slope) | Linear regression on `history` window | r² and std error included |
 | `projection.*.days_to_dead_storage` | Linear extrapolation from fit | Honest extrapolation, not modelled |
 | `enso.oni_latest` | NOAA CPC ONI ASCII mirror | https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt |
@@ -40,9 +40,9 @@ that the UI displays in the detail panel.
 |---|---|---|
 | AOI polygon | Auto-derived from JRC `recurrence ≥ 50` seed, not visually reviewed | `first_pass_needs_manual_review` |
 | AOI polygon (manual bbox rows) | Manual bbox; downstream extraction counts water inside | `manual_bbox_needs_visual_check` |
-| `current.estimated_storage_bcm` (28 current-only expanded rows) | Uses the loaded CWC live-storage row for percent/tier until historical backfill creates a satellite-derived curve | `storage_from_cwc_live_reference`, `current_only_no_history` |
+| `current.estimated_storage_bcm` (28 expanded rows) | JRC history is loaded and calibrated where a CWC row matches; dense recent Sentinel-2 series is still pending after Earth Engine stalled on those windows | `sentinel_2_series_backfill_pending` |
 | `current.estimated_storage_bcm` (2 observed rows) | Computed via `area / full_pool_area × capacity` instead of a calibrated power-law curve | `volume_area_ratio_proxy`, `needs_cwc_calibration` |
-| `current.estimated_storage_bcm` (23 observed rows) | Power-law calibrated, but only one usable CWC anchor point per reservoir | `cwc_calibrated_single_point`, `phase0_cwc_validation_incomplete` |
+| `current.estimated_storage_bcm` (51 observed rows) | Power-law calibrated, but only one usable CWC anchor point per reservoir | `cwc_calibrated_single_point`, `phase0_cwc_validation_incomplete` |
 | `current.cwc_reported_bcm` (52 of 53) | Latest matching local CWC bulletin row from 02.04.2026-14.05.2026 — six-month validation pending | `phase0_cwc_validation_incomplete` where calibrated |
 | `current.cwc_reported_bcm` (1 of 53) | No defensible matching CWC row is loaded into this snapshot yet | `needs_cwc_calibration` |
 | Dead-storage area used in projection | Power-law conversion with default b=2.0 when no calibrated curve exists | `dead_storage_area_proxy` |
@@ -52,18 +52,18 @@ that the UI displays in the detail panel.
 
 ---
 
-## Tier 3 — Metadata I supplied, not externally verified
+## Tier 3 — Metadata supplied, source checks in progress
 
 These values came from training-data knowledge during the PRD v2 scope pivot
 and have **not** been cross-checked against CWC's published register.
 
 | Field | Where it shows | Confidence | Action needed |
 |---|---|---|---|
-| `lat` / `lon` | Map pin location | Approximate (±5 km plausible) | Cross-check against CWC bulletin or OSM `way:` for each dam |
+| `lat` / `lon` | Map pin location | Top 10 priority rows source-checked on 2026-05-25; remaining rows approximate (±5 km plausible) until `coord_source` or `coord_verified_at` is populated | Cross-check against OSM `way:` where available, otherwise another cited geospatial source |
 | `full_pool_capacity_bcm` (52 of 53) | "of X BCM" in storage line | CWC `live_capacity_at_frl_bcm` loaded from local bulletin rows | Continue six-month bulletin collection |
 | `full_pool_capacity_bcm` (1 of 53) | "of X BCM" in storage line | Approximate (±10%) | Needs a defensible CWC row match |
-| `dead_storage_capacity_bcm` | Drives `dead_storage_area` calculation | Approximate | Add an explicit dead-storage source; the current Phase 0 CSV does not carry it |
-| `population_served` | At-risk headline + detail byline | Rough estimate (order of magnitude) | Census 2011 + 2024 estimates for the named cities |
+| `dead_storage_capacity_bcm` | Drives `dead_storage_area` calculation | Approximate until `dead_storage_source` is populated | Add an explicit dead-storage source; the current CWC weekly bulletin CSVs do not carry it |
+| `population_served` | At-risk headline + detail byline | Rough estimate (order of magnitude) until `population_source` is populated | Census 2011 + 2024 estimates for the named cities |
 | `city_served` (free-text) | "Supplies X" in detail byline | Editorial label | Verify the *primary* drinking water source per city's water utility |
 | `priority` | Sort order in list | Editorial; based on city population × CWC inclusion | n/a — internal ordering only |
 
@@ -75,13 +75,13 @@ card lists this gap.
 
 ## How to verify a row in Tier 3
 
-Standard workflow when you fetch a CWC bulletin or have time for a manual check:
+Standard workflow when you fetch a source or have time for a manual check:
 
-1. Open the CWC weekly bulletin PDF (e.g. via `pipeline/data/cwc/raw_pdfs/`).
-2. Match each reservoir's row by name; CWC publishes:
-   - Live capacity at FRL (BCM)
-   - Dead storage capacity (BCM)
-   - Lat/long (degrees minutes seconds)
+1. Open the authoritative source: CWC weekly bulletin for live storage/FRL
+   capacity, OpenStreetMap or another cited geospatial source for coordinates,
+   and dam/project documentation for dead-storage capacity.
+2. Match each reservoir's row by name and record the exact source URL/citation
+   in the relevant source column.
 3. Update `docs/reservoirs.csv` for any field whose value differs by > 5%.
 4. If `lat`/`lon` shift by > 2 km, re-run `python scripts/seed_aois.py <id> --overwrite`
    then `python scripts/backfill_history.py <id>` so the AOI follows the dam.
@@ -99,20 +99,22 @@ for the machine-readable form.
 | Reservoirs in dashboard scope | 53 of 53 |
 | Reservoirs with satellite observation | 53 of 53 |
 | Reservoirs with CWC live-storage reference loaded | 52 of 53 |
-| Reservoirs with CWC-calibrated curve | 23 of 53 |
-| Reservoirs with CWC live-storage used directly | 28 of 53 |
+| Reservoirs with CWC-calibrated curve | 51 of 53 |
+| Reservoirs with JRC history backfilled but dense S2 series pending | 28 of 53 |
+| Reservoirs with CWC live-storage used directly | 0 of 53 |
 | Reservoirs with `volume_area_ratio_proxy` flag | 2 of 53 |
 | Reservoirs with AOI GeoJSON available | 53 of 53 |
 | Reservoirs with AOI seeded but unreviewed | 53 of 53 |
 | Reservoirs awaiting AOI seeding | 0 of 53 |
-| Reservoirs with verified `lat/lon` against CWC bulletin | **0 of 53** |
+| Reservoirs with source-checked `lat/lon` | 10 of 53 |
 | Reservoirs with FRL capacity loaded from CWC | 52 of 53 |
 | Reservoirs with verified `dead_storage_capacity_bcm` | **0 of 53** |
 | Reservoirs with verified `population_served` against census | **0 of 53** |
 
 The dashboard separates **operational coverage** from **manual source checks**:
-all 53 reservoirs have current satellite observations and AOI polygons, while
-the 28 expanded reservoirs are current-only rows awaiting historical backfill
-and full area-to-volume calibration. The "0 of 53" rows are the next milestone
-for Tier 3 confidence. They require manual cross-checks against CWC/OSM/census
-sources; until then those metadata fields stay "approximate" in the dashboard.
+all 53 reservoirs have current satellite observations and AOI polygons. The 28
+expanded reservoirs now have JRC history, but their dense recent Sentinel-2
+series is still pending after Earth Engine stalled on those composite windows.
+The "0 of 53" rows are the next milestone for Tier 3 confidence. They require
+manual cross-checks against dam/project and census sources; until then those
+metadata fields stay "approximate" in the dashboard.

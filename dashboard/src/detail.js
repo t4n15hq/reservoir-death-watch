@@ -1,6 +1,3 @@
-import { Chart, registerables } from 'chart.js';
-import 'chartjs-adapter-date-fns';
-import annotationPlugin from 'chartjs-plugin-annotation';
 import {
   awaitingFirstObservation,
   daysSince,
@@ -9,9 +6,8 @@ import {
   loadReservoirHistory,
 } from './data.js';
 
-Chart.register(...registerables, annotationPlugin);
-
 let activeChart = null;
+let chartRuntime = null;
 
 export function renderEmpty(container) {
   container.innerHTML = '<div class="empty">Select a reservoir from the list or map.</div>';
@@ -103,7 +99,7 @@ export async function renderDetail(container, reservoir) {
   } else {
     try {
       const history = await loadReservoirHistory(reservoir.id);
-      drawHistoryChart(history, reservoir);
+      await drawHistoryChart(history, reservoir);
     } catch (err) {
       const wrap = container.querySelector('.chart-wrap');
       if (wrap) wrap.textContent = `History unavailable: ${err.message}`;
@@ -142,9 +138,10 @@ function daysClass(days) {
   return '';
 }
 
-function drawHistoryChart(history, reservoir) {
+async function drawHistoryChart(history, reservoir) {
   const canvas = document.getElementById('history-chart');
   if (!canvas) return;
+  const Chart = await loadChartRuntime();
   const ctx = canvas.getContext('2d');
   clearActiveChart();
   const points = history
@@ -264,6 +261,21 @@ function drawHistoryChart(history, reservoir) {
       },
     },
   });
+}
+
+async function loadChartRuntime() {
+  if (!chartRuntime) {
+    chartRuntime = Promise.all([
+      import('chart.js'),
+      import('chartjs-plugin-annotation'),
+      import('chartjs-adapter-date-fns'),
+    ]).then(([chartJs, annotationModule]) => {
+      const annotationPlugin = annotationModule.default ?? annotationModule;
+      chartJs.Chart.register(...chartJs.registerables, annotationPlugin);
+      return chartJs.Chart;
+    });
+  }
+  return chartRuntime;
 }
 
 function clearActiveChart() {

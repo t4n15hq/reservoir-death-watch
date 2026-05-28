@@ -6,13 +6,13 @@
     "cwc_reference_available": 52,
     "dead_storage_capacity_verified": 0,
     "full_pool_capacity_from_cwc": 52,
-    "lat_lon_verified": 0,
+    "lat_lon_verified": 10,
     "observed_with_satellite": 53,
     "population_verified_against_census": 0,
-    "storage_cwc_calibrated": 23,
+    "storage_cwc_calibrated": 51,
     "total_reservoirs": 53
   },
-  "generated_at": "2026-05-25T21:45:21.737473Z",
+  "generated_at": "2026-05-25T22:45:38.432941Z",
   "reservoirs": [
     {
       "aoi": {
@@ -46,12 +46,12 @@
       },
       "id": "bhakra",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/120587569",
         "value": [
-          31.4106,
-          76.4339
+          31.4115924,
+          76.4326399
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Bhakra",
       "population_served": {
@@ -97,12 +97,12 @@
       },
       "id": "tehri",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/93091865",
         "value": [
-          30.3779,
-          78.4806
+          30.3761751,
+          78.4803102
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Tehri",
       "population_served": {
@@ -148,12 +148,12 @@
       },
       "id": "krs",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/85603321",
         "value": [
-          12.4244,
-          76.5719
+          12.4241993,
+          76.572052
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Krishnaraja Sagar",
       "population_served": {
@@ -199,12 +199,12 @@
       },
       "id": "mettur",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/456753358",
         "value": [
-          11.786,
-          77.7995
+          11.8034926,
+          77.8060776
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Mettur",
       "population_served": {
@@ -250,12 +250,12 @@
       },
       "id": "jayakwadi",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/55984458",
         "value": [
-          19.4818,
-          75.3697
+          19.472485,
+          75.3639212
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Jayakwadi",
       "population_served": {
@@ -301,12 +301,12 @@
       },
       "id": "indira_sagar",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/192715768",
         "value": [
-          22.2944,
-          76.4717
+          22.2845394,
+          76.4718832
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Indira Sagar",
       "population_served": {
@@ -352,12 +352,12 @@
       },
       "id": "nagarjuna_sagar",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/101362710",
         "value": [
-          16.5728,
-          79.3119
+          16.577222,
+          79.311944
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Nagarjuna Sagar",
       "population_served": {
@@ -403,12 +403,12 @@
       },
       "id": "srisailam",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/135953153",
         "value": [
-          16.0833,
-          78.9
+          16.0867989,
+          78.8970352
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Srisailam",
       "population_served": {
@@ -454,12 +454,12 @@
       },
       "id": "sardar_sarovar",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://www.openstreetmap.org/way/116794508",
         "value": [
-          21.8333,
-          73.75
+          21.8297987,
+          73.7497195
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Sardar Sarovar",
       "population_served": {
@@ -505,12 +505,12 @@
       },
       "id": "ukai",
       "lat_lon": {
-        "source": "approximate (training-data knowledge)",
+        "source": "https://en.wikipedia.org/wiki/Ukai_Dam",
         "value": [
-          21.25,
-          73.5833
+          21.2482417,
+          73.5894083
         ],
-        "verified": false
+        "verified": true
       },
       "name": "Ukai",
       "population_served": {
@@ -1336,8 +1336,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1387,8 +1387,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1438,8 +1438,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1489,8 +1489,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1540,8 +1540,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1591,8 +1591,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1642,8 +1642,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1693,8 +1693,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1744,8 +1744,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1795,8 +1795,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1846,8 +1846,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1897,8 +1897,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1948,8 +1948,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -1999,8 +1999,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2050,8 +2050,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2101,8 +2101,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2152,8 +2152,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2203,8 +2203,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2254,8 +2254,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2305,8 +2305,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2356,8 +2356,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2407,8 +2407,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2458,8 +2458,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2509,8 +2509,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2560,8 +2560,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2611,8 +2611,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2662,8 +2662,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     },
     {
@@ -2713,8 +2713,8 @@
       },
       "scope": "expanded_cwc",
       "storage_calibration": {
-        "cwc_anchored": false,
-        "method": "cwc_live_reference"
+        "cwc_anchored": true,
+        "method": "cwc_calibrated_power_law"
       }
     }
   ]
